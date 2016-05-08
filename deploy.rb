@@ -1,4 +1,5 @@
 require "readline"
+require 'pry'
 require './config/initializers/gcloud'
 # require './app/models/entity'
 
