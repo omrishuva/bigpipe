@@ -35,6 +35,7 @@ class AppVersion
 																	e["developer"] = `whoami`
 																	e.key.namespace = "app_versions"
 																end
+			binding.pry
 			$datastore.save(new_app_version_entity)["version_number"]
 		end
 
