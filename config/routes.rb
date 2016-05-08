@@ -19,6 +19,6 @@ Rails.application.routes.draw do
 
   # Restful routes for BooksController
   resources :books
-
+  get '_ah/health', :to => 'application_health#health'
 end
 # [END routes]
