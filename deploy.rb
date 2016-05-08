@@ -1,5 +1,6 @@
 require "readline"
 require './config/initializers/gcloud'
+require 'pry'
 
 class AppVersion
 	
