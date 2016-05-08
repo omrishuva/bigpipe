@@ -1,8 +1,8 @@
 require "readline"
-require './initializers/gcloud'
-require './entities/abstract_entity'
+require './config/initializers/gcloud'
+# require './app/models/entity'
 
-class AppVersion < Entity
+class AppVersion
 	
 	class << self
 
@@ -24,9 +24,18 @@ class AppVersion < Entity
 		end
 
 		def create_new_version_number
+			last_version_query = $datastore.query.kind(branch).order("created_at", :desc).limit(1)
+			$datastore.run( last_version_query, namespace: "app_versions" )
 			app_version =  self.last[0]["version_number"] rescue 0
 			new_version_number = app_version + 1
-			self.create( version_number: new_version_number )[0]["version_number"]
+			new_app_version_entity =  $datastore.entity "app_versions" do |e|
+																	e["created_at"] = Time.now.utc
+																	e["version_number"] = new_version_number
+																	e["branch"] = branch
+																	e["developer"] = `whoami`
+																	e.key.namespace = "app_versions"
+																end
+			$datastore.save new_app_version_entity
 		end
 
 		def run_gcloud_sdk_deploy_commands
