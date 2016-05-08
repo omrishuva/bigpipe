@@ -1,7 +1,5 @@
 require "readline"
-require 'pry'
 require './config/initializers/gcloud'
-# require './app/models/entity'
 
 class AppVersion
 	
@@ -35,8 +33,7 @@ class AppVersion
 																	e["developer"] = `whoami`
 																	e.key.namespace = "app_versions"
 																end
-			binding.pry
-			$datastore.save(new_app_version_entity)["version_number"]
+			$datastore.save(new_app_version_entity)[0]["version_number"]
 		end
 
 		def run_gcloud_sdk_deploy_commands
