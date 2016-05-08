@@ -25,10 +25,10 @@ class AppVersion
 		end
 
 		def create_new_version_number
-			last_version_query = $datastore.query.kind(branch).order("created_at", :desc).limit(1)
+			last_version_query = $datastore.query.kind(app_name).order("created_at", :desc).limit(1)
 			app_version =  $datastore.run( last_version_query, namespace: "app_versions" )["version_number"] rescue 0
 			new_version_number = app_version + 1
-			new_app_version_entity =  $datastore.entity "app_versions" do |e|
+			new_app_version_entity =  $datastore.entity app_name do |e|
 																	e["created_at"] = Time.now.utc
 																	e["version_number"] = new_version_number
 																	e["branch"] = branch
@@ -60,6 +60,10 @@ class AppVersion
 			@current_branch ||= `git rev-parse --abbrev-ref HEAD`.split("\n")[0]
 		end
 		
+		def app_name
+			"Play"
+		end
+
 	end
 end
 
