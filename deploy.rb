@@ -1,6 +1,5 @@
 require "readline"
 require './config/initializers/gcloud'
-require 'pry'
 
 class AppVersion
 	
@@ -25,7 +24,7 @@ class AppVersion
 
 		def create_new_version_number
 			last_version_query = $datastore.query.kind(app_name).order("created_at", :desc).limit(1)
-			app_version =  $datastore.run( last_version_query, namespace: "app_versions" )["version_number"] rescue 0
+			app_version =  $datastore.run( last_version_query, namespace: "app_versions" )[0]["version_number"] rescue 0
 			new_version_number = app_version + 1
 			new_app_version_entity =  $datastore.entity app_name do |e|
 																	e["created_at"] = Time.now.utc
@@ -34,7 +33,6 @@ class AppVersion
 																	e["developer"] = `whoami`
 																	e.key.namespace = "app_versions"
 																end
-			binding.pry
 			$datastore.save(new_app_version_entity)[0]["version_number"]
 		end
 
