@@ -65,16 +65,22 @@ class Entity
 	    from_entity( entity ) if entity
 	  end
 
-		def all
-			run_query( $datastore.query.kind(self.name) ).map{|entity| from_entity entity }
+		def all( opts = { } )
+			results = run_query( $datastore.query.kind(self.name) )
+			return results if opts[:raw] == true
+			results.map{|entity| from_entity entity } 
 		end
 		
-		def first
-			from_entity( run_query( $datastore.query.kind(self.name).order("created_at", :asc).limit(1) ) )
+		def first(opts = { } )
+			result = run_query( $datastore.query.kind(self.name).order("created_at", :asc).limit(1) )[0]
+			return result if opts[:raw] == true
+			from_entity( result )
 		end
 		
-		def last
-			from_entity( run_query( $datastore.query.kind(self.name).order("created_at", :desc).limit(1) ) )
+		def last(opts = { } )
+			result = run_query( $datastore.query.kind(self.name).order("created_at", :desc).limit(1) )[0]
+			return result if opts[:raw] == true
+			from_entity( result )
 		end
 
 		def run_query( query_obj  )
@@ -100,5 +106,9 @@ class Entity
 			instance_methods(false).select{|a| a.to_s.include?( "=" )   }.map{|a| a.to_s.delete( "=" ) }
 		end
 
+		def destroy_all
+			all.each {|e| e.destroy }
+		end
+	
 	end
 end
