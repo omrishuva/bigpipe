@@ -1,0 +1,11 @@
+<p>
+	<%= locals[:form_object].label locals[:field_name] %><br />
+	<%= locals[:form_object].phone_field locals[:field_name] %>
+</p>
+
+<%if locals[:user].errors[locals[:field_name]]%>
+	<%= 
+	 	render "shared/form_helpers/error_message", 
+		locals: {field_name: locals[:field_name].to_s.split("_").join(" "), error: locals[:user].errors[locals[:field_name]][0] } 
+	%>
+<%end%>

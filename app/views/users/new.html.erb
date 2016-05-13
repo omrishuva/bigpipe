@@ -1,0 +1,14 @@
+<h1>Sign Up</h1>
+
+<%= form_for @user do |f| %>
+  
+  <%= render "shared/form_helpers/text_field", locals: {field_name: :first_name, form_object: f, user: @user } %>
+  <%= render "shared/form_helpers/text_field", locals: {field_name: :last_name, form_object: f, user: @user } %>
+  <%= render "shared/form_helpers/phone_field", locals: {field_name: :phone, form_object: f, user: @user } %>
+  <%= render "shared/form_helpers/text_field", locals: {field_name: :email, form_object: f, user: @user } %>
+  <%= render "shared/form_helpers/password_field", locals: {field_name: :password, form_object: f, user: @user } %>
+  <%= render "shared/form_helpers/password_field", locals: {field_name: :password_confirmation, form_object: f, user: @user } %>  
+  
+  <p class="button"><%= f.submit %></p>
+
+<% end %>

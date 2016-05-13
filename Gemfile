@@ -17,11 +17,10 @@ source "https://rubygems.org"
 gem "rails"
 gem "gcloud"
 gem 'rufus-scheduler'
-# [END dependencies]
 gem "jquery-rails"
-
-# For Windows support
+gem 'bcrypt-ruby', '~> 3.0.0'
 gem "tzinfo-data"
+gem 'veto'
 
 group :development do
 	gem 'pry'

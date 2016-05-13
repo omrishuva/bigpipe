@@ -42,6 +42,7 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    bcrypt-ruby (3.0.1)
     beefcake (1.1.0)
     builder (3.2.2)
     capybara (2.7.1)
@@ -188,6 +189,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2016.4)
       tzinfo (>= 1.0.0)
+    veto (1.0.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     zonefile (1.04)
@@ -196,6 +198,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (~> 3.0.0)
   capybara
   gcloud
   jquery-rails
@@ -205,6 +208,7 @@ DEPENDENCIES
   rspec-rails
   rufus-scheduler
   tzinfo-data
+  veto
 
 BUNDLED WITH
    1.12.2

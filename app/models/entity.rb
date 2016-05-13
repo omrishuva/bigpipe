@@ -1,20 +1,25 @@
 class Entity 
   	
 	include ActiveModel::Model
-	include ActiveModel::Validations
-	
+	extend ActiveModel::Callbacks
+	include Veto.validator
+
+	define_model_callbacks :save, :create, :update
+
 	def save
-    self.created_at = Time.now.utc unless persisted?
-    if valid?
-      entity = to_entity
-      entity.key.namespace = Rails.env
-      entity["updated_at"] = Time.now.utc
-      $datastore.save entity
-      self.id = entity.key.id
-      true
-    else
-      false
-    end
+		run_callbacks :save do
+	    self.created_at = Time.now.utc unless persisted?
+	    if valid? self
+	      entity = to_entity
+	      entity.key.namespace = Rails.env
+	      entity["updated_at"] = Time.now.utc
+	      $datastore.save entity
+	      self.id = entity.key.id
+	      true
+	    else
+	      false
+	    end
+  	end
   end
   
   def update( attributes )
@@ -28,7 +33,7 @@ class Entity
     $datastore.delete(  set_key_properties( $datastore.entity ) )
   end
  
-  def persisted?
+  def persisted?(user="user")
     id.present?
   end
     
@@ -63,6 +68,10 @@ class Entity
 	    key.kind = self.name; key.namespace = Rails.env; key.id = id.to_i
 	    entity = $datastore.find key
 	    from_entity( entity ) if entity
+	  end
+	  
+	  def find_by( key, value )
+	  	from_entity( run_query($datastore.query.kind(self.name).where(key.to_s,"=",value))[0] )
 	  end
 
 		def all( opts = { } )
