@@ -1,6 +1,6 @@
 indexes:
 
-- kind: app_versions
+- kind: Play
   ancestor: no
   properties:
   - name: branch
