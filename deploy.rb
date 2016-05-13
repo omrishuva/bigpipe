@@ -1,3 +1,4 @@
+require 'pry'
 require "readline"
 require './config/initializers/gcloud'
 
