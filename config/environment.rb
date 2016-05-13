@@ -2,10 +2,10 @@
 def define_env
 	if ENV["GAE_MODULE_VERSION"] && ENV["GAE_MODULE_VERSION"].split("-")[0] == "master" 
 		"production"
-	elsif Rails.env &&  Rails.env == "development"
-		Rails.env
-	else
+	elsif ENV["GAE_MODULE_VERSION"] && ENV["GAE_MODULE_VERSION"].split("-")[0] != "master" 
 		"staging"
+	else
+		"development"
 	end
 end
 
