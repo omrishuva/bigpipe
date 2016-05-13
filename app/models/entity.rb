@@ -2,9 +2,14 @@ class Entity
   	
 	include ActiveModel::Model
 	extend ActiveModel::Callbacks
+	
 	include Veto.validator
 
-	define_model_callbacks :save, :create, :update
+	Veto.configure do |c|
+		c.message.set(:presence, lambda{"is missing"})
+	end
+
+	define_model_callbacks :save, :create, :update, :initialize
 
 	def save
 		run_callbacks :save do
@@ -17,6 +22,7 @@ class Entity
 	      self.id = entity.key.id
 	      true
 	    else
+	    	customize_error_messages
 	      false
 	    end
   	end
@@ -50,6 +56,9 @@ class Entity
     	entity[attribute] = self.send(attribute) if self.send(attribute)
     end
     entity
+  end
+  
+  def customize_error_messages
   end
 
 	class << self
