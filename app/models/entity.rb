@@ -102,7 +102,6 @@ class Entity
 												e[k.to_s] = v
 											end
 											e.key.namespace = Rails.env
-											e["created_at"] = Time.now.utc
  									 end
 			entity
 		end
