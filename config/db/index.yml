@@ -1,0 +1,7 @@
+indexes:
+
+- kind: app_versions
+  ancestor: no
+  properties:
+  - name: branch
+    direction: desc
