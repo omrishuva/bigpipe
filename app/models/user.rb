@@ -1,14 +1,14 @@
 class User < Entity
 
 	attr_accessor :id, :first_name, :last_name, :email, :phone, :company_name, :account_name, :role, :created_at, :updated_at
-	attr_reader :password_salt, :password_hash
+	attr_reader :password_salt, :password_hash, :password
 
   include BCrypt
 	 	
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :password, presence: true, :unless => :persisted?
+  validates :password, presence: true, :if => :persisted?
   # validates :password_confirmation, presence: true #unless persisted?
 
   def initialize( params = { } )

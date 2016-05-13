@@ -36,7 +36,7 @@ class Entity
   def persisted?(user="user")
     id.present?
   end
-    
+  
   def set_key_properties(entity)
   	entity.key.kind = self.class.name
   	entity.key.namespace = Rails.env

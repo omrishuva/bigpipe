@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
 	get '_ah/health', :to => 'application_health#health'
 	get '_ah/start', :to => 'application_health#start'
+	get '/_ah/background', :to => "application_health#background"
 
 end

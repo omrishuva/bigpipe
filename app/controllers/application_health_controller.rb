@@ -7,4 +7,9 @@ class ApplicationHealthController < ApplicationController
 	def health
 		render :json => params
 	end
+
+	def background
+		render :json => params
+	end
+
 end
