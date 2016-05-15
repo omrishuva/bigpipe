@@ -9,6 +9,7 @@ class User < Entity
   validates :last_name, presence: true
   validates :email, presence: true
   validates :password_hash, presence: true
+  validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
 
