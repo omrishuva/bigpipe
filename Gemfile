@@ -21,6 +21,11 @@ gem "jquery-rails"
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem "tzinfo-data"
 gem 'veto'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 
 group :development do
 	gem 'pry'

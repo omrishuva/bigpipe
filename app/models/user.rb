@@ -8,6 +8,7 @@ class User < Entity
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
+  validates :phone, presence: true
   validates :password_hash, presence: true
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
@@ -19,7 +20,6 @@ class User < Entity
 	  	self.password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
   	end
 		params.delete(:password)
-		params.delete(:password_confirmation)
   	super( params )
   end
   
@@ -34,7 +34,7 @@ class User < Entity
   def uniqueness_of_email(entity)
   	if !entity.persisted?
   		if User.find_by( :email, entity.email ).present?
-  			errors.add(:email, "adress already exists") if errors[:password_hash]	
+  			errors.add(:email, "adress already exists")
   		end
   	end
   end
@@ -42,7 +42,7 @@ class User < Entity
   def uniqueness_of_phone(entity)
   	if !entity.persisted? 
   		if User.find_by( :phone, entity.phone ).present?
-  			errors.add(:phone, "number already exists") if errors[:password_hash]	
+  			errors.add(:phone, "number already exists")
   		end
   	end
   end
