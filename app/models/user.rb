@@ -9,6 +9,8 @@ class User < Entity
   validates :last_name, presence: true
   validates :email, presence: true
   validates :password_hash, presence: true
+  validate :uniqueness_of_email
+  validate :uniqueness_of_phone
 
   def initialize( params = { } )
   	if !params[:password].blank?
@@ -26,6 +28,22 @@ class User < Entity
   
   def customize_error_messages
   	errors.add(:password, "is missing") if errors[:password_hash]
+  end
+  
+  def uniqueness_of_email(entity)
+  	if !entity.persisted?
+  		if User.find_by( :email, entity.email ).present?
+  			errors.add(:email, "adress already exists") if errors[:password_hash]	
+  		end
+  	end
+  end
+
+  def uniqueness_of_phone(entity)
+  	if !entity.persisted? 
+  		if User.find_by( :phone, entity.phone ).present?
+  			errors.add(:phone, "number already exists") if errors[:password_hash]	
+  		end
+  	end
   end
 
   class << self

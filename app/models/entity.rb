@@ -64,12 +64,16 @@ class Entity
 	class << self
 		
 		def from_entity( entity )
-	    object = self.new
-	    object.id = entity.key.id
-	    entity.properties.to_hash.each do |name, value|
-	      object.send "#{name}=", value
-	    end
-	    object
+	    if entity
+		    object = self.new
+		    object.id = entity.key.id
+		    entity.properties.to_hash.each do |name, value|
+		      object.send "#{name}=", value
+		    end
+	    	object
+	  	else
+	  		nil
+	  	end
 	  end
 	  
 	  def find( id )
