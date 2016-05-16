@@ -73,6 +73,6 @@ Rails.application.configure do
 
   config.assets.compile = false
   config.assets.digest = true
-  config.assets.css_compressor = :yui
+  config.assets.css_compressor = :uglifier
   config.assets.js_compressor = :uglifier
 end
