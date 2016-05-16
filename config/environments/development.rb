@@ -25,12 +25,11 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  config.serve_static_files = true
-  config.assets.debug = true
-  config.assets.digest = true
+  config.serve_static_files = false
+  config.assets.debug = false
+  config.assets.digest = false
   config.assets.raise_runtime_errors = true
 end

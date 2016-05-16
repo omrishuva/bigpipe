@@ -20,35 +20,30 @@
     <title>Play</title>
     <meta charset="utf-8">
     <meta name="viewset" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag 'application', media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   
   <body>
     
-    <div class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <div class="navbar-brand">Play</div>
-            <ul class="nav navbar-nav">
-              <% if current_user %>
-                Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-              <% else %>
-                <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-              <% end %>
-            </ul>
-        </div>
-      </div>
-    </div>
-    <%= render "shared/form_helpers/flash_messages" %>
+    <%=render "shared/components/navigation_bar"%>
+
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <%= yield %>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2  pull-xs-right">
+         <%= render "shared/form_helpers/flash_messages" %>
+      </div>
     </div>
       
   </body>
+  <footer>
+  </footer>
+    <nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
+      <a class="navbar-brand" href="#">Play</a>
+    </nav>
+  </footer>
 </html>

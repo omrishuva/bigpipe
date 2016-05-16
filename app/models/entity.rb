@@ -16,7 +16,7 @@ class Entity
 	    self.created_at = Time.now.utc unless persisted?
 	    if valid? self
 	      entity = to_entity
-	      entity.key.namespace = Rails.env
+	      entity.key.namespace = Rails.env.to_s
 	      entity["updated_at"] = Time.now.utc
 	      $datastore.save entity
 	      self.id = entity.key.id
@@ -45,7 +45,7 @@ class Entity
   
   def set_key_properties(entity)
   	entity.key.kind = self.class.name
-  	entity.key.namespace = Rails.env
+  	entity.key.namespace = Rails.env.to_s
   	entity.key.id = self.id.to_i if self.id
   	entity
   end
@@ -78,7 +78,7 @@ class Entity
 	  
 	  def find( id )
 	    key = $datastore.entity.key
-	    key.kind = self.name; key.namespace = Rails.env; key.id = id.to_i
+	    key.kind = self.name; key.namespace = Rails.env.to_s; key.id = id.to_i
 	    entity = $datastore.find key
 	    from_entity( entity ) if entity
 	  end
@@ -105,8 +105,8 @@ class Entity
 			from_entity( result )
 		end
 
-		def run_query( query_obj  )
-			$datastore.run( query_obj, namespace: Rails.env )
+		def run_query( query_obj )
+			$datastore.run( query_obj, namespace: Rails.env.to_s )
 		end
 
 		def new_entity( properties = { } )
@@ -114,7 +114,7 @@ class Entity
 											properties.each do |k,v|
 												e[k.to_s] = v
 											end
-											e.key.namespace = Rails.env
+											e.key.namespace = Rails.env.to_s
  									 end
 			entity
 		end

@@ -1,0 +1,13 @@
+
+  <% if current_user %>
+  	<div class="btn-group pull-xs-right" role="group">
+  		<p class='lead'><%="Signed in as #{current_user.name}" %></p>
+  		<button type="button" class="btn btn-secondary"><%=link_to('Logout', '/logout')%> </button>
+  	</div>
+  <% else %>
+  	<div class="btn-group pull-xs-right" role="group">
+	  	<button type="button" class="btn btn-secondary"><%= link_to 'Login', '/login' %></button>
+  		<button type="button" class="btn btn-secondary"><%= link_to 'Signup', '/signup' %></button>
+  	</div>
+  <%end%>  
+</div>
