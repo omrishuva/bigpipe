@@ -70,7 +70,11 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
+  
   config.assets.compile = false
   config.assets.digest = true
+  
+  config.assets.css_compressor = :yui
+  config.assets.js_compressor = :uglifier
+
 end

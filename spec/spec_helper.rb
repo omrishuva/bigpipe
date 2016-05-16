@@ -4,6 +4,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
 require "capybara/rails"
 require "rack/test"
+require 'pry'
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true

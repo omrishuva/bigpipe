@@ -13,6 +13,7 @@ class User < Entity
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
+  validates :phone, :exact_length => 10
 
   def initialize( params = { } )
   	if !params[:password].blank?
@@ -22,13 +23,17 @@ class User < Entity
 		params.delete(:password)
   	super( params )
   end
-  
+
   def name
   	"#{self.first_name} #{self.last_name}"
   end
   
   def customize_error_messages
-  	errors.add(:password, "is missing") if errors[:password_hash]
+  	if errors[:password_hash]
+	  	errors.delete(:password_hash)
+	  	errors.add(:password, "is missing")
+		end
+	  errors[:phone] = ["number is not valid"] if errors[:phone] == ["is not 10 characters"]
   end
   
   def uniqueness_of_email(entity)
@@ -57,7 +62,11 @@ class User < Entity
 	      nil
 	    end
 	  end
-
+	
+	  def create(params)
+  		self.new(params).save
+  	end
+	
 	end
 	
 	protected
