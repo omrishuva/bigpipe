@@ -29,7 +29,7 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
   config.serve_static_files = false
-  config.assets.debug = false
+  config.assets.debug = true
   config.assets.digest = false
   config.assets.raise_runtime_errors = true
 end
