@@ -1,18 +1,13 @@
 <nav class="navbar navbar-light navigationBar" role="navigation">
 	<div class = "navbar-header">
-      <a class="navbar-brand" href="/"><%=image_tag("logo.png",class:"navBarLogo")%></a>
-      <button class="navbar-toggler hidden-md-up pull-sm-right pull-xs-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+      <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#CollapsingNavbar">
    	 		 &#9776;
    	 		 <span class = "sr-only">Toggle navigation</span>
-         <span class = "icon-bar"></span>
-         <span class = "icon-bar"></span>
-         <span class = "icon-bar"></span>
-         <span class = "icon-bar"></span>
 	  	</button>
+	  	<a class="navbar-brand" href="/"><%=image_tag("logo.png",class:"navBarLogo")%></a>
    </div>
-	
-  <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
-   	<ul class="nav navbar-nav">
+
+   <ul class="nav navbar-nav pull-md-left">
       <li class="nav-item">
         <a class="nav-link" href="#">
         <p class="lead">How it works? </p>
@@ -25,8 +20,7 @@
 					<span class="lead">03-60-333-70</span>
 				</a>
       </li>
-      <%=render "shared/components/login_logout"%>
-    </ul>
-  </div>
+    </ul>  	
+    <%=render "shared/components/login_logout"%>
   
 </nav>

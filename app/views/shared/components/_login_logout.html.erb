@@ -1,19 +1,23 @@
-<% unless current_user %>
-	<li class="nav-item">
-		<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#loginModal" href="#">
-		Login
-		</a>
-	</li>
+<div class="collapse navbar-toggleable-xs pull-xs-left pull-md-right" id="CollapsingNavbar">
+	<ul class="nav navbar-nav">
+		<% unless current_user %>
+			<li class="nav-item">
+				<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#loginModal" href="#">
+				Login
+				</a>
+			</li>
 
-	<li class="nav-item">
-		<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#signupModal">
-		Sign Up
-		</a>
-	</li>
-<%else%>
-	<li class="nav-item pull-sm-right userDropdown">
-		<a class="nav-link btn" href="/logout">
-			<p class="lead">Logout</p>
-		</a>
-	</li>
-<%end%>
+			<li class="nav-item">
+				<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#signupModal">
+				Sign Up
+				</a>
+			</li>
+		<%else%>
+			<li class="nav-item pull-sm-right userDropdown">
+				<a class="nav-link btn" href="/logout">
+					<p class="lead">Logout</p>
+				</a>
+			</li>
+		<%end%>
+	</ul>
+</div>
