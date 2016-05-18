@@ -1,10 +1,19 @@
-<div class="btn-group pull-xs-right" role="group" id="loginLogout">
-  <% if current_user %>
-  		<p class='lead'><%="Signed in as #{current_user.name}" %></p>
-  		<button type="button" class="btn btn-secondary"><%=link_to('Logout', '/logout')%> </button>
-  <% else %>
-	  	<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login</button>
-      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#signupModal">Sign Up</button>
-  <%end%>  
-</div>
+<% unless current_user %>
+	<li class="nav-item">
+		<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#loginModal" href="#">
+		Login
+		</a>
+	</li>
 
+	<li class="nav-item">
+		<a class="btn btn-sign-up lead" data-toggle="modal" data-target="#signupModal">
+		Sign Up
+		</a>
+	</li>
+<%else%>
+	<li class="nav-item pull-sm-right userDropdown">
+		<a class="nav-link btn" href="/logout">
+			<p class="lead">Logout</p>
+		</a>
+	</li>
+<%end%>
