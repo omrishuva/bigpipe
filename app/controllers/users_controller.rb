@@ -7,20 +7,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to root_url, :notice => "Signed up!"
-    else
-      render "new"
+      session[:user_id] = @user.id
+      flash[:success] = "Logged in!"
     end
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @user }
+    end
+  
   end
   
   def index
     @users = User.all
   end
-
-private
-
-  # def user_params
-  #   params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  # end
 
 end

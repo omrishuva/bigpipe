@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Entity 
   	
 	include ActiveModel::Model
@@ -53,7 +54,13 @@ class Entity
   def to_entity
     entity = set_key_properties( $datastore.entity )
     self.class.get_attributes.each do |attribute|
-    	entity[attribute] = self.send(attribute) if self.send(attribute)
+    	if self.send(attribute)
+    		if self.send(attribute).class == String
+	    		entity[attribute.encode("UTF-8")] = self.send(attribute).encode("UTF-8")
+    		else
+    			entity[attribute] = self.send(attribute) if self.send(attribute)
+    		end
+    	end
     end
     entity
   end

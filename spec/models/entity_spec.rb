@@ -46,7 +46,8 @@ RSpec.describe Entity do
   it "should update entity attributes" do
   	book = Book.last
   	book.update(title: "ze mamash stam")
-  	expect( Book.last.title ).to eq "ze mamash stam"
+    sleep 1
+    expect( Book.last.title ).to eq "ze mamash stam"
   end
   
   it "should create entities with a namespace matching to the environment" do

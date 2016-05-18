@@ -2,8 +2,7 @@
  
 <%= form_for @user, :html => {:class => 'form-inline'} do |f| %>
 
-	<%= render "shared/form_helpers/text_field", locals: {field_name: :first_name, form_object: f, user: @user } %>
-	<%= render "shared/form_helpers/text_field", locals: {field_name: :last_name, form_object: f, user: @user } %>
+	<%= render "shared/form_helpers/text_field", locals: {field_name: :name, form_object: f, user: @user } %>
 	</br>
 	<%= render "shared/form_helpers/phone_field", locals: {field_name: :phone, form_object: f, user: @user } %>
 	<%= render "shared/form_helpers/text_field", locals: {field_name: :email, form_object: f, user: @user } %>

@@ -1,12 +1,22 @@
-<fieldset class="form-group">
-	<%= locals[:form_object].label locals[:field_name] %><br/>
-	<%= locals[:form_object].text_field locals[:field_name], class: "form-control" %>
+<%klass = locals[:user] && locals[:user].errors[locals[:field_name]] ? "form-group has-danger" : "form-group" %>
+<div class=<%=klass%>>
+	<label 
+	 	for=<%="user_#{locals[:field_name]}"%> 
+	 	>
+	 	<%=locals[:field_name]%>
+	 </label>
+	 <br/>
+	<input 
+		class="form-control-lg ModalInput" 
+		type="text" 
+		name=<%="user[#{locals[:field_name]}]"%> id=<%="user_#{locals[:field_name]}"%> 
+		/>
 
-	<%if locals[:user].errors[locals[:field_name]]%>
+	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>
 		</br>
 		<%= 
 		 	render "shared/form_helpers/error_message", 
 			locals: {field_name: locals[:field_name].to_s.split("_").join(" "), error: locals[:user].errors[locals[:field_name]][0] } 
 		%>
 	<%end%>
-</fieldset>
+</div>

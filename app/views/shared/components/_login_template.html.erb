@@ -5,7 +5,7 @@
   <div class="form-group">
     <label for="email" class="form-control-label">Email</label>
     </br>
-    <input type="email" name="email" class="form-control-lg loginModalInput" id="email" placeholder="Email">
+    <input type="email" name="email" class="form-control-lg ModalInput" id="email" placeholder="Email">
   </div>
 
   </br>
@@ -13,9 +13,16 @@
   <div class="form-group">
     <label for="password" class="form-control-label">Password</label>
     </br>
-    <input type="password" name="password" class="form-control-lg loginModalInput" id="password" placeholder="Password">
+    <input type="password" name="password" class="form-control-lg ModalInput" id="password" placeholder="Password">
   </div>
 
   </br>
-  <button type="submit" class="btn btn-primary">Sign In</button>
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <button type="submit" class="btn btn-primary">Sign In</button>
+    </div>
+    <div class="col-sm-4">
+      <a id="dontHaveAccount">I don't have an account</a>
+    </div>
+  </div>
 </form>

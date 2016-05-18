@@ -1,12 +1,11 @@
 class User < Entity
 
-	attr_accessor :id, :first_name, :last_name, :email, :phone, :company_name, :account_name, :role, :created_at, :updated_at
+	attr_accessor :id, :name, :email, :phone, :company_name, :account_name, :role, :created_at, :updated_at
 	attr_reader :password_salt, :password_hash
 
   include BCrypt
 	 	
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true
   validates :email, presence: true
   validates :phone, presence: true
   validates :password_hash, presence: true
@@ -22,10 +21,6 @@ class User < Entity
   	end
 		params.delete(:password)
   	super( params )
-  end
-
-  def name
-  	"#{self.first_name} #{self.last_name}"
   end
   
   def customize_error_messages

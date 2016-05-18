@@ -26,5 +26,10 @@ class ApplicationController < ActionController::Base
   def authorize
     # redirect_to '/login' if !current_user
   end
+  
+  def recognize_path
+  	path_params = Rails.application.routes.recognize_path( request.env['PATH_INFO'] )
+  	"#{path_params[:controller]}/#{path_params[:action]}"
+  end
 
 end

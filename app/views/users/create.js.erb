@@ -1,0 +1,7 @@
+<%if @user.errors.present?%>
+	$('#newUser').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user }) %>");
+<%else%>
+	$('#signupModal').modal('hide')
+	$("#loginLogout").replaceWith("<%= escape_javascript( render 'shared/components/login_logout') %>")
+	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");
+<%end%>

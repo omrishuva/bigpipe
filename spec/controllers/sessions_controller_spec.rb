@@ -3,18 +3,9 @@ RSpec.describe SessionsController do
   
   before :all do
     User.destroy_all
-    params = { first_name: "omri", last_name: "shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123" }
+    params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123" }
     @user = User.new(params)
     @user.save
-  end
-  
-  describe "GET login" do
-
-    it "should render login template" do
-      get :new
-      expect(response).to render_template("sessions/new")
-    end  
-  
   end
   
   describe "POST login" do
@@ -24,9 +15,24 @@ RSpec.describe SessionsController do
       expect(session[:user_id]).to eq @user.id
     end
     
-    it "should render login screen with an error message if credentials are invalid" do
+    it "should redirect to root url when provided credentials are invalid" do
       post :create, { email: "omrishuva1@gmail.com", password: "zzzaaaa1" }
-      expect(response).to render_template("sessions/new")
+      expect(response).to redirect_to(root_url)
+    end
+
+  end
+  
+  describe "GET destroy" do
+    
+    it "should redirect to root url" do
+      get :destroy
+      expect(response).to redirect_to(root_url)
+    end
+     
+    it "should assign session user id with null value" do
+      post :create, { email: "omrishuva1@gmail.com", password: "zzzaaaa123" }
+      get :destroy
+      expect(session[:user_id]).to be nil
     end
 
   end

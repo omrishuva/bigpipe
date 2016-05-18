@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
   
-  def new
-  end
-
   def create
     user = User.authenticate(params[:email], params[:password])
   	if user
@@ -11,7 +8,7 @@ class SessionsController < ApplicationController
     	redirect_to root_url
   	else
     	flash[:error] = "Invalid email or password"
-    	render "new"
+    	redirect_to root_url
   	end
 	end
 
