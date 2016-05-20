@@ -3,11 +3,13 @@
 body
 {
     overflow:hidden;
+		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
 }
 
-.navBarLogo { width: 60px; height: 40px; }
-// .navbar-nav{ margin-left: 10%; }
-// .nav-item{ margin-right: 10%; }
+.navBarLogo { width: 100px; height: 60px; }
+.desktopNavbar{ margin-left: 20%; margin-top: 1em;}
+.desktopNavItem{ margin-right: 20%; }
+.mobileNavItem{ margin-top: 1em; margin-right: 2%; }
 
 .ModalInput { width: 100% }
 
@@ -18,5 +20,6 @@ body
 
 // .userDropdown{ margin-left: 40% }
 
-.btn-sign-up{ background-color: #5D33F4; color: #FF8171; }
-.btn-sign-up:hover{ color: #FFB941; background-color: #8C76FE }
+.btn-sign-up{ background-color: #5D33F4; color: #FFB941; font-weight: bold; padding: 2px 4px; font-size: 14px; border-radius: 3px; margin-top: 10%;}
+.btn-sign-up:hover{ color: #FFB941; background-color: #8C76FE;    }
+.mobileIcon{ color: #5D33F4; border: 1px solid #FFB941; box-shadow: 1px 1px 5px #FFB941; height: 100%; width:100%;  border-radius: 15px; padding:10%; margin-top: 10%;}
