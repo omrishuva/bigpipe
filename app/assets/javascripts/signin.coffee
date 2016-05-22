@@ -58,10 +58,12 @@ loadSignUpForm = ->
       type: 'GET'
       url: '/signup'
       success: (data) ->
+        loadLoginForm();
         if data == ""
-        else
           loadLoginForm();
+        else
           submitSignUpForm();
+          loadLoginForm();
 
 submitSignUpForm = ->
   $('#signUpForm').submit (e) ->
@@ -70,7 +72,7 @@ submitSignUpForm = ->
     $.ajax
       type: 'POST'
       url: url
-      data: $('#newUser').serialize()
+      data: $('#signUpForm').serialize()
       success: (data) ->
         if data == ""
           $('#signupModal').modal 'hide'

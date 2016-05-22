@@ -1,17 +1,26 @@
 <%klass = locals[:user] && locals[:user].errors[locals[:field_name]] ? "form-group has-danger" : "form-group" %>
 <div class=<%=klass%>>
+<%value = locals[:user].try(locals[:field_name]) %>
+<%if value.present?%>
 	<input 
 		class="form-control-sm ModalInput" 
-		value=<%="#{locals[:user].try(locals[:field_name])}" || 'a' %>
-		type="text" 
+		type=<%=locals[:input_type]%> 
 		name=<%="user[#{locals[:field_name]}]"%> 
 		id=<%="user_#{locals[:field_name]}" %> 
 		placeholder=<%=locals[:field_name]%>
-
+		value=<%=value%>
 		/>
-
+<%else%>
+	<input 
+		class="form-control-sm ModalInput"
+		type=<%=locals[:input_type]%> 
+		name=<%="user[#{locals[:field_name]}]"%> 
+		id=<%="user_#{locals[:field_name]}" %> 
+		placeholder=<%=locals[:field_name]%>
+		/>
+<%end%>
+	
 	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>
-		</br>
 		<%= 
 		 	render "shared/form_helpers/error_message", 
 			locals: {field_name: locals[:field_name].to_s.split("_").join(" "), error: locals[:user].errors[locals[:field_name]][0] } 

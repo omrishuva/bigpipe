@@ -1,17 +1,30 @@
-<div id="signUpTemplate">
-	<form id="signUpForm" data-remote="true" action="/signup" accept-charset="UTF-8" method="post">
-		
-		<input name="utf8" type="hidden" value="&#x2713;" />
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-		<%= hidden_field_tag :auth_provider, "play" %>
-		<%= render "shared/form_helpers/text_field", locals: {field_name: :name, user: @user } %>
-		<%= render "shared/form_helpers/phone_field", locals: {field_name: :phone, user: @user } %>
-		<%= render "shared/form_helpers/text_field", locals: {field_name: :email, user: @user } %>
-		<%= render "shared/form_helpers/password_field", locals: {field_name: :password, user: @user } %>
-		<a id="haveAccount">I already have an account</a>
-		</br>
-		</br>
-		<button type="submit" class="btn btnBrand1 bthSignUpForm">Sign me up</button>
-
-	</form>
+<%locals ||= {} %>
+<div id="signUpTemplate" class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+      <h4 class='signInModalTitle centeredText'>Sign Up</h4>
+      <p class="centeredText">
+        Already a Member of Play? 
+        <a id="haveAccount">Sign in</a>
+      </p>
+      <a class="btn btn-block btn-social btn-facebook centeredText" id="fbSignIn" >
+        <span class="fa fa-facebook"></span>
+          Connect With Facebook
+        </a>
+  </div>  
+    <p class="centeredText" >or connect via email</p>
+    <div class="modal-body">
+    	<form id="signUpForm" data-remote="true" action="/signup" accept-charset="UTF-8" method="post">	
+				<input name="utf8" type="hidden" value="&#x2713;" />
+				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+				<%= hidden_field_tag "user[auth_provider]", "play" %>
+				<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: locals[:user] } %>
+				<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: locals[:user] } %>
+				<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
+				<%= render "shared/form_helpers/input_field", locals: {input_type:"password", field_name: :password, user: locals[:user] } %>
+				<button type="submit" class="btn btnBrand1 bthSignUpForm">Sign me up</button>
+			</form>
+  	</div>
 </div>

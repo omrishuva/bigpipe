@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   end
   
   def create
-    @user = User.authenticate(params)
+    @user = User.authenticate(user_params)
   	if @user
     	session[:user_id] = @user.id
       flash[:success] = "Logged in!"
@@ -28,4 +28,10 @@ class SessionsController < ApplicationController
     flash[:info] = "Logged out!"
     redirect_to root_url
   end
+end
+
+private
+
+def user_params
+  params.select{|k,v| [:name, :email, :password, :profile_picture, :auth_provider].include?(k.to_sym) }.symbolize_keys
 end

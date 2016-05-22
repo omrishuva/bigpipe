@@ -8,11 +8,11 @@ class User < Entity
   validates :name, presence: true
   validates :email, presence: true
   # validates :phone, presence: true
-  validates :password_hash, presence: true unless :from_facebook?
+  validates :password_hash, presence: true, :if => :from_play?
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
-  validates :phone, :exact_length => 10
+  validates :phone, :exact_length => 10, :if => :has_phone?
 
   def initialize( params = { } )
   	if !params[:password].blank?
@@ -51,8 +51,12 @@ class User < Entity
     auth_provider == 'facebook'
   end
   
-  def from_play?
+  def from_play?(entity = nil)
     auth_provider == 'play'
+  end
+
+  def has_phone?(entity = nil)
+    self.phone
   end
 
   class << self
@@ -68,7 +72,7 @@ class User < Entity
       elsif user && user.from_facebook?
   	    user
       elsif user && user.from_play?
-        if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+        if user && user.password_hash == BCrypt::Engine.hash_secret(params[:password], user.password_salt)
   	      user
   	    else
   	      nil
@@ -84,5 +88,4 @@ class User < Entity
 	
 	protected
 	attr_writer  :password_salt, :password_hash
-
 end
