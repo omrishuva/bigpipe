@@ -1,11 +1,12 @@
 <% unless current_user %>
 	<li class="nav-item mobileNavItem">
-		<a class="btn btn-sign-up" data-toggle="modal" data-target="#signupModal">
+		<a class="btn btn-sign-up btnBrand1" data-toggle="modal" data-target="#signupModal">
 		Sign In
 		</a>
 	</li>
+	
 <%else%>
-	<li class="nav-item pull-sm-right userDropdown mobileNavItem">
+	<li class="nav-item pull-sm-right mobileNavItem">
 		<a class="nav-link btn-sign-up" href="/logout">
 			<p class="lead">Logout</p>
 		</a>

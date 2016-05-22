@@ -26,4 +26,4 @@
 //= require jquery
 //= require tether
 //= require bootstrap-sprockets
-//= require shared
+//= require facebook

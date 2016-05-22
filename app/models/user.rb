@@ -1,14 +1,14 @@
 class User < Entity
 
-	attr_accessor :id, :name, :email, :phone, :company_name, :account_name, :role, :created_at, :updated_at
+	attr_accessor :id, :name, :email, :phone, :profile_picture, :auth_provider, :role, :created_at, :updated_at
 	attr_reader :password_salt, :password_hash
 
   include BCrypt
 	 	
   validates :name, presence: true
   validates :email, presence: true
-  validates :phone, presence: true
-  validates :password_hash, presence: true
+  # validates :phone, presence: true
+  validates :password_hash, presence: true unless :from_facebook?
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
@@ -47,15 +47,33 @@ class User < Entity
   	end
   end
 
+  def from_facebook?
+    auth_provider == 'facebook'
+  end
+  
+  def from_play?
+    auth_provider == 'play'
+  end
+
   class << self
 	
-	  def authenticate(email, password)
-	    user = find_by(:email, email)
-	    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-	      user
-	    else
-	      nil
-	    end
+	  def authenticate(params)
+	    user = find_by(:email, params[:email])
+      if !user && params[:auth_provider] == 'facebook'
+        user = User.new(params)
+        user.save
+        user
+      elsif user && !user.from_facebook? && params[:auth_provider] == 'facebook'
+        user.update( profile_picture: params[:profile_picture], auth_provider: 'facebook' )
+      elsif user && user.from_facebook?
+  	    user
+      elsif user && user.from_play?
+        if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+  	      user
+  	    else
+  	      nil
+  	    end
+      end
 	  end
 	
 	  def create(params)

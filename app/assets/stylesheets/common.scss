@@ -1,11 +1,12 @@
 @import "bootstrap";
-
+@import "bootstrap-social";
 body
 {
     overflow:hidden;
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
 }
 
+// .signupModal{ width: 30%; }
 .navBarLogo { width: 100px; height: 60px; }
 .desktopNavbar{ margin-left: 20%; margin-top: 1em;}
 .desktopNavItem{ margin-right: 20%; }
@@ -20,6 +21,8 @@ body
 
 // .userDropdown{ margin-left: 40% }
 
-.btn-sign-up{ background-color: #5D33F4; color: #FFB941; font-weight: bold; padding: 2px 4px; font-size: 14px; border-radius: 3px; margin-top: 10%;}
-.btn-sign-up:hover{ color: #FFB941; background-color: #8C76FE;    }
-.mobileIcon{ color: #5D33F4; border: 1px solid #FFB941; box-shadow: 1px 1px 5px #FFB941; height: 100%; width:100%;  border-radius: 15px; padding:10%; margin-top: 10%;}
+.btn-sign-up{  padding: 2px 4px; font-size: 14px; border-radius: 3px; margin-top: 10%;}
+.btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
+.bthSignUpForm{ width: 100% }
+.btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
+.mobileIcon{ color: #5D33F4; border: 1px solid #FFB941; box-shadow: 1px 1px 5px #FFB941; height: 100%; width:100%;  border-radius: 4px; padding:10%; margin-top: 10%;}

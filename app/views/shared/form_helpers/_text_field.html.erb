@@ -1,15 +1,11 @@
 <%klass = locals[:user] && locals[:user].errors[locals[:field_name]] ? "form-group has-danger" : "form-group" %>
 <div class=<%=klass%>>
-	<label 
-	 	for=<%="user_#{locals[:field_name]}"%> 
-	 	>
-	 	<%=locals[:field_name]%>
-	 </label>
-	 <br/>
+
 	<input 
-		class="form-control ModalInput" 
+		class="form-control-sm ModalInput" 
 		type="text" 
 		name=<%="user[#{locals[:field_name]}]"%> id=<%="user_#{locals[:field_name]}"%> 
+		placeholder=<%=locals[:field_name]%>
 		/>
 
 	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>

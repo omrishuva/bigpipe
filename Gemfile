@@ -26,6 +26,8 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'sprockets-rails'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

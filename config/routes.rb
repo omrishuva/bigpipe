@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root "users#index"
 
 	post '/login' => 'sessions#create'
+	get '/login' => 'sessions#new'
 	get '/logout' => 'sessions#destroy'
-
+	
 	get 'users' => 'users#index'
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'

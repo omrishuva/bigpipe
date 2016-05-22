@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 
   def new
-    @user = User.new
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @user }
+    end
   end
 
   def create
@@ -14,7 +17,6 @@ class UsersController < ApplicationController
       format.js { }
       format.json { render json: @user }
     end
-  
   end
   
   def index
