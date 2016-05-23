@@ -59,37 +59,64 @@ RSpec.describe User do
 	end
 	
 	context "Authentication" do
+
+		before :each do
+			@play_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+			User.destroy_all
+			@fb_params = { auth_provider: "facebook", name: "omri shuva", email: "omrishuva1@gmail.com" }				
+		end
 		
 		it "should encrypt password correctrly" do
-			user = User.new(@valid_params)
+			user = User.new(@play_params)
 			user.save
 			expect(user.password_hash).to eq BCrypt::Engine.hash_secret("zzzaaaa123", user.password_salt)
 		end
 		
-		it "should authenticate user" do
-			user = User.new(@valid_params)
-			user.save
-			@valid_params.merge!(password: "zzzaaaa123")
-			expect(User.authenticate(@valid_params)).to_not be nil
-		end
+		context "auth provider is facebook" do
 
-		it "should not authenticate user if password is not correct" do
-			user = User.new(@valid_params)
-			user.save
-			expect(User.authenticate(@valid_params)).to be nil
-		end
-		
-		context "Logic" do
-			
 			it "should create a new user if new and from facebook" do
 				user_count = User.all.count
-				@valid_params = { auth_provider: "facebook", name: "omri shuva", email: "omrishuva1@gmail.com" }
-				User.authenticate(@valid_params)
+				User.authenticate(@fb_params)
+				sleep 1
 				expect(User.all.count).to eq (user_count + 1)
+			end
+			
+			it "should authenticate existing users" do
+				user = User.new(@fb_params)
+				user.save
+				User.authenticate(@fb_params)
+				expect(User.authenticate(@fb_params)).to_not be nil
+			end
+
+			it "should authenticate users that signed in originally with play" do
+				user = User.new(@play_params)
+				user.save
+				expect(User.authenticate(@fb_params)).to_not be nil
 			end
 
 		end
+	
+		context "auth provider is play" do
+			
+			it "should authenticate user" do
+				user = User.new(@play_params)
+				user.save
+				@play_params.merge!(password: "zzzaaaa123")
+				expect(User.authenticate(@play_params)).to_not be nil
+			end
 
+			it "should not authenticate user if password is not correct" do
+				user = User.new(@play_params)
+				user.save
+				expect(User.authenticate(@play_params)).to be nil
+			end
+
+			it "should not authenticate user if not exists" do
+				expect(User.authenticate(@play_params)).to be nil
+			end
+
+		end
+	
 	end
 
 end
