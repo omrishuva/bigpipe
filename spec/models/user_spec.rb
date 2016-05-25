@@ -35,12 +35,12 @@ RSpec.describe User do
 			expect(user.errors).to eq  phone: ["number already exists"]
 		end
 
-		it "should validate length of phone" do
-			@invalid_email_format_params = { name: "omri shuva", email: "c21vqev@gmail.com", phone: "05261111", password: "zzzaaaa123", auth_provider: "play" }
-			user = User.new(@invalid_email_format_params)
-			user.save
-			expect(user.errors).to eq  phone: ["number is not valid"]
-		end
+		# it "should validate length of phone" do
+		# 	@invalid_email_format_params = { name: "omri shuva", email: "c21vqev@gmail.com", phone: "05261111", password: "zzzaaaa123", auth_provider: "play" }
+		# 	user = User.new(@invalid_email_format_params)
+		# 	user.save
+		# 	expect(user.errors).to eq  phone: ["number is not valid"]
+		# end
 
 		it "should validate presence of name" do
 			@missing_name_params = {  email: "c21vqev@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
@@ -91,7 +91,7 @@ RSpec.describe User do
 			it "should authenticate users that signed in originally with play" do
 				user = User.new(@play_params)
 				user.save
-				expect(User.authenticate(@fb_params)).to_not be nil
+				expect(User.authenticate(@fb_params).id).to eq user.id
 			end
 
 		end

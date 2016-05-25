@@ -1,19 +1,18 @@
 class User < Entity
 
-	attr_accessor :id, :name, :email, :phone, :profile_picture, :auth_provider, :role, :created_at, :updated_at
+	attr_accessor :id, :name, :email, :phone, :phone_verification_code, :phone_verified, :profile_picture, :auth_provider, :role, :created_at, :updated_at
 	attr_reader :password_salt, :password_hash
 
   include BCrypt
 	 	
   validates :name, presence: true
   validates :email, presence: true
-  # validates :phone, presence: true
   validates :password_hash, presence: true, :if => :from_play?
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
-  validates :phone, :exact_length => 10, :if => :has_phone?
-
+  # validates :phone, :exact_length => 10, :if => :has_phone?
+  
   def initialize( params = { } )
   	if !params[:password].blank?
 	  	self.password_salt = BCrypt::Engine.generate_salt
@@ -58,10 +57,25 @@ class User < Entity
   def has_phone?(entity = nil)
     self.phone
   end
+  
+  def save_phone( phone )
+    update( phone: phone )
+    send_and_save_phone_verification_code
+  end
+  
+  def send_and_save_phone_verification_code
+    sms =  Sms.new( "phone_verification_message", phone, { name: name } )
+    sms.send_message
+    update( phone_verification_code: sms.phone_verification_code  )
+  end
+  
+  def verify_phone_number( user_verification_code )
+    update( phone_verified: true ) if user_verification_code.to_s == phone_verification_code.to_s
+  end
 
   class << self
-	
-	  def authenticate(params)
+	 	  
+    def authenticate(params)
 	    user = find_by(:email, params[:email])
       if !user && params[:auth_provider] == 'facebook'
         user = User.new(params)
@@ -69,6 +83,7 @@ class User < Entity
         user
       elsif user && !user.from_facebook? && params[:auth_provider] == 'facebook'
         user.update( profile_picture: params[:profile_picture], auth_provider: 'facebook' )
+        user
       elsif user && user.from_facebook?
   	    user
       elsif user && user.from_play?

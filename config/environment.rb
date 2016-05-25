@@ -14,5 +14,3 @@ ENV["RAILS_ENV"] = define_env unless ENV["RAILS_ENV"] == "test"
 require File.expand_path("../application", __FILE__)
 # Initialize the Rails application.
 Rails.application.initialize!
-
-

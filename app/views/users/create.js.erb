@@ -1,6 +1,8 @@
 <%if @user.errors.present?%>
 	$('#signUpTemplate').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user }) %>");
-<%else%>
+<%elsif !@user.phone_verified  %>
+	$("#signUpTemplate").replaceWith("<%= escape_javascript( render 'shared/components/verify_phone_template', locals: {user: @user } ) %>")
+<%else %>
 	$('#signupModal').modal('hide')
 	$("#navItems").replaceWith("<%= escape_javascript( render 'shared/components/navigation/nav_items') %>")
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");

@@ -1,12 +1,13 @@
 $(document).ready ->
   loadSignUpForm();
   loadLoginForm();
+  submitLoginUpForm();
   submitSignUpForm();
+  submitPhoneForm();
+  submitPhoneVerificationForm();
   facebookSignIn();
   logOut();
  
-
-  
 facebookSignIn = ->
   $('#fbSignIn').on 'click', ->
     FB.login ((response) ->
@@ -15,7 +16,6 @@ facebookSignIn = ->
           name = responseFromFB.name
           email = responseFromFB.email
           profile_picture =  responseFromFB.picture.data.url
-          #Take the vales and send to
           $.ajax
             type: 'POST'
             url: '/login'
@@ -25,10 +25,8 @@ facebookSignIn = ->
               'email': email
               'profile_picture': profile_picture
               'auth_provider': 'facebook'
-
             success: (data) ->
-              $('#fbSignIn').hide()
-              $('#signupModal').modal 'hide'
+              submitPhoneForm();
             complete: ->
             error: (xhr, textStatus, errorThrown) ->
               console.log 'ajax loading error...'
@@ -51,6 +49,9 @@ loadLoginForm = ->
       url: '/login'
       success: (data) ->
         loadSignUpForm();
+        submitSignUpForm();
+        facebookSignIn();
+        submitPhoneForm();
 
 loadSignUpForm = ->
   $('a#dontHaveAccount').click ->
@@ -58,12 +59,21 @@ loadSignUpForm = ->
       type: 'GET'
       url: '/signup'
       success: (data) ->
+        submitSignUpForm();
         loadLoginForm();
-        if data == ""
-          loadLoginForm();
-        else
-          submitSignUpForm();
-          loadLoginForm();
+        facebookSignIn();
+        submitPhoneForm();
+
+submitLoginUpForm = ->
+  $('#loginForm').submit (e) ->
+    e.preventDefault()
+    url = '/login'
+    $.ajax
+      type: 'POST'
+      url: url
+      data: $('#loginForm').serialize()
+      success: (data) ->
+        
 
 submitSignUpForm = ->
   $('#signUpForm').submit (e) ->
@@ -74,7 +84,25 @@ submitSignUpForm = ->
       url: url
       data: $('#signUpForm').serialize()
       success: (data) ->
-        if data == ""
-          $('#signupModal').modal 'hide'
-        else
-          submitSignUpForm()
+        submitPhoneVerificationForm();
+
+submitPhoneForm = ->
+  $('#phoneForm').submit (e) ->
+    e.preventDefault()
+    url = '/authenticate_phone'
+    $.ajax
+      type: 'POST'
+      url: url
+      data: $('#phoneForm').serialize()
+      success: (data) ->
+        submitPhoneVerificationForm();
+
+submitPhoneVerificationForm = ->
+  $('#verifyPhoneForm').submit (e) ->
+    e.preventDefault()
+    url = '/authenticate_phone'
+    $.ajax
+      type: 'POST'
+      url: url
+      data: $('#verifyPhoneForm').serialize()
+      success: (data) ->

@@ -34,5 +34,54 @@ RSpec.describe UsersController do
      	expect( response.content_type).to eq Mime::JS
     end
   end
+  
+  describe "POST authenticate phone" do
+    
+    before :all do
+      User.destroy_all
+      @valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", auth_provider: "facebook" }
+      @user = User.new(@valid_params)
+      @user.save
+    end
+
+    context "after fb auth" do
+      
+      context "first step - phone " do
+    
+        it "should save phone number in db" do
+          controller.stub(:current_user).and_return(@user)
+          Sms.any_instance.stub(:send_message).and_return(:return_value) 
+          xhr :post, :authenticate_phone, { user: { phone: "972526733740" } }
+          expect(@user.phone).to eql "972526733740"
+        end
+        
+        it "should generate verification code when phone params is passed" do
+          controller.stub(:current_user).and_return(@user)
+          Sms.any_instance.stub(:send_message).and_return(:return_value)
+          xhr :post, :authenticate_phone, { user: { phone: "972526733740" } }
+          expect(@user.phone_verification_code).to_not be nil
+        end
+    
+        # it "should send verification code in sms to user" do
+        #   controller.stub(:current_user).and_return(@user)
+        #   Sms.any_instance.stub(:send_message).and_return(:return_value)
+          
+        #   xhr :post, :authenticate_phone, { user: { phone: "972526733740" } }
+        #   expect_any_instance_of(Sms).to receive(:send_message).and_return(true)
+        # end
+      
+      end
+    
+    end
+
+    context "second step - verification code" do
+
+      it "should assign phone_verified attribute to true" do
+
+      end
+
+    end
+
+  end 
 
 end

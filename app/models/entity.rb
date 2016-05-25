@@ -137,6 +137,6 @@ class Entity
 		def destroy_all
 			all.each {|e| e.destroy }
 		end
-	
+		
 	end
 end
