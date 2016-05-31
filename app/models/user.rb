@@ -66,6 +66,7 @@ class User < Entity
   def send_and_save_phone_verification_code
     sms =  Sms.new( "phone_verification_message", phone, { name: name } )
     sms.send_message
+    binding.pry
     update( phone_verification_code: sms.phone_verification_code  )
   end
   

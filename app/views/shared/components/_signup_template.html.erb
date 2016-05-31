@@ -21,7 +21,6 @@
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 				<%= hidden_field_tag "user[auth_provider]", "play" %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: locals[:user] } %>
-				<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"password", field_name: :password, user: locals[:user] } %>
 				<button type="submit" class="btn btnBrand1 bthSignUpForm">Sign me up</button>

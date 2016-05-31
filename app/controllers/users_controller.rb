@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      @user.send_and_save_phone_verification_code
+      #@user.send_and_save_phone_verification_code
       session[:user_id] = @user.id
       flash[:success] = "Logged in!"
     end

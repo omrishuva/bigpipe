@@ -84,6 +84,7 @@ submitSignUpForm = ->
       url: url
       data: $('#signUpForm').serialize()
       success: (data) ->
+        submitPhoneForm();
         submitPhoneVerificationForm();
 
 submitPhoneForm = ->

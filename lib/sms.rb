@@ -8,7 +8,7 @@ class Sms
 		auth_token = "NDc0NmJmOWIyMWM5Y2RmMjhkMjVkYTUzY2RhMGJj"
 		@opts = opts
 		@phone_verification_code = rand.to_s[2..5] if message_name == "phone_verification_message"
-		@sender_number = 97236033370
+		@sender_number = "+972586033370"
 		@message_name = message_name
 		@destination_numbers = [destination_numbers].flatten
 		@plivo_api = RestAPI.new(auth_id, auth_token)
@@ -28,7 +28,7 @@ class Sms
 	end
 
 	def format_destination_numbers
-		destination_numbers.join("<")
+		destination_numbers.map{ |num| num.to_s.gsub("05","+972") }.join("<")
 	end
 
 	def phone_verification_message
