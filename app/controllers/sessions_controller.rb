@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
     flash[:info] = "Logged out!"
     redirect_to root_url
   end
+
 end
 
 private

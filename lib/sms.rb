@@ -28,11 +28,11 @@ class Sms
 	end
 
 	def format_destination_numbers
-		destination_numbers.map{ |num| num.to_s.gsub("05","+972") }.join("<")
+		destination_numbers.join("<")
 	end
 
 	def phone_verification_message
-		"Hi #{opts[:name]} welcome to Play, please enter the following code #{phone_verification_code}"
+		"#{I18n.t(:phone_verification_message)}" + " #{phone_verification_code}"
 	end
 
 end

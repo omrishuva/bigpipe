@@ -1,4 +1,4 @@
-<%if @user.has_phone? %>
+<%if @user.has_phone? && @user.phone_verified %>
 	$('#signupModal').modal('hide')
 	$("#navItems").replaceWith("<%= escape_javascript( render 'shared/components/navigation/nav_items') %>")
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");

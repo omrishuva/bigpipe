@@ -5,8 +5,12 @@
     <title>Play</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
-
-    <%= stylesheet_link_tag 'application', media: "all" %>
+    <%unless I18n.locale == :he %>
+      <%= stylesheet_link_tag 'application', media: "all" %>
+    <%else%>
+      <%= stylesheet_link_tag 'application_rtl', media: "all" %>
+    <%end%>
+    
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -29,8 +33,5 @@
   </body>
   <footer>
   </footer>
-  <!--   <nav class="navbar navbar-fixed-bottom navbar-light bg-faded">
-      <a class="navbar-brand" href="#">Play</a>
-    </nav> -->
   </footer>
 </html>

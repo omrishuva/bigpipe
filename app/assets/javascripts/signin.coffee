@@ -107,3 +107,4 @@ submitPhoneVerificationForm = ->
       url: url
       data: $('#verifyPhoneForm').serialize()
       success: (data) ->
+        submitPhoneVerificationForm();

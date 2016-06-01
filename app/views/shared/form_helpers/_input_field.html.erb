@@ -1,14 +1,14 @@
 <%klass = locals[:user] && locals[:user].errors[locals[:field_name]] ? "form-group has-danger" : "form-group" %>
 <div class=<%=klass%>>
 <%value = locals[:user].try(locals[:field_name]) || locals[:value]  %>
-<% disallowed_fields = ["phone_verification_code", "password", "password_confirmation"] %>
+<% disallowed_fields = [:phone_verification_code, :password, :password_confirmation] %>
 <%if value.present? && !disallowed_fields.include?( locals[:field_name] ) %>
 	<input 
 		class="form-control-sm ModalInput" 
 		type=<%=locals[:input_type]%> 
 		name=<%="user[#{locals[:field_name]}]"%> 
 		id=<%="user_#{locals[:field_name]}" %> 
-		placeholder=<%=locals[:field_name]%>
+		placeholder='<%= I18n.t "#{locals[:field_name]}_input_placeholder" %>'
 		value=<%=value%>
 		/>
 <%else%>
@@ -17,10 +17,9 @@
 		type=<%=locals[:input_type]%> 
 		name=<%="user[#{locals[:field_name]}]"%> 
 		id=<%="user_#{locals[:field_name]}" %> 
-		placeholder=<%=locals[:field_name]%>
+		placeholder='<%= I18n.t "#{locals[:field_name]}_input_placeholder" %>'
 		/>
 <%end%>
-	
 	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>
 		<%= 
 		 	render "shared/form_helpers/error_message", 

@@ -4,17 +4,25 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-      <h4 class='signInModalTitle centeredText'>We just sent you an SMS</h4>
+      <h4 class='signInModalTitle centeredText'><%= I18n.t :phone_verification_modal_title %></h4>
       <p class="centeredText">
-      Please enter the code you received
+        <%= I18n.t :phone_verification_modal_subtitle %>
       </p>
   </div>  
     <div class="modal-body">
     	<form id="verifyPhoneForm" data-remote="true"  action="/authenticate_phone" accept-charset="UTF-8" method="post">	
 				<input name="utf8" type="hidden" value="&#x2713;" />
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-				<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: "phone_verification_code", user: locals[:user] } %>
-				<button type="submit" class="btn btnBrand1 bthPhoneCodeForm">Send</button>
+        <%= render "shared/form_helpers/input_field", locals: {input_type: "text", 
+          field_name: :phone_verification_code, user: locals[:user] } %>
+        <%if locals[:user] && locals[:user].errors[:phone_verification_code]%>
+          <p class="centeredText">
+            <%= I18n.t :check_again_your_phone%>
+            </br>
+          <a id="resendPhoneNumber"><%= I18n.t :resend_phone_number %></a>
+          </p>
+        <%end%>
+				<button type="submit" class="btn btnBrand1 bthPhoneForm"><%=I18n.t :submit%></button>
 			</form>
   	</div>
 </div>

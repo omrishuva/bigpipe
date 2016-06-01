@@ -4,17 +4,17 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-      <h4 class='signInModalTitle centeredText'>Sign Up</h4>
+      <h4 class='signInModalTitle centeredText'><%= I18n.t :signup_modal_title %></h4>
       <p class="centeredText">
-        Already a Member of Play? 
-        <a id="haveAccount">Sign in</a>
+        <%= I18n.t :already_a_member%> 
+        <a id="haveAccount"><%= I18n.t :sign_in_button %></a>
       </p>
       <a class="btn btn-block btn-social btn-facebook centeredText" id="fbSignIn" >
         <span class="fa fa-facebook"></span>
-          Connect With Facebook
+         <%= I18n.t :signup_with_fb%> 
         </a>
   </div>  
-    <p class="centeredText" >or connect via email</p>
+    <p class="centeredText" > <%= I18n.t :or_signup_with_email%> </p>
     <div class="modal-body">
     	<form id="signUpForm" data-remote="true" action="/signup" accept-charset="UTF-8" method="post">	
 				<input name="utf8" type="hidden" value="&#x2713;" />
@@ -23,7 +23,7 @@
 				<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"password", field_name: :password, user: locals[:user] } %>
-				<button type="submit" class="btn btnBrand1 bthSignUpForm">Sign me up</button>
+				<button type="submit" class="btn btnBrand1 bthSignUpForm"><%= I18n.t :signup_button%></button>
 			</form>
   	</div>
 </div>

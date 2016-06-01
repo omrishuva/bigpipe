@@ -66,12 +66,15 @@ class User < Entity
   def send_and_save_phone_verification_code
     sms =  Sms.new( "phone_verification_message", phone, { name: name } )
     sms.send_message
-    binding.pry
     update( phone_verification_code: sms.phone_verification_code  )
   end
   
   def verify_phone_number( user_verification_code )
-    update( phone_verified: true ) if user_verification_code.to_s == phone_verification_code.to_s
+    if user_verification_code.to_s == phone_verification_code.to_s
+      update( phone_verified: true )
+    else
+      errors.add(:phone_verification_code, "does not match")
+    end
   end
 
   class << self
