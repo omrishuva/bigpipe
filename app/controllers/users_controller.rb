@@ -31,7 +31,32 @@ class UsersController < ApplicationController
       format.js { }
       format.json { render json: @user }
     end
+  end
   
+  def password_recovery_email 
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @user }
+    end
+  
+  end
+  
+  def select_new_password
+    
+    if params[:user] && params[:user][:email]
+      @email_sent = true
+      @user = User.find_by( :email, params[:user][:email] )
+      if @user
+        AppMailer.password_recovery_code_mail(@user).deliver_now
+      else
+        flash[:danger] = "You email was not found in the system" 
+      end
+    end
+    
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @user }
+    end
   end
 
   def index

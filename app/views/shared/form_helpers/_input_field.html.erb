@@ -21,9 +21,13 @@
 		/>
 <%end%>
 	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>
-		<%= 
-		 	render "shared/form_helpers/error_message", 
-			locals: {field_name: locals[:field_name].to_s.split("_").join(" "), error: locals[:user].errors[locals[:field_name]][0] } 
-		%>
+		<%locals[:user].errors[locals[:field_name]].each do |error| %>
+			<%= 
+			 	render "shared/form_helpers/error_message", 
+				locals: {
+									field_name: locals[:field_name].to_s.split("_").join(" "), 
+									error: "error_messages.#{locals[:field_name]}.#{error.to_s}" } 
+			%>
+		<%end%>
 	<%end%>
 </div>

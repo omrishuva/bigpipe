@@ -1,10 +1,12 @@
 $(document).ready ->
   loadSignUpForm();
   loadLoginForm();
-  submitLoginUpForm();
+  loadPasswordRecoveryEmailForm();
+  submitLoginForm();
   submitSignUpForm();
   submitPhoneForm();
   submitPhoneVerificationForm();
+  submitPasswordRecoveryEmailForm();
   facebookSignIn();
   logOut();
  
@@ -48,10 +50,13 @@ loadLoginForm = ->
       type: 'GET'
       url: '/login'
       success: (data) ->
+        loadLoginForm();
         loadSignUpForm();
+        submitLoginForm();
         submitSignUpForm();
         facebookSignIn();
         submitPhoneForm();
+        loadPasswordRecoveryEmailForm();
 
 loadSignUpForm = ->
   $('a#dontHaveAccount').click ->
@@ -63,8 +68,10 @@ loadSignUpForm = ->
         loadLoginForm();
         facebookSignIn();
         submitPhoneForm();
+        loadPasswordRecoveryEmailForm();
 
-submitLoginUpForm = ->
+
+submitLoginForm = ->
   $('#loginForm').submit (e) ->
     e.preventDefault()
     url = '/login'
@@ -73,7 +80,13 @@ submitLoginUpForm = ->
       url: url
       data: $('#loginForm').serialize()
       success: (data) ->
-        
+        loadLoginForm();
+        loadSignUpForm();
+        submitLoginForm();
+        submitSignUpForm();
+        facebookSignIn();
+        submitPhoneForm();
+        loadPasswordRecoveryEmailForm();
 
 submitSignUpForm = ->
   $('#signUpForm').submit (e) ->
@@ -84,6 +97,8 @@ submitSignUpForm = ->
       url: url
       data: $('#signUpForm').serialize()
       success: (data) ->
+        loadLoginForm();
+        submitSignUpForm();
         submitPhoneForm();
         submitPhoneVerificationForm();
 
@@ -106,5 +121,27 @@ submitPhoneVerificationForm = ->
       type: 'POST'
       url: url
       data: $('#verifyPhoneForm').serialize()
+      success: (data) ->
+        submitPhoneVerificationForm();
+
+loadPasswordRecoveryEmailForm = ->
+  $('#forgotPassword').click (e) ->
+    url = '/send_password_recovery_email'
+    $.ajax
+      type: 'GET'
+      url: url
+      success: (data) ->
+        submitPasswordRecoveryEmailForm();
+        loadPasswordRecoveryEmailForm();
+        loadLoginForm();
+
+submitPasswordRecoveryEmailForm = ->
+  $('#passwordRecoveryEmail').submit (e) ->
+    e.preventDefault()
+    url = '/select_new_password'
+    $.ajax
+      type: 'GET'
+      url: url
+      data: $('#passwordRecoveryEmail').serialize()
       success: (data) ->
         submitPhoneVerificationForm();

@@ -26,3 +26,17 @@ en:
  check_again_your_phone: "Check again the code we sent you"
  resend_phone_number: "Or try resend your phone number"
  submit: "Submit"
+ password_recovery_title: "Password Recovery Wizard"
+ password_recovery_subtitle: "Enter you email"
+ back: "Go Back"
+ error_messages:
+  password:  
+   is_missing: "Missing Password"
+  phone:
+    already_exists: "The phone number you entered is already exists"
+  email:
+    is_missing: "Please insert your email adress"
+    already_exists: "The email adress you entered is already exists"
+    wrong_format: "The email adress you entered is not valid"
+  name:
+    is_missing: "Please enter your name"

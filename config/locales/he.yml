@@ -26,3 +26,17 @@ he:
  check_again_your_phone: "בדקו שוב את את קוד האימות שנשלח אליכם"
  resend_phone_number: "נסו להזין שוב את מספר הטלפון שלכם"
  submit: "שלח"
+ password_recovery_title: "שחזור סיסמה"
+ password_recovery_subtitle: "הכנס/י כתובת דואר אלקטרוני"
+ back: "חזור"
+ error_messages:
+  password:  
+   is_missing: " הכנס/י סיסמה"
+  phone:
+    already_exists: "מספר הטלפון שהזנת בכר קיים במערכת"
+  email:
+    is_missing: "הכנס/י כתובת הדואר האלקטרוני"
+    already_exists: "כתובת הדואר האלקטרוני שהזנת כבר קיימת במערכת"
+    wrong_format: "כתובת הדואר האלקטרוני שהזנת אינה חוקית"
+  name:
+    is_missing: "הכנס/י שם מלא"

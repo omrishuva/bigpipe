@@ -1,4 +1,3 @@
-<%binding.pry%>
 <%if @user.errors.present?%>
 	$('#signUpTemplate').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user }) %>");
 <% elsif !@user.has_phone?%>

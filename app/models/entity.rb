@@ -7,7 +7,8 @@ class Entity
 	include Veto.validator
 
 	Veto.configure do |c|
-		c.message.set(:presence, lambda{"is missing"})
+		c.message.set(:presence, lambda{ :is_missing } )
+		c.message.set(:format, lambda{ :wrong_format } )
 	end
 
 	define_model_callbacks :save, :create, :update, :initialize

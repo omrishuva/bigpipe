@@ -3,7 +3,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-      <h4 class='signInModalTitle centeredText'><%=I18n.t :signin_modal_title%></h4> 
+      <h4 class='formModalTitle centeredText'><%=I18n.t :signin_modal_title%></h4> 
       <p class="centeredText">
         <%=I18n.t :not_a_member_yet%>
         <a id="dontHaveAccount"><%=I18n.t :signup_link%></a>
@@ -33,11 +33,13 @@
              id="password" 
              placeholder="<%= I18n.t :password_input_placeholder%>"
       >
+      
       </br>
+       <%= render "shared/form_helpers/flash_messages" %>
        </br>
-      <a id="forgotPassword"><%= I18n.t :forgot_password_link%></a>
+       <a id="forgotPassword"><%= I18n.t :forgot_password_link%></a>
       </div>
-      <button type="submit" class="btn btnBrand1 bthSignUpForm"><%= I18n.t :sign_in_button%></button>
+      <button type="submit" class="btn btnBrand1 bthModalForm"><%= I18n.t :sign_in_button%></button>
     </form>
   </div>
 </div>

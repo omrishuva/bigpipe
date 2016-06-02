@@ -1,6 +1,6 @@
 class User < Entity
 
-	attr_accessor :id, :name, :email, :phone, :phone_verification_code, :phone_verified, :profile_picture, :auth_provider, :role, :created_at, :updated_at
+	attr_accessor :id, :name, :email, :phone, :phone_verification_code, :password_recovery_code, :phone_verified, :profile_picture, :auth_provider, :role, :created_at, :updated_at
 	attr_reader :password_salt, :password_hash
 
   include BCrypt
@@ -11,7 +11,6 @@ class User < Entity
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
-  # validates :phone, :exact_length => 10, :if => :has_phone?
   
   def initialize( params = { } )
   	if !params[:password].blank?
@@ -25,15 +24,15 @@ class User < Entity
   def customize_error_messages
   	if errors[:password_hash]
 	  	errors.delete(:password_hash)
-	  	errors.add(:password, "is missing")
+	  	errors.add(:password, "is_missing")
 		end
-	  errors[:phone] = ["number is not valid"] if errors[:phone] == ["is not 10 characters"]
+	  errors[:phone] = [:invalid_number] if errors[:phone] == ["is not 10 characters"]
   end
   
   def uniqueness_of_email(entity)
   	if !entity.persisted?
   		if User.find_by( :email, entity.email ).present?
-  			errors.add(:email, "adress already exists")
+  			errors.add(:email, "already_exists")
   		end
   	end
   end
@@ -41,7 +40,7 @@ class User < Entity
   def uniqueness_of_phone(entity)
   	if !entity.persisted? 
   		if User.find_by( :phone, entity.phone ).present?
-  			errors.add(:phone, "number already exists")
+  			errors.add(:phone, :already_exists)
   		end
   	end
   end
@@ -73,7 +72,7 @@ class User < Entity
     if user_verification_code.to_s == phone_verification_code.to_s
       update( phone_verified: true )
     else
-      errors.add(:phone_verification_code, "does not match")
+      errors.add(:phone_verification_code, :does_not_match)
     end
   end
 

@@ -13,7 +13,7 @@ body
 .mobileNavItem{ margin-top: 1em; margin-right: 2%; }
 
 .ModalInput { width: 100% }
-.signInModalTitle{ font-weight: bold; }
+.formModalTitle{ font-weight: bold; }
 .centeredText{ text-align: center; }
 .navigationBar{  
 	border-bottom: 1px solid #FFB941;
@@ -22,8 +22,6 @@ body
 
 .btn-sign-up{  padding: 2px 4px; font-size: 14px; border-radius: 3px; margin-top: 10%;}
 .btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
-.bthSignUpForm{ width: 100%; }
-.bthPhoneForm { width: 100%; }
 .btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
+.bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
-.phonePrefix{ width: 50px; }

@@ -4,7 +4,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-      <h4 class='signInModalTitle centeredText'><%= I18n.t :signup_modal_title %></h4>
+      <h4 class='formModalTitle centeredText'><%= I18n.t :signup_modal_title %></h4>
       <p class="centeredText">
         <%= I18n.t :already_a_member%> 
         <a id="haveAccount"><%= I18n.t :sign_in_button %></a>
@@ -23,7 +23,7 @@
 				<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"password", field_name: :password, user: locals[:user] } %>
-				<button type="submit" class="btn btnBrand1 bthSignUpForm"><%= I18n.t :signup_button%></button>
+				<button type="submit" class="btn btnBrand1 bthModalForm"><%= I18n.t :signup_button%></button>
 			</form>
   	</div>
 </div>
