@@ -14,6 +14,8 @@ en:
  name_input_placeholder: "Enter your Full Name"
  password_input_placeholder: "Choose your password"
  phone_input_placeholder: "Please enter your phone number"
+ authentication_code_input_placeholder: "Enter the code you just received in the email"
+ new_password_input_placeholder: "Enter you new password"
  phone_verification_code_input_placeholder: "Enter the code you received in the SMS message"
  forgot_password_link: "I forgot my password"
  sign_in_button: "Sign In"
@@ -28,12 +30,16 @@ en:
  submit: "Submit"
  password_recovery_title: "Password Recovery Wizard"
  password_recovery_subtitle: "Enter you email"
+ select_new_password_recovery_title:  "Select you new password"
+ select_new_password_recovery_subtitle: "Enter the code you received in the email and select your new password"
  back: "Go Back"
  error_messages:
-  password:  
+  password:
    is_missing: "Missing Password"
   phone:
     already_exists: "The phone number you entered is already exists"
+  phone_verification_code:
+    does_not_match: "The code you entered does not match the one we sent you"
   email:
     is_missing: "Please insert your email adress"
     already_exists: "The email adress you entered is already exists"

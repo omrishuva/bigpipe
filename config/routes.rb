@@ -13,9 +13,12 @@ Rails.application.routes.draw do
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'
 	post '/authenticate_phone' => 'users#authenticate_phone'
-	get 'send_password_recovery_email' => 'users#password_recovery_email'
-	get 'select_new_password' => 'users#select_new_password'
-	
+	get '/send_password_recovery_email' => 'users#password_recovery_email'
+	get '/select_new_password' => 'users#select_new_password'
+	post '/set_new_password' => 'users#set_new_password'
+	get '/resend_phone_number' => 'users#resend_phone_number'
+
+	#health checks
 	get '_ah/health', :to => 'application_health#health'
 	get '_ah/start', :to => 'application_health#start'
 	get '/_ah/background', :to => "application_health#background"

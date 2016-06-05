@@ -8,6 +8,8 @@
       <p class="centeredText">
         <%= I18n.t :already_a_member%> 
         <a id="haveAccount"><%= I18n.t :sign_in_button %></a>
+        </br>
+        <%=image_tag("loader.gif", class: "signinLoader")%>
       </p>
       <a class="btn btn-block btn-social btn-facebook centeredText" id="fbSignIn" >
         <span class="fa fa-facebook"></span>
@@ -24,6 +26,7 @@
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
 				<%= render "shared/form_helpers/input_field", locals: {input_type:"password", field_name: :password, user: locals[:user] } %>
 				<button type="submit" class="btn btnBrand1 bthModalForm"><%= I18n.t :signup_button%></button>
+        <%= render "shared/form_helpers/flash_messages" %>
 			</form>
   	</div>
 </div>

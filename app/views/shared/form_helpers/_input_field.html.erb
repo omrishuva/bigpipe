@@ -20,6 +20,7 @@
 		placeholder='<%= I18n.t "#{locals[:field_name]}_input_placeholder" %>'
 		/>
 <%end%>
+
 	<%if locals[:user] && locals[:user].errors[locals[:field_name]]%>
 		<%locals[:user].errors[locals[:field_name]].each do |error| %>
 			<%= 

@@ -1,5 +1,6 @@
 <%if flash.present?%>
 	</br>
+	</br>
 	<div id="flashMessages">
 		<% flash.each do |type, message| %>
 			<div class="alert <%=bootstrap_class_for(type)%> flashMessage" role="alert">

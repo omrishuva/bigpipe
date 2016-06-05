@@ -1,4 +1,7 @@
 $(document).ready ->
+ loadListeners();
+
+loadListeners = ->
   loadSignUpForm();
   loadLoginForm();
   loadPasswordRecoveryEmailForm();
@@ -7,12 +10,21 @@ $(document).ready ->
   submitPhoneForm();
   submitPhoneVerificationForm();
   submitPasswordRecoveryEmailForm();
+  submitSelectNewPasswordForm();
   facebookSignIn();
+  resendPhoneNumber();
   logOut();
- 
+
+showLoader = ->
+  $('.signinLoader').show()
+
+hideLoader = ->
+   $('.signinLoader').hide()
+
 facebookSignIn = ->
   $('#fbSignIn').on 'click', ->
     FB.login ((response) ->
+      showLoader();
       if response.authResponse
         FB.api '/me?fields=email,name,picture', (responseFromFB) ->
           name = responseFromFB.name
@@ -50,13 +62,7 @@ loadLoginForm = ->
       type: 'GET'
       url: '/login'
       success: (data) ->
-        loadLoginForm();
-        loadSignUpForm();
-        submitLoginForm();
-        submitSignUpForm();
-        facebookSignIn();
-        submitPhoneForm();
-        loadPasswordRecoveryEmailForm();
+        loadListeners();
 
 loadSignUpForm = ->
   $('a#dontHaveAccount').click ->
@@ -64,15 +70,13 @@ loadSignUpForm = ->
       type: 'GET'
       url: '/signup'
       success: (data) ->
-        submitSignUpForm();
-        loadLoginForm();
-        facebookSignIn();
-        submitPhoneForm();
-        loadPasswordRecoveryEmailForm();
+       loadListeners();
 
 
 submitLoginForm = ->
   $('#loginForm').submit (e) ->
+    $('#loginForm').attr("disabled", true); 
+    showLoader();
     e.preventDefault()
     url = '/login'
     $.ajax
@@ -80,16 +84,12 @@ submitLoginForm = ->
       url: url
       data: $('#loginForm').serialize()
       success: (data) ->
-        loadLoginForm();
-        loadSignUpForm();
-        submitLoginForm();
-        submitSignUpForm();
-        facebookSignIn();
-        submitPhoneForm();
-        loadPasswordRecoveryEmailForm();
+       loadListeners();
 
 submitSignUpForm = ->
   $('#signUpForm').submit (e) ->
+    $('#signUpForm').attr("disabled", true); 
+    showLoader();
     e.preventDefault()
     url = '/signup'
     $.ajax
@@ -97,13 +97,12 @@ submitSignUpForm = ->
       url: url
       data: $('#signUpForm').serialize()
       success: (data) ->
-        loadLoginForm();
-        submitSignUpForm();
-        submitPhoneForm();
-        submitPhoneVerificationForm();
+        loadListeners();
 
 submitPhoneForm = ->
   $('#phoneForm').submit (e) ->
+    $('#phoneForm').attr("disabled", true); 
+    showLoader();
     e.preventDefault()
     url = '/authenticate_phone'
     $.ajax
@@ -111,10 +110,12 @@ submitPhoneForm = ->
       url: url
       data: $('#phoneForm').serialize()
       success: (data) ->
-        submitPhoneVerificationForm();
+        loadListeners();
 
 submitPhoneVerificationForm = ->
   $('#verifyPhoneForm').submit (e) ->
+    $('#verifyPhoneForm').attr("disabled", true); 
+    showLoader();
     e.preventDefault()
     url = '/authenticate_phone'
     $.ajax
@@ -122,7 +123,7 @@ submitPhoneVerificationForm = ->
       url: url
       data: $('#verifyPhoneForm').serialize()
       success: (data) ->
-        submitPhoneVerificationForm();
+        loadListeners();
 
 loadPasswordRecoveryEmailForm = ->
   $('#forgotPassword').click (e) ->
@@ -131,12 +132,22 @@ loadPasswordRecoveryEmailForm = ->
       type: 'GET'
       url: url
       success: (data) ->
-        submitPasswordRecoveryEmailForm();
-        loadPasswordRecoveryEmailForm();
-        loadLoginForm();
+       loadListeners();
+
+resendPhoneNumber = ->
+  $('a#resendPhoneNumber').click (e) ->
+    showLoader();
+    url = '/resend_phone_number'
+    $.ajax
+      type: 'GET'
+      url: url
+      success: (data) ->
+        loadListeners();
 
 submitPasswordRecoveryEmailForm = ->
   $('#passwordRecoveryEmail').submit (e) ->
+    $('#passwordRecoveryEmail').attr("disabled", true); 
+    showLoader();
     e.preventDefault()
     url = '/select_new_password'
     $.ajax
@@ -144,4 +155,20 @@ submitPasswordRecoveryEmailForm = ->
       url: url
       data: $('#passwordRecoveryEmail').serialize()
       success: (data) ->
-        submitPhoneVerificationForm();
+        loadListeners();
+
+submitSelectNewPasswordForm = ->
+  $('#selectNewPasswordForm').submit (e) ->
+    e.preventDefault()
+    $('#selectNewPasswordForm').attr("disabled", true);
+    if $( "input[name='user[authentication_code]']" )[0].value != '' && $( "input[name='user[new_password]']" )[0].value != ''
+      showLoader();
+      url = '/set_new_password'
+      $.ajax
+        type: 'POST'
+        url: url
+        data: $('#selectNewPasswordForm').serialize()
+        success: (data) ->
+          loadListeners();
+    else
+      $('#selectNewPasswordForm').attr("disabled", false);

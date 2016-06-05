@@ -14,6 +14,8 @@ he:
  name_input_placeholder: "הכנס/י שם שם מלא"
  password_input_placeholder: "הכנס/י סיסמה"
  phone_input_placeholder: "הכנס/י מספר טלפון"
+ authentication_code_input_placeholder: "הכנס/י את קוד האימות שקיבלת באי מייל"
+ new_password_input_placeholder: "הכנס/י את הסיסמא החדשה שלך"
  phone_verification_code_input_placeholder: "הכנס/י את קוד האימות שקיבלת בהודעת ה SMS"
  forgot_password_link: "שכחתי את הסיסמה שלי"
  sign_in_button: "כניסה"
@@ -23,6 +25,8 @@ he:
  phone_verification_message: "ברוכים הבאים ל Play, אנא הכניסו את הקוד הבא בתיבה המיועדת לכך"
  phone_verification_modal_title: "הודעת SMS נשלחה זה עתה למכשיר הנייד שלכם"
  phone_verification_modal_subtitle: "אנא הכניסו כאן את הקוד שנשלח אליכם"
+ select_new_password_recovery_title:  "בחר/י סיסמא חדשה"
+ select_new_password_recovery_subtitle: "הכנס/י את הקוד שקיבלת באי מייל ובחר/י סיסמא חדשה"
  check_again_your_phone: "בדקו שוב את את קוד האימות שנשלח אליכם"
  resend_phone_number: "נסו להזין שוב את מספר הטלפון שלכם"
  submit: "שלח"
@@ -34,6 +38,8 @@ he:
    is_missing: " הכנס/י סיסמה"
   phone:
     already_exists: "מספר הטלפון שהזנת בכר קיים במערכת"
+  phone_verification_code:
+    does_not_match: "הקוד שהזנת אינו תואם לזה ששלחנו לך"
   email:
     is_missing: "הכנס/י כתובת הדואר האלקטרוני"
     already_exists: "כתובת הדואר האלקטרוני שהזנת כבר קיימת במערכת"

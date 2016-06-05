@@ -13,10 +13,7 @@ class User < Entity
   validate :uniqueness_of_phone
   
   def initialize( params = { } )
-  	if !params[:password].blank?
-	  	self.password_salt = BCrypt::Engine.generate_salt
-	  	self.password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
-  	end
+	  set_password( params[:password] ) if !params[:password].blank?
 		params.delete(:password)
   	super( params )
   end
@@ -29,7 +26,7 @@ class User < Entity
 	  errors[:phone] = [:invalid_number] if errors[:phone] == ["is not 10 characters"]
   end
   
-  def uniqueness_of_email(entity)
+  def uniqueness_of_email( entity )
   	if !entity.persisted?
   		if User.find_by( :email, entity.email ).present?
   			errors.add(:email, "already_exists")
@@ -37,7 +34,7 @@ class User < Entity
   	end
   end
 
-  def uniqueness_of_phone(entity)
+  def uniqueness_of_phone( entity )
   	if !entity.persisted? 
   		if User.find_by( :phone, entity.phone ).present?
   			errors.add(:phone, :already_exists)
@@ -49,12 +46,12 @@ class User < Entity
     auth_provider == 'facebook'
   end
   
-  def from_play?(entity = nil)
+  def from_play?( entity = nil )
     auth_provider == 'play'
   end
 
-  def has_phone?(entity = nil)
-    self.phone
+  def has_phone?( entity = nil )
+    self.phone.present?
   end
   
   def save_phone( phone )
@@ -72,13 +69,13 @@ class User < Entity
     if user_verification_code.to_s == phone_verification_code.to_s
       update( phone_verified: true )
     else
-      errors.add(:phone_verification_code, :does_not_match)
+      errors.add(:phone_verification_code, "does_not_match")
     end
   end
 
   class << self
 	 	  
-    def authenticate(params)
+    def authenticate( params )
 	    user = find_by(:email, params[:email])
       if !user && params[:auth_provider] == 'facebook'
         user = User.new(params)
@@ -98,12 +95,18 @@ class User < Entity
       end
 	  end
 	
-	  def create(params)
+	  def create( params )
   		self.new(params).save
   	end
-	
+	 
 	end
 	
+  def set_password( password )
+    self.password_salt = BCrypt::Engine.generate_salt
+    self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+  end
+
 	protected
 	attr_writer  :password_salt, :password_hash
+
 end
