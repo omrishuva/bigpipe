@@ -1,5 +1,6 @@
 en:
  sign_in_button: "Sign In"
+ logout: "Logout"
  how_it_works: "How it works?"
  not_a_member_yet: "Not a Member yet?"
  already_a_member: "Already a Member of Play?"

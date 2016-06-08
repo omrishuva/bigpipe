@@ -1,6 +1,10 @@
 <div class="modal fade" id="signupModal" tabindex="-1" data-keyboard=true data-backdrop='static'  role="dialog" aria-labelledby="signupModal" aria-hidden="true">
   <div class="modal-dialog signupModal" role="document">
-      <%=render "shared/components/login_template"%>
+    	<%if !current_user%>
+      	<%=render "shared/components/login_template"%>
+      <%elsif current_user && !current_user.try(:phone_verfied)%>
+	      <%=render "shared/components/enter_phone_template"%>	
+  		<%end%>
     </div>
   </div>
 </div>

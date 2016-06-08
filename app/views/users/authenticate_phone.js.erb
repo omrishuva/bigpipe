@@ -4,6 +4,8 @@
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");
 <%elsif !current_user.has_phone? %>
 	$("#enterPhoneTemplate").replaceWith("<%= escape_javascript( render 'shared/components/enter_phone_template') %>")
+<%elsif current_user.errors[:phone] %>
+	$("#enterPhoneTemplate").replaceWith("<%= escape_javascript( render 'shared/components/enter_phone_template') %>")
 <%elsif current_user.errors[:phone_verification_code] %>
 	$("#verifyPhoneTemplate").replaceWith("<%= escape_javascript( render 'shared/components/verify_phone_template', locals: {user: current_user }  ) %>")
 <%else%>

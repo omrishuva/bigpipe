@@ -70,6 +70,7 @@ class UsersController < ApplicationController
   end
   
   def set_new_password
+    
     @user = User.find_by( [ { k: "email", v: params[:user][:email], op: "=" } ] )
     if params[:user][:authentication_code] == @user.password_recovery_code
       @user.set_password( params[:user][:password] )
@@ -78,11 +79,11 @@ class UsersController < ApplicationController
     else
       flash[:error] = "The code you entered does not match the one we sent you"
     end
+
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
     end
-  
   end
 
   def index
