@@ -75,7 +75,7 @@ loadSignUpForm = ->
 
 submitLoginForm = ->
   $('#loginForm').submit (e) ->
-    $('#loginForm').attr("disabled", true); 
+    disableSubmitButton();
     showLoader();
     e.preventDefault()
     url = '/login'
@@ -88,7 +88,7 @@ submitLoginForm = ->
 
 submitSignUpForm = ->
   $('#signUpForm').submit (e) ->
-    $('#signUpForm').attr("disabled", true); 
+    disableSubmitButton();
     showLoader();
     e.preventDefault()
     url = '/signup'
@@ -101,7 +101,7 @@ submitSignUpForm = ->
 
 submitPhoneForm = ->
   $('#phoneForm').submit (e) ->
-    $('#phoneForm').attr("disabled", true); 
+    disableSubmitButton();
     showLoader();
     e.preventDefault()
     url = '/authenticate_phone'
@@ -114,7 +114,7 @@ submitPhoneForm = ->
 
 submitPhoneVerificationForm = ->
   $('#verifyPhoneForm').submit (e) ->
-    $('#verifyPhoneForm').attr("disabled", true); 
+    disableSubmitButton();
     showLoader();
     e.preventDefault()
     url = '/authenticate_phone'
@@ -146,7 +146,7 @@ resendPhoneNumber = ->
 
 submitPasswordRecoveryEmailForm = ->
   $('#passwordRecoveryEmail').submit (e) ->
-    $('#passwordRecoveryEmail').attr("disabled", true); 
+    disableSubmitButton();
     showLoader();
     e.preventDefault()
     url = '/select_new_password'
@@ -160,7 +160,7 @@ submitPasswordRecoveryEmailForm = ->
 submitSelectNewPasswordForm = ->
   $('#selectNewPasswordForm').submit (e) ->
     e.preventDefault()
-    $('#selectNewPasswordForm').attr("disabled", true);
+    disableSubmitButton();
     if $( "input[name='user[authentication_code]']" )[0].value != '' && $( "input[name='user[new_password]']" )[0].value != ''
       showLoader();
       url = '/set_new_password'
@@ -172,3 +172,6 @@ submitSelectNewPasswordForm = ->
           loadListeners();
     else
       $('#selectNewPasswordForm').attr("disabled", false);
+
+disableSubmitButton = ->
+  $('.bthModalForm').attr("disabled", true); 

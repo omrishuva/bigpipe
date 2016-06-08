@@ -11,9 +11,9 @@ class SessionsController < ApplicationController
   
   def create
     @user = User.authenticate(user_params)
-  	if @user
+  	if @user 
     	session[:user_id] = @user.id
-      flash[:success] = "Logged in!"
+      flash[:success] = "Logged in"
   	else
     	flash[:error] = "Invalid email or password"
   	end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:info] = "Logged out!"
+    flash[:info] = "Logged out"
     redirect_to root_url
   end
 

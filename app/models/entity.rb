@@ -7,8 +7,8 @@ class Entity
 	include Veto.validator
 
 	Veto.configure do |c|
-		c.message.set(:presence, lambda{ :is_missing } )
-		c.message.set(:format, lambda{ :wrong_format } )
+		c.message.set(:presence, lambda{ "is_missing" } )
+		c.message.set(:format, lambda{ "wrong_format" } )
 	end
 
 	define_model_callbacks :save, :create, :update, :initialize
@@ -91,8 +91,12 @@ class Entity
 	    from_entity( entity ) if entity
 	  end
 	  
-	  def find_by( key, value )
-	  	from_entity( run_query($datastore.query.kind(self.name).where(key.to_s,"=",value))[0] )
+	  def find_by( query_params )
+	  	query_obj = $datastore.query.kind(self.name)
+	  	query_params.each do |filter|
+	  		query_obj = query_obj.where( filter[:k].to_s, filter[:op], filter[:v] )
+	  	end
+	  	from_entity( run_query( query_obj )[0] )
 	  end
 
 		def all( opts = { } )

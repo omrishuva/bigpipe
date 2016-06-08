@@ -2,8 +2,9 @@ require "spec_helper"
 RSpec.describe User do
 	
 	before :each do
-		@valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+		@valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play", phone_verified: true }
 		User.destroy_all
+		$stop = false
 	end
 	
 	context "Validations" do
@@ -17,43 +18,46 @@ RSpec.describe User do
 			@duplicate_email_address_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
 			user = User.new(@duplicate_email_address_params)
 			user.save
-			expect(user.errors).to eq  email: ["adress already exists"]
+			expect(user.errors).to eq  email: ["already_exists"]
 		end
 		
 		it "should validate email format" do
 			@invalid_email_format_params = { name: "omri shuva", email: "omrishuva1gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
 			user = User.new(@invalid_email_format_params)
 			user.save
-			expect(user.errors).to eq  email: ["is not valid"]
+			expect(user.errors).to eq  email: ["wrong_format"]
 		end
 
 		it "should validate uniqueness of phone" do
 			User.create(@valid_params)
-			@duplicate_email_address_params = { name: "omri shuva", email: "omrishuva123@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
-			user = User.new(@duplicate_email_address_params)
+			@another_user_params = { name: "omri shuva", email: "omrishuva123@gmail.com", password: "zzzaaaa123", auth_provider: "play" }
+			user = User.new(@another_user_params)
 			user.save
-			expect(user.errors).to eq  phone: ["number already exists"]
+			user.save_phone( "0526733740" )
+			expect(user.errors).to eq  phone: ["already_exists"]
 		end
 
-		# it "should validate length of phone" do
-		# 	@invalid_email_format_params = { name: "omri shuva", email: "c21vqev@gmail.com", phone: "05261111", password: "zzzaaaa123", auth_provider: "play" }
-		# 	user = User.new(@invalid_email_format_params)
-		# 	user.save
-		# 	expect(user.errors).to eq  phone: ["number is not valid"]
-		# end
+		it "should not send sms if phone is not unique" do
+			User.create(@valid_params)
+			@another_user_params = { name: "omri shuva", email: "omrishuva123@gmail.com", password: "zzzaaaa123", auth_provider: "play" }
+			user = User.new(@another_user_params)
+			user.save
+			user.save_phone( "0526733740" )
+			user.should_not_receive(:send_and_save_phone_verification_code)
+		end
 
 		it "should validate presence of name" do
 			@missing_name_params = {  email: "c21vqev@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
 			user = User.new(@missing_name_params)
 			user.save
-			expect(user.errors).to eq  name: ["is missing"]
+			expect(user.errors).to eq  name: ["is_missing"]
 		end
 		
 		it "should validate presence of password" do
 			@missing_password_params = { name: "omri shuva", email: "c21vqev@gmail.com", phone: "0526744632", password: "", auth_provider: "play" }
 			user = User.new(@missing_password_params)
 			user.save
-			expect(user.errors).to eq  password: ["is missing"]
+			expect(user.errors).to eq  password: ["is_missing"]
 		end
 
 	end

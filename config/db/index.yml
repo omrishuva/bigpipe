@@ -6,3 +6,10 @@ indexes:
   - name: branch
   - name: created_at
     direction: desc
+
+- kind: User
+  ancestor: no
+  properties:
+  - name: phone
+  - name: phone_verified
+    direction: desc

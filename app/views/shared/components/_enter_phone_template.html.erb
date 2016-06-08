@@ -17,6 +17,7 @@
 				<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: locals[:user] } %>
 				<button type="submit" class="btn btnBrand1 bthModalForm"><%= I18n.t :submit %></button>
+         <%= render "shared/form_helpers/flash_messages" %>
 			</form>
   	</div>
 </div>

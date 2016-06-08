@@ -9,11 +9,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
-      #@user.send_and_save_phone_verification_code
-      session[:user_id] = @user.id
-      flash[:success] = "Logged in!"
-    end
+    session[:user_id] = @user.id if @user.save
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
@@ -21,10 +17,15 @@ class UsersController < ApplicationController
   end
   
   def authenticate_phone
-    if params[:user][:phone]
-      current_user.save_phone( params[:user][:phone] )
-    elsif params[:user][:phone_verification_code]
+    if params[:user][:phone].present?
+        current_user.save_phone( params[:user][:phone] )
+        if current_user.errors[:phone]
+          flash[:error] = "Number already exists in our system, please user a different number"
+        end
+    elsif params[:user][:phone_verification_code].present?
       current_user.verify_phone_number( params[:user][:phone_verification_code] )
+    elsif !params[:user][:phone].present?
+      flash[:error] =  "Please enter your phone number"
     end
     
     respond_to do |format|
@@ -34,7 +35,6 @@ class UsersController < ApplicationController
   end
   
   def resend_phone_number
-    
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def select_new_password
     if params[:user] && params[:user][:email].present?
       @email_sent = true
-      @user = User.find_by( :email, params[:user][:email] )
+      @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
       if @user
         AppMailer.password_recovery_code_mail(@user).deliver_now
       else
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   end
   
   def set_new_password
-    @user = User.find_by( :email, params[:user][:email] )
+    @user = User.find_by( [ { k: "email", v: params[:user][:email], op: "=" } ] )
     if params[:user][:authentication_code] == @user.password_recovery_code
       @user.set_password( params[:user][:password] )
       flash[:success] = "Password changed successfully"

@@ -28,20 +28,16 @@ class User < Entity
   
   def uniqueness_of_email( entity )
   	if !entity.persisted?
-  		if User.find_by( :email, entity.email ).present?
+  		if User.find_by( [{k: "email", v: entity.email, op: "=" } ] ).present?
   			errors.add(:email, "already_exists")
   		end
   	end
   end
 
   def uniqueness_of_phone( entity )
-  	if !entity.persisted? 
-  		if User.find_by( :phone, entity.phone ).present?
-  			errors.add(:phone, :already_exists)
-  		end
-  	end
+  	errors.add(:phone, "already_exists") if User.phone_exists?( entity )
   end
-
+  
   def from_facebook?
     auth_provider == 'facebook'
   end
@@ -55,14 +51,13 @@ class User < Entity
   end
   
   def save_phone( phone )
-    update( phone: phone )
-    send_and_save_phone_verification_code
+    send_and_save_phone_verification_code if update( phone: phone )
   end
   
   def send_and_save_phone_verification_code
     sms =  Sms.new( "phone_verification_message", phone, { name: name } )
-    sms.send_message
     update( phone_verification_code: sms.phone_verification_code  )
+    sms.send_message
   end
   
   def verify_phone_number( user_verification_code )
@@ -76,7 +71,7 @@ class User < Entity
   class << self
 	 	  
     def authenticate( params )
-	    user = find_by(:email, params[:email])
+	    user = find_by( [{ k: 'email', v: params[:email], op: "=" } ] )
       if !user && params[:auth_provider] == 'facebook'
         user = User.new(params)
         user.save
@@ -94,11 +89,28 @@ class User < Entity
   	    end
       end
 	  end
-	
+	  
 	  def create( params )
   		self.new(params).save
   	end
-	 
+	  
+    def phone_exists?( user )
+      query_params = [ 
+                        { k: "phone", v: user.phone, op: "=" }, 
+                        { k: "phone_verified", v: true, op: "="  }, 
+                      ]
+      result = find_by( query_params )
+      if result.present?
+        if result.id == user.id
+          false
+        else
+          true
+        end
+      else
+        false
+      end
+    end
+
 	end
 	
   def set_password( password )
