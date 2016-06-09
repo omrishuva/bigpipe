@@ -50,19 +50,22 @@ class UsersController < ApplicationController
   end
   
   def select_new_password
-    if params[:user] && params[:user][:email].present?
-      @email_sent = true
-      @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
-      if @user
-        AppMailer.password_recovery_code_mail(@user).deliver_now
+    begin
+      if params[:user] && params[:user][:email].present?
+        @email_sent = true
+        @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
+        if @user
+          AppMailer.password_recovery_code_mail(@user).deliver_now
+        else
+          flash[:error] = "Your email was not found in the system" 
+        end
       else
-        flash[:error] = "Your email was not found in the system" 
+        @success = false
+        flash[:error] = "We couldn't find your email adress" 
       end
-    else
-      @success = false
-      flash[:error] = "We couldn't find your email adress" 
+    rescue => e
+      logger.debug "#{e.message} ---- #{e.backtrace}"
     end
-    
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
