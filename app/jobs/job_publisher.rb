@@ -6,7 +6,6 @@ class JobPublisher
   		@job_name = job_name
   		@publisher_name = publisher_name
   		@job_key =  "#{Rails.env}-#{publisher_name}-#{job_name}"
-  		binding.pry
   		@args = set_args(args)
   		@topics = set_topics
   		@topic = find_or_create_topic
