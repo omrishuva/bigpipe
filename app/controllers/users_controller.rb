@@ -50,12 +50,15 @@ class UsersController < ApplicationController
   end
   
   def select_new_password
-    begin
+    # begin
       if params[:user] && params[:user][:email].present?
         @email_sent = true
         @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
         if @user
-          AppMailer.password_recovery_code_mail(@user).deliver_now
+          password_recovery_code = rand.to_s[2..5]
+          @user.update(password_recovery_code: @password_recovery_code )
+          JobPublisher.new( self.class.name, "send_password_recovery_email", { email: @user.email, password_recovery_code: password_recovery_code })
+          #AppMailer.password_recovery_code_mail( @user.email, password_recovery_code ).deliver_now
         else
           flash[:error] = "Your email was not found in the system" 
         end
@@ -63,11 +66,11 @@ class UsersController < ApplicationController
         @success = false
         flash[:error] = "We couldn't find your email adress" 
       end
-    rescue => e
-      logger.info "app_log #{e.message} ---- #{e.backtrace}"
-      $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
-      $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
-    end
+    # rescue => e
+    #   logger.info "app_log #{e.message} ---- #{e.backtrace}"
+    #   $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
+    #   $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
+    # end
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
