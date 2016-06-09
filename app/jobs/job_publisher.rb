@@ -16,7 +16,7 @@ class JobPublisher
 		private
 		
 		def publish!
-			topic.publish( job_id, args  )
+			$stderr.puts "publish #{topic.publish( job_id, args  )}"
 		end
 
 		def generate_job_id
