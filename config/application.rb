@@ -19,6 +19,7 @@ Bundler.require(*Rails.groups)
 module Play
   class Application < Rails::Application
   	config.autoload_paths += Dir["#{config.root}/lib/**/"]
+  	config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
   	config.i18n.default_locale = :he
   end
 end
