@@ -16,7 +16,7 @@ class JobPublisher
 	private
 		
 	def publish!
-		logger.info "publish #{topic.publish( job_id, args  )}"
+		Rails.logger.info "publish #{topic.publish( job_id, args  )}"
 	end
 
 	def generate_job_id
