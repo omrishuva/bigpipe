@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
   before_filter :authorize
+  before_filter :clear_flash_messages
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
  
   private 
   
+  def clear_flash_messages
+    flash.clear
+  end
+
   def set_locale
     I18n.locale = params[:l] || I18n.default_locale
   end

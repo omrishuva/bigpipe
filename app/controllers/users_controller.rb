@@ -56,9 +56,13 @@ class UsersController < ApplicationController
         @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
         if @user
           password_recovery_code = rand.to_s[2..5]
-          @user.update(password_recovery_code: @password_recovery_code )
-          JobPublisher.new( self.class.name, "send_password_recovery_email", { email: @user.email, password_recovery_code: password_recovery_code })
-          #AppMailer.password_recovery_code_mail( @user.email, password_recovery_code ).deliver_now
+          @user.update(password_recovery_code: password_recovery_code )
+          JobPublisher.new( 
+                            self.class.name, 
+                            "send_password_recovery_email", 
+                            { email: @user.email, name: @user.name, password_recovery_code: password_recovery_code }
+                          )
+          
         else
           flash[:error] = "Your email was not found in the system" 
         end
@@ -78,7 +82,7 @@ class UsersController < ApplicationController
   end
   
   def set_new_password
-    
+
     @user = User.find_by( [ { k: "email", v: params[:user][:email], op: "=" } ] )
     if params[:user][:authentication_code] == @user.password_recovery_code
       @user.set_password( params[:user][:password] )

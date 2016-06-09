@@ -30,4 +30,5 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.digest = false
   config.assets.raise_runtime_errors = true
+  config.log_level = :debug
 end
