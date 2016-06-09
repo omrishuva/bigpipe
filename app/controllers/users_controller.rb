@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
   
   def select_new_password
-    # begin
+    begin
       if params[:user] && params[:user][:email].present?
         @email_sent = true
         @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
@@ -70,11 +70,11 @@ class UsersController < ApplicationController
         @success = false
         flash[:error] = "We couldn't find your email adress" 
       end
-    # rescue => e
-    #   logger.info "app_log #{e.message} ---- #{e.backtrace}"
-    #   $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
-    #   $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
-    # end
+    rescue => e
+      logger.info "app_log #{e.message} ---- #{e.backtrace}"
+      $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
+      $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
+    end
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
