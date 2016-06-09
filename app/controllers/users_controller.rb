@@ -65,6 +65,8 @@ class UsersController < ApplicationController
       end
     rescue => e
       logger.info "app_log #{e.message} ---- #{e.backtrace}"
+      $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
+      $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
     end
     respond_to do |format|
       format.js { }
