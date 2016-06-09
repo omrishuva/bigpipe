@@ -71,9 +71,7 @@ class UsersController < ApplicationController
         flash[:error] = "We couldn't find your email adress" 
       end
     rescue => e
-      logger.info "app_log #{e.message} ---- #{e.backtrace}"
-      $stderr.puts "app_log #{e.message} ---- #{e.backtrace}"
-      $stdout.puts "app_log #{e.message} ---- #{e.backtrace}"
+      logger.deubg "app_log #{e.message} ---- #{e.backtrace}"
     end
     respond_to do |format|
       format.js { }
