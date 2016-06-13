@@ -32,4 +32,4 @@ automatic_scaling:
 # [END scaling]
 
 env_variables:
-  FORMATION: web=1
+  FORMATION: web=1,worker=1
