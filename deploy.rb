@@ -38,11 +38,13 @@ class AppVersion
 		end
 
 		def run_gcloud_sdk_deploy_commands
+			version_number = create_new_version_number
 			p "Deploying branch #{branch}"
 			`gcloud preview app deploy ./config/db/index.yml`
 			`gcloud config set app/promote_by_default false`
 			`gcloud config set app/stop_previous_version false`
-			`gcloud preview app deploy --no-promote --version #{branch}-#{create_new_version_number}`
+			`gcloud preview app deploy worker.yaml --version #{branch}-#{version_number}`
+			`gcloud preview app deploy --no-promote --version #{branch}-#{version_number}`
 		end
 
 		def show_git_issues_message

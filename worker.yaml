@@ -1,11 +1,11 @@
 
-runtime: ruby
+runtime: custom
 vm: true
 module: worker
 entrypoint: bundle exec foreman start --formation "$FORMATION"
 
 # [START formation]
 env_variables:
-  FORMATION: worker=2
+  FORMATION: worker=1,health_check=1
   #,health_check=1
 # [END formation]
