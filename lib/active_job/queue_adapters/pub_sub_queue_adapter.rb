@@ -30,6 +30,7 @@ module ActiveJob
         sub = $pubsub.find_subscription( queue_name )
         sub.listen autoack: true do |message|
           job_class = eval( message.subscription.topic.name.split("/").last )
+          Rails.logger.info "#{queue_name} -> #{job_class.to_s} -> #{ message.attributes } "
           job_class.perform_now( message.attributes )
         end
       end
