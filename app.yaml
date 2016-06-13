@@ -14,7 +14,7 @@
 # [START runtime]
 runtime: custom
 vm: true
-entrypoint: bundle exec rackup -p 8080 -E production config.ru
+entrypoint: bundle exec foreman start --formation "$FORMATION" #bundle exec rackup -p 8080 -E production config.ru
 # [END runtime]
 # [START resources]
 resources:
@@ -30,3 +30,6 @@ automatic_scaling:
   cpu_utilization:
     target_utilization: 0.8
 # [END scaling]
+
+env_variables:
+  FORMATION: web=1

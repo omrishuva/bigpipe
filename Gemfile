@@ -27,8 +27,8 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'sprockets-rails'
 gem 'plivo'
-# gem 'omniauth'
-# gem 'omniauth-facebook', '1.4.0'
+gem "google-api-client"
+gem "foreman"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
