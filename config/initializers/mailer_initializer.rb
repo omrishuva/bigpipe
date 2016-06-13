@@ -3,7 +3,7 @@ ActionMailer::Base.smtp_settings = {
   :password => 'play123abc',
   :domain => 'play.org.il',
   :address => 'smtp.sendgrid.net',
-  :port => 587,
+  :port => 2525,
   :authentication => :plain,
   :enable_starttls_auto => true
 }
