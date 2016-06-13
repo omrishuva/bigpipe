@@ -7,6 +7,7 @@ class AppVersion
 	class << self
 
 		def deploy!
+			binding.pry
 			answer = user_deployment_approval
 			if answer == "y" || answer == ""
 				if working_directory_is_clean?
@@ -67,5 +68,5 @@ class AppVersion
 
 	end
 end
-
+binding.pry
 AppVersion.deploy!
