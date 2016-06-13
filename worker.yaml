@@ -1,8 +1,13 @@
 
-runtime: custom
+runtime: ruby
 vm: true
 module: worker
-entrypoint: bundle exec foreman start --formation "$FORMATION"
+entrypoint: bundle exec foreman start --formation worker=1,health_check=1
+#"$FORMATION"
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 1
 
 # [START formation]
 env_variables:

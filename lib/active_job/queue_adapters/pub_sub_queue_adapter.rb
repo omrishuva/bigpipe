@@ -7,7 +7,9 @@ module ActiveJob
       end
 
       def self.enqueue( job )
-        topic = find_or_create_topic( job.class.name, job.queue_name )
+        topic_name = "#{Rails.env}-#{job.class.name}"
+        queue_name = "#{Rails.env}-#{job.queue_name}"
+        topic = find_or_create_topic(topic_name, queue_name )
         topic.publish( job.job_id, job.arguments[0] )
       end
       
@@ -27,9 +29,10 @@ module ActiveJob
       end
 
       def self.run_worker!( queue_name )
-        sub = $pubsub.find_subscription( queue_name )
+        sub = $pubsub.find_subscription( "#{Rails.env}-#{queue_name}" )
         sub.listen autoack: true do |message|
-          job_class = eval( message.subscription.topic.name.split("/").last )
+          p message.subscription.topic.name.split("-").last.split("/").last
+          job_class = eval( message.subscription.topic.name.split("-").last.split("/").last )
           Rails.logger.info "#{queue_name} -> #{job_class.to_s} -> #{ message.attributes } "
           job_class.perform_now( message.attributes )
         end
