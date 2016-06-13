@@ -24,7 +24,6 @@ RSpec.describe JobPublisher do
 
   it "should publish a message" do
   	job_publisher =  JobPublisher.new( "Spec", "test_job", test: 123 )
-    binding.pry
   	message = job_publisher.sub.sub.pull[0].message.data 
   	result = message.include?("test-Spec-test_job")
   	expect(result).to be true

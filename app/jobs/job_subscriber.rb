@@ -1,13 +1,12 @@
 class JobSubscriber
 	
-	attr_accessor :topic, :sub_name, :sub
+	attr_accessor :topic, :queue, :sub
 
-	def initialize( topic, job_key )
+	def initialize( topic, queue )
 		@topic = topic
-		@sub_name = "Sub-#{job_key}"
-		PubsubUtils.delete_subscription( sub_name )
-		@sub = topic.subscribe( sub_name )
-		register_job_listener
+		@queue = queue
+		PubsubUtils.delete_subscription( queue )
+		@sub = topic.subscribe( queue )
 	end
 	
 	private

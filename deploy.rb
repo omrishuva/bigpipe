@@ -7,7 +7,6 @@ class AppVersion
 	class << self
 
 		def deploy!
-			binding.pry
 			answer = user_deployment_approval
 			if answer == "y" || answer == ""
 				if working_directory_is_clean?
@@ -44,7 +43,6 @@ class AppVersion
 			`gcloud preview app deploy ./config/db/index.yml`
 			`gcloud config set app/promote_by_default false`
 			`gcloud config set app/stop_previous_version false`
-			`gcloud preview app deploy worker.yaml --version #{branch}-#{version_number}`
 			`gcloud preview app deploy --no-promote --version #{branch}-#{version_number}`
 		end
 
@@ -68,5 +66,5 @@ class AppVersion
 
 	end
 end
-binding.pry
+
 AppVersion.deploy!

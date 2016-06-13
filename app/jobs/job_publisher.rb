@@ -1,11 +1,11 @@
 class JobPublisher
   	
-  attr_accessor :topics, :publisher_name, :job_key, :job_name, :job_id, :args, :topic, :sub
+  attr_accessor :topics, :publisher_name, :queue, :job_name, :job_id, :args, :topic, :sub
 
-	def initialize( publisher_name, job_name, args = { } )
+	def initialize( publisher_name, job_name, queue, args = { } )
 		@job_name = job_name
 		@publisher_name = publisher_name
-		@job_key =  "#{Rails.env}-#{publisher_name}-#{job_name}"
+		@queue =  "#{Rails.env}-#{queue}"
 		@args = set_args(args)
 		@topics = set_topics
 		@topic = find_or_create_topic
@@ -16,7 +16,8 @@ class JobPublisher
 	private
 		
 	def publish!
-		Rails.logger.info "publish #{topic.publish( job_id, args  )}"
+		PubSubQueueAdapter.enqueue( topic, job_id, args )
+		#Rails.logger.info "publish #{topic.publish( job_id, args  )}"
 	end
 
 	def generate_job_id
@@ -24,18 +25,18 @@ class JobPublisher
 	end
 
 	def set_topics
-		$pubsub.list_topics.map{|topic| topic.name.split("/").last }
+		$pubsub.list_topics.map{ |topic| topic.name.split("/").last }
 	end
 
 	def find_or_create_topic
-		create_topic unless topics.include?( job_key )
-		$pubsub.topic job_key
+		create_topic unless topics.include?( job_name )
+		$pubsub.topic job_name
 	end
 
 	def create_topic
-		new_topic =  $pubsub.create_topic( job_key )
-		@sub = JobSubscriber.new( new_topic, job_key )
-		topics << job_key
+		new_topic =  $pubsub.create_topic( job_name )
+		@sub = JobSubscriber.new( new_topic, queue )
+		topics << job_name
 	end
 	
 	def set_args( args )

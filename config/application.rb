@@ -21,5 +21,6 @@ module Play
   	config.autoload_paths += Dir["#{config.root}/lib/**/"]
   	config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
   	config.i18n.default_locale = :he
+  	config.active_job.queue_adapter = :pub_sub_queue
   end
 end

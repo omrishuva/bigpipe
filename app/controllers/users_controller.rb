@@ -57,12 +57,7 @@ class UsersController < ApplicationController
         if @user
           password_recovery_code = rand.to_s[2..5]
           @user.update(password_recovery_code: password_recovery_code )
-          JobPublisher.new( 
-                            self.class.name, 
-                            "send_password_recovery_email", 
-                            { email: @user.email, name: @user.name, password_recovery_code: password_recovery_code }
-                          )
-          
+          SendPasswordRecoveryEmail.perform_later( email: @user.email, name: @user.name, password_recovery_code: password_recovery_code )
         else
           flash[:error] = "Your email was not found in the system" 
         end
