@@ -1,13 +1,12 @@
-<nav class="navbar navbar-light navigationBar" role="navigation">
+
+<nav class="navbar navbar-light navbar-full navigationBar" role="navigation">
 	<div class = "navbar-header">
-	  <a class="navbar-brand" href="/"><%=image_tag("logo.png",class:"navBarLogo")%></a>
-  </div>
-  <div id="navItems">
-	  <%= render 'shared/components/navigation/nav_items'%>
-  </div>
+		<a class="navbar-brand" href="/"><%=image_tag("logo.png",class:"navBarLogo")%></a>
+	</div>
+	<div id="navItems">
+		<%= render 'shared/components/navigation/nav_items'%>
+	</div>
 </nav>
-
-
 
 <!-- <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#CollapsingNavbar">
 &#9776;

@@ -5,7 +5,7 @@ module ApplicationHelper
   end
   
   def profile_pic_src
-  	current_user.try(:profile_picture).present? ? current_user.profile_picture : '/assets/genderless_silhouette.png'
+  	current_user.try(:profile_picture).present? ? current_user.profile_picture : 'genderless_silhouette.png'
   end
 
 end

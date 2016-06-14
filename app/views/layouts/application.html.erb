@@ -5,6 +5,7 @@
     <title>Play</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
+    
     <%unless I18n.locale == :he %>
       <%= stylesheet_link_tag 'application', media: "all" %>
     <%else%>
@@ -17,7 +18,7 @@
   </head>
   
   <body>
-    <%= render "shared/scripts/fb_sdk"%>
+    <%=render "shared/scripts/fb_sdk"%>
     <%=render "shared/components/modals/signin_modal"%>
     <%=render "shared/components/navigation/navigation_bar"%>
     </br>
