@@ -7,41 +7,31 @@ body
     overflow:hidden;
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
+.mainContainer{ z-index: -1; }
 
 .signinLoader{  display: none; }
 
-.ltrNavBarLogo { 
-							width: 4em; 
-							height: 3em; 
-							position:absolute;
-						  top:2px;
-   						left:5px;
-						}
+.NavBarLogo{ width: 4.5em; height: 4em; position: absolute;  }
+.ltrNavBarLogo { @extend .NavBarLogo; top:2px; left:5px; }
+.rtlNavBarLogo { @extend .NavBarLogo; top:2px; right:5px; }
+
 .ProfilePic{  border-radius: 2px; border-style: solid; border-color: black; border-width: 1px; width: 30px; height: 30px; }
 
+.ltrInfo{ top: 2px; left: 30%; position: absolute; }
+.ltrCallUs{ top: 2px; left: 50%; position: absolute; }
+.ltrUserLogin{ top: 2px; left: 75%;  position: absolute;  }
+.ltrProfilePic{   @extend .ProfilePic; top: 2px;  position: absolute; }
 
-.ltrInfo{ top: 2px; margin-left: 25%; margin-right: 5%; position: relative; }
-.ltrCallUs{ top: 2px; margin-left: 5%; margin-right: 5%; position: relative; }
-.ltruserLogin{ top: 2px; margin-left: 5%;  position: relative;  }
-.ltrProfilePic{   @extend .ProfilePic; top: 2px; margin-right: 5%;  position: relative; }
+.rtlInfo{ top: 2px; right: 30%; position: absolute; }
+.rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
+.rtlUserLogin{ top: 2px; right: 75%; position: absolute;  }
+.rtlProfilePic{ @extend .ProfilePic;  top: 2px; position: absolute; }
 
-.rtlNavBarLogo { 
-							width: 4em; 
-							height: 3em; 
-							position:absolute;
-						  top:2px;
-   						right:5px;
-						}
-
-.rtlInfo{ top: 2px; margin-left: 5%; margin-right: 25%; position: relative; }
-.rtlCallUs{ top: 2px; margin-left: 5%; margin-right: 5%; position: relative;  }
-.rtluserLogin{ top: 2px; margin-left: 5%; position: relative;  }
-.rtlProfilePic{ @extend .ProfilePic;  top: 2px; margin-right: 5%; position: relative; }
-.userSideBar { width: 20em; border-style: solid; border-width: 1px; border-radius: 2px; border-color: #fff; background-color: #FFB941; display: none; z-index: 1000; position: absolute; text-align: center; opacity:0.9; }
+.userSideBar { width: 100%; border-style: solid; border-width: 1px; border-radius: 2px; border-color: #fff; background-color: #FFB941; display: none; z-index: 1000; position: absolute; text-align: center; opacity:0.9; }
 .ltrUserSideBar{ @extend .userSideBar; right: 0; }
 .rtlUserSideBar{ @extend .userSideBar; left:0;  }
 .dropdown-item{ color: #5D33F4; }
-.mainContainer{ z-index: -1; }
+
 
 .ModalInput { width: 100%; }
 .formModalTitle{ font-weight: bold; }
@@ -55,7 +45,6 @@ body
 	height: 5em;
 }
 
-// .navItems{ margin-top : 1px; }
 .nav-link{margin-top: 1.5em; }
 .btn-sign-up{  padding: 2px 4px; font-size: 14px; border-radius: 3px; }
 .btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
