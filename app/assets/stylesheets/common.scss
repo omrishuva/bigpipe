@@ -19,12 +19,12 @@ body
 
 .ltrInfo{ top: 2px; left: 30%; position: absolute; }
 .ltrCallUs{ top: 2px; left: 50%; position: absolute; }
-.ltrUserLogin{ top: 2px; left: 75%;  position: absolute;  }
+.ltrUserLogin{ top: 2px; left: 70%;  position: absolute;  }
 .ltrProfilePic{   @extend .ProfilePic; top: 2px;  position: absolute; }
 
 .rtlInfo{ top: 2px; right: 30%; position: absolute; }
 .rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
-.rtlUserLogin{ top: 2px; right: 75%; position: absolute;  }
+.rtlUserLogin{ top: 2px; right: 70%; position: absolute;  }
 .rtlProfilePic{ @extend .ProfilePic;  top: 2px; position: absolute; }
 
 .userSideBar { width: 100%; border-style: solid; border-width: 1px; border-radius: 2px; border-color: #fff; background-color: #FFB941; display: none; z-index: 1000; position: absolute; text-align: center; opacity:0.9; }

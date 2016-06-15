@@ -68,4 +68,5 @@ class AppVersion
 end
 start_time = Time.now
 AppVersion.deploy!
-p "took ((Time.now  - start_time)/60).round(2)"
+took = ((Time.now  - start_time)/60).round(2)
+p "took #{took}" 
