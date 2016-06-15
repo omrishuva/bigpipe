@@ -66,5 +66,6 @@ class AppVersion
 
 	end
 end
-
+start_time = Time.now
 AppVersion.deploy!
+Time.now  - start_time

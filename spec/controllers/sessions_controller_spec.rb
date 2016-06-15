@@ -6,9 +6,13 @@ RSpec.describe SessionsController do
     params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
     @user = User.new(params)
     @user.save
-    sleep 2
+    sleep 1
   end
-  
+
+  after :all do
+    User.destroy_all
+  end
+
   describe "POST login" do
     
     it "should create a new session if user is authenticated" do

@@ -6,14 +6,18 @@ RSpec.describe Entity do
 		  attr_accessor :id, :title, :author, :published_on, :description, :created_at, :updated_at
 	  	validates :title, presence: true
 	  end
-	  Book.destroy_all
   	@valid_params = { title: "stam", author: "Japp Stam", published_on: Time.now.to_date, description: "mamash stam" }
   	@invalid_params = { author: "Japp Stam", published_on: Time.now.to_date, description: "mamash stam" }
 	end
+  
+  after :all do
+    Book.destroy_all
+  end
 
   it "should create a new entity" do
   	entities_number_before = Book.all.size
   	Book.create( @valid_params  )
+    sleep 1
   	entities_number_after = Book.all.size
   	expect(entities_number_before).to eq( entities_number_after - 1)
 	 end
@@ -26,7 +30,7 @@ RSpec.describe Entity do
 	it "should not override the created_at when updating an entity" do
 		book_object = Book.new(@valid_params)
 		book_object.save
-		expect(Book.last.created_at).to eq(book_object.created_at)
+		expect(Book.last.created_at.to_i).to eq(book_object.created_at.to_i)
 	end
 
 	it "should not create an entity with invalid params" do

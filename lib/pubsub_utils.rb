@@ -21,7 +21,7 @@ class PubsubUtils
 		end
 
 		def get_all_topic_names
-			get_all_topics.map{|topic| topic.name.split('/').last  }
+			get_all_topics.map{ |topic| topic.name.split('/').last  }.select{|topic| topic.include?( Rails.env ) }
 		end
 
 		def get_all_topics
@@ -29,7 +29,7 @@ class PubsubUtils
 		end
 
 		def get_all_subscription_names
-			get_all_subscriptions.map{|topic| topic.name.split('/').last  }
+			get_all_subscriptions.map{|sub| sub.name.split('/').last  }.select{|sub| sub.include?( Rails.env ) }
 		end
 
 		def get_all_subscriptions

@@ -15,11 +15,11 @@ class Entity
 
 	def save
 		run_callbacks :save do
-	    self.created_at = Time.now.utc unless persisted?
+	    self.created_at = Time.now unless persisted?
 	    if valid? self
 	      entity = to_entity
 	      entity.key.namespace = Rails.env.to_s
-	      entity["updated_at"] = Time.now.utc
+	      entity["updated_at"] = Time.now
 	      $datastore.save entity
 	      self.id = entity.key.id
 	      true

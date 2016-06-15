@@ -92,8 +92,8 @@ class UsersController < ApplicationController
   end
   
   def change_locale
-    current_user.update(locale: params[:l])
-    I18n.locale = params[:l]
+    current_user.update(locale: params[:l]) if current_user
+    session[:current_locale] = params[:l]
     redirect_to "/"
   end
 

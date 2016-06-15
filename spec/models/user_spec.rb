@@ -4,9 +4,12 @@ RSpec.describe User do
 	before :each do
 		@valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play", phone_verified: true }
 		User.destroy_all
-		$stop = false
 	end
 	
+	after :all do
+		User.destroy_all
+	end
+
 	context "Validations" do
 	
 		it "should create a user entity if all params are correct" do
@@ -14,11 +17,12 @@ RSpec.describe User do
 		end
 		
 		it "should validate uniqueness of email" do
-			User.create(@valid_params)
+			User.create( @valid_params )
+			sleep 2
 			@duplicate_email_address_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
-			user = User.new(@duplicate_email_address_params)
+			user = User.new( @duplicate_email_address_params )
 			user.save
-			expect(user.errors).to eq  email: ["already_exists"]
+			expect( user.errors ).to eq  email: ["already_exists"]
 		end
 		
 		it "should validate email format" do
@@ -95,6 +99,7 @@ RSpec.describe User do
 			it "should authenticate users that signed in originally with play" do
 				user = User.new(@play_params)
 				user.save
+				sleep 1
 				expect(User.authenticate(@fb_params).id).to eq user.id
 			end
 

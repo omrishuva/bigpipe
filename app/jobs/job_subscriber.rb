@@ -9,10 +9,4 @@ class JobSubscriber
 		@sub = topic.subscribe( queue )
 	end
 	
-	private
-
-	def register_job_listener
-		$job_listeners << sub
-	end
-
 end

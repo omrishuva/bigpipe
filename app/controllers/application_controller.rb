@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
 
-  # before_filter :set_locale
+  before_filter :set_locale
   before_filter :authorize
   before_filter :clear_flash_messages
 
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   private 
   
+  def set_locale
+    I18n.locale = current_user.try(:locale) || session[:current_locale]
+  end
+
   def clear_flash_messages
     flash.clear
   end

@@ -1,7 +1,10 @@
 
 <div class="btn-group nav-link">
-  <img src=<%=profile_pic_src%> class="ProfilePic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-
+  <img src=<%=profile_pic_src%> class="ProfilePic" >
+  <button data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    &#9776;
+    <span class = "sr-only">Toggle navigation</span>
+  </button>
   <div class="dropdown-menu">
   	
     <%supported_locales.each do |k,v|%>
