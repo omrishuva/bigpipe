@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
 
-  before_filter :set_locale
+  # before_filter :set_locale
   before_filter :authorize
   before_filter :clear_flash_messages
 
@@ -20,15 +20,17 @@ class ApplicationController < ActionController::Base
   	path_params = Rails.application.routes.recognize_path( request.env['PATH_INFO'] )
   	"#{path_params[:controller]}/#{path_params[:action]}"
   end
- 
+  
+  def current_language_direction
+    I18n.locale == :he ? :rtl : :ltr
+  end
+  
+  helper_method :current_language_direction
+
   private 
   
   def clear_flash_messages
     flash.clear
-  end
-
-  def set_locale
-    I18n.locale = params[:l] || I18n.default_locale
   end
   
 end

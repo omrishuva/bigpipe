@@ -17,7 +17,8 @@ Rails.application.routes.draw do
 	get '/select_new_password' => 'users#select_new_password'
 	post '/set_new_password' => 'users#set_new_password'
 	get '/resend_phone_number' => 'users#resend_phone_number'
-
+	get '/change_locale' => 'users#change_locale'
+	
 	#health checks
 	get '_ah/health', :to => 'application_health#health'
 	get '_ah/start', :to => 'application_health#start'

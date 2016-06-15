@@ -90,6 +90,12 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
+  
+  def change_locale
+    current_user.update(locale: params[:l])
+    I18n.locale = params[:l]
+    redirect_to "/"
+  end
 
   def index
     @users = User.all

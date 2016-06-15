@@ -3,17 +3,36 @@
 
 body
 {
+    width: 100%;
     overflow:hidden;
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
 
-.navBarLogo { width: 100px; height: 60px; }
-.desktopNavbar{ margin-top: 1em;}
-.mobileNavbar{ margin-top: 1em; }
-
-.desktopNavItem{ margin-right: 15%; }
-.mobileNavItem{ margin-top: 1em; margin-right: 4%; }
 .signinLoader{  display: none; }
+
+.ltrNavBarLogo { 
+							width: 4em; 
+							height: 3em; 
+							position:absolute;
+						  top:2px;
+   						left:5px;
+						}
+
+.ltrInfo{ top: 2px; margin-left: 25%; margin-right: 5%; position: relative; }
+.ltrCallUs{ top: 2px; margin-left: 5%; margin-right: 5%; position: relative; }
+.ltruserLogin{ top: 2px; margin-left: 5%; margin-right: 5%;  position: relative;  }
+
+.rtlNavBarLogo { 
+							width: 4em; 
+							height: 3em; 
+							position:absolute;
+						  top:2px;
+   						right:5px;
+						}
+
+.rtlInfo{ top: 2px; margin-left: 5%; margin-right: 25%; position: relative; }
+.rtlCallUs{ top: 2px; margin-left: 5%; margin-right: 5%; position: relative;  }
+.rtluserLogin{ top: 2px; margin-left: 5%; margin-right: 5%; position: relative;  }
 
 .ModalInput { width: 100%; }
 .formModalTitle{ font-weight: bold; }
@@ -23,14 +42,15 @@ body
 	width: 100%;
 	border-bottom: 1px solid #FFB941;
 	box-shadow: 4px 4px 10px #FFB941;
+	border-radius: 5px;
+	height: 5em;
 }
 
-.navItems{ float: right; marign-right: 10%; }
-
-.ProfilePic{  border-radius: 30px; border-style: solid; border-color: black; border-width: 1px; width: 60px; height: 60px; }
+// .navItems{ margin-top : 1px; }
+.nav-link{margin-top: 1em; }
+.ProfilePic{  border-radius: 30px; border-style: solid; border-color: black; border-width: 1px; width: 40px; height: 40px; }
 .btn-sign-up{  padding: 2px 4px; font-size: 14px; border-radius: 3px; margin-top: 10%;}
 .btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
 .btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
-.nav-con{ width: 100%; }

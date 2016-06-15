@@ -16,23 +16,15 @@
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   </head>
-  
+
   <body>
     <%=render "shared/scripts/fb_sdk"%>
     <%=render "shared/components/modals/signin_modal"%>
     <%=render "shared/components/navigation/navigation_bar"%>
     </br>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <%= yield %>
-      </div>
-      <div class="col-md-2  pull-xs-right">
-        
-      </div>
-    </div>
+    </br>
+    <%= yield %>
   </body>
   <footer>
-  </footer>
   </footer>
 </html>

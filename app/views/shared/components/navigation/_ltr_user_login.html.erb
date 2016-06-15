@@ -1,11 +1,11 @@
 <% if current_user && current_user.try(:phone_verified) %>
-	<li class="nav-item desktopNavItem">
+	<div class="col-xs-2 ltruserLogin">
 		<%=render 'shared/components/navigation/user_dropdown'%>
-	</li>
+	</div>
 <%else%>
-	<li class="nav-item desktopNavItem">
+	<div class="col-xs-2 ltruserLogin">
 		<a class="btn btn-sign-up btnBrand1" data-toggle="modal" data-target="#signupModal">
 			<%=I18n.t :sign_in_button%>
 		</a>
-	</li>
+	</div>
 <%end%>
