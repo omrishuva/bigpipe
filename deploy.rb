@@ -68,4 +68,4 @@ class AppVersion
 end
 start_time = Time.now
 AppVersion.deploy!
-Time.now  - start_time
+"took ((Time.now  - start_time)/60).round(2)"
