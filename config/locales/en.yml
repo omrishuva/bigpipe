@@ -34,6 +34,7 @@ en:
  select_new_password_recovery_title:  "Select you new password"
  select_new_password_recovery_subtitle: "Enter the code you received in the email and select your new password"
  back: "Go Back"
+ language: "language"
  error_messages:
   password:
    is_missing: "Missing Password"

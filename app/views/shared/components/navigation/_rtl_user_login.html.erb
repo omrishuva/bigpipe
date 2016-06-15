@@ -1,15 +1,12 @@
 <% if current_user && current_user.try(:phone_verified) %>
-
-	<div class="col-xs-2 rtluserLogin">
-		<%=render 'shared/components/navigation/user_dropdown'%>
-	</div>
-
+<div class="col-xs-1 ltruserLogin">
+	<%=render 'shared/components/navigation/user_dropdown'%>
+	<%=render 'shared/components/navigation/rtl_profile_pic'%>
+</div>
 <%else%>
-
 	<div class="col-xs-2 rtluserLogin">
 		<a class="btn btn-sign-up btnBrand1 nav-link" data-toggle="modal" data-target="#signupModal">
 			<%=I18n.t :sign_in_button%>
 		</a>
 	</div>
-
 <%end%>

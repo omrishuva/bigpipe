@@ -1,21 +1,6 @@
-
-<div class="btn-group nav-link">
-  <img src=<%=profile_pic_src%> class="ProfilePic" >
-  <button data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="btn-group" id="userDropdown">
+  <button class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     &#9776;
     <span class = "sr-only">Toggle navigation</span>
   </button>
-  <div class="dropdown-menu">
-  	
-    <%supported_locales.each do |k,v|%>
-  		<a class="dropdown-item" href=<%="/change_locale?l=#{k}" %>> <%=v%> </a>		
-  	<%end%>
-  	
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="/logout"><%= I18n.t :logout%></a>
-  
-  </div>
-
 </div>

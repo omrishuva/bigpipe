@@ -1,0 +1,9 @@
+<%sidebar_class = current_language_direction == :ltr ? "ltrUserSideBar" : "rtlUserSideBar" %>
+<div class=<%=sidebar_class%> id="userSideBar" >
+  <p>  Change Language </p>    
+  <%supported_locales.each do |k,v|%>
+  <a class="dropdown-item" href=<%="/change_locale?l=#{k}" %>> <%=v%> </a>		
+  <%end%>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="/logout"><%= I18n.t :logout%></a>
+</div>

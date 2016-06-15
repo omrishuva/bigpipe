@@ -13,6 +13,7 @@ loadListeners = ->
   submitSelectNewPasswordForm();
   facebookSignIn();
   resendPhoneNumber();
+  openUsersideBar();
   logOut();
 
 showLoader = ->
@@ -40,7 +41,7 @@ facebookSignIn = ->
               'profile_picture': profile_picture
               'auth_provider': 'facebook'
             success: (data) ->
-              submitPhoneForm();
+              loadListeners();
             complete: ->
             error: (xhr, textStatus, errorThrown) ->
               console.log 'ajax loading error...'
@@ -72,6 +73,13 @@ loadSignUpForm = ->
       success: (data) ->
        loadListeners();
 
+openUsersideBar = ->
+  $('#userDropdown').click ->
+    sideBar = $('#userSideBar')
+    if sideBar.is(":visible")
+      sideBar.hide();
+    else
+      sideBar.show();
 
 submitLoginForm = ->
   $('#loginForm').submit (e) ->
