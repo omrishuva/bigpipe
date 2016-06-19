@@ -1,4 +1,17 @@
-<div class="btn-group userDropdown" id="userDropdown">
+<script>
+	openUsersideBar = function() {
+  	var sideBar;
+  	sideBar = $('#userSideBar');
+  	if (sideBar.is(":visible")) {
+    	return sideBar.hide();
+  	} 
+  	else {
+    	return sideBar.show();
+  	}
+	};
+</script>
+
+<div class="btn-group userDropdown" id="userDropdown" onclick="openUsersideBar();">
   <button class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     &#9776;
     <span class = "sr-only">Toggle navigation</span>

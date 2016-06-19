@@ -1,6 +1,5 @@
 $(document).ready ->
  loadListeners();
- openUsersideBar();
 
 loadListeners = ->
   loadSignUpForm();
@@ -72,14 +71,6 @@ loadSignUpForm = ->
       url: '/signup'
       success: (data) ->
        loadListeners();
-
-openUsersideBar = ->
-  $('#userDropdown').click ->
-    sideBar = $('#userSideBar')
-    if sideBar.is(":visible")
-      sideBar.hide();
-    else
-      sideBar.show();
 
 submitLoginForm = ->
   $('#loginForm').submit (e) ->
