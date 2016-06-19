@@ -1,13 +1,22 @@
 <%sidebar_class = current_language_direction == :ltr ? "ltrUserSideBar" : "rtlUserSideBar" %>
 <div class=<%=sidebar_class%> id="userSideBar" >
-  <p>Change Language</p>
+  <div>
+	  <p class="userMenuSection" >Language</p>
+	  <i class="fa fa-globe userMenuSection" aria-hidden="true"></i>
+	 </div>
   <%supported_locales.each do |k,v|%>
-  <a class="dropdown-item" href=<%="/change_locale?l=#{k}" %>> <%=v%> </a>		
+  <a class="dropdown-item" href=<%="/change_locale?l=#{k}" %>> <%=v%> </a>
   <%end%>
   <div class="dropdown-divider"></div>
   <%if current_user.present?%>
-	  <a class="dropdown-item" href="/logout"><%= I18n.t :logout%></a>
+	  <a class="dropdown-item" href="/logout">
+	  	<p class="userMenuSection" ><%= I18n.t :logout%></p>
+	  	<i class="fa fa-sign-out userMenuSection" aria-hidden="true"></i>
+		</a>
 	<%else%>
-		<a class="dropdown-item" data-toggle="modal" data-target="#signupModal">Login</a>
+		<a class="dropdown-item" data-toggle="modal" data-target="#signupModal">
+			<p class="userMenuSection" ><%= I18n.t :sign_in_button%></p>
+			<i class="fa fa-sign-in userMenuSection" aria-hidden="true"></i>
+		</a>
 	<%end%>
 </div>

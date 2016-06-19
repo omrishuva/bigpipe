@@ -1,5 +1,6 @@
 $(document).ready ->
  loadListeners();
+ openUsersideBar();
 
 loadListeners = ->
   loadSignUpForm();
@@ -13,7 +14,6 @@ loadListeners = ->
   submitSelectNewPasswordForm();
   facebookSignIn();
   resendPhoneNumber();
-  openUsersideBar();
   logOut();
 
 showLoader = ->
@@ -133,15 +133,6 @@ submitPhoneVerificationForm = ->
       success: (data) ->
         loadListeners();
 
-loadPasswordRecoveryEmailForm = ->
-  $('#forgotPassword').click (e) ->
-    url = '/send_password_recovery_email'
-    $.ajax
-      type: 'GET'
-      url: url
-      success: (data) ->
-       loadListeners();
-
 resendPhoneNumber = ->
   $('a#resendPhoneNumber').click (e) ->
     showLoader();
@@ -151,6 +142,15 @@ resendPhoneNumber = ->
       url: url
       success: (data) ->
         loadListeners();
+
+loadPasswordRecoveryEmailForm = ->
+  $('#forgotPassword').click (e) ->
+    url = '/send_password_recovery_email'
+    $.ajax
+      type: 'GET'
+      url: url
+      success: (data) ->
+       loadListeners();
 
 submitPasswordRecoveryEmailForm = ->
   $('#passwordRecoveryEmail').submit (e) ->

@@ -1,9 +1,10 @@
-<%if !@user%>
+<%if !@user%>	
 	$('#loginTemplate').replaceWith("<%= escape_javascript( render 'shared/components/login_template') %>");
 <%elsif @user.has_phone? && @user.phone_verified %>
 	$('#signupModal').modal('hide')
 	$("#navbarContainer").replaceWith("<%= escape_javascript( render 'shared/components/navigation/navigation_bar') %>")
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");
+	$('#userSideBar').replaceWith("<%= escape_javascript( render 'shared/components/navigation/user_menu') %>");
 <%else%>
 	$("#signUpTemplate, #loginTemplate").replaceWith("<%= escape_javascript( render 'shared/components/enter_phone_template', locals: {user: @user } ) %>")
 <%end%>
