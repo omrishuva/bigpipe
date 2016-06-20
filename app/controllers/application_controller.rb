@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    # redirect_to '/login' if !current_user
+    
+    redirect_to root_url unless allowed
   end
   
   def recognize_path
@@ -37,4 +38,26 @@ class ApplicationController < ActionController::Base
     flash.clear
   end
   
+  def allowed
+    return true unless controller_permissions
+     action_permissions
+    if action_permissions.nil?
+      true
+    else
+      action_permissions.include?( current_user.try(:role)  )
+    end
+  end
+  
+  def controller_permissions
+    permissions[params['controller']]
+  end
+  
+  def action_permissions
+    controller_permissions[params['action']]
+  end
+
+  def permissions
+    @permissions ||= YAML.load_file('./lib/permissions.yaml')
+  end
+
 end

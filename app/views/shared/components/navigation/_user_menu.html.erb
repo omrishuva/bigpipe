@@ -8,6 +8,14 @@
   <a class="dropdown-item" href=<%="/change_locale?l=#{k}" %>> <%=v%> </a>
   <%end%>
   <div class="dropdown-divider"></div>
+	
+	<div>
+	  <p class="userMenuSection" >Admin</p>
+	  <i class="fa fa-lock userMenuSection" aria-hidden="true"></i>
+	 </div>
+	 <a class="dropdown-item" href=<%="/crm" %>> CRM </a>
+	 <div class="dropdown-divider"></div>
+
   <%if current_user.present?%>
 	  <a class="dropdown-item" href="/logout">
 	  	<p class="userMenuSection" ><%= I18n.t :logout%></p>
@@ -19,4 +27,5 @@
 			<i class="fa fa-sign-in userMenuSection" aria-hidden="true"></i>
 		</a>
 	<%end%>
+
 </div>

@@ -97,8 +97,14 @@ class UsersController < ApplicationController
     redirect_to "/"
   end
 
-  def index
+  def crm
     @users = User.all
   end
+  
+  def pipedrive
+    Rails.logger params
+  end
 
+  def index
+  end
 end

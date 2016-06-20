@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.role %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone %></td>
+    </tr>
+  <% end %>
+</table>

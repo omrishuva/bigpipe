@@ -1,7 +1,10 @@
 class User < Entity
 
-	attr_accessor :id, :name, :email, :phone, :locale, :phone_verification_code, :password_recovery_code, :phone_verified, :profile_picture, :auth_provider, :role, :created_at, :updated_at
-	attr_reader :password_salt, :password_hash
+	attr_accessor :id, :name, :email, :phone, :locale, :gender, :birthdate, :arrived_from, 
+  :phone_verification_code, :password_recovery_code, :phone_verified, :profile_picture, 
+  :auth_provider, :role, :created_at, :updated_at
+	
+  attr_reader :password_salt, :password_hash
 
   include BCrypt
 	 	
@@ -110,7 +113,7 @@ class User < Entity
         false
       end
     end
-
+    
 	end
 	
   def set_password( password )
