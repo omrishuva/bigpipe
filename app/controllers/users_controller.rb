@@ -103,7 +103,11 @@ class UsersController < ApplicationController
   
 
   def pipedrive
-    Rails.logger.info  "#{request.method } --- #{params.to_s}"
+    Rails.logger.info params[:Parameters]["meta"]
+    user_id = params[:Parameters]["meta"]["id"]
+    Rails.logger.info "Create User"
+    Rails.logger.info  User.create_from_pipedrive( Pipedrive::Person.find( user_id ) )
+    Rails.logger.info "======================================="
     render nothing: true
   end
 

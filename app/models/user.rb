@@ -1,6 +1,6 @@
 class User < Entity
 
-	attr_accessor :id, :name, :email, :phone, :locale, :gender, :birthdate, :arrived_from, 
+	attr_accessor :id, :name, :email, :phone, :locale, :gender, :birthdate, :campaign, :arrived_from, 
   :phone_verification_code, :password_recovery_code, :phone_verified, :profile_picture, 
   :auth_provider, :role, :created_at, :updated_at
 	
@@ -97,6 +97,14 @@ class User < Entity
   		self.new(params).save
   	end
 	  
+    def create_from_pipedrive( pd_person )
+      self.new( name: pd_person.name, email: pd_person.email[0]["value"], phone: pd_person.phone[0]["value"], password: generate_password, phone_verified: true, campaign: pd_person.campaign  ).save
+    end
+
+    def generate_password
+      SecureRandom.hex[0..8]
+    end
+
     def phone_exists?( user )
       query_params = [ 
                         { k: "phone", v: user.phone, op: "=" }, 
@@ -122,6 +130,7 @@ class User < Entity
   end
 
 	protected
-	attr_writer  :password_salt, :password_hash
 
+	attr_writer  :password_salt, :password_hash
+  
 end

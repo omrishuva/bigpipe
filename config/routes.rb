@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 	get '/resend_phone_number' => 'users#resend_phone_number'
 	get '/change_locale' => 'users#change_locale'
 	get '/crm' => 'users#crm'
-	get 'pipedrive' => 'users#pipedrive'
 	post 'pipedrive' => 'users#pipedrive'
 
 	#health checks
