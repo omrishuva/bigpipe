@@ -101,8 +101,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
+
   def pipedrive
-    Rails.logger params
+    Rails.logger.info  "#{request.method } --- #{params.to_s}"
+    render nothing: true
   end
 
   def index
