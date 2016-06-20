@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	get '/logout' => 'sessions#destroy'
 
 	#users
-	get 'users' => 'users#index'
+	get '/users' => 'users#index'
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'
 	post '/authenticate_phone' => 'users#authenticate_phone'
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 	get '/change_locale' => 'users#change_locale'
 	get '/crm' => 'users#crm'
 	post '/pipedrive' => 'users#pipedrive'
+	post '/fb_lead' => 'users#fb_lead'
 
 	#health checks
 	get '_ah/health', :to => 'application_health#health'

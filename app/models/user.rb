@@ -98,6 +98,7 @@ class User < Entity
   	end
 	  
     def create_from_pipedrive( pd_person )
+      binding.pry
       self.new( name: pd_person.name, email: pd_person.email[0]["value"], phone: pd_person.phone[0]["value"], password: generate_password, phone_verified: true, campaign: pd_person.campaign  ).save
     end
 

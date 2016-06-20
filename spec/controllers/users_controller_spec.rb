@@ -127,13 +127,21 @@ RSpec.describe UsersController do
     before :all do
       @pipedrive_params = { Parameters: {"v"=>1, "matches_filters"=>nil, "meta"=>{"v"=>1, "action"=>"added", "object"=>"pushNotification", "id"=>115, "company_id"=>1040979, "user_id"=>1490483, "host"=>"play5.pipedrive.com", "timestamp"=>1466427546, "permitted_user_ids"=>["*"], "trans_pending"=>false, "is_bulk_update"=>false}, "retry"=>2, "current"=>{"id"=>3, "user_id"=>1490483, "company_id"=>1040979, "subscription_url"=>"https://play-prod.appspot.com/pipedrive", "type"=>"regular", "event"=>"added.pushNotification", "http_auth_user"=>"", "http_auth_password"=>"[FILTERED]", "add_time"=>"2016-06-20 12:59:06", "active_flag"=>true, "remove_time"=>nil, "http_last_response_code"=>nil}, "previous"=>nil, "event"=>"added.pushNotification", "user"=>{"v"=>1, "matches_filters"=>nil, "meta"=>{"v"=>1, "action"=>"added", "object"=>"pushNotification", "id"=>3, "company_id"=>1040979, "user_id"=>1490483, "host"=>"play5.pipedrive.com", "timestamp"=>1466427546, "permitted_user_ids"=>["*"], "trans_pending"=>false, "is_bulk_update"=>false}, "retry"=>2, "current"=>{"id"=>3, "user_id"=>1490483, "company_id"=>1040979, "subscription_url"=>"https://play-prod.appspot.com/pipedrive", "type"=>"regular", "event"=>"added.pushNotification", "http_auth_user"=>"", "http_auth_password"=>"[FILTERED]", "add_time"=>"2016-06-20 12:59:06", "active_flag"=>true, "remove_time"=>nil, "http_last_response_code"=>nil}, "previous"=>nil, "event"=>"added.pushNotification"}} }
     end
+    
+    before :each do
+      User.destroy_all
+    end
 
     it "should create a user record in the database" do
       users_count = User.all.size
-      post :pipedrive,@pipedrive_params
+      post :pipedrive, @pipedrive_params
       expect(User.all.size).to eq ( users_count + 1 )
     end
 
+    it "should return 200" do
+      post :pipedrive,@pipedrive_params
+      binding.pry
+    end
 
 
   end

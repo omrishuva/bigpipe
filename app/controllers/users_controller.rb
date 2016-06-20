@@ -101,16 +101,23 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
+  def fb_lead
+    Rails.logger.info "FB Lead"
+    Rails.logger.info params.to_s
+    Rails.logger.info "======================="
+  end
 
   def pipedrive
     Rails.logger.info params[:Parameters]["meta"]
     user_id = params[:Parameters]["meta"]["id"]
     Rails.logger.info "Create User"
+    binding.pry
     Rails.logger.info  User.create_from_pipedrive( Pipedrive::Person.find( user_id ) )
     Rails.logger.info "======================================="
-    render nothing: true
+    render status: 200, json: params
   end
 
   def index
   end
+
 end
