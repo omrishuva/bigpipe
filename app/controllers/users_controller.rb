@@ -104,9 +104,9 @@ class UsersController < ApplicationController
   end
   
   def fb_lead
-    Rails.logger.info "FB Lead"
-    Rails.logger.info params.to_s
-    Rails.logger.info "======================="
+    user =  User.new( params[:Parameters] )
+    user.save
+    user.create_pipedrive_lead_deal
     render status: 200, json: params
   end
 
