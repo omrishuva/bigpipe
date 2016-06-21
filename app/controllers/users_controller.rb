@@ -111,7 +111,6 @@ class UsersController < ApplicationController
     Rails.logger.info params[:Parameters]["meta"]
     user_id = params[:Parameters]["meta"]["id"]
     Rails.logger.info "Create User"
-    binding.pry
     Rails.logger.info  User.create_from_pipedrive( Pipedrive::Person.find( user_id ) )
     Rails.logger.info "======================================="
     render status: 200, json: params

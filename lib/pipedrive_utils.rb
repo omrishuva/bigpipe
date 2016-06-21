@@ -5,25 +5,28 @@ module PipedriveUtils
 																					name: name,
 																					email: email, 
 																					phone: phone,
-																					created_time: created_at,
-																					"7de30fadfac146c67755fcf834dd0b98fab371c9" => media_source, 
-																					"9bc9473d156cbe92893496b75242720006477913" => campaign  
+																					pd_fields_api_keys[:media_source] => media_source, 
+																					pd_fields_api_keys[:campaign] => campaign  
 																				)
 		update( pipedrive_id: pd_person.id )
+		pd_person
 	end
 
 	def create_pipedrive_lead_deal
 		pd_person = create_pipedrive_person
-		Pipedrive::Deal.create( title: name, person_id: pd_person.id, created_time: created_at, pipeline_id: pipeline( :lead_ads ) )
+		Pipedrive::Deal.create( title: name, person_id: pd_person.id, pipeline_id: pipeline[:lead_ads] )
 	end
 	
-	def pipeline( pipeline_name )
-		{ lead_ads: 1, churned: 2, test: 3 }[pipeline_name]
-	end
-
-
 	def find_person(user_id)
 		Pipedrive::Person.find( user_id )
+	end
+
+	def pd_fields_api_keys
+		{ media_source: "7de30fadfac146c67755fcf834dd0b98fab371c9", campaign: "9bc9473d156cbe92893496b75242720006477913" }
+	end
+
+	def pipeline
+		{ lead_ads: 1, churned: 2, test: 3 }
 	end
 
 end
