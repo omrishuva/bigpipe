@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+   
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :pipedrive]
 
   def new
     respond_to do |format|
