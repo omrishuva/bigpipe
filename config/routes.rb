@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 	get '/change_locale' => 'users#change_locale'
 	get '/crm' => 'users#crm'
 	post '/pipedrive' => 'users#pipedrive'
-	post '/fb_lead' => 'users#fb_lead'
+	get '/fb_lead' => 'users#fb_lead'
 
 	#health checks
 	get '_ah/health', :to => 'application_health#health'

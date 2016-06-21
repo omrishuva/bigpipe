@@ -104,11 +104,15 @@ class UsersController < ApplicationController
   end
   
   def fb_lead
-    user_params = params[:Parameters].merge!( password: User.generate_password, phone_verified: true )
-    user =  User.new( user_params )
-    user.save
-    user.create_pipedrive_lead_deal
-    render status: 200, json: user_params
+    begin
+      user_params = params[:Parameters].merge!( password: User.generate_password, phone_verified: true )
+      user =  User.new( user_params )
+      user.save
+      user.create_pipedrive_lead_deal
+      render status: 200, json: user_params
+    rescue => e
+      render status: 200, json: { message: e.message, backtrace: e.backtrace }
+    end
   end
 
   def pipedrive
