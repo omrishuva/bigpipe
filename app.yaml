@@ -35,3 +35,4 @@ automatic_scaling:
 
 env_variables:
   FORMATION: web=1
+  
