@@ -105,6 +105,7 @@ class UsersController < ApplicationController
     Rails.logger.info "FB Lead"
     Rails.logger.info params.to_s
     Rails.logger.info "======================="
+    render status: 200, json: params
   end
 
   def pipedrive
