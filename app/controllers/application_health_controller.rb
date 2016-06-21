@@ -12,8 +12,4 @@ class ApplicationHealthController < ApplicationController
 		render :json => params
 	end
 
-	def env
-		
-	end
-
 end

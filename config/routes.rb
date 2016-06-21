@@ -26,5 +26,4 @@ Rails.application.routes.draw do
 	get '_ah/health' => 'application_health#health'
 	get '_ah/start' => 'application_health#start'
 	get '/_ah/background' => "application_health#background"
-	get '/env' => 'application_health#env'
 end

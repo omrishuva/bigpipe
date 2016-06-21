@@ -104,26 +104,13 @@ class UsersController < ApplicationController
   end
   
   def fb_lead
-    begin
-      user_params = params.merge!( password: User.generate_password, phone_verified: true )
-      user_params.delete(:controller)
-      user_params.delete(:action)
-      user =  User.new( user_params )
-      user.save
-      user.create_pipedrive_lead_deal
-      render status: 200, json: user_params
-    rescue => e
-      render status: 200, json: { params: params.to_s, message: e.message, backtrace: e.backtrace }
-    end
-  end
-
-  def pipedrive
-    Rails.logger.info params[:Parameters]["meta"]
-    user_id = params[:Parameters]["meta"]["id"]
-    Rails.logger.info "Create User"
-    Rails.logger.info  User.create_from_pipedrive( Pipedrive::Person.find( user_id ) )
-    Rails.logger.info "======================================="
-    render status: 200, json: params
+    user_params = params.merge!( password: User.generate_password, phone_verified: true )
+    user_params.delete(:controller)
+    user_params.delete(:action)
+    user =  User.new( user_params )
+    user.save
+    user.create_pipedrive_lead_deal unless user.errors.present?
+    render status: 200, json: user_params
   end
 
   def index

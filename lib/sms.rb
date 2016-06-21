@@ -4,14 +4,12 @@ class Sms
 	include Plivo
 
 	def initialize( message_name, destination_numbers, opts = { } )
-		auth_id = "MAMZK2YJM5NDKYNDUZZD"
-		auth_token = "NDc0NmJmOWIyMWM5Y2RmMjhkMjVkYTUzY2RhMGJj"
 		@opts = opts
 		@phone_verification_code = rand.to_s[2..5] if message_name == "phone_verification_message"
 		@sender_number = "+972586033370"
 		@message_name = message_name
 		@destination_numbers = [destination_numbers].flatten
-		@plivo_api = RestAPI.new(auth_id, auth_token)
+		@plivo_api = init_plivo_api
 	end
 	
 	def send_message
@@ -33,6 +31,12 @@ class Sms
 
 	def phone_verification_message
 		"#{I18n.t(:phone_verification_message)}" + " #{phone_verification_code}"
+	end
+	
+	def init_plivo_api
+		auth_id = ENV["plivo_auth_id"] || YAML.load_file("./app.yaml")["env_variables"]["pipedrive_api_key"]
+		auth_token = ENV["plivo_auth_token"] || YAML.load_file("./app.yaml")["env_variables"]["plivo_auth_token"]
+		RestAPI.new(auth_id, auth_token)
 	end
 
 end
