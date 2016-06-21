@@ -111,6 +111,7 @@ class UsersController < ApplicationController
       user.create_pipedrive_lead_deal
       render status: 200, json: params
     rescue => e
+      Rails.logger.info "#{e.message}  -- #{e.backtrace}"
       render status: 500, json: user_params
     end
   end
