@@ -34,7 +34,7 @@ class Sms
 	end
 	
 	def init_plivo_api
-		auth_id = ENV["plivo_auth_id"] || YAML.load_file("./app.yaml")["env_variables"]["pipedrive_api_key"]
+		auth_id = ENV["plivo_auth_id"] || YAML.load_file("./app.yaml")["env_variables"]["plivo_auth_id"]
 		auth_token = ENV["plivo_auth_token"] || YAML.load_file("./app.yaml")["env_variables"]["plivo_auth_token"]
 		RestAPI.new(auth_id, auth_token)
 	end
