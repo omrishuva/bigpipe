@@ -17,7 +17,6 @@ class User < Entity
   validate :uniqueness_of_phone
   
   def initialize( params = { } )
-    binding.pry
 	  set_password( params[:password] ) if !params[:password].blank?
 		params.delete(:password)
   	super( params )

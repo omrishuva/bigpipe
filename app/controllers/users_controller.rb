@@ -114,7 +114,7 @@ class UsersController < ApplicationController
       p "p #{e.message}  -- #{e.backtrace}"
       Rails.logger.debug "debug #{e.message}  -- #{e.backtrace}"
       Rails.logger.info "info #{e.message}  -- #{e.backtrace}"
-      render status: 500, json: user_params
+      render status: 200, json: user_params.merge(failed: true)
     end
   end
 
