@@ -105,7 +105,7 @@ class UsersController < ApplicationController
   
   def fb_lead
     begin
-      user_params = params[:Parameters].merge!( password: User.generate_password, phone_verified: true )
+      user_params = params.merge!( password: User.generate_password, phone_verified: true )
       user =  User.new( user_params )
       user.save
       user.create_pipedrive_lead_deal
