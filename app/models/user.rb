@@ -8,6 +8,7 @@ class User < Entity
 
   include BCrypt
 	include PipedriveUtils
+  
 
   validates :name, presence: true
   validates :email, presence: true
@@ -16,6 +17,8 @@ class User < Entity
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
   
+  before_destroy :delete_related_pipedrive_records
+
   def initialize( params = { } )
     params.with_indifferent_access
 	  set_password( params[:password] ) if !params[:password].blank?

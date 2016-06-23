@@ -11,7 +11,7 @@ class Entity
 		c.message.set(:format, lambda{ "wrong_format" } )
 	end
 
-	define_model_callbacks :save, :create, :update, :initialize
+	define_model_callbacks :save, :create, :update, :initialize, :destroy
 
 	def save
 		run_callbacks :save do
@@ -38,7 +38,9 @@ class Entity
   end
 
   def destroy
-    $datastore.delete(  set_key_properties( $datastore.entity ) )
+  	run_callbacks :destroy do
+	    $datastore.delete(  set_key_properties( $datastore.entity ) )
+  	end
   end
  
   def persisted?(user="user")

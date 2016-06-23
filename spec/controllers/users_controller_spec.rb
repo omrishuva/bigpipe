@@ -122,26 +122,38 @@ RSpec.describe UsersController do
 
   end
 
-  describe "POST pipedrive" do
+  describe "POST fb_lead" do
     
     before :all do
-      @pipedrive_params = { Parameters: {"v"=>1, "matches_filters"=>nil, "meta"=>{"v"=>1, "action"=>"added", "object"=>"pushNotification", "id"=>115, "company_id"=>1040979, "user_id"=>1490483, "host"=>"play5.pipedrive.com", "timestamp"=>1466427546, "permitted_user_ids"=>["*"], "trans_pending"=>false, "is_bulk_update"=>false}, "retry"=>2, "current"=>{"id"=>3, "user_id"=>1490483, "company_id"=>1040979, "subscription_url"=>"https://play-prod.appspot.com/pipedrive", "type"=>"regular", "event"=>"added.pushNotification", "http_auth_user"=>"", "http_auth_password"=>"[FILTERED]", "add_time"=>"2016-06-20 12:59:06", "active_flag"=>true, "remove_time"=>nil, "http_last_response_code"=>nil}, "previous"=>nil, "event"=>"added.pushNotification", "user"=>{"v"=>1, "matches_filters"=>nil, "meta"=>{"v"=>1, "action"=>"added", "object"=>"pushNotification", "id"=>3, "company_id"=>1040979, "user_id"=>1490483, "host"=>"play5.pipedrive.com", "timestamp"=>1466427546, "permitted_user_ids"=>["*"], "trans_pending"=>false, "is_bulk_update"=>false}, "retry"=>2, "current"=>{"id"=>3, "user_id"=>1490483, "company_id"=>1040979, "subscription_url"=>"https://play-prod.appspot.com/pipedrive", "type"=>"regular", "event"=>"added.pushNotification", "http_auth_user"=>"", "http_auth_password"=>"[FILTERED]", "add_time"=>"2016-06-20 12:59:06", "active_flag"=>true, "remove_time"=>nil, "http_last_response_code"=>nil}, "previous"=>nil, "event"=>"added.pushNotification"}} }
+      @fb_lead_params = { name: "test user", email: "testuser@play.org.il", phone: "0526333333", fb_id: 111111, campaign: "Test", media_source: "facebook", created_at: Time.now.to_i  }
     end
     
     before :each do
       User.destroy_all
+      User.any_instance.stub(:pipeline_id).and_return( { leads: 3 } ) #test pipeline
+    end
+
+    after :each do
+      User.last.destroy
     end
 
     it "should create a user record in the database" do
       users_count = User.all.size
-      post :pipedrive, @pipedrive_params
+      post :fb_lead, @fb_lead_params
       expect(User.all.size).to eq ( users_count + 1 )
     end
-
-    it "should return 200" do
-      post :pipedrive,@pipedrive_params
+    
+    it "should generate a matching pipedrive person" do
+      post :fb_lead, @fb_lead_params
+      new_user = User.last
+      expect(new_user.pipedrive_person.id).to eq new_user.pipedrive_id
     end
 
+    it "should generate a matching pipedrive deal" do
+      post :fb_lead, @fb_lead_params
+      new_user = User.last
+      expect(new_user.pipedrive_person.deals[0]).to_not be nil
+    end
 
   end
 

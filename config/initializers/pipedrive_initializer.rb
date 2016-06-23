@@ -1,5 +1,6 @@
-if Rails.env == "development"
-	Pipedrive.authenticate( YAML.load_file("./app.yaml")["env_variables"]["pipedrive_api_key"] )
+if Rails.env == "production"
+	pd_api_key = ENV["pipedrive_api_key"]
 else
-	Pipedrive.authenticate( ENV["pipedrive_api_key"] )
+	pd_api_key = YAML.load_file("./app.yaml")["env_variables"]["pipedrive_api_key"]
 end
+Pipedrive.authenticate( pd_api_key )
