@@ -4,7 +4,6 @@
 body
 {
     width: 100%;
-    // overflow:hidden;
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
 .mainContainer{ z-index: -1; }
@@ -43,6 +42,7 @@ body
 	box-shadow: 4px 4px 10px #FFB941;
 	border-radius: 5px;
 	height: 5em;
+	overflow:hidden;
 }
 
 .nav-link{margin-top: 1.5em; }
