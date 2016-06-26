@@ -98,7 +98,8 @@ class UsersController < ApplicationController
   end
 
   def users
-    @users = User.all.sort_by{|user| user.created_at }
+    @users = User.all.sort_by{|user| user.created_at }.reverse
+    @today =  @users.select{|user| user.created_at.to_date.to_s == Date.today.to_s }.size
     @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
   end
   
