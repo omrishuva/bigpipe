@@ -98,8 +98,8 @@ class UsersController < ApplicationController
   end
 
   def users
-    @users = User.all
-    @yesterday =  @users.select{|user| user.created_at.to_s == Date.yesterday }.size
+    @users = User.all.sort_by{|user| user.created_at }
+    @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
   end
   
   def fb_lead
