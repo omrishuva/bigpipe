@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   
-  root "users#index"
+  root "users#home_page"
 
   #sessions
 	post '/login' => 'sessions#create'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	get '/logout' => 'sessions#destroy'
 
 	#users
-	get '/users' => 'users#index'
+	get '/users' => 'users#users'
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'
 	post '/authenticate_phone' => 'users#authenticate_phone'
@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 	post '/set_new_password' => 'users#set_new_password'
 	get '/resend_phone_number' => 'users#resend_phone_number'
 	get '/change_locale' => 'users#change_locale'
-	get '/crm' => 'users#crm'
-	post '/pipedrive' => 'users#pipedrive'
 	post '/fb_lead' => 'users#fb_lead'
 
 	#health checks

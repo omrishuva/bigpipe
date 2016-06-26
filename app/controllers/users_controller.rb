@@ -52,24 +52,22 @@ class UsersController < ApplicationController
   end
   
   def select_new_password
-    begin
-      if params[:user] && params[:user][:email].present?
-        @email_sent = true
-        @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
-        if @user
-          password_recovery_code = rand.to_s[2..5]
-          @user.update(password_recovery_code: password_recovery_code )
-          SendPasswordRecoveryEmail.perform_later( email: @user.email, name: @user.name, password_recovery_code: password_recovery_code )
-        else
-          flash[:error] = "Your email was not found in the system" 
-        end
+    
+    if params[:user] && params[:user][:email].present?
+      @email_sent = true
+      @user = User.find_by( [ { k: "email",  v: params[:user][:email], op: "=" } ] )
+      if @user
+        password_recovery_code = rand.to_s[2..5]
+        @user.update(password_recovery_code: password_recovery_code )
+        SendPasswordRecoveryEmail.perform_later( email: @user.email, name: @user.name, password_recovery_code: password_recovery_code )
       else
-        @success = false
-        flash[:error] = "We couldn't find your email adress" 
+        flash[:error] = "Your email was not found in the system" 
       end
-    rescue => e
-      logger.error "app_log #{e.message} ---- #{e.backtrace}"
+    else
+      @success = false
+      flash[:error] = "We couldn't find your email adress" 
     end
+
     respond_to do |format|
       format.js { }
       format.json { render json: @user }
@@ -99,8 +97,9 @@ class UsersController < ApplicationController
     redirect_to "/"
   end
 
-  def crm
+  def users
     @users = User.all
+    @yesterday =  @users.select{|user| user.created_at.to_s == Date.yesterday }.size
   end
   
   def fb_lead
@@ -113,7 +112,7 @@ class UsersController < ApplicationController
     render status: 200, json: user_params
   end
 
-  def index
+  def home_page
   end
 
 end

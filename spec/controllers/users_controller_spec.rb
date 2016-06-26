@@ -125,7 +125,7 @@ RSpec.describe UsersController do
   describe "POST fb_lead" do
     
     before :all do
-      @fb_lead_params = { name: "test user", email: "testuser@play.org.il", phone: "0526333333", fb_id: 111111, campaign: "Test", media_source: "facebook", created_at: Time.now.to_i  }
+      @fb_lead_params = { name: "test user", email: "testuser@play.org.il", phone: "0526333333", fb_id: 111111, campaign: "Tennis", media_source: "facebook", created_at: Time.now.to_i  }
     end
     
     before :each do
@@ -152,7 +152,8 @@ RSpec.describe UsersController do
     it "should generate a matching pipedrive deal" do
       post :fb_lead, @fb_lead_params
       new_user = User.last
-      expect(new_user.pipedrive_person.deals[0]).to_not be nil
+      binding.pry
+      expect(new_user.pipedrive_person.deals[0].weighted_value).to_not eq weighted_value
     end
 
   end

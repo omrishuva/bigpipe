@@ -6,7 +6,7 @@ module PipedriveUtils
 																					email: email, 
 																					phone: phone,
 																					pd_fields_api_keys[:media_source] => media_source, 
-																					pd_fields_api_keys[:campaign] => campaign  
+																					pd_fields_api_keys[:campaign] => campaign
 																				)
 		update( pipedrive_id: pd_person.id )
 		pd_person
@@ -14,9 +14,13 @@ module PipedriveUtils
 
 	def create_pipedrive_lead_deal
 		pd_person = create_pipedrive_person
-		Pipedrive::Deal.create( title: name, person_id: pd_person.id, pipeline_id: pipeline_id[:leads] )
+		Pipedrive::Deal.create( title: name, person_id: pd_person.id, pipeline_id: pipeline_id[:leads], value: deal_value[campaign] )
 	end
 	
+	def deal_value
+		{ "Tennis" => 270, "Play" => 169 }
+	end
+
 	def find_person(user_id)
 		Pipedrive::Person.find( user_id )
 	end
