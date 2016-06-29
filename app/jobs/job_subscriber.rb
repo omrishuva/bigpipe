@@ -5,7 +5,7 @@ class JobSubscriber
 	def initialize( topic, queue )
 		@topic = topic
 		@queue = queue
-		PubsubUtils.delete_subscription( queue )
+		# PubsubUtils.delete_subscription( queue )
 		@sub = topic.subscribe( queue )
 	end
 	

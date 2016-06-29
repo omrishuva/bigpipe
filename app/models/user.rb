@@ -2,22 +2,24 @@ class User < Entity
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, :media_source, :campaign, 
   :phone_verification_code, :password_recovery_code, :phone_verified, :profile_picture, 
-  :auth_provider, :role, :created_at, :updated_at
+  :auth_provider, :role, :trainer_certificate_url, :invited_by, :created_at, :updated_at
 	
   attr_reader :password_salt, :password_hash
 
   include BCrypt
 	include PipedriveUtils
-  
+  include StorageUtils  
 
   validates :name, presence: true
   validates :email, presence: true
-  validates :password_hash, presence: true, :if => :from_play?
+  validates :password_hash, presence: true, :unless => :from_facebook?
   validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
   
   before_destroy :delete_related_pipedrive_records
+  before_save :set_default_role, unless: :has_role?
+  before_save :set_locale, unless: :has_locale?
 
   def initialize( params = { } )
     params.with_indifferent_access
@@ -46,7 +48,7 @@ class User < Entity
   	errors.add(:phone, "already_exists") if User.phone_exists?( entity )
   end
   
-  def from_facebook?
+  def from_facebook?( entity = nil )
     auth_provider == 'facebook'
   end
   
@@ -74,6 +76,36 @@ class User < Entity
     else
       errors.add(:phone_verification_code, "does_not_match")
     end
+  end
+
+   def set_password( password )
+    self.password_salt = BCrypt::Engine.generate_salt
+    self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+  end
+  
+  def set_default_role
+    self.role = 4 
+  end
+  
+  def set_locale
+    self.locale = I18n.locale.to_s
+  end
+  
+  def has_locale?
+    self.locale.present?
+  end
+
+  def save_certificate_file( temp_certificate_file )
+    certificate_file = self.save_file( temp_certificate_file, "certificate_#{self.id}", "certificates", public: true )
+    self.update( trainer_certificate_url: certificate_file.public_url )
+  end
+
+  def has_role?
+    self.role.present?
+  end
+  
+  def role_name
+    $user_roles[self.role]
   end
 
   class << self
@@ -127,12 +159,18 @@ class User < Entity
       end
     end
     
+    
+    def new_trainer( params )
+      user = User.new( params[:user].merge( role: 2, phone_verified: true, password: generate_password ) )
+      user.save
+      unless user.errors.present?
+        user.save_certificate_file( params[:certificate].tempfile )
+        SendTrainerInvitationEmail.perform_later( email: user.email, name: user.name, invited_by: user.invited_by )
+      end
+      user
+    end
+
 	end
-	
-  def set_password( password )
-    self.password_salt = BCrypt::Engine.generate_salt
-    self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-  end
 
 	protected
 

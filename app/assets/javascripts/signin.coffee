@@ -13,6 +13,7 @@ loadListeners = ->
   submitSelectNewPasswordForm();
   facebookSignIn();
   resendPhoneNumber();
+  onFileUpload();
   logOut();
 
 showLoader = ->
@@ -174,3 +175,10 @@ submitSelectNewPasswordForm = ->
 
 disableSubmitButton = ->
   $('.bthModalForm').attr("disabled", true); 
+
+onFileUpload = ->
+  $('.fileUploadInput').change (e) ->
+    fileName = $(".fileUploadInput").val()
+    splitedFileName = fileName.split("\\")
+    fileName = splitedFileName[ (splitedFileName.length - 1) ]
+    $('.fileName').text(fileName)

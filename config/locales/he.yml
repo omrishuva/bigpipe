@@ -35,6 +35,8 @@ he:
  password_recovery_subtitle: "הכנס/י כתובת דואר אלקטרוני"
  back: "חזור"
  change_language: "שפה"
+ add_trainer: "הוסף מאמן"
+ upload_trainer_certificate: "תעודת מאמן"
  error_messages:
   password:  
    is_missing: " הכנס/י סיסמה"

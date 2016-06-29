@@ -104,19 +104,19 @@ RSpec.describe UsersController do
     end
 
     it "should change user locale if user is logged in" do
-      get :change_locale, { l: "en" }
+      get :change_locale, { locale: "en" }
       expect( @user.locale ).to eq "en"
     end
 
     it "should change session current_locale" do
       @user.update(locale: "he")
-      get :change_locale, { l: "en" }
+      get :change_locale, { locale: "en" }
       expect( session[:current_locale] ).to eq "en"
     end
 
     it "should change I18n.locale" do
       I18n.locale == "he"
-      get :change_locale, { l: "en" }
+      get :change_locale, { locale: "en" }
       expect( I18n.locale ).to eq :en
     end
 
@@ -152,8 +152,7 @@ RSpec.describe UsersController do
     it "should generate a matching pipedrive deal" do
       post :fb_lead, @fb_lead_params
       new_user = User.last
-      binding.pry
-      expect(new_user.pipedrive_person.deals[0].weighted_value).to_not eq weighted_value
+      expect(new_user.pipedrive_person.deals[0].weighted_value).to eq 270
     end
 
   end

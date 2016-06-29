@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead, :pipedrive]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead]
 
   def new
     respond_to do |format|
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new( params[:user] )
     session[:user_id] = @user.id if @user.save
     respond_to do |format|
       format.js { }
@@ -92,17 +92,17 @@ class UsersController < ApplicationController
   end
   
   def change_locale
-    current_user.update(locale: params[:l]) if current_user
-    session[:current_locale] = params[:l]
+    current_user.update(locale: params[:locale]) if current_user
+    session[:current_locale] = params[:locale]
     redirect_to "/"
   end
 
   def users
-    @users = User.all.sort_by{|user| user.created_at }.reverse
+    @users = User.where( [ { k: "role",  v: $user_roles[params[:type]], op: "=" } ] )#.sort_by{|user| user.created_at }.reverse
     @today =  @users.select{|user| user.created_at.to_date.to_s == Date.today.to_s }.size
     @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
-  end
-  
+  end 
+
   def fb_lead
     user_params = params.merge!( password: User.generate_password, phone_verified: true )
     user_params.delete(:controller)
@@ -111,6 +111,13 @@ class UsersController < ApplicationController
     user.save
     user.create_pipedrive_lead_deal unless user.errors.present?
     render status: 200, json: user_params
+  end
+  
+  def add_trainer
+    if params[:user].present?
+      @user = User.new_trainer( params )
+      redirect_to "/trainer/new" 
+    end
   end
 
   def home_page

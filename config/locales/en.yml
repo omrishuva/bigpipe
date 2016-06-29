@@ -34,6 +34,9 @@ en:
  select_new_password_recovery_subtitle: "Enter the code you received in the email and select your new password"
  back: "Go Back"
  language: "language"
+ add_trainer: "Add Trainer"
+ upload_trainer_certificate: "Trainer Certificate"
+ 
  error_messages:
   password:
    is_missing: "Missing Password"
@@ -47,3 +50,5 @@ en:
     wrong_format: "The email adress you entered is not valid"
   name:
     is_missing: "Please enter your name"
+
+

@@ -51,3 +51,33 @@ body
 .btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
+.addTrainer{ width: 50%; position: absolute; right: 25%; }
+
+.fileUploadButton
+{
+    background: #5D33F4 center top no-repeat;
+    overflow: hidden;
+    color: #FFB941;
+    border-radius: 5px;
+    width: 180px;  
+    position: relative; 
+    padding: 8px 10px 8px 10px;
+}
+
+.fileUploadButton:hover
+{
+    background: #FFB941 center top no-repeat;
+    color: #5D33F4;
+}
+
+.fileUploadInput
+{
+    opacity: 0;
+    width: 250px;
+    height: 35px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.fileName{ color: #fff; }

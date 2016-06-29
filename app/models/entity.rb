@@ -93,13 +93,18 @@ class Entity
 	    from_entity( entity ) if entity
 	  end
 	  
-	  def find_by( query_params )
+	  def find_by( query_params ) #returns one result
+	  	where(query_params)[0]
+	  end
+
+	  def where( query_params )
 	  	query_obj = $datastore.query.kind(self.name)
 	  	query_params.each do |filter|
 	  		query_obj = query_obj.where( filter[:k].to_s, filter[:op], filter[:v] )
 	  	end
-	  	from_entity( run_query( query_obj )[0] )
+	  	run_query(query_obj).map{ |ent| from_entity(ent)  }	
 	  end
+
 
 		def all( opts = { } )
 			results = run_query( $datastore.query.kind(self.name) )

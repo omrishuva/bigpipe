@@ -6,6 +6,11 @@ RSpec.describe ActiveJob::QueueAdapters::PubSubQueueAdapter do
 		PubsubUtils.delete_all_topics
 		PubsubUtils.delete_all_subscriptions
 	end
+	
+	after :all do
+		PubsubUtils.delete_all_topics
+		PubsubUtils.delete_all_subscriptions
+	end
 
 	describe :enqueue do
 		
@@ -14,7 +19,7 @@ RSpec.describe ActiveJob::QueueAdapters::PubSubQueueAdapter do
 		end
 
 		it "should create new topic" do
-			expect( PubsubUtils.get_all_topic_names[0] ).to eq "test-SendPasswordRecoveryEmail"
+			expect( PubsubUtils.get_all_topic_names[0] ).to eq "test-now"
 		end
 
 		it "should create a new now subscription " do
@@ -24,6 +29,11 @@ RSpec.describe ActiveJob::QueueAdapters::PubSubQueueAdapter do
 		it "should enqueue SendPasswordRecoveryEmail job" do
 			sub = $pubsub.find_subscription( "#{Rails.env}-now" )
 			expect( sub.pull[0].attributes["email"] ).to eq "omrishuva1@gmail.com"
+		end
+
+		it "should set the publisher class name  job" do
+			sub = $pubsub.find_subscription( "#{Rails.env}-now" )
+			expect( sub.pull[0].attributes["class"] ).to eq "SendPasswordRecoveryEmail"
 		end
 
 	end

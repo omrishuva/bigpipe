@@ -1,0 +1,31 @@
+
+<form action="/trainer/create" class="addTrainer" id="addTrainer" method="post" enctype="multipart/form-data">
+	<h1>Add New Trainer</h1>
+	<div class="dropdown-divider"></div>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+	<%= hidden_field_tag "user[invited_by]", current_user.name %>
+	<%= label_tag :name %>
+	<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: @user } %>
+	<%= label_tag :email %>
+	<%= render "shared/form_helpers/input_field", locals: {input_type: "email", field_name: :email, user: @user } %>
+	<%= label_tag :phone %>
+	<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: @user } %>
+	<%= label_tag :language %>
+	<%= select_tag "user[locale]", options_for_select(SupportedLocales.all.map{ |k,v| [v, k] })%>
+	</br></br>
+	<%= label_tag :gender %>
+	<%= select_tag "user[gender]", options_for_select([["Male", :male], ["Female", :female]])%>
+	</br></br>
+	<div class="fileUploadButton">
+		<%= file_field_tag 'certificate', class: "fileUploadInput"%>
+		<%=I18n.t :upload_trainer_certificate%>
+		</br>
+		<div class="fileName"></div>
+	</div>
+
+  </br></br>
+	<div class="dropdown-divider"></div>
+	<button type="submit" class="btn btnBrand1"><%= I18n.t :add_trainer%></button>
+  <%= render "shared/form_helpers/flash_messages" %>
+</form>
+

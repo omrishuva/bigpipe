@@ -44,20 +44,16 @@ class ApplicationController < ActionController::Base
     if action_permissions.nil?
       true
     else
-      action_permissions.include?( current_user.try(:role)  )
+      action_permissions.include?( current_user.try(:role_name)  )
     end
   end
   
   def controller_permissions
-    permissions[params['controller']]
+    $permissions[params['controller']]
   end
   
   def action_permissions
     controller_permissions[params['action']]
-  end
-
-  def permissions
-    @permissions ||= YAML.load_file('./lib/permissions.yaml')
   end
 
 end

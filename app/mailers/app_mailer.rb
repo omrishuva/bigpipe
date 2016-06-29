@@ -8,4 +8,10 @@ class AppMailer < ApplicationMailer
 		mail(to: email, subject: 'Play - Password Recovery')
 	end
 
+	def trainer_invitation_email( email, name, invited_by )
+		@user_name = name
+		@invited_by = invited_by
+		mail(to: email, subject: 'Welcome To Play')
+	end
+
 end

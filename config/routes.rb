@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	get '/logout' => 'sessions#destroy'
 
 	#users
-	get '/users' => 'users#users'
+	get '/users/:type' => 'users#users'
 	get '/signup' => 'users#new'
 	post '/signup' => 'users#create'
 	post '/authenticate_phone' => 'users#authenticate_phone'
@@ -17,9 +17,12 @@ Rails.application.routes.draw do
 	get '/select_new_password' => 'users#select_new_password'
 	post '/set_new_password' => 'users#set_new_password'
 	get '/resend_phone_number' => 'users#resend_phone_number'
-	get '/change_locale' => 'users#change_locale'
+	get '/change_locale/:locale' => 'users#change_locale'
 	post '/fb_lead' => 'users#fb_lead'
 
+	#trainers
+	get 'trainer/new' => 'users#add_trainer'
+	post 'trainer/create' => 'users#add_trainer'
 	#health checks
 	get '_ah/health' => 'application_health#health'
 	get '_ah/start' => 'application_health#start'

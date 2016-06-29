@@ -25,15 +25,19 @@ class PubsubUtils
 		end
 
 		def get_all_topics
-			$pubsub.list_topics
+			$pubsub.list_topics.select{ |topic| topic.name.include?( Rails.env )  }
 		end
 
 		def get_all_subscription_names
 			get_all_subscriptions.map{|sub| sub.name.split('/').last  }.select{|sub| sub.include?( Rails.env ) }
 		end
+		
+		def get_now_subscription_names
+			get_all_subscriptions.map{|sub| sub.name.split('/').last  }.select{|sub| sub.include?( Rails.env ) }.select{ |sub| sub.include?( "now" ) }
+		end
 
 		def get_all_subscriptions
-			$pubsub.list_subscriptions
+			$pubsub.list_subscriptions.select{|sub| sub.name.include?( Rails.env )  }
 		end
 
 	end

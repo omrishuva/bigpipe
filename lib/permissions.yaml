@@ -1,3 +1,7 @@
-users: 
-  crm:
+users:
+  users:
+    - admin
+  trainers:
+    - admin
+  locations:
     - admin

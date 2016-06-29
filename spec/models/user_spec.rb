@@ -125,7 +125,35 @@ RSpec.describe User do
 			end
 
 		end
+
+		context "roles & permissions" do
+			
+			before :each do
+				User.destroy_all
+				@play_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+				@fb_params = { auth_provider: "facebook", name: "omri shuva", email: "omrishuva1@gmail.com" }				
+			end
+
+			it "should set the user a user default role" do
+				user = User.new(@play_params)
+				user.save
+				expect(user.role).to eq 4
+			end
+			
+			it "should not set the role if user already has a role" do
+				user = User.new( @play_params.merge(role: 2) )
+				user.save
+				expect(user.role).to eq 2
+			end
 		
+			it "should map role id to name" do 
+				user = User.new( @play_params )
+				user.save
+				expect(user.role_name).to eq "user"
+			end
+		
+		end
+
 	end
 
 end
