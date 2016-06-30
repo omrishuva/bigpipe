@@ -76,16 +76,8 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.digest = true
 
-  # class NoCompression
-  #   def compress(string)
-  #   string
-  #   end
-  # end
-  # config.assets.css_compressor = NoCompression.new
-  # config.assets.js_compressor = NoCompression.new
-
-  config.assets.compress = true
-  # config.assets.js_compressor = :uglifier
+  # config.assets.compress = true
+  config.assets.js_compressor = :uglifier
   config.assets.css_compressor = :sass
   
 
