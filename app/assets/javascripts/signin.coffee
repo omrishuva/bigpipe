@@ -23,7 +23,7 @@ hideLoader = ->
    $('.signinLoader').hide()
 
 facebookSignIn = ->
-  $('#fbSignIn').on 'click', ->
+  $('#fbSignIn, #fbTrainerSignIn').on 'click', ->
     FB.login ((response) ->
       showLoader() unless window.location.pathname == "/trainer/onboarding";
       if response.authResponse
