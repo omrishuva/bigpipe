@@ -25,7 +25,7 @@ hideLoader = ->
 facebookSignIn = ->
   $('#fbSignIn').on 'click', ->
     FB.login ((response) ->
-      showLoader();
+      showLoader(); unless window.location.pathname == "/trainer/onboarding"
       if response.authResponse
         FB.api '/me?fields=email,name,picture', (responseFromFB) ->
           name = responseFromFB.name

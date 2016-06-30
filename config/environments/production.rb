@@ -75,6 +75,6 @@ Rails.application.configure do
   config.assets.digest = true
 
   config.assets.css_compressor = :sass
-  config.assets.js_compressor = :uglifier
-  config.action_mailer.default_url_options = { :host => 'https://www.play-prod.appspot.com' }
+  # config.assets.js_compressor = :uglifier
+  config.action_mailer.default_url_options = { :host => 'www.play-prod.appspot.com' }
 end
