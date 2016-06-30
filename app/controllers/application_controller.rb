@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     
-    redirect_to root_url unless allowed
+    redirect_to root_url unless allowed?
   end
   
   def recognize_path
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     flash.clear
   end
   
-  def allowed
+  def allowed?
     return true unless controller_permissions
      action_permissions
     if action_permissions.nil?

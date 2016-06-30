@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :trainer_login]
 
   def new
     respond_to do |format|
@@ -98,7 +98,7 @@ class UsersController < ApplicationController
   end
 
   def users
-    @users = User.where( [ { k: "role",  v: $user_roles[params[:type]], op: "=" } ] )#.sort_by{|user| user.created_at }.reverse
+    @users = User.where( [ { k: "role",  v: $user_roles[params[:type]], op: "=" } ] ).sort_by{|user| user.created_at }.reverse
     @today =  @users.select{|user| user.created_at.to_date.to_s == Date.today.to_s }.size
     @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
   end 
@@ -114,10 +114,29 @@ class UsersController < ApplicationController
   end
   
   def add_trainer
-    if params[:user].present?
-      @user = User.new_trainer( params )
-      redirect_to "/trainer/new" 
+    @user = User.new_trainer( params ) if params[:user].present?
+    if !@user
+      render "add_trainer"
+    elsif @user && @user.errors.present?
+      render "add_trainer"
+    else
+      redirect_to '/users/trainer'
     end
+  end
+  
+  def trainer_onboarding
+    redirect_to root_url and return unless params[:tid]
+    @user = User.find( params[:tid] )
+    session[:current_locale] = @user.locale
+  end
+
+  def trainer_login
+    @user = User.authenticate(user_params)
+    if @user 
+      session[:user_id] = @user.id
+      flash[:success] = "Logged in"
+      redirect_to root_url and return
+    end  
   end
 
   def home_page

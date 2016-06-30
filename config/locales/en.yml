@@ -1,4 +1,5 @@
 en:
+ welcome_message: "Welcome to Play"
  sign_in_button: "Sign In"
  logout: "Logout"
  how_it_works: "How it works?"

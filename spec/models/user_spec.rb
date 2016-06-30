@@ -156,4 +156,43 @@ RSpec.describe User do
 
 	end
 
+	context "Trainer" do
+			
+		describe "add new trainer" do
+			
+			before :all do
+				tempfile = File.new("cert.pdf","w+")
+				certificate = OpenStruct.new( tempfile: tempfile )
+				@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
+				@user = User.new_trainer( @trainer_params )
+				@file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
+				@sub = $pubsub.find_subscription( "test-now" )
+			end
+			
+			after :all do
+				@file.delete
+				@user.destroy
+				@sub.pull.each{ |msg| msg.ack! }
+			end
+
+			it "should create the user with trainer role" do
+				expect( @user.role_name ).to eq "trainer"
+			end
+			
+			it "should should save the certificate file in the storage" do
+				file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
+				expect(file).to_not be nil
+			end
+			
+			it "should save the certificate path in the database" do
+				expect(@file.public_url).to eq @user.trainer_certificate_url
+			end
+
+			it "should enqueue an invitation email task" do
+				expect(@sub.pull.first.attributes["class"]).to eq "SendTrainerInvitationEmail"	
+			end
+			
+		end
+	end
+
 end

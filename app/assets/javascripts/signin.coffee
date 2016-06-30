@@ -31,9 +31,10 @@ facebookSignIn = ->
           name = responseFromFB.name
           email = responseFromFB.email
           profile_picture =  responseFromFB.picture.data.url
+          url = if window.location.pathname == "/trainer/onboarding"  then "/trainer/onboarding" else "/login"
           $.ajax
             type: 'POST'
-            url: '/login'
+            url: url
             async: false
             data:
               'name': name
@@ -41,7 +42,10 @@ facebookSignIn = ->
               'profile_picture': profile_picture
               'auth_provider': 'facebook'
             success: (data) ->
-              loadListeners();
+              if window.location.pathname == "/trainer/onboarding"
+                window.location.pathname = "/"
+              else
+                loadListeners();
             complete: ->
             error: (xhr, textStatus, errorThrown) ->
               console.log 'ajax loading error...'

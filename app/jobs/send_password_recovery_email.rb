@@ -3,9 +3,10 @@ class SendPasswordRecoveryEmail < ActiveJob::Base
 
   def perform( args )
   	begin
+  		Rails.logger.info "sending email"
 	  	AppMailer.password_recovery_code_mail( args["email"], args["name"], args["password_recovery_code"] ).deliver_now
 		rescue => e
-			Rails.logger.info "#{e.message} -- #{e.backrace}"
+			Rails.logger.info "#{e.message} -- #{e.backtrace}"
 		end
 	end
 

@@ -1,5 +1,10 @@
 <%sidebar_class = current_language_direction == :ltr ? "ltrUserSideBar" : "rtlUserSideBar" %>
 <div class=<%=sidebar_class%> id="userSideBar" >
+  <%if current_user%>
+	  <p><%=current_user.name.strip.capitalize%></p>
+  	<div class="dropdown-divider"></div>
+  <%end%>
+  
   <div>
 	  <p class="userMenuSection" >Language</p>
 	  <i class="fa fa-globe userMenuSection" aria-hidden="true"></i>
@@ -9,15 +14,15 @@
   <%end%>
   <div class="dropdown-divider"></div>
   <%if current_user.present?%>
-	  
-		<div>
-		  <p class="userMenuSection" >Admin</p>
-		  <i class="fa fa-lock userMenuSection" aria-hidden="true"></i>
-		 </div>
-			 <a class="dropdown-item" href=<%="/users/user" %>> Users </a>
-			 <a class="dropdown-item" href=<%="/users/trainer" %>> Trainers </a>
-		 <div class="dropdown-divider"></div>
-
+	  <%if current_user.admin?%>
+			<div>
+			  <p class="userMenuSection" >Admin</p>
+			  <i class="fa fa-lock userMenuSection" aria-hidden="true"></i>
+			 </div>
+				 <a class="dropdown-item" href=<%="/users/user" %>> Users </a>
+				 <a class="dropdown-item" href=<%="/users/trainer" %>> Trainers </a>
+			 <div class="dropdown-divider"></div>
+		<%end%>	 
 	  	<a class="dropdown-item" href="/logout">
 	  		<p class="userMenuSection" ><%= I18n.t :logout%></p>
 	  		<i class="fa fa-sign-out userMenuSection" aria-hidden="true"></i>

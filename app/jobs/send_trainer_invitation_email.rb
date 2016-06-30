@@ -3,9 +3,10 @@ class SendTrainerInvitationEmail < ActiveJob::Base
 
   def perform( args )
   	begin
-	  	AppMailer.trainer_invitation_email( args["email"], args["name"], args["invited_by"] ).deliver_now
+  		Rails.logger.info "Sending Email"
+	  	AppMailer.trainer_invitation_email( args["user_id"], args["email"], args["name"], args["invited_by"] ).deliver_now
 		rescue => e
-			Rails.logger.info "#{e.message} -- #{e.backrace}"
+			Rails.logger.info "#{e.message} -- #{e.backtrace}"
 		end
 	end
 

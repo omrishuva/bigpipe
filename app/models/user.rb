@@ -107,6 +107,10 @@ class User < Entity
   def role_name
     $user_roles[self.role]
   end
+  
+  def admin?
+    self.role == 1
+  end
 
   class << self
 	 	  
@@ -134,10 +138,6 @@ class User < Entity
   		self.new(params).save
   	end
 	  
-    def create_from_pipedrive( pd_person )
-      self.new( name: pd_person.name, email: pd_person.email[0]["value"], phone: pd_person.phone[0]["value"], password: generate_password, phone_verified: true, campaign: pd_person.campaign  ).save
-    end
-
     def generate_password
       SecureRandom.hex[0..8]
     end
@@ -159,13 +159,12 @@ class User < Entity
       end
     end
     
-    
     def new_trainer( params )
       user = User.new( params[:user].merge( role: 2, phone_verified: true, password: generate_password ) )
       user.save
       unless user.errors.present?
         user.save_certificate_file( params[:certificate].tempfile )
-        SendTrainerInvitationEmail.perform_later( email: user.email, name: user.name, invited_by: user.invited_by )
+        SendTrainerInvitationEmail.perform_later( user_id: user.id, email: user.email, name: user.name, invited_by: user.invited_by )
       end
       user
     end
