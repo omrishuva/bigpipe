@@ -71,10 +71,23 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   
+  
+
   config.assets.compile = false
   config.assets.digest = true
 
-  config.assets.css_compressor = :sass
-  config.assets.js_compressor = :uglifier
+  class NoCompression
+    def compress(string)
+    string
+    end
+  end
+  config.assets.compress = true
+  config.assets.css_compressor = NoCompression.new
+  config.assets.js_compressor = NoCompression.new
+
+  # config.assets.css_compressor = :sass
+  # config.assets.js_compressor = :uglifier
+
   config.action_mailer.default_url_options = { :host => 'www.play-prod.appspot.com' }
+
 end
