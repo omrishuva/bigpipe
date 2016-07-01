@@ -1,4 +1,5 @@
 require "spec_helper"
+
 RSpec.describe User do
 	
 	before :each do
@@ -161,6 +162,7 @@ RSpec.describe User do
 		describe "add new trainer" do
 			
 			before :all do
+				tempfile = File.new "cert.pdf","w"
 				certificate = OpenStruct.new( tempfile: tempfile )
 				@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
 				@user = User.new_trainer( @trainer_params )
@@ -169,6 +171,7 @@ RSpec.describe User do
 			end
 			
 			after :all do
+				`rm cert.pdf`
 				@file.delete
 				@user.destroy
 				@sub.pull.each{ |msg| msg.ack! }

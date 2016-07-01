@@ -81,6 +81,6 @@ Rails.application.configure do
   config.assets.css_compressor = :sass
   
 
-  config.action_mailer.default_url_options = { :host => 'www.play-prod.appspot.com' }
+  config.action_mailer.default_url_options = { :host => 'http://www.play-prod.appspot.com' }
 
 end
