@@ -1,8 +1,13 @@
 1: admin
-2: trainer
-3: location
-4: user
+2: service_provider
+3: consumer
+
 admin: 1
-trainer: 2
-location: 3
-user: 4
+service_provider: 2
+consumer: 3
+
+service_providers_types:
+ trainer: 1
+ location_owner: 2
+ 1: trainer
+ 2: location_owner

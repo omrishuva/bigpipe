@@ -19,12 +19,13 @@ Rails.application.routes.draw do
 	get  '/resend_phone_number' 				 => 'users#resend_phone_number'
 	get  '/change_locale/:locale' 			 => 'users#change_locale'
 	post '/fb_lead' 										 => 'users#fb_lead'
+	get  '/me'                           => 'users#me'
 
-	#trainers
-	get  'trainer/new'         => 'users#add_trainer'
-	post 'trainer/new'         => 'users#add_trainer'
-	get  '/trainer/onboarding' => 'users#trainer_onboarding'
-	post '/trainer/onboarding' => 'users#trainer_login'
+	#service_providers
+	get  'service_provider/new'         => 'users#add_service_provider'
+	post 'service_provider/new'         => 'users#add_service_provider'
+	get  '/service_provide/onboarding' => 'users#service_provide_onboarding'
+	post '/service_provider/onboarding' => 'users#service_provider_login'
 	
 	#health checks
 	get '_ah/health'      => 'application_health#health'

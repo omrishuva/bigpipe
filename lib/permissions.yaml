@@ -1,5 +1,4 @@
 users:
-  users:
-    - admin
-  add_trainer:
-    - admin
+  users: admin
+  add_service_provider: admin
+  me: user

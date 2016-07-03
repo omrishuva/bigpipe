@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :authorize
   before_filter :clear_flash_messages
-
+  
+  DEFAULT_LOCALE  = :en
+  
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -31,7 +33,11 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
-    I18n.locale = current_user.try(:locale) || session[:current_locale]
+    if current_user.admin? && action_permissions == "admin"
+      I18n.locale = DEFAULT_LOCALE
+    else
+      I18n.locale = current_user.try(:locale) || session[:current_locale]
+    end
   end
 
   def clear_flash_messages
@@ -44,7 +50,7 @@ class ApplicationController < ActionController::Base
     if action_permissions.nil?
       true
     else
-      action_permissions.include?( current_user.try(:role_name)  )
+      $user_roles[action_permissions] >= current_user.try(:role).to_i
     end
   end
   

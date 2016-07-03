@@ -1,6 +1,8 @@
-<form action="/trainer/new" class="addTrainer" id="addTrainer" method="post" enctype="multipart/form-data">
-	<p class="lead">Add New Trainer</p>
+<form action="/service_provider/new" class="addTrainer" id="addTrainer" method="post" enctype="multipart/form-data">
+	<button type="submit" class="btn btnBrand1">Add New Service Provider</button>
+
 	<div class="dropdown-divider"></div>
+	<%= render "shared/form_helpers/flash_messages" %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 	<%= hidden_field_tag "user[invited_by]", current_user.name %>
 	<%= label_tag :name %>
@@ -8,23 +10,30 @@
 	<%= label_tag :email %>
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "email", field_name: :email, user: @user } %>
 	<%= label_tag :phone %>
-	<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: @user } %>
+	<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: @user } 
+	%>
+	
+	<%= label_tag :service_provider_type %>
+	</br>
+	<%= select_tag "user[service_provider_type]", options_for_select( $user_roles["service_providers_types"].map{|k,v| [k.humanize,v]   } )%>
+	</br></br>
 	<%= label_tag :language %>
+	</br>
 	<%= select_tag "user[locale]", options_for_select(SupportedLocales.all.map{ |k,v| [v, k] })%>
+	
+
 	</br></br>
 	<%= label_tag :gender %>
+	</br>
 	<%= select_tag "user[gender]", options_for_select([["Male", :male], ["Female", :female]])%>
+
 	</br></br>
 	<div class="fileUploadButton">
 		<%= file_field_tag 'certificate', class: "fileUploadInput"%>
-		<%=I18n.t :upload_trainer_certificate%>
+		Add Certificate
 		</br>
 		<div class="fileName"></div>
-	</div>
-
-  </br></br>
-	<div class="dropdown-divider"></div>
-	<button type="submit" class="btn btnBrand1"><%= I18n.t :add_trainer%></button>
-  <%= render "shared/form_helpers/flash_messages" %>
+	</div>	
+  
 </form>
 

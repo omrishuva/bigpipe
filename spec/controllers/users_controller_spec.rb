@@ -170,16 +170,16 @@ RSpec.describe UsersController do
     end
 
     it "should redirect to root url when user is not an admin" do
-      controller.stub(:current_user).and_return(@user)
-      get :users, type: "trainer"
+      controller.stub( :current_user ).and_return( @user )
+      get :users, type: "consumer"
       expect( response).to redirect_to  "/"
     end
 
     it "should be allowed for admin users" do
-      @user.update(role: 1)
-      controller.stub(:current_user).and_return(@user)
-      get :users, type: "trainer"
-      expect( response.status).to be 200
+      @user.update( role: 1 )
+      controller.stub( :current_user ).and_return( @user )
+      get :users, type: "service_provider"
+      expect( response.status ).to be 200
     end
 
   end

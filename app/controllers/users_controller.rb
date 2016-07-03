@@ -113,29 +113,38 @@ class UsersController < ApplicationController
     render status: 200, json: user_params
   end
   
-  def add_trainer
+  def add_service_provider
     @user = User.new_trainer( params ) if params[:user].present?
     if !@user
-      render "add_trainer"
+      render "add_service_provider"
     elsif @user && @user.errors.present?
-      render "add_trainer"
+      render "add_service_provider"
     else
-      redirect_to '/users/trainer'
+      redirect_to '/users/service_provider'
     end
   end
   
-  def trainer_onboarding
-    redirect_to root_url and return unless params[:tid]
-    @user = User.find( params[:tid] )
+  def service_provider_onboarding
+    redirect_to root_url and return unless params[:spid]
+    @user = User.find( params[:spid] )
     session[:current_locale] = @user.locale
   end
 
-  def trainer_login
+  def me
+    # @user = current_user
+  end
+  
+  def public_profile
+    @user = User.find( params[:id] )
+
+  end
+
+  def service_provider_login
     @user = User.authenticate(user_params)
     if @user 
       session[:user_id] = @user.id
       flash[:success] = "Logged in"
-      redirect_to root_url and return
+      redirect_to '/me' and return
     end  
   end
 
