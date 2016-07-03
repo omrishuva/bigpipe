@@ -1,5 +1,5 @@
 <div class="row pull-left">
-  <h5 ><%="#{params[:type].pluralize.capitalize}"%></h5>
+  <h5 ><%="#{params[:type].pluralize.humanize}"%></h5>
   <span class="lead" ><%="Total: #{@users.size}"%></span>
   <span>|</span>
   <span class="lead"><%="Today: #{@today}"%></span>

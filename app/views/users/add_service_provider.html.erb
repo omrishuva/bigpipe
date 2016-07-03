@@ -15,7 +15,11 @@
 	
 	<%= label_tag :service_provider_type %>
 	</br>
-	<%= select_tag "user[service_provider_type]", options_for_select( $user_roles["service_providers_types"].map{|k,v| [k.humanize,v]   } )%>
+	<%= select_tag "user[service_provider_type]", options_for_select( 
+																																		$user_roles["service_providers_types"]
+																																		.map{|k,v| [k.humanize,v]  
+																																		 }  
+	)%>																																		
 	</br></br>
 	<%= label_tag :language %>
 	</br>
