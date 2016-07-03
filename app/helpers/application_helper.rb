@@ -14,4 +14,12 @@ module ApplicationHelper
   	current_user.try(:profile_picture).present? ? current_user.profile_picture : 'genderless_silhouette.png'
   end
 
+  def users_admin_page_title( service_provider_type )
+    if service_provider_type
+      service_provider_type.pluralize.humanize
+    else
+      "Consumers"
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead, :trainer_login]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login]
 
   def new
     respond_to do |format|
@@ -98,7 +98,9 @@ class UsersController < ApplicationController
   end
 
   def users
-    @users = User.where( [ { k: "role",  v: $user_roles[params[:type]], op: "=" } ] ).sort_by{|user| user.created_at }.reverse
+    query_params = [ { k: "role",  v: $user_roles["roles"][params[:role]], op: "=" } ]
+    query_params << { k: "service_provider_type", v: $user_roles["service_provider_types"][params[:service_provider]], op: "=" } if params[:service_provider]
+    @users = User.where( query_params ).sort_by{|user| user.created_at }.reverse
     @today =  @users.select{|user| user.created_at.to_date.to_s == Date.today.to_s }.size
     @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
   end 
@@ -114,6 +116,8 @@ class UsersController < ApplicationController
   end
   
   def add_service_provider
+    @service_provider_type = params[:spt]
+
     @user = User.new_trainer( params ) if params[:user].present?
     if !@user
       render "add_service_provider"
@@ -131,7 +135,6 @@ class UsersController < ApplicationController
   end
 
   def me
-    # @user = current_user
   end
   
   def public_profile
@@ -140,7 +143,7 @@ class UsersController < ApplicationController
   end
 
   def service_provider_login
-    @user = User.authenticate(user_params)
+    @user = User.authenticate( params )
     if @user 
       session[:user_id] = @user.id
       flash[:success] = "Logged in"

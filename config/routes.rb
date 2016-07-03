@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 	get  '/logout' => 'sessions#destroy'
 
 	#users
-	get  '/users/:type'        					 => 'users#users'
+	get  '/users/:role'        					 => 'users#users'
 	get  '/signup'                       => 'users#new'
 	post '/signup'                       => 'users#create'
 	post '/authenticate_phone'           => 'users#authenticate_phone'
@@ -22,10 +22,10 @@ Rails.application.routes.draw do
 	get  '/me'                           => 'users#me'
 
 	#service_providers
-	get  'service_provider/new'         => 'users#add_service_provider'
-	post 'service_provider/new'         => 'users#add_service_provider'
-	get  '/service_provide/onboarding' => 'users#service_provide_onboarding'
-	post '/service_provider/onboarding' => 'users#service_provider_login'
+	get  'service_provider/:spt/new'         => 'users#add_service_provider'
+	post 'service_provider/:spt/new'         => 'users#add_service_provider'
+	get  '/service_provider/onboarding'       => 'users#service_provider_onboarding'
+	post '/service_provider/onboarding'      => 'users#service_provider_login'
 	
 	#health checks
 	get '_ah/health'      => 'application_health#health'

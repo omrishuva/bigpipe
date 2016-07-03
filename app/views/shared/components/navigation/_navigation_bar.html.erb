@@ -5,7 +5,7 @@
 		  <%=render "shared/components/navigation/ltr_logo"%>
 		  <%=render "shared/components/navigation/ltr_info"%>
 		  <%=render "shared/components/navigation/ltr_call_us"%>
-		  <%=render "shared/components/navigation/ltr_user_login" unless params["action"] == "trainer_onboarding"%>
+		  <%=render "shared/components/navigation/ltr_user_login" unless params["action"] == "service_provider_onboarding"%>
 		</div>
 	</div>
 
@@ -13,7 +13,7 @@
 
 	<div class="navigationBar" id="navbarContainer" >
 		<div class="navItems"> 
-		  <%=render "shared/components/navigation/rtl_user_login" unless params["action"] == "trainer_onboarding"%>
+		  <%=render "shared/components/navigation/rtl_user_login" unless params["action"] == "service_provider_onboarding"%>
 		  <%=render "shared/components/navigation/rtl_call_us"%>
 		  <%=render "shared/components/navigation/rtl_info"%>
 		  <%=render "shared/components/navigation/rtl_logo"%>

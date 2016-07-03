@@ -157,7 +157,7 @@ RSpec.describe UsersController do
 
   end
 
-  describe "GET users/:type" do
+  describe "GET users/:role" do
 
     before :all do
       @valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", auth_provider: "facebook" }
@@ -171,14 +171,14 @@ RSpec.describe UsersController do
 
     it "should redirect to root url when user is not an admin" do
       controller.stub( :current_user ).and_return( @user )
-      get :users, type: "consumer"
+      get :users, role: "consumer"
       expect( response).to redirect_to  "/"
     end
 
     it "should be allowed for admin users" do
       @user.update( role: 1 )
       controller.stub( :current_user ).and_return( @user )
-      get :users, type: "service_provider"
+      get :users, role: "service_provider", spt: "trainer"
       expect( response.status ).to be 200
     end
 

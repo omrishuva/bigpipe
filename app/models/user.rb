@@ -1,6 +1,6 @@
 class User < Entity
 
-  DEFAULT_ROLE = 3
+  DEFAULT_ROLE = 1
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 

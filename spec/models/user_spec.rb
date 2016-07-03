@@ -177,10 +177,14 @@ RSpec.describe User do
 				@sub.pull.each{ |msg| msg.ack! }
 			end
 
-			it "should create the user with trainer role" do
+			it "should create the user with service_provider role" do
 				expect( @user.role_name ).to eq "service_provider"
 			end
 			
+			it "should create the user with service provider type trainer" do
+				expect( @user.service_provider_name ).to eq "service_provider"
+			end
+
 			it "should should save the certificate file in the storage" do
 				file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
 				expect(file).to_not be nil

@@ -25,13 +25,13 @@ hideLoader = ->
 facebookSignIn = ->
   $('#fbSignIn, #fbTrainerSignIn').on 'click', ->
     FB.login ((response) ->
-      showLoader() unless window.location.pathname == "/trainer/onboarding";
+      showLoader() unless window.location.pathname == "/service_provider/onboarding";
       if response.authResponse
         FB.api '/me?fields=email,name,picture', (responseFromFB) ->
           name = responseFromFB.name
           email = responseFromFB.email
           profile_picture =  responseFromFB.picture.data.url
-          url = if window.location.pathname == "/trainer/onboarding"  then "/trainer/onboarding" else "/login"
+          url = if window.location.pathname == "/service_provider/onboarding"  then "/service_provider/onboarding" else "/login"
           $.ajax
             type: 'POST'
             url: url
@@ -42,8 +42,8 @@ facebookSignIn = ->
               'profile_picture': profile_picture
               'auth_provider': 'facebook'
             success: (data) ->
-              if window.location.pathname == "/trainer/onboarding"
-                window.location.pathname = "/"
+              if window.location.pathname == "/service_provider/onboarding"
+                window.location.pathname = "/me"
               else
                 loadListeners();
             complete: ->

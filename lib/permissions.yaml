@@ -1,4 +1,5 @@
 users:
   users: admin
   add_service_provider: admin
-  me: user
+  me: consumer
+  # service_provider_onboarding: service_provider

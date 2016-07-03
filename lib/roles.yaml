@@ -1,13 +1,17 @@
-1: admin
-2: service_provider
-3: consumer
+roles:
+  consumer: 1
+  service_provider: 2
+  admin: 3
 
-admin: 1
-service_provider: 2
-consumer: 3
+roles_mapping:
+  1: consumer
+  2: service_provider
+  3: admin
 
-service_providers_types:
+service_provider_types:
  trainer: 1
  location_owner: 2
+
+service_provider_types_mapping:
  1: trainer
  2: location_owner

@@ -15,8 +15,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    
-    redirect_to root_url unless allowed?
+    redirect_to root_url and return unless allowed?
   end
   
   def recognize_path
@@ -33,7 +32,7 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
-    if current_user && current_user.admin? && action_permissions == "admin"
+    if current_user && current_user.admin? && controller_permissions.present? && action_permissions == "admin"
       I18n.locale = DEFAULT_LOCALE
     else
       I18n.locale = current_user.try(:locale) || session[:current_locale]
@@ -50,7 +49,7 @@ class ApplicationController < ActionController::Base
     if action_permissions.nil?
       true
     else
-      $user_roles[action_permissions] >= current_user.try(:role).to_i
+      $user_roles["roles"][action_permissions].to_i <= current_user.try(:role).to_i
     end
   end
   

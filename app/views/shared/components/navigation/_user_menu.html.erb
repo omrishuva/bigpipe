@@ -19,9 +19,11 @@
 			  <p class="userMenuSection" >Admin</p>
 			  <i class="fa fa-lock userMenuSection" aria-hidden="true"></i>
 			 </div>
-				 <a class="dropdown-item" href=<%="/users/consumer" %>> Users </a>
-				 <a class="dropdown-item" href=<%="/users/service_provider" %>> Service Providers </a>
-			 <div class="dropdown-divider"></div>
+				 <a class="dropdown-item" href=<%="/users/consumer" %>> Consumers </a>
+				 <%$user_roles["service_provider_types"].each do |k,v|%>
+				 		<a class="dropdown-item" href=<%="/users/service_provider?spt=#{k}" %>> <%=k.humanize.pluralize%> </a>
+			 	 <%end%>
+			 	<div class="dropdown-divider"></div>
 		<%end%>	 
 	  	<a class="dropdown-item" href="/logout">
 	  		<p class="userMenuSection" ><%= I18n.t :logout%></p>

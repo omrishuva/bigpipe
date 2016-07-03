@@ -17,11 +17,15 @@ module RoleUtils
   end
   
   def role_name
-    $user_roles[self.role]
+    $user_roles["roles_mapping"][self.role]
   end
   
+  def service_provider_name
+    $user_roles["service_provider_types_mapping"][self.role]
+  end
+
   def admin?
-    self.role == 1
+    self.role == $user_roles["roles"]["admin"]
   end
 
 end
