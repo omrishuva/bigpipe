@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
-    if current_user.admin? && action_permissions == "admin"
+    if current_user && current_user.admin? && action_permissions == "admin"
       I18n.locale = DEFAULT_LOCALE
     else
       I18n.locale = current_user.try(:locale) || session[:current_locale]
