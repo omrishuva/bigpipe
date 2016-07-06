@@ -20,7 +20,10 @@ Rails.application.routes.draw do
 	get  '/change_locale/:locale' 			 => 'users#change_locale'
 	post '/fb_lead' 										 => 'users#fb_lead'
 	get  '/me'                           => 'users#me'
-
+	post '/upload_image'								 => 'users#upload_image'
+	get  '/edit_user_about_text'         => 'users#edit_user_about_text'
+	get  '/cancel_user_edit_about_text'  => 'users#cancel_user_edit_about_text'
+	post '/save_user_about_text'         => 'users#save_user_about_text'
 	#service_providers
 	get  'service_provider/:spt/new'         => 'users#add_service_provider'
 	post 'service_provider/:spt/new'         => 'users#add_service_provider'

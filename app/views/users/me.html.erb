@@ -1,1 +1,20 @@
-<%=current_user%>
+<div class="container">
+
+  <div class="row">
+    
+    <div class="col-lg-6 gridItem">
+        
+    	<%=
+    		render "shared/components/cover_image",
+    		locals: { overlay_text: current_user.display_name, src: @cover_image } 
+    	%>
+       
+    </div>
+
+     <div class="col-lg-6 gridItem">
+     		<%= render 'about_user'%>
+     </div>
+
+  </div>
+   <div class="dropdown-divider"></div>
+</div>

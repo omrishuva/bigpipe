@@ -1,0 +1,7 @@
+<textarea name="editor1">
+	<%=current_user.about_text%>
+</textarea>
+
+<script>
+	CKEDITOR.replace( 'editor1',{ language: "<%=I18n.locale.to_s%>"} );
+</script>

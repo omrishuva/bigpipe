@@ -15,6 +15,7 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="//cdn.ckeditor.com/4.5.9/basic/ckeditor.js"></script>
   </head>
 
   <body>
@@ -22,8 +23,6 @@
     <%=render "shared/components/modals/signin_modal"%>
     <%=render "shared/components/navigation/navigation_bar"%>
     <%=render "shared/components/navigation/user_menu"%>
-    </br>
-    </br>
     <div class="container mainContainer">
       <%= yield %>
     </div>

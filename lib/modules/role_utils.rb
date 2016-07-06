@@ -21,7 +21,7 @@ module RoleUtils
   end
   
   def service_provider_name
-    $user_roles["service_provider_types_mapping"][self.role]
+    $user_roles["service_provider_types_mapping"][self.service_provider_type]
   end
 
   def admin?

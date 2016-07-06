@@ -1,0 +1,14 @@
+<div id="userAboutTextBox" class="userAboutTextBox" >
+	<%unless current_user.about_text %>
+		<a href="#" id="writeAboutYourself" class="userAboutText">
+			<%=I18n.t :write_few_words%>
+		</a>
+	<%else%>
+		<div class="userAboutText">
+			<%=current_user.about_text.html_safe%>
+		</div>
+	<%end%>
+	<a id="writeAboutYourself" class="btnBrand1 btnBrandSize textBoxEditButton">
+		<i class="fa fa-pencil" aria-hidden="true">Edit</i>
+	</a>
+</div>

@@ -14,6 +14,10 @@ loadListeners = ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
+  onImageUpload();
+  editUserABoutText();
+  saveUserAboutText();
+  cancelEditUserAboutText();
   logOut();
 
 showLoader = ->
@@ -186,3 +190,49 @@ onFileUpload = ->
     splitedFileName = fileName.split("\\")
     fileName = splitedFileName[ (splitedFileName.length - 1) ]
     $('.fileName').text(fileName)
+
+onImageUpload = ->
+  $('.imageUploadInput').change (e) ->
+    formData = new FormData
+    file = e.target.files[0]
+    formData.append( 'image', file, file.name )
+    $.ajax
+        type: 'POST'
+        url: '/upload_image'
+        data: formData
+        processData: false
+        contentType: false
+        success: (data) ->
+          loadListeners();
+
+editUserABoutText = ->
+  $('#writeAboutYourself').click (e) ->
+    $.ajax
+        type: 'GET'
+        url: 'edit_user_about_text'
+        success: (data) ->
+          loadListeners();
+
+cancelEditUserAboutText = ->
+  $('#cancelEditUserAboutText').click (e) ->
+    CKEDITOR.instances.editor1.destroy();
+    $('#editUserText').hide();
+    $.ajax
+        type: 'GET'
+        url: 'cancel_user_edit_about_text'
+        success: (data) ->
+          loadListeners();
+
+saveUserAboutText = ->
+  $('#saveUserAboutText').click (e) ->
+    
+    userText = CKEDITOR.instances.editor1.getData()
+    data = {}
+    data['user_about_text'] = userText
+    $.ajax
+        type: 'POST'
+        url: 'save_user_about_text'
+        data: data
+        success: (data) ->
+          loadListeners();
+    

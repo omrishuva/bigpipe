@@ -4,7 +4,8 @@ class User < Entity
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 
-  :profile_picture, :auth_provider, :role, :service_provider_type, :trainer_certificate_url, :invited_by, 
+  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role, :service_provider_type, 
+  :trainer_certificate_url, :invited_by, 
   :created_at, :updated_at
 	
   attr_reader :password_salt, :password_hash
@@ -36,7 +37,11 @@ class User < Entity
 		params.delete(:password)
   	super( params )
   end
-    
+
+  def display_name
+    name.humanize
+  end
+
 	protected
 
 	attr_writer  :password_salt, :password_hash

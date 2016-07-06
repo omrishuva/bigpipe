@@ -1,7 +1,7 @@
 <%sidebar_class = current_language_direction == :ltr ? "ltrUserSideBar" : "rtlUserSideBar" %>
 <div class=<%=sidebar_class%> id="userSideBar" >
   <%if current_user%>
-	  <a href="/me" ><%=current_user.name.strip.capitalize%></a>
+	  <a class="dropdown-item" href="/me" ><%=current_user.name.strip.capitalize%></a>
   	<div class="dropdown-divider"></div>
   <%end%>
   

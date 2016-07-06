@@ -30,6 +30,7 @@ gem 'plivo'
 gem "google-api-client"
 gem "foreman"
 gem 'pipedrive-api-client'
+gem 'cloudinary'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

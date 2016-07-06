@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login, :upload_image, :save_user_about_text]
 
   def new
     respond_to do |format|
@@ -135,6 +135,7 @@ class UsersController < ApplicationController
   end
 
   def me
+    @cover_image = current_user.cover_image_cloudinary_id || "http://placehold.it/700x400"
   end
   
   def public_profile
@@ -149,6 +150,37 @@ class UsersController < ApplicationController
       flash[:success] = "Logged in"
       redirect_to '/me' and return
     end  
+  end
+
+  def upload_image
+    cloudinary_image = Cloudinary::Uploader.upload( params["image"].tempfile, eager:{ width: 700, height: 400, crop: :thumb, gravity: :face } )
+    current_user.update( cover_image_cloudinary_id: cloudinary_image["public_id"] )
+    @image_url =  "#{cloudinary_image['public_id']}.jpg"
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @image_url }
+    end
+  end
+  
+  def edit_user_about_text
+    respond_to do |format|
+      format.js { }
+      format.json { render json: @image_url }
+    end
+  end
+  
+  def cancel_user_edit_about_text
+    respond_to do |format|
+      format.js { }
+    end
+  end
+  
+  def save_user_about_text
+    current_user.update( about_text: params[:user_about_text] )
+    # current_user.reload!
+    respond_to do |format|
+      format.js { }
+    end
   end
 
   def home_page

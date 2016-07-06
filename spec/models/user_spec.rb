@@ -182,7 +182,7 @@ RSpec.describe User do
 			end
 			
 			it "should create the user with service provider type trainer" do
-				expect( @user.service_provider_name ).to eq "service_provider"
+				expect( @user.service_provider_name ).to eq "trainer"
 			end
 
 			it "should should save the certificate file in the storage" do

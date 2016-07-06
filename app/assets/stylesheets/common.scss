@@ -6,7 +6,7 @@ body
     width: 100%;
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
-.mainContainer{ z-index: -1; }
+.mainContainer{ z-index: -1; margin-top: 20px; }
 
 .signinLoader{  display: none; }
 
@@ -14,19 +14,19 @@ body
 .ltrNavBarLogo { @extend .NavBarLogo; top:2px; left:5px; }
 .rtlNavBarLogo { @extend .NavBarLogo; top:2px; right:5px; }
 
-.ProfilePic{  border-radius: 2px; border-style: solid; border-color: black; border-width: 1px; width: 50px; height: 50px; }
+.navBarProfilePic{  border-radius: 2px; border-style: solid; border-color: black; border-width: 1px; width: 30px; height: 30px; }
 
 .ltrInfo{ top: 2px; left: 30%; position: absolute; }
 .ltrCallUs{ top: 2px; left: 50%; position: absolute; }
 .ltrUserLogin{ top: 2px; left: 75%;  position: absolute;  }
-.ltrProfilePic{   @extend .ProfilePic; top: 2px;  position: absolute; }
+// .ltrNavBarProfilePic{   @extend .navBarProfilePic; top: 2px;  position: absolute; }
 
 .rtlInfo{ top: 2px; right: 30%; position: absolute; }
 .rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
 .rtlUserLogin{ top: 2px; right: 75%; position: absolute;  }
-.rtlProfilePic{ @extend .ProfilePic;  top: 2px; position: absolute; }
+// .rtlNavBarProfilePic{ @extend .navBarProfilePic;  top: 2px; position: absolute; }
 
-.userSideBar { width: 50%; border-style: solid; border-width: 1px; border-radius: 2px; border-color: #fff; background-color: #FFB941; display: none; z-index: 1000; position: absolute; text-align: center; opacity:0.9; }
+.userSideBar { width: 50%; border-style: solid; border-width: 1px; border-radius: 2px; border-color: #fff; background-color: #FFB941; display: none; z-index: 1000; position: absolute; text-align: center; opacity:0.95; }
 .ltrUserSideBar{ @extend .userSideBar; right: 0; }
 .rtlUserSideBar{ @extend .userSideBar; left:0;  }
 .dropdown-item{ color: #5D33F4; }
@@ -46,9 +46,11 @@ body
 }
 
 .nav-link{margin-top: 1.5em; }
-.btn-sign-up{  padding: 2px 4px; font-size: 14px; border-radius: 3px; }
+.btnBrandSize{  padding: 2px 4px; font-size: 14px; border-radius: 3px; }
 .btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
 .btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
+.btnBrand2{ background-color: #AF3245; color: #FFB941; font-weight: bold; }
+.btnBrand2:hover{ background-color: #FFB941; color: #AF3245 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
 
@@ -83,3 +85,56 @@ body
 .fileName{ color: #fff; }
 .addTrainer{ width: 50%; position: absolute; right: 25%; }
 .trainerOnboarding{ width: 50%; position: absolute; right: 25%; }
+// .UserProfileMainContainer{ width: 100%; height: 100%; position: absolute; right: 5%; border-style: solid; border-color: black; border-width: 1px;}
+// .mainProfilePic{ width: 20em; height: 12em; position: absolute; margin: 1em; border-style: solid; border-color: black; border-width: 1px;}
+
+.gridItem {
+    margin-bottom: 15px;
+}
+.userAboutTextBox{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px; min-width: 20%; min-height: 15em; }
+a.userAboutText{ opacity: 0.3; margin-left: 20px; margin-top: 10px; font-size: 80%; }
+div.userAboutText{ margin-left: 20px; margin-left: 20px; margin-top: 10px; font-size: 80%; }
+.textBoxEditButton{ position: absolute; bottom: 0.15em; left: 1.2em; }
+
+.userAboutText:hover{ text-decoration: none; opacity: 1;}
+.imageOverlayText { 
+                    position: absolute;
+                    top: 5px; 
+                    left: 20px;
+                    width: 35%; 
+                    opacity:0.7; 
+                    background-color: #494949; 
+                    color: #fff; 
+                    text-align: center; 
+                }
+
+.imageUploadButton
+{
+    background: #494949 center top no-repeat;
+    overflow: hidden;
+    color: #fff;
+    // border-radius: 5px;
+    width: 120px;
+    // position: relative; 
+    // padding: 8px 10px 8px 10px;
+    opacity:0.5;
+    text-align: center; 
+    position: absolute;
+    top: 35px; left: 20px;
+}
+
+.imageUploadButton:hover
+{
+    background: #fff center top no-repeat;
+    color: #494949;
+}
+
+.imageUploadInput
+{
+    opacity: 0;
+    width: 250px;
+    height: 35px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
