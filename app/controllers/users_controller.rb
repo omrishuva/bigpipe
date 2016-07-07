@@ -177,7 +177,6 @@ class UsersController < ApplicationController
   
   def save_user_about_text
     current_user.update( about_text: params[:user_about_text] )
-    # current_user.reload!
     respond_to do |format|
       format.js { }
     end

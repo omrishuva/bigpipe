@@ -8,7 +8,8 @@
 			<%=current_user.about_text.html_safe%>
 		</div>
 	<%end%>
-	<a id="writeAboutYourself" class="btnBrand1 btnBrandSize textBoxEditButton">
-		<i class="fa fa-pencil" aria-hidden="true">Edit</i>
+	</br>
+	<a id="writeAboutYourself" class="<%="btnBrand1 btnBrandSize #{current_direction.to_s}textBoxEditButton"%>">
+		<i class="fa fa-pencil" aria-hidden="true"><%=I18n.t :edit%></i>
 	</a>
 </div>

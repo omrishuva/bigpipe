@@ -38,6 +38,8 @@ en:
  add_trainer: "Add Trainer"
  upload_trainer_certificate: "Trainer Certificate"
  write_few_words: "Write a few words about yourself..."
+ update_image: "Update Image"
+ edit: "Edit"
  error_messages:
   password:
    is_missing: "Missing Password"

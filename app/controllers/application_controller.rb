@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
   	"#{path_params[:controller]}/#{path_params[:action]}"
   end
   
-  def current_language_direction
+  def current_direction
     I18n.locale == :he ? :rtl : :ltr
   end
-  
-  helper_method :current_language_direction
+
+  helper_method :current_direction
 
   private 
   
