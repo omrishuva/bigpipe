@@ -1,21 +1,4 @@
-<ul class="nav nav-tabs UserProfileNavbar">
-	<li class="nav-item">
-		<a class="nav-link active" href="#">About Me</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">My Activities</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Upcoming Events</a>
-	</li>
-	<!-- <li class="nav-item">
-		<a class="nav-link" href="#">My Favorites</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Requests</a>
-	</li> -->
-</ul>
-</br>
+<%=render 'user_navigation_tabs'%>
 <div class="container">
   <%= render "#{current_direction}_user_intro_section"%>
 </div>

@@ -34,12 +34,17 @@ en:
  select_new_password_recovery_title:  "Select your new password"
  select_new_password_recovery_subtitle: "Enter the code you received in the email and select your new password"
  back: "Go Back"
+ save: "Save"
+ cancel: "Cancel"
  language: "language"
  add_trainer: "Add Trainer"
  upload_trainer_certificate: "Trainer Certificate"
  write_few_words: "Write a few words about yourself..."
  update_image: "Update Image"
  edit: "Edit"
+ about_me: "About Me"
+ my_activities: "My Activities"
+ upcoming_events: "Upcoming Events"
  error_messages:
   password:
    is_missing: "Missing Password"

@@ -35,12 +35,17 @@ he:
  password_recovery_title: "שחזור סיסמה"
  password_recovery_subtitle: "הכנס/י כתובת דואר אלקטרוני"
  back: "חזור"
+ save: "שמור"
+ cancel: "בטל"
  change_language: "שפה"
  add_trainer: "הוסף מאמן"
  upload_trainer_certificate: "תעודת מאמן"
  write_few_words: "...כתוב על עצמך כמה מילים"
  update_image: "עדכן תמונה"
  edit: "ערוך"
+ about_me: "עליי"
+ my_activities: "הפעילויות שלי"
+ upcoming_events: "אירועים קרובים"
  error_messages:
   password:  
    is_missing: " הכנס/י סיסמה"

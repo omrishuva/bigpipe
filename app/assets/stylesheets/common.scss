@@ -148,3 +148,5 @@ div.userAboutText{ margin-left: 20px; margin-left: 20px; margin-top: 10px; font-
     font-size: 60%
   }
 }
+.ltruserProfileNavItem{ @extend .nav-item;} 
+.rtluserProfileNavItem{ float :right; margin-bottom: -1px; }
