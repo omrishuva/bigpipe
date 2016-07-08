@@ -143,10 +143,24 @@ div.userAboutText{ margin-left: 20px; margin-left: 20px; margin-top: 10px; font-
     left: 0px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .UserProfileNavbar {
-    font-size: 60%
+    font-size: 85%
   }
 }
+
+@media (max-width: 350px) {
+  .UserProfileNavbar {
+    font-size: 70%
+  }
+}
+
+@media (min-width: 700px) {
+  .UserProfileNavbar {
+    font-size: 150%
+  }
+}
+
+
 .ltruserProfileNavItem{ @extend .nav-item;} 
 .rtluserProfileNavItem{ float :right; margin-bottom: -1px; }
