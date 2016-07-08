@@ -145,19 +145,13 @@ div.userAboutText{ margin-left: 20px; margin-left: 20px; margin-top: 10px; font-
 
 @media (max-width: 400px) {
   .UserProfileNavbar {
-    font-size: 85%
-  }
-}
-
-@media (max-width: 350px) {
-  .UserProfileNavbar {
-    font-size: 70%
+    font-size: 75%
   }
 }
 
 @media (min-width: 700px) {
   .UserProfileNavbar {
-    font-size: 150%
+    font-size: 120%
   }
 }
 
