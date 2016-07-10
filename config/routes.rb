@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 	get  '/change_locale/:locale' 			 => 'users#change_locale'
 	post '/fb_lead' 										 => 'users#fb_lead'
 	get  '/me'                           => 'users#me'
+	get  '/me/nav/:navtab'               => 'users#me_navigation'
 	post '/upload_image'								 => 'users#upload_image'
 	get  '/edit_user_about_text'         => 'users#edit_user_about_text'
 	get  '/cancel_user_edit_about_text'  => 'users#cancel_user_edit_about_text'

@@ -1,14 +1,12 @@
 <div class="row pull-left">
-  
-  <h5 ><%=users_admin_page_title(params[:spt])%></h5>
+  <h5 ><%=users_admin_page_title(params[:spt], params[:role])%></h5>
   
   <span class="lead" ><%="Total: #{@users.size}"%></span>
-  <span>|</span>
-  <span class="lead"><%="Today: #{@today}"%></span>
-  <span>|</span>
-  <span class="lead"><%="Yesterday: #{@yesterday}"%></span>
+  <span class="lead">| New - </span>
+  <span><%="Today: #{@today}"%></span>
+  <span>,</span>
+  <span><%="Yesterday: #{@yesterday}"%></span>
 </div>
-</br>
 </br>
 </br>
 

@@ -98,8 +98,8 @@ class UsersController < ApplicationController
   end
 
   def users
-    query_params = [ { k: "role",  v: $user_roles["roles"][params[:role]], op: "=" } ]
-    query_params << { k: "service_provider_type", v: $user_roles["service_provider_types"][params[:service_provider]], op: "=" } if params[:service_provider]
+    query_params = [ { k: "role_ids",  v: User.role_id( params[:role] ), op: "=" } ]
+    query_params << { k: "service_ids", v: User.service_id( params[:spt] ), op: "=" } if params[:spt]
     @users = User.where( query_params ).sort_by{|user| user.created_at }.reverse
     @today =  @users.select{|user| user.created_at.to_date.to_s == Date.today.to_s }.size
     @yesterday =  @users.select{|user| user.created_at.to_date.to_s == Date.yesterday.to_s }.size
@@ -138,6 +138,13 @@ class UsersController < ApplicationController
     @cover_image = current_user.cover_image_cloudinary_id || "http://placehold.it/700x400"
   end
   
+  def me_navigation
+    p params
+    respond_to do |format|
+      format.js { }
+    end
+  end
+
   def public_profile
     @user = User.find( params[:id] )
 

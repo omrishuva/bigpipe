@@ -44,7 +44,13 @@ en:
  edit: "Edit"
  about_me: "About Me"
  my_activities: "My Activities"
+ my_locations: "My Locations"
  upcoming_events: "Upcoming Events"
+ activities: "Activities"
+ locations: "Locations"
+ events: "Events"
+ stats: "Stats"
+
  error_messages:
   password:
    is_missing: "Missing Password"

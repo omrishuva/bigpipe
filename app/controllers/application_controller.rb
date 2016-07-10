@@ -49,12 +49,12 @@ class ApplicationController < ActionController::Base
     if action_permissions.nil?
       true
     else
-      $user_roles["roles"][action_permissions].to_i <= current_user.try(:role).to_i
+      User.roles_data["roles"][action_permissions].to_i <= current_user.role_ids.max
     end
   end
   
   def controller_permissions
-    $permissions[params['controller']]
+    $permissions["controllers"][params['controller']]
   end
   
   def action_permissions

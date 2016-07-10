@@ -45,7 +45,13 @@ he:
  edit: "ערוך"
  about_me: "עליי"
  my_activities: "הפעילויות שלי"
+ my_locations: "מקומות שלי"
  upcoming_events: "אירועים קרובים"
+ activities: "הפעילויות"
+ locations: "מקומות"
+ events: "אירועים"
+ stats: "סטטיסטיקות"
+
  error_messages:
   password:  
    is_missing: " הכנס/י סיסמה"

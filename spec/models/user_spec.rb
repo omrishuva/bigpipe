@@ -138,19 +138,19 @@ RSpec.describe User do
 			it "should set the user a user default role" do
 				user = User.new(@play_params)
 				user.save
-				expect(user.role).to eq User::DEFAULT_ROLE
+				expect(user.role_ids).to eq User::DEFAULT_ROLE
 			end
 			
 			it "should not set the role if user already has a role" do
-				user = User.new( @play_params.merge(role: 2) )
+				user = User.new( @play_params.merge(role_ids: [2]) )
 				user.save
-				expect(user.role).to eq 2
+				expect(user.role_ids).to eq [2]
 			end
 		
 			it "should map role id to name" do 
 				user = User.new( @play_params )
 				user.save
-				expect(user.role_name).to eq "consumer"
+				expect(user.roles).to eq ["consumer"]
 			end
 		
 		end
@@ -178,11 +178,11 @@ RSpec.describe User do
 			end
 
 			it "should create the user with service_provider role" do
-				expect( @user.role_name ).to eq "service_provider"
+				expect( @user.roles ).to eq ["service_provider"]
 			end
 			
 			it "should create the user with service provider type trainer" do
-				expect( @user.service_provider_name ).to eq "trainer"
+				expect( @user.services ).to eq ["trainer"]
 			end
 
 			it "should should save the certificate file in the storage" do

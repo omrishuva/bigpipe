@@ -1,11 +1,11 @@
-<div class="row">    
-  
+<div class="row">
   <div class="col-lg-6 col-lg-push-6 gridItem">
      <%=
     render "shared/components/cover_image",
-    locals: { overlay_text: current_user.display_name, src: @cover_image } 
+    locals: { overlay_text: current_user.display_name, src: current_user.cover_image } 
     %>		
   </div>
+
   <div class="col-lg-6 col-lg-pull-6 gridItem">
 	  <%= render 'about_user'%>
   </div>

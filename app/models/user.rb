@@ -1,10 +1,10 @@
 class User < Entity
 
-  DEFAULT_ROLE = 1
+  DEFAULT_ROLE = [1]
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 
-  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role, :service_provider_type, 
+  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role_ids, :service_ids, 
   :trainer_certificate_url, :invited_by, 
   :created_at, :updated_at
 	
@@ -41,6 +41,10 @@ class User < Entity
 
   def display_name
     name.humanize
+  end
+
+  def cover_image
+    cover_image_cloudinary_id || "http://placehold.it/700x400"
   end
 
 	protected

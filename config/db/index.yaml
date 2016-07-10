@@ -13,3 +13,10 @@ indexes:
   - name: phone
   - name: phone_verified
     direction: desc
+
+- kind: User
+  ancestor: no
+  properties:
+  - name: role_ids
+  - name: service_ids
+    direction: desc

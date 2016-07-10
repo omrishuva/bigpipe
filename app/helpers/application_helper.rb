@@ -14,12 +14,19 @@ module ApplicationHelper
   	current_user.try(:profile_picture).present? ? current_user.profile_picture : 'genderless_silhouette.png'
   end
 
-  def users_admin_page_title( service_provider_type )
+  def users_admin_page_title( service_provider_type, role )
     if service_provider_type
       service_provider_type.pluralize.humanize
     else
-      "Consumers"
+      role.pluralize.humanize
     end
+  end
+
+  def available_navtabs
+    navtabs_list = $permissions["views"]["user_navtabs"]
+    role_navtabs = current_user.role_ids.map{ |role_id| navtabs_list["roles"][User.role_name(role_id)] }
+    service_navtabs = current_user.service_ids.map{ |service_id| navtabs_list["services"][User.service_name(service_id)] }
+    [ role_navtabs, service_navtabs ].flatten.uniq.compact.sort
   end
 
 end

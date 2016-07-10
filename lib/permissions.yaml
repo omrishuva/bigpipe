@@ -1,5 +1,24 @@
-users:
-  users: admin
-  add_service_provider: admin
-  me: consumer
-  # service_provider_onboarding: service_provider
+controllers:
+  users:
+    users: admin
+    add_service_provider: admin
+    me: consumer
+
+views:
+  user_navtabs:
+    roles:
+      consumer:
+        - about_me
+        - upcoming_events
+        - stats
+      service_provider:
+        - about_me
+        - upcoming_events
+        - stats
+      admin:
+        - about_me
+    services:
+      trainer:
+        - my_activities
+      location_owner:
+        - my_locations

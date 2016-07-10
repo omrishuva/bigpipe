@@ -7,7 +7,7 @@ module TrainerUtils
 	module TrainerClassMethods
 		
 		def new_trainer( params )
-			user = User.new( params[:user].merge( role: 2, service_provider_type: 1, phone_verified: true, password: generate_password ) )
+			user = User.new( params[:user].merge( role_ids: [2], service_ids: [1], phone_verified: true, password: generate_password ) )
 			user.save
 			unless user.errors.present?
 				user.save_certificate_file( params[:certificate].tempfile )

@@ -8,11 +8,11 @@ roles_mapping:
   2: service_provider
   3: admin
 
-service_provider_types:
+services:
  trainer: 1
  location_owner: 2
 
-service_provider_types_mapping:
+services_mapping:
  1: trainer
  2: location_owner
 

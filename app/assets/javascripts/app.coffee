@@ -222,7 +222,7 @@ cancelEditUserAboutText = ->
         type: 'GET'
         url: 'cancel_user_edit_about_text'
         success: (data) ->
-          loadListeners();
+        loadListeners();
 
 saveUserAboutText = ->
   $('#saveUserAboutText').click (e) ->
@@ -239,3 +239,10 @@ saveUserAboutText = ->
 
 changeUserNavTab = ->
   $('.userProfileNavItem').click (e) ->
+    $("a#userNavTab.active").removeClass('active');
+    $("a#userNavTab[name='#{e.target.name}']").addClass('active');
+    $.ajax
+        type: 'GET'
+        url: "/me/nav/#{e.target.name}"
+        # success: (data) ->
+        #   loadListeners();
