@@ -13,6 +13,7 @@ class User < Entity
 	include PipedriveUtils
   include StorageUtils
   include RoleUtils
+  include LocaleUtils
   include AuthenticationUtils
   include TrainerUtils
 

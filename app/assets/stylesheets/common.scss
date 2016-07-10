@@ -54,6 +54,7 @@ body
                 position: fixed; 
                 text-align: 
                 center; opacity:0.95;
+                overflow: scroll;
              }
 
 .ltrUserSideBar{ @extend .userSideBar; right: 0;   }
