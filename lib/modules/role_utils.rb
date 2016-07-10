@@ -27,5 +27,5 @@ module RoleUtils
   def admin?
     self.role == $user_roles["roles"]["admin"]
   end
-
+  
 end

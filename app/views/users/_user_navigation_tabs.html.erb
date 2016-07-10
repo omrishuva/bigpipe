@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs UserProfileNavbar">
-	<li class="<%="#{current_direction}userProfileNavItem"%>">
-		<a class="nav-link active" href="#"><%= I18n.t :about_me%></a>
+	<li class="<%=" #{current_direction} userProfileNavItem"%>">
+		<a class="nav-link active" id="userNavTab" href="#"><%= I18n.t :about_me%></a>
 	</li>
-	<li class="<%="#{current_direction}userProfileNavItem"%>">
-		<a class="nav-link" href="#"><%= I18n.t :my_activities%></a>
+	<li class="<%=" #{current_direction} userProfileNavItem"%>">
+		<a class="nav-link" id="userNavTab" href="#"><%= I18n.t :my_activities%></a>
 	</li>
-	<li class="<%="#{current_direction}userProfileNavItem"%>">
-		<a class="nav-link" href="#"><%=I18n.t :upcoming_events%></a>
+	<li class="<%=" #{current_direction} userProfileNavItem"%>">
+		<a class="nav-link" id="userNavTab" href="#"><%=I18n.t :upcoming_events%></a>
 	</li>
 </ul>
 </br>
