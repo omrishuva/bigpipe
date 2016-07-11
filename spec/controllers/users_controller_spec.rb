@@ -176,7 +176,7 @@ RSpec.describe UsersController do
     end
 
     it "should be allowed for admin users" do
-      @user.update( role_ids: [3] )
+      @user.add_role( "admin" )
       controller.stub( :current_user ).and_return( @user )
       get :users, role: "service_provider", spt: "trainer"
       expect( response.status ).to be 200

@@ -5,6 +5,14 @@ module RoleUtils
   end	
 	
   module RoleClassMethods
+    
+    def default_role
+      [ User.role_id( "consumer" ) ]
+    end
+
+    def default_service
+      [0]
+    end
 
     def roles_data
       $user_roles
@@ -45,8 +53,8 @@ module RoleUtils
   end
 
   def set_default_role_and_service
-    self.role_ids = self.class::DEFAULT_ROLE
-    self.service_ids = self.class::DEFAULT_SERVICE
+    self.role_ids = self.class.default_role unless self.role_ids.present?
+    self.service_ids = self.class.default_service unless self.service_ids.present?
   end
 
   def has_role_and_service?
@@ -54,11 +62,11 @@ module RoleUtils
   end
   
   def roles
-    self.role_ids.map{ |role_id| User.role_name( role_id )  }
+    self.role_ids.map{ |role_id| User.role_name( role_id )  }.compact
   end
   
   def services
-    self.service_ids.map{ |service_id| User.service_name( service_id )  }
+    self.service_ids.map{ |service_id| User.service_name( service_id )  }.compact
   end
 
   def roles_and_services
@@ -76,23 +84,18 @@ module RoleUtils
   def add_role( role_name )
     if User.role_id( role_name )
       self.role_ids << User.role_id( role_name )
-      self.role_ids.uniq!
+      self.role_ids = self.role_ids.uniq.compact
       self.save
     end
   end
 
   def add_service( service_name )
-    if User.service_id( service_name )
-      unless self.service_ids.present?
-        self.service_ids = [User.service_id( service_name )]
-      else
-        self.service_ids << User.service_id( service_name )
-        self.service_ids.uniq!
-      end
-      self.role_ids << User.role_id( "service_provider" )
-      self.role_ids.uniq!
-      self.save
-    end
+    set_default_role_and_service
+    self.service_ids << User.service_id( service_name )
+    self.service_ids.uniq!
+    self.role_ids << User.role_id( "service_provider" )
+    self.role_ids = self.role_ids.uniq.compact
+    save
   end
 
 

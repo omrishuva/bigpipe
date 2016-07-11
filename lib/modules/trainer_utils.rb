@@ -6,11 +6,12 @@ module TrainerUtils
 	
 	module TrainerClassMethods
 		
-		def new_trainer( params )
-			user = User.new( params[:user].merge( role_ids: [2], service_ids: [1], phone_verified: true, password: generate_password ) )
+		def new_trainer( user_params, certificate_file = nil )
+			user = User.new( user_params.merge( phone_verified: true, password: generate_password ) )
 			user.save
+			user.add_service("trainer")
 			unless user.errors.present?
-				user.save_certificate_file( params[:certificate].tempfile )
+				user.save_certificate_file( certificate_file.tempfile ) if certificate_file.present?
 				SendTrainerInvitationEmail.perform_later( 
 																									user_id: user.id, 
 																									email: user.email, 

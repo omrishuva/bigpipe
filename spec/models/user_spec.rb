@@ -129,30 +129,40 @@ RSpec.describe User do
 
 		context "roles & permissions" do
 			
-			before :each do
-				User.destroy_all
-				@play_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
-				@fb_params = { auth_provider: "facebook", name: "omri shuva", email: "omrishuva1@gmail.com" }				
+			context "Consumer" do
+				before :all do
+					User.destroy_all
+					consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+					@consumer = User.new( consumer_params )
+					@consumer.save
+				end
+
+				it "should set the user a default role" do
+					expect(@consumer.role_ids).to eq [1]
+				end
+				
+				it "should map role id to name" do
+					expect(@consumer.roles).to eq ["consumer"]
+				end
 			end
 
-			it "should set the user a user default role" do
-				user = User.new(@play_params)
-				user.save
-				expect(user.role_ids).to eq User::DEFAULT_ROLE
+			context "Service Provider" do
+
+				before :all do
+					User.destroy_all
+					trainer_params = { name: "yuval klien", email: "yuval@play.org.il", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "play"}
+					@trainer = User.new_trainer( trainer_params )
+					@trainer.save
+				end
+				
+				it "can should multiple roles" do
+					expect(@trainer.role_ids.sort).to eq [1,2]
+				end
+				
+				it "should not set the role if user already has a role" do
+					expect(@trainer.service_ids).to eq [0,1]
+				end
 			end
-			
-			it "should not set the role if user already has a role" do
-				user = User.new( @play_params.merge(role_ids: [2]) )
-				user.save
-				expect(user.role_ids).to eq [2]
-			end
-		
-			it "should map role id to name" do 
-				user = User.new( @play_params )
-				user.save
-				expect(user.roles).to eq ["consumer"]
-			end
-		
 		end
 
 	end
@@ -165,7 +175,7 @@ RSpec.describe User do
 				tempfile = File.new "cert.pdf","w"
 				certificate = OpenStruct.new( tempfile: tempfile )
 				@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
-				@user = User.new_trainer( @trainer_params )
+				@user = User.new_trainer( @trainer_params[:user], @trainer_params[:certificate] )
 				@file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
 				@sub = $pubsub.find_subscription( "test-now" )
 			end
@@ -177,8 +187,8 @@ RSpec.describe User do
 				@sub.pull.each{ |msg| msg.ack! }
 			end
 
-			it "should create the user with service_provider role" do
-				expect( @user.roles ).to eq ["service_provider"]
+			it "should create the user with service_provider and consumer role" do
+				expect( @user.roles ).to eq ["consumer", "service_provider"]
 			end
 			
 			it "should create the user with service provider type trainer" do

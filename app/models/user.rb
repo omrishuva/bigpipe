@@ -1,6 +1,5 @@
 class User < Entity
 
-  DEFAULT_ROLE = [1]
   DEFAULT_SERVICE = []
   DEPRECATED_FIELDS = [:service_provider_type, :role]
 
