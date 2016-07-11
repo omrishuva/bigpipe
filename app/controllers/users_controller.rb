@@ -116,9 +116,8 @@ class UsersController < ApplicationController
   end
   
   def add_service_provider
-    @service_provider_type = params[:spt]
-
-    @user = User.new_trainer( params ) if params[:user].present?
+    @service_type = params[:spt]
+    @user = User.send( "new_#{@service_type}", params) if params[:user].present?
     if !@user
       render "add_service_provider"
     elsif @user && @user.errors.present?
@@ -183,7 +182,7 @@ class UsersController < ApplicationController
   end
   
   def save_user_about_text
-    current_user.update( about_text: params[:user_about_text] )
+    current_user.update( about_text: params[:user_about_text] ) if params["user_about_text"].present?
     respond_to do |format|
       format.js { }
     end

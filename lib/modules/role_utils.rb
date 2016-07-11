@@ -60,10 +60,18 @@ module RoleUtils
     self.service_ids.map{ |service_id| User.service_name( service_id )  }    
   end
 
+  def roles_and_services
+    @roles_and_services ||= [self.roles, self.services].flatten
+  end
+
   def admin?
-    self.role_ids.include?(  User.roles_data["roles"]["admin"] )
+    self.role_ids.include?(  User.role_id( "admin" ) )
   end
   
+  def service_provider?
+    self.role_ids.include?(  User.role_id( "service_provider" ) )
+  end
+
   def add_role( role_name )
     if User.role_id( role_name )
       self.role_ids << User.role_id( role_name )

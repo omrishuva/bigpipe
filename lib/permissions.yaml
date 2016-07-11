@@ -6,19 +6,15 @@ controllers:
 
 views:
   user_navtabs:
-    roles:
-      consumer:
-        - about_me
-        - upcoming_events
-        - stats
-      service_provider:
-        - about_me
-        - upcoming_events
-        - stats
-      admin:
-        - about_me
-    services:
-      trainer:
-        - my_activities
-      location_owner:
-        - my_locations
+    permissions:
+      about_me: ["admin", "service_provider"]
+      my_activities: [ "trainer" ]
+      my_locations: ["location_owner"]
+      my_schedule: ["consumer", "service_provider"]
+      goals: ["consumer"]
+      stats: ["service_provider"]
+    default_active:
+      consumer: "my_schedule"
+      trainer: "my_activities"
+      location_owner: "stats"
+      admin: "my_schedule"

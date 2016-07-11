@@ -6,13 +6,14 @@
   <span><%="Today: #{@today}"%></span>
   <span>,</span>
   <span><%="Yesterday: #{@yesterday}"%></span>
+  <%if params[:spt].present?%>
+    <a href=<%="/service_provider/#{params[:spt]}/new"%>> | Add</a>
+  <%end%>
 </div>
 </br>
 </br>
 
-<%if params[:spt].present?%>
-  <a href=<%="/service_provider/#{params[:spt]}/new"%>>Add</a>
-<%end%>
+
 
 </br></br>
 <table class="table table-hover pull-left">

@@ -50,6 +50,8 @@ en:
  locations: "Locations"
  events: "Events"
  stats: "Stats"
+ my_schedule: "My Schedule"
+ goals: "Goals"
 
  error_messages:
   password:

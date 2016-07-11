@@ -23,10 +23,20 @@ module ApplicationHelper
   end
 
   def available_navtabs
-    navtabs_list = $permissions["views"]["user_navtabs"]
-    role_navtabs = current_user.role_ids.map{ |role_id| navtabs_list["roles"][User.role_name(role_id)] }
-    service_navtabs = current_user.service_ids.map{ |service_id| navtabs_list["services"][User.service_name(service_id)] }
-    [ role_navtabs, service_navtabs ].flatten.uniq.compact.sort
+    allowed_navtabs = []
+    $permissions["views"]["user_navtabs"]["permissions"].each do |key, values|
+      allowed_navtabs << key if values.size > [values - current_user.roles_and_services ].flatten.size
+    end
+    allowed_navtabs
+  end
+
+  def default_active
+    if current_user.service_provider?
+      key = User.service_name( current_user.service_ids.max )
+    else
+      key = User.role_name( current_user.role_ids.max )
+    end
+    $permissions["views"]["user_navtabs"]["default_active"][key]
   end
 
 end

@@ -40,7 +40,7 @@ he:
  change_language: "שפה"
  add_trainer: "הוסף מאמן"
  upload_trainer_certificate: "תעודת מאמן"
- write_few_words: "...כתוב על עצמך כמה מילים"
+ write_few_words: "כתוב על עצמך כמה מילים..."
  update_image: "עדכן תמונה"
  edit: "ערוך"
  about_me: "עליי"
@@ -51,7 +51,8 @@ he:
  locations: "מקומות"
  events: "אירועים"
  stats: "סטטיסטיקות"
-
+ my_schedule: "הלו״ז שלי"
+ goals: "מטרות"
  error_messages:
   password:  
    is_missing: " הכנס/י סיסמה"

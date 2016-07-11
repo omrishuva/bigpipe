@@ -1,7 +1,8 @@
 $(document).ready ->
+ @exclude = { }
  loadListeners();
 
-loadListeners = ->
+loadListeners = ( exclude ) ->
   loadSignUpForm();
   loadLoginForm();
   loadPasswordRecoveryEmailForm();
@@ -18,8 +19,11 @@ loadListeners = ->
   editUserABoutText();
   saveUserAboutText();
   cancelEditUserAboutText();
-  changeUserNavTab();
+  changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
+
+loadOnce =(func) ->
+  document.exclude[func] = true
 
 showLoader = ->
   $('.signinLoader').show()
@@ -222,7 +226,7 @@ cancelEditUserAboutText = ->
         type: 'GET'
         url: 'cancel_user_edit_about_text'
         success: (data) ->
-        loadListeners();
+          loadListeners();
 
 saveUserAboutText = ->
   $('#saveUserAboutText').click (e) ->
@@ -237,12 +241,13 @@ saveUserAboutText = ->
         success: (data) ->
           loadListeners();
 
-changeUserNavTab = ->
-  $('.userProfileNavItem').click (e) ->
-    $("a#userNavTab.active").removeClass('active');
-    $("a#userNavTab[name='#{e.target.name}']").addClass('active');
+changeUserNavTab =( exclude ) ->
+  loadOnce( "changeUserNavTab" );
+  $('.userNavtabLink').click (e) ->
+    $("a.userNavtabLink.active").removeClass('active');
+    $("a.userNavtabLink[name='#{e.target.name}']").addClass('active');
     $.ajax
-        type: 'GET'
-        url: "/me/nav/#{e.target.name}"
-        # success: (data) ->
-        #   loadListeners();
+      type: 'GET'
+      url: "/me/nav/#{e.target.name}"
+      success: (data) ->
+        loadListeners( exclude );
