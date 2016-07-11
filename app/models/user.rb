@@ -1,6 +1,8 @@
 class User < Entity
 
   DEFAULT_ROLE = [1]
+  DEFAULT_SERVICE = []
+  DEPRECATED_FIELDS = [:service_provider_type, :role]
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 
@@ -25,7 +27,7 @@ class User < Entity
   validate :uniqueness_of_phone
   
   before_destroy :delete_related_pipedrive_records
-  before_save :set_default_role, unless: :has_role?
+  before_save :set_default_role_and_service, unless: :has_role_and_service?
   before_save :set_locale, unless: :has_locale?
 
   def self.create( params )

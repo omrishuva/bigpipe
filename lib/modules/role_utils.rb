@@ -44,12 +44,13 @@ module RoleUtils
 
   end
 
-  def set_default_role
+  def set_default_role_and_service
     self.role_ids = self.class::DEFAULT_ROLE
+    self.service_ids = self.class::DEFAULT_SERVICE
   end
 
-  def has_role?
-    self.role_ids.present?
+  def has_role_and_service?
+    self.service_ids.present? && self.role_ids.present?
   end
   
   def roles
@@ -57,11 +58,11 @@ module RoleUtils
   end
   
   def services
-    self.service_ids.map{ |service_id| User.service_name( service_id )  }    
+    self.service_ids.map{ |service_id| User.service_name( service_id )  }
   end
 
   def roles_and_services
-    @roles_and_services ||= [self.roles, self.services].flatten
+    [self.roles, self.services].flatten
   end
 
   def admin?

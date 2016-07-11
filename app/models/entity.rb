@@ -12,7 +12,7 @@ class Entity
 	end
 
 	define_model_callbacks :save, :create, :update, :initialize, :destroy
-
+	
 	def save
 		run_callbacks :save do
 	    self.created_at = Time.now unless persisted?
@@ -70,7 +70,7 @@ class Entity
   
   def customize_error_messages
   end
-
+   
 	class << self
 		
 		def from_entity( entity )
@@ -78,14 +78,26 @@ class Entity
 		    object = self.new
 		    object.id = entity.key.id
 		    entity.properties.to_hash.each do |name, value|
-		      object.send "#{name}=", value
+		      begin
+			      object.send( "#{name}=", value)
+					rescue => e
+						raise e unless remove_deprecated_fields( entity, name )
+					end
 		    end
 	    	object
 	  	else
 	  		nil
 	  	end
 	  end
-	  
+		
+		def remove_deprecated_fields( entity, field )
+			if self.class::DEPRECATED_FIELDS.include?( field.to_sym )
+				entity.properties.delete( field )
+			else
+				false
+			end
+		end
+
 	  def find( id )
 	    key = $datastore.entity.key
 	    key.kind = self.name; key.namespace = Rails.env.to_s; key.id = id.to_i
