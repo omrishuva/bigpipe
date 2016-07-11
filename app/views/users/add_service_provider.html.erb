@@ -1,5 +1,5 @@
 <form action=<%="/service_provider/#{@service_type}/new"%> class="addTrainer" id="addTrainer" method="post" enctype="multipart/form-data">
-	<button type="submit" class="btn btnBrand1"><%="Add New #{@service_type.humanize}"%></button>
+	<button type="submit" class="btn btnBrand1 btnFull"><%="Add New #{@service_type.humanize}"%></button>
 
 	<div class="dropdown-divider"></div>
 	<%= render "shared/form_helpers/flash_messages" %>
