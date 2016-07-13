@@ -19,7 +19,7 @@ RSpec.describe User do
 		
 		it "should validate uniqueness of email" do
 			User.create( @valid_params )
-			sleep 2
+			sleep 3
 			@duplicate_email_address_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
 			user = User.new( @duplicate_email_address_params )
 			user.save
@@ -126,89 +126,142 @@ RSpec.describe User do
 			end
 
 		end
-
-		context "roles & permissions" do
-			
-			context "Consumer" do
-				before :all do
-					User.destroy_all
-					consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
-					@consumer = User.new( consumer_params )
-					@consumer.save
-				end
-
-				it "should set the user a default role" do
-					expect(@consumer.role_ids).to eq [1]
-				end
-				
-				it "should map role id to name" do
-					expect(@consumer.roles).to eq ["consumer"]
-				end
-			end
-
-			context "Service Provider" do
-
-				before :all do
-					User.destroy_all
-					trainer_params = { name: "yuval klien", email: "yuval@play.org.il", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "play"}
-					@trainer = User.new_trainer( trainer_params )
-					@trainer.save
-				end
-				
-				it "can should multiple roles" do
-					expect(@trainer.role_ids.sort).to eq [1,2]
-				end
-				
-				it "should not set the role if user already has a role" do
-					expect(@trainer.service_ids).to eq [0,1]
-				end
-			end
-		end
-
 	end
 
-	context "Trainer" do
-			
-		describe "add new trainer" do
+	context "roles & permissions" do
+		
+		context "administraion" do
 			
 			before :all do
-				tempfile = File.new "cert.pdf","w"
-				certificate = OpenStruct.new( tempfile: tempfile )
-				@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
-				@user = User.new_trainer( @trainer_params[:user], @trainer_params[:certificate] )
-				@file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
-				@sub = $pubsub.find_subscription( "test-now" )
+				User.destroy_all
+				consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+				@consumer = User.new( consumer_params )
+				@consumer.save
 			end
 			
-			after :all do
-				`rm cert.pdf`
-				@file.delete
-				@user.destroy
-				@sub.pull.each{ |msg| msg.ack! }
+			it "should add role" do
+				@consumer.add_role( "admin" )
+				expect( @consumer.admin? ).to be true
 			end
 
-			it "should create the user with service_provider and consumer role" do
-				expect( @user.roles ).to eq ["consumer", "service_provider"]
+			it "should remove role" do 
+				@consumer.remove_role("admin")
+				expect( @consumer.admin? ).to be false
 			end
 			
-			it "should create the user with service provider type trainer" do
-				expect( @user.services ).to eq ["trainer"]
+			it "should not add service_provider only by using add_service" do
+				@consumer.add_role( "service_provider" )
+				expect( @consumer.service_provider? ).to be false
+			end
+			
+			it "should add service_provider role when adding a service" do
+				@consumer.add_service( "trainer" )
+				expect( @consumer.service_provider? ).to be true
+			end
+			
+			it "should add service" do
+				expect( @consumer.services ).to eql ["trainer"]
+			end
+			
+			it "should remove service" do
+				@consumer.remove_service( "trainer" )
+				expect( @consumer.services ).to eql []
 			end
 
-			it "should should save the certificate file in the storage" do
-				file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
-				expect(file).to_not be nil
+			it "should remove service_provider role if user has no other services" do
+				expect( @consumer.service_provider? ).to be false
 			end
 			
-			it "should save the certificate path in the database" do
-				expect(@file.public_url).to eq @user.trainer_certificate_url
+			it "should keep service_provider role if user has other services" do
+				@consumer.add_service("trainer")
+				@consumer.add_service("location_owner")
+				@consumer.remove_service("location_owner")
+				expect( @consumer.service_provider? ).to be true
 			end
 
-			it "should enqueue an invitation email task" do
-				expect(@sub.pull.first.attributes["class"]).to eq "SendTrainerInvitationEmail"	
+		end
+
+		context "Consumer" do
+			
+			before :all do
+				User.destroy_all
+				consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+				@consumer = User.new( consumer_params )
+				@consumer.save
+			end
+
+			it "should set the user a default role" do
+				expect(@consumer.role_ids).to eq [1]
 			end
 			
+			it "should map role id to name" do
+				expect(@consumer.roles).to eq ["consumer"]
+			end
+		end
+
+		context "Service Provider" do
+
+			before :all do
+				User.destroy_all
+				trainer_params = { name: "yuval klien", email: "yuval@play.org.il", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "play"}
+				@trainer = User.new_trainer( trainer_params )
+				@trainer.save
+			end
+			
+			it "can should multiple roles" do
+				expect(@trainer.role_ids.sort).to eq [1,2]
+			end
+			
+			it "should not set the role if user already has a role" do
+				expect(@trainer.service_ids).to eq [0,1]
+			end
+		end
+		
+		context "Services" do
+			
+			context "Trainer" do
+					
+				describe "add new trainer" do
+					
+					before :all do
+						tempfile = File.new "cert.pdf","w"
+						certificate = OpenStruct.new( tempfile: tempfile )
+						@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
+						@user = User.new_trainer( @trainer_params[:user], @trainer_params[:certificate] )
+						@file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
+						@sub = $pubsub.find_subscription( "test-now" )
+					end
+					
+					after :all do
+						`rm cert.pdf`
+						@file.delete
+						@user.destroy
+						@sub.pull.each{ |msg| msg.ack! }
+					end
+
+					it "should create the user with service_provider and consumer role" do
+						expect( @user.roles ).to eq ["consumer", "service_provider"]
+					end
+					
+					it "should create the user with service provider type trainer" do
+						expect( @user.services ).to eq ["trainer"]
+					end
+
+					it "should should save the certificate file in the storage" do
+						file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
+						expect(file).to_not be nil
+					end
+					
+					it "should save the certificate path in the database" do
+						expect(@file.public_url).to eq @user.trainer_certificate_url
+					end
+
+					it "should enqueue an invitation email task" do
+						expect(@sub.pull.first.attributes["class"]).to eq "SendTrainerInvitationEmail"	
+					end
+					
+				end
+			end
 		end
 	end
-
 end

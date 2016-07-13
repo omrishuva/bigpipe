@@ -79,15 +79,21 @@ module RoleUtils
   
   def service_provider?
     self.role_ids.include?(  User.role_id( "service_provider" ) )
-  end
+  end 
 
   def add_role( role_name )
-    if User.role_id( role_name )
+    if User.role_id( role_name ) && role_name != "service_provider"
       self.role_ids << User.role_id( role_name )
       self.role_ids = self.role_ids.uniq.compact
       self.save
     end
   end
+  
+  def remove_role(role_name)
+    self.role_ids = ( self.role_ids - [ User.role_id( role_name ) ]).flatten.compact
+    self.save
+  end
+
 
   def add_service( service_name )
     set_default_role_and_service
@@ -96,6 +102,12 @@ module RoleUtils
     self.role_ids << User.role_id( "service_provider" )
     self.role_ids = self.role_ids.uniq.compact
     save
+  end
+  
+  def remove_service( service_name )
+    self.service_ids = ( self.service_ids - [ User.service_id( service_name ) ]).flatten.compact
+    self.remove_role("service_provider") unless self.service_ids.max > 0
+    self.save
   end
 
 

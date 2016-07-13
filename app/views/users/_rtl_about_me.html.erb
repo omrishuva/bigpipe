@@ -1,13 +1,12 @@
 <div class="row">
-  <div class="col-lg-6 col-lg-push-6 gridItem">
+  <div class="col-lg-4 col-lg-push-8 gridItem">
      <%=
     render "shared/components/cover_image",
     locals: { overlay_text: current_user.display_name, src: current_user.cover_image } 
     %>		
   </div>
 
-  <div class="col-lg-6 col-lg-pull-6 gridItem">
+  <div class="col-lg-8 col-lg-pull-4 gridItem">
 	  <%= render 'about_user'%>
   </div>
 </div>
-<div class="dropdown-divider"></div>

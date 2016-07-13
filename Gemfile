@@ -27,7 +27,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'sprockets-rails'
 gem 'plivo'
-gem "google-api-client"
+gem 'google-api-client'
 gem "foreman"
 gem 'pipedrive-api-client'
 gem 'cloudinary'
