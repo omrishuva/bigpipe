@@ -81,12 +81,13 @@ body
 }
 
 .nav-link{margin-top: 1.5em; }
-.btnBrandSize{  padding: 2px 4px; font-size: 14px; border-radius: 3px; }
+.btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }
-.btnBrand1{ background-color: #5D33F4; color: #FFB941; font-weight: bold; }
-.btnBrand1:hover{ background-color: #FFB941; color: #5D33F4 ;    }
-.btnBrand2{ background-color: #AF3245; color: #FFB941; font-weight: bold; }
-.btnBrand2:hover{ background-color: #FFB941; color: #AF3245 ;    }
+.btnBrand1{ @extend .btnBrand; background-color: #5D33F4; color: #FFB941;  }
+.btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #FFB941; }
+.btnBrandHover{ text-decoration: none; }
+.btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #5D33F4 ; }
+.btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #AF3245 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
 
@@ -125,17 +126,18 @@ body
 .gridItem {
     margin-bottom: 15px;
 }
-.userAboutTextBox { 
-                    border-radius: 5px;  
-                    border-style: solid; 
-                    border-color: #e5e5e5; 
-                    border-width: 1px; 
-                    min-width: 20%; 
-                    min-height: 15em; 
-                  }
+.textBox { 
+            // border-radius: 5px;  
+            // border-style: solid; 
+            // border-color: #e5e5e5; 
+            // border-width: 1px; 
+            min-width: 20%; 
+            min-height: 15em; 
+          }
+.textBoxControl{ margin: 5px; }
+.textBoxTextLocation{  margin-left: 20px; margin-top: 10px;  }
+.textBoxTextBeforeEdit{ @extend .textBoxTextLocation; opacity: 0.3; }
 
-a.userAboutText{ opacity: 0.3; margin-left: 20px; margin-top: 10px; font-size: 80%; }
-div.userAboutText{ margin-left: 20px; margin-left: 20px; margin-top: 10px; font-size: 80%; }
 
 .textBoxEditButton{ position: absolute; bottom: 0.15em; }
 .ltrtextBoxEditButton{ @extend .textBoxEditButton; right: 1.2em; }

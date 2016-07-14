@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    redirect_to root_url and return unless allowed?
+    redirect_to root_url and return if not allowed?
   end
   
   def recognize_path
@@ -45,7 +45,6 @@ class ApplicationController < ActionController::Base
   
   def allowed?
     return true unless controller_permissions
-     action_permissions
     if action_permissions.nil?
       true
     else

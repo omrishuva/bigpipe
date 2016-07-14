@@ -2,6 +2,30 @@
 	<%=current_user.about_text%>
 </textarea>
 
+<div class="<%="#{current_direction.to_s}"%>" >
+	<a
+		class="<%="btnBrand1 textBoxControl"%>"  
+		aria-hidden="true"
+		data-object-name="<%="#{locals[:objectName]}"%>" 
+		data-object-id="<%="#{locals[:objectId]}"%>"
+		data-field-name="<%="#{locals[:fieldName]}"%>" 
+		data-action="save"
+	>
+		<%=I18n.t :save %>
+	</a>
+
+	<a 
+		class="<%="btnBrandCancel textBoxControl"%>"
+		aria-hidden="true"
+		data-object-name="<%="#{locals[:objectName]}"%>" 
+		data-object-id="<%="#{locals[:objectId]}"%>"
+		data-field-name="<%="#{locals[:fieldName]}"%>" 
+		data-action="cancel"
+	>
+		<%=I18n.t :cancel %>
+	</a>
+</div>
+
 <script>
 	CKEDITOR.replace( 'editor1',{ language: "<%=I18n.locale.to_s%>"} );
 </script>

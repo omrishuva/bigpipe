@@ -1,0 +1,31 @@
+<div class="textBox">
+	<%if locals[:action] != "edit" && not( locals[:object].send( locals[:fieldName] ).present? ) %>
+
+		<a class="<%= "textBoxTextBeforeEdit #{current_direction} textBoxControl" %>">
+			<%=I18n.t locals[:text_placeholder]%>
+		</a>
+
+	<%elsif locals[:action] != "edit" && locals[:object].send( locals[:fieldName] ).present? %>
+			
+		<div class="textBoxTextLocation">
+			<%= locals[:object].send( locals[:fieldName] ).html_safe %>
+		</div>
+
+			<a 
+				class="<%="textBoxControl btnBrand1 #{current_direction.to_s}textBoxEditButton fa fa-pencil"%>"
+				aria-hidden="true"
+				data-object-name="<%="#{locals[:object].class.name.downcase.pluralize}"%>"
+				data-object-id="<%="#{locals[:object].id}"%>"
+				data-field-name="<%="#{locals[:fieldName]}"%>" 
+				data-action="edit"
+			>
+				<%=I18n.t :edit %>
+			</a>
+			</br>
+		<%end%>
+	
+		<%if locals[:action] == 'edit'%>
+			<%=render 'shared/components/text_area', locals: locals%>
+		<%end%>
+
+</div>

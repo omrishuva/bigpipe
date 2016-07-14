@@ -2,7 +2,7 @@ controllers:
   users:
     users: admin
     add_service_provider: admin
-    me: consumer
+    profile: consumer
 
 views:
   user_navtabs:

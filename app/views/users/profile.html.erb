@@ -1,0 +1,6 @@
+<%if current_user.id.to_s == params[:user_id]%>
+	<%= render 'user_navigation_tabs' %>
+	<%= render  default_active %>
+<%else%>
+	<%= render 'about_me' %>
+<%end%>

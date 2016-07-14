@@ -16,9 +16,9 @@ loadListeners = ( exclude ) ->
   resendPhoneNumber();
   onFileUpload();
   onImageUpload();
-  editUserABoutText();
-  saveUserAboutText();
-  cancelEditUserAboutText();
+  textBoxControl();
+  saveTextBoxEdit();
+  # textBoxEditChange();
   changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
 
@@ -210,33 +210,30 @@ onImageUpload = ->
         success: (data) ->
           loadListeners();
 
-editUserABoutText = ->
-  $('#writeAboutYourself').click (e) ->
+textBoxControl = ->
+  $('.textBoxControl').click (e) ->
+    data = { 'widget': {}, 'data': { } }
+    data['widget'] = e.target.dataset
+    if data['widget'].action == 'cancel'
+      CKEDITOR.instances.editor1.destroy();
+      # $( "textarea[name='editor1']" ).hide();
+      $( ".textBox" ).hide();
+    data['widget']['data'] = CKEDITOR.instances.editor1.getData() if data['widget'].action == 'save'
     $.ajax
         type: 'GET'
-        url: 'edit_user_about_text'
+        url: "/widgets/textbox/#{data.widget.objectName}/#{data.widget.fieldName}"
+        data: data
         success: (data) ->
           loadListeners();
 
-cancelEditUserAboutText = ->
-  $('#cancelEditUserAboutText').click (e) ->
-    CKEDITOR.instances.editor1.destroy();
-    $('#editUserText').hide();
-    $.ajax
-        type: 'GET'
-        url: 'cancel_user_edit_about_text'
-        success: (data) ->
-          loadListeners();
-
-saveUserAboutText = ->
-  $('#saveUserAboutText').click (e) ->
-    
+saveTextBoxEdit = ->
+  $('#saveTextBoxEdit').click (e) ->
     userText = CKEDITOR.instances.editor1.getData()
     data = {}
     data['user_about_text'] = userText
     $.ajax
         type: 'POST'
-        url: 'save_user_about_text'
+        url: "/#{data.objectName}/save/#{data.textField}"
         data: data
         success: (data) ->
           loadListeners();

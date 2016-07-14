@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login, :upload_image, :save_user_about_text]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login, :upload_image, :save_about_text]
 
   def new
     respond_to do |format|
@@ -133,20 +133,13 @@ class UsersController < ApplicationController
     session[:current_locale] = @user.locale
   end
 
-  def me
-    @cover_image = current_user.cover_image_cloudinary_id || "http://placehold.it/700x400"
+  def profile
   end
   
   def me_navigation
-    p params
     respond_to do |format|
       format.js { }
     end
-  end
-
-  def public_profile
-    @user = User.find( params[:id] )
-
   end
 
   def service_provider_login
@@ -168,26 +161,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def edit_user_about_text
-    respond_to do |format|
-      format.js { }
-      format.json { render json: @image_url }
-    end
-  end
-  
-  def cancel_user_edit_about_text
-    respond_to do |format|
-      format.js { }
-    end
-  end
-  
-  def save_user_about_text
-    current_user.update( about_text: params[:user_about_text] ) if params["user_about_text"].present?
-    respond_to do |format|
-      format.js { }
-    end
-  end
-
   def home_page
   end
 

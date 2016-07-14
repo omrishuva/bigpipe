@@ -1,6 +1,29 @@
-<div id="editUserText">
+<div id="editTextBox">
+	
 	<%=render 'shared/components/text_area'%>
 	</br>
-	<a class="btn btnBrandSize btnBrand1" id="saveUserAboutText"><%=I18n.t :save%></a>
-	<a class="btn btnBrandSize btnBrand2" id="cancelEditUserAboutText" ><%=I18n.t :cancel%></a>
+	
+	<div class="<%="#{current_direction.to_s}"%>" >
+		<a
+			class="<%="btnBrand1 textBoxControl"%>"  
+			aria-hidden="true"
+			data-object-name="<%="#{locals[:objectName]}"%>" 
+			data-text-field="<%="#{locals[:fieldName]}"%>" 
+			data-action="save"
+		>
+			<%=I18n.t :save %>
+		</a>
+
+		<a 
+			class="<%="btnBrandCancel textBoxControl"%>"
+			aria-hidden="true"
+			data-object-name="<%="#{locals[:objectName]}"%>" 
+			data-text-field="<%="#{locals[:fieldName]}"%>" 
+			data-action="cancel"
+		>
+			<%=I18n.t :cancel %>
+		</a>
+	</div>
 </div>
+
+<!-- #{current_direction.to_s}textBoxEditButton -->

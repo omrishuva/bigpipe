@@ -48,6 +48,10 @@ class User < Entity
     cover_image_cloudinary_id || "http://placehold.it/700x400"
   end
 
+  def save_about_text(field, data)
+    self.update( about_text: params[:user_about_text] ) if params["user_about_text"].present?
+  end
+
 	protected
 
 	attr_writer  :password_salt, :password_hash
