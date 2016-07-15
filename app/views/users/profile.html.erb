@@ -1,5 +1,7 @@
 <%if current_user.id.to_s == params[:user_id]%>
 	<%= render 'user_navigation_tabs' %>
+	<div class="dropdown-divider"></div>
+	</br>
 	<%= render  default_active %>
 <%else%>
 	<%= render 'about_me' %>

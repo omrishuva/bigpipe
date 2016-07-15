@@ -3,6 +3,8 @@ controllers:
     users: admin
     add_service_provider: admin
     profile: consumer
+  activities:
+    new_activity: service_provider
 
 views:
   user_navtabs:

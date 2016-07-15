@@ -52,6 +52,10 @@ class User < Entity
     self.update( about_text: params[:user_about_text] ) if params["user_about_text"].present?
   end
 
+  def activities
+    Activity.where( [{ k: "user_id", v: id, op: "=" }] )
+  end
+
 	protected
 
 	attr_writer  :password_salt, :password_hash

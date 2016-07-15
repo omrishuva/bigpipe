@@ -1,3 +1,30 @@
 <div class="container" id="meSectionContainer">
-	<p>You didn't create any activities yet</p>
+	<%if current_user.activities.present? %>
+		
+		<div class="container">
+			
+			<a class="btnBrand1" href="<%="/new_activity/#{current_user.id}"%>"%>
+			<i class="fa fa-plus-square-o" aria-hidden="true"></i>
+				Create New Activity
+			</a>
+			</br></br>
+
+			<%current_user.activities.in_groups_of(4,false) do |activity_group|%>		
+			  <div class="row">
+		  		<%activity_group.each do |activity|%>
+				    <div class="col-md-3 gridItem">
+			        <a href="#"><img class="img-fluid" src="http://placehold.it/700x400" alt=""></a>
+			        <h3><a href="<%="/activities/#{activity.id}"%>"><%=activity.title %></a></h3>
+			        <p><%=activity.about_text%></p>
+			    	</div>
+		  		<%end%>
+			  </div>
+			<%end%>
+		</div>
+	
+	<%else%>
+		<p ><%= I18n.t :didnt_create_activities%></p>
+		<a href="<%="/new_activity/#{current_user.id}"%>" ><%= I18n.t :create_your_first_activity %></a>
+	<%end%>
+	
 </div>

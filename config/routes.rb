@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 	get  '/me/nav/:navtab'               							 => 'users#me_navigation'
 	post '/upload_image'								 							 => 'users#upload_image'
 	
+	#activities	
+	get '/new_activity/:user_id'											 => 'activities#new_activity'
+	get '/activities/:activity_id' 										 => 'activities#activity'
 
 	#widgets
 	get  '/widgets/textbox/:object/:field'             => 'widgets#textbox'

@@ -1,0 +1,8 @@
+<div class="container activityContainer">
+	<h1 class="centeredText"><%=@activity.title %></h1>
+	<div class="dropdown-divider"></div>
+	</br></br>
+	 <%= render 'widgets/textbox', 
+    		locals: { object: @activity, fieldName: "about_text", text_placeholder: "describe_your_activity" }
+    %>
+</div>

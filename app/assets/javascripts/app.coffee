@@ -17,8 +17,6 @@ loadListeners = ( exclude ) ->
   onFileUpload();
   onImageUpload();
   textBoxControl();
-  saveTextBoxEdit();
-  # textBoxEditChange();
   changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
 
@@ -216,24 +214,11 @@ textBoxControl = ->
     data['widget'] = e.target.dataset
     if data['widget'].action == 'cancel'
       CKEDITOR.instances.editor1.destroy();
-      # $( "textarea[name='editor1']" ).hide();
       $( ".textBox" ).hide();
     data['widget']['data'] = CKEDITOR.instances.editor1.getData() if data['widget'].action == 'save'
     $.ajax
         type: 'GET'
         url: "/widgets/textbox/#{data.widget.objectName}/#{data.widget.fieldName}"
-        data: data
-        success: (data) ->
-          loadListeners();
-
-saveTextBoxEdit = ->
-  $('#saveTextBoxEdit').click (e) ->
-    userText = CKEDITOR.instances.editor1.getData()
-    data = {}
-    data['user_about_text'] = userText
-    $.ajax
-        type: 'POST'
-        url: "/#{data.objectName}/save/#{data.textField}"
         data: data
         success: (data) ->
           loadListeners();

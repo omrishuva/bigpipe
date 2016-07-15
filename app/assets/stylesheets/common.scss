@@ -127,10 +127,10 @@ body
     margin-bottom: 15px;
 }
 .textBox { 
-            // border-radius: 5px;  
-            // border-style: solid; 
-            // border-color: #e5e5e5; 
-            // border-width: 1px; 
+            border-radius: 5px;  
+            border-style: solid; 
+            border-color: #e5e5e5; 
+            border-width: 1px; 
             min-width: 20%; 
             min-height: 15em; 
           }
@@ -140,8 +140,8 @@ body
 
 
 .textBoxEditButton{ position: absolute; bottom: 0.15em; }
-.ltrtextBoxEditButton{ @extend .textBoxEditButton; right: 1.2em; }
-.rtltextBoxEditButton{ @extend .textBoxEditButton; left: 1.2em; }
+.ltrtextBoxEditButton{ @extend .textBoxEditButton; left: 1.2em; }
+.rtltextBoxEditButton{ @extend .textBoxEditButton; right: 1.2em; }
 
 .userAboutText:hover{ text-decoration: none; opacity: 1;}
 

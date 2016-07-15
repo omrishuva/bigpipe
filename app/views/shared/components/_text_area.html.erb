@@ -1,5 +1,5 @@
 <textarea name="editor1">
-	<%=current_user.about_text%>
+	<%=locals[:object].send( locals[:fieldName] ) %>
 </textarea>
 
 <div class="<%="#{current_direction.to_s}"%>" >
