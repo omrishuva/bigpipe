@@ -70,7 +70,11 @@ class Entity
   
   def customize_error_messages
   end
-   
+  
+  def owners
+  	[id]
+  end
+
 	class << self
 		
 		def from_entity( entity )

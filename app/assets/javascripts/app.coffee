@@ -16,7 +16,7 @@ loadListeners = ( exclude ) ->
   resendPhoneNumber();
   onFileUpload();
   onImageUpload();
-  textBoxControl();
+  textAreaBoxControl();
   changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
 
@@ -208,17 +208,20 @@ onImageUpload = ->
         success: (data) ->
           loadListeners();
 
-textBoxControl = ->
-  $('.textBoxControl').click (e) ->
+textAreaBoxControl = ->
+  $('.textAreaBoxControl').click (e) ->
     data = { 'widget': {}, 'data': { } }
     data['widget'] = e.target.dataset
-    if data['widget'].action == 'cancel'
+    if data['widget'].state == 'cancel'
       CKEDITOR.instances.editor1.destroy();
-      $( ".textBox" ).hide();
-    data['widget']['data'] = CKEDITOR.instances.editor1.getData() if data['widget'].action == 'save'
+      $( ".textAreaBox" ).hide();
+      location.search = "" 
+    if data['widget'].state == 'save'
+      data['widget']['data'] = CKEDITOR.instances.editor1.getData()
+      location.search = ""
     $.ajax
         type: 'GET'
-        url: "/widgets/textbox/#{data.widget.objectName}/#{data.widget.fieldName}"
+        url: "/widgets/text_area_box/#{data.widget.objectName}/#{data.widget.key}"
         data: data
         success: (data) ->
           loadListeners();

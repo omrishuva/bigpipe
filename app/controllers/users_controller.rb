@@ -117,7 +117,7 @@ class UsersController < ApplicationController
   
   def add_service_provider
     @service_type = params[:spt]
-    @user = User.send( "new_#{@service_type}", params) if params[:user].present?
+    @user = User.send( "new_#{@service_type}", params[:user]) if params[:user].present?
     if !@user
       render "add_service_provider"
     elsif @user && @user.errors.present?
@@ -134,6 +134,7 @@ class UsersController < ApplicationController
   end
 
   def profile
+    @user = User.find( params[:user_id] )
   end
   
   def me_navigation

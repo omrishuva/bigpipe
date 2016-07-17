@@ -38,5 +38,6 @@ module ApplicationHelper
     end
     $permissions["views"]["user_navtabs"]["default_active"][key]
   end
+  
 
 end

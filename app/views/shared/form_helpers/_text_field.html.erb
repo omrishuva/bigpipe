@@ -1,7 +1,7 @@
 <%klass = locals[:user] && locals[:user].errors[locals[:field_name]] ? "form-group has-danger" : "form-group" %>
 <div class=<%=klass%>>
 	<input 
-		class="form-control-sm ModalInput" 
+		class="form-control-sm label-floating ModalInput" 
 		value=<%="#{locals[:user].try(locals[:field_name])}" || 'a' %>
 		type="text" 
 		name=<%="user[#{locals[:field_name]}]"%> 

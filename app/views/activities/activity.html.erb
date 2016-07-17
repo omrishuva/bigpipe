@@ -1,8 +1,21 @@
 <div class="container activityContainer">
-	<h1 class="centeredText"><%=@activity.title %></h1>
-	<div class="dropdown-divider"></div>
-	</br></br>
-	 <%= render 'widgets/textbox', 
-    		locals: { object: @activity, fieldName: "about_text", text_placeholder: "describe_your_activity" }
-    %>
+	<div class="row">
+		<h1 class="centeredText"><%=@activity.title %></h1>
+		<div class="dropdown-divider"></div>
+	</div>
+	</br>
+	<div class="row">
+		 <%= render 'widgets/text_area_box', 
+	    		locals: {  
+	    							objectName: "activities", 
+	    							objectId: @activity.id,
+	    							key: "about_text",
+	    							value: @activity.about_text,
+	    							state: params[:state],
+	    							isWidgetOwner: @is_widget_owner,
+	    							placeholder: "describe_your_activity"
+
+	    						}
+	    %>
+	</div>
 </div>

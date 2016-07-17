@@ -7,8 +7,15 @@
 
   </div>
   <div class="col-lg-8 gridItem">
-    <%= render 'widgets/textbox', 
-    		locals: { object: current_user, fieldName: "about_text", text_placeholder: "write_few_words" }
+    <%= render 'widgets/text_area_box', 
+    		locals: { 
+                  objectName: "users", 
+                  objectId: current_user.id, 
+                  isWidgetOwner: current_user.id == params[:user_id],
+                  key: "about_text",
+                  value: current_user.about_text,
+                  placeholder: "write_few_words" 
+                }
     %>
   </div>
 </div>

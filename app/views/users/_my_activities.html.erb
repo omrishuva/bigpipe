@@ -9,13 +9,15 @@
 			</a>
 			</br></br>
 
-			<%current_user.activities.in_groups_of(4,false) do |activity_group|%>		
+			<%current_user.activities.in_groups_of(3,false) do |activity_group|%>		
 			  <div class="row">
 		  		<%activity_group.each do |activity|%>
-				    <div class="col-md-3 gridItem">
+				    <div class="col-md-4 gridItem">
+			        <h4 class="centeredText"><a href="<%="/activities/#{activity.id}"%>"><%=activity.title %></a></h4>
 			        <a href="#"><img class="img-fluid" src="http://placehold.it/700x400" alt=""></a>
-			        <h3><a href="<%="/activities/#{activity.id}"%>"><%=activity.title %></a></h3>
-			        <p><%=activity.about_text%></p>
+			        	<%if activity.about_text.present?%>
+				        	<div class=smallText><%=activity.about_text[0..120].html_safe + "..." %></div>
+								<%end%>
 			    	</div>
 		  		<%end%>
 			  </div>

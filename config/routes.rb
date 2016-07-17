@@ -26,14 +26,14 @@ Rails.application.routes.draw do
 	
 	#activities	
 	get '/new_activity/:user_id'											 => 'activities#new_activity'
-	get '/activities/:activity_id' 										 => 'activities#activity'
+	get '/activities/:activity_id' 						         => 'activities#activity'
 
 	#widgets
-	get  '/widgets/textbox/:object/:field'             => 'widgets#textbox'
+	get  '/widgets/text_area_box/:object/:field'             => 'widgets#text_area_box'
 
 	#service_providers
-	get  'service_provider/:spt/new'         					 => 'users#add_service_provider'
-	post 'service_provider/:spt/new'         					 => 'users#add_service_provider'
+	get  '/service_provider/:spt/new'         				 => 'users#add_service_provider'
+	post '/service_provider/:spt/new'         				 => 'users#add_service_provider'
 	get  '/service_provider/onboarding'       				 => 'users#service_provider_onboarding'
 	post '/service_provider/onboarding'      					 => 'users#service_provider_login'
 	

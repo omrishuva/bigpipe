@@ -1,26 +1,28 @@
 <textarea name="editor1">
-	<%=locals[:object].send( locals[:fieldName] ) %>
+	<%=locals[:value] %>
 </textarea>
-
+</br>
 <div class="<%="#{current_direction.to_s}"%>" >
 	<a
-		class="<%="btnBrand1 textBoxControl"%>"  
+		class="<%="btnBrand1 textAreaBoxControl"%>"  
 		aria-hidden="true"
-		data-object-name="<%="#{locals[:objectName]}"%>" 
+		data-object-name="<%=locals[:objectName]%>"
 		data-object-id="<%="#{locals[:objectId]}"%>"
-		data-field-name="<%="#{locals[:fieldName]}"%>" 
-		data-action="save"
+		data-key="<%="#{locals[:key]}"%>"
+		data-placeholder="<%="#{locals[:placeholder]}"%>"
+		data-state="save"
 	>
 		<%=I18n.t :save %>
 	</a>
 
 	<a 
-		class="<%="btnBrandCancel textBoxControl"%>"
+		class="<%="btnBrandCancel textAreaBoxControl"%>"
 		aria-hidden="true"
-		data-object-name="<%="#{locals[:objectName]}"%>" 
+		data-object-name="<%=locals[:objectName]%>"
 		data-object-id="<%="#{locals[:objectId]}"%>"
-		data-field-name="<%="#{locals[:fieldName]}"%>" 
-		data-action="cancel"
+		data-key="<%="#{locals[:key]}"%>"
+		data-placeholder="<%="#{locals[:placeholder]}"%>"
+		data-state="cancel"
 	>
 		<%=I18n.t :cancel %>
 	</a>
