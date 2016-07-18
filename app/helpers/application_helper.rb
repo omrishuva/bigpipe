@@ -38,6 +38,18 @@ module ApplicationHelper
     end
     $permissions["views"]["user_navtabs"]["default_active"][key]
   end
+
+  def widget_state( locals )
+    if locals[:state] != "edit" && not( locals[:value].present? ) && locals[:isWidgetOwner]
+      :owner_before_commit
+    elsif locals[:state] != "edit" && locals[:value].present? && locals[:isWidgetOwner]
+      :owner_after_commit
+    elsif locals[:state] != "edit" && locals[:value].present? && !locals[:isWidgetOwner]
+      :user_after_commit
+    elsif locals[:state] == 'edit' && locals[:isWidgetOwner]
+      :edit
+    end
+  end
   
 
 end

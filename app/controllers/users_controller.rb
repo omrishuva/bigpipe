@@ -137,7 +137,7 @@ class UsersController < ApplicationController
     @user = User.find( params[:user_id] )
   end
   
-  def me_navigation
+  def profile_navigation
     respond_to do |format|
       format.js { }
     end

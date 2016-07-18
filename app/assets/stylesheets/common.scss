@@ -131,7 +131,7 @@ body
 }
 .textAreaBox { min-width: 20%;  min-height: 15em; }
 .thinBorder{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px;  }
-.textAreaBoxControl{ margin: 5px; }
+.widgetControl{ margin: 5px; }
 .textAreaBoxTextLocation{  margin-left: 20px; margin-top: 10px;  }
 .textAreaBoxTextBeforeEdit{ @extend .textAreaBoxTextLocation; opacity: 0.3; }
 

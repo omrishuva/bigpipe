@@ -5,8 +5,10 @@
 	</div>
 	</br>
 	<div class="row">
-		 <%= render 'widgets/text_area_box', 
+		 <%= render 'widgets/widget', 
 	    		locals: {  
+	    							widgetName: "text_area_box",
+	    							divClass: ".textAreaBox",
 	    							objectName: "activities", 
 	    							objectId: @activity.id,
 	    							key: "about_text",

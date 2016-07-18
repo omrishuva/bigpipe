@@ -1,6 +1,7 @@
 $(document).ready ->
- @exclude = { }
- loadListeners();
+  @exclude = { }
+  window.App = { }
+  loadListeners();
 
 loadListeners = ( exclude ) ->
   loadSignUpForm();
@@ -16,7 +17,7 @@ loadListeners = ( exclude ) ->
   resendPhoneNumber();
   onFileUpload();
   onImageUpload();
-  textAreaBoxControl();
+  widgetControl();
   changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
 
@@ -208,31 +209,41 @@ onImageUpload = ->
         success: (data) ->
           loadListeners();
 
-textAreaBoxControl = ->
-  $('.textAreaBoxControl').click (e) ->
-    data = { 'widget': {}, 'data': { } }
-    data['widget'] = e.target.dataset
-    if data['widget'].state == 'cancel'
-      CKEDITOR.instances.editor1.destroy();
-      $( ".textAreaBox" ).hide();
-      location.search = "" 
-    if data['widget'].state == 'save'
-      data['widget']['data'] = CKEDITOR.instances.editor1.getData()
-      location.search = ""
-    $.ajax
-        type: 'GET'
-        url: "/widgets/text_area_box/#{data.widget.objectName}/#{data.widget.key}"
-        data: data
-        success: (data) ->
-          loadListeners();
-
 changeUserNavTab =( exclude ) ->
   loadOnce( "changeUserNavTab" );
   $('.userNavtabLink').click (e) ->
     $("a.userNavtabLink.active").removeClass('active');
     $("a.userNavtabLink[name='#{e.target.name}']").addClass('active');
+    data = e.target.dataset
     $.ajax
       type: 'GET'
-      url: "/me/nav/#{e.target.name}"
+      url: "/profile/navigation/#{e.target.name}"
+      data: data
       success: (data) ->
         loadListeners( exclude );
+
+widgetControl = ->
+  $('.widgetControl').click (e) ->
+    widget = {} 
+    widget = e.target.dataset
+    if widget.state == 'cancel'
+      CKEDITOR.instances.editor1.destroy();
+      $( widget.divClass ).hide();
+      location.search = "" 
+    if widget.state == 'save'
+      widget['data'] = CKEDITOR.instances.editor1.getData()
+      location.search = ""
+    $.ajax
+        type: 'GET'
+        url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+        data: widget
+        success: (data) ->
+          loadListeners();
+
+
+
+
+
+
+
+

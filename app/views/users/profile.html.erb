@@ -2,7 +2,7 @@
 	<%= render 'user_navigation_tabs' %>
 	<div class="dropdown-divider"></div>
 	</br>
-	<%= render  default_active %>
+	<%= render  default_active, locals: { user_id: params[:user_id] } %>
 <%else%>
-	<%= render 'about_me' %>
+	<%= render 'about_me', locals: { user_id: params[:user_id] } %>
 <%end%>

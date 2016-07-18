@@ -26,4 +26,5 @@
 //= require jquery
 //= require tether
 //= require bootstrap-sprockets
+//= require widgets_control
 //= require app

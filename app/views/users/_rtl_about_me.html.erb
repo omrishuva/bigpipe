@@ -7,11 +7,13 @@
   </div>
 
   <div class="col-lg-8 col-lg-pull-4 gridItem">
-	  <%= render 'widgets/text_area_box', 
+	  <%= render 'widgets/widget', 
         locals: { 
+                  widgetName: "text_area_box",
+                  divClass: ".textAreaBox",
                   objectName: "users", 
-                  objectId: current_user.id,
-                  isWidgetOwner: current_user.id == params[:user_id],
+                  objectId: locals[:userId],
+                  isWidgetOwner: current_user.id.to_s == locals[:userId],
                   key: "about_text",
                   value: current_user.about_text,
                   placeholder: "write_few_words"

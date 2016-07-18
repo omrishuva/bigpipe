@@ -3,29 +3,19 @@
 </textarea>
 </br>
 <div class="<%="#{current_direction.to_s}"%>" >
-	<a
-		class="<%="btnBrand1 textAreaBoxControl"%>"  
-		aria-hidden="true"
-		data-object-name="<%=locals[:objectName]%>"
-		data-object-id="<%="#{locals[:objectId]}"%>"
-		data-key="<%="#{locals[:key]}"%>"
-		data-placeholder="<%="#{locals[:placeholder]}"%>"
-		data-state="save"
-	>
-		<%=I18n.t :save %>
-	</a>
-
-	<a 
-		class="<%="btnBrandCancel textAreaBoxControl"%>"
-		aria-hidden="true"
-		data-object-name="<%=locals[:objectName]%>"
-		data-object-id="<%="#{locals[:objectId]}"%>"
-		data-key="<%="#{locals[:key]}"%>"
-		data-placeholder="<%="#{locals[:placeholder]}"%>"
-		data-state="cancel"
-	>
-		<%=I18n.t :cancel %>
-	</a>
+	<%=render "widgets/widget_button", 
+						locals: locals.merge( 
+																	class: "btnBrand1", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+	<%=render "widgets/widget_button", 
+						locals: locals.merge( 
+																	class: "btnBrandCancel", 
+																	state: "cancel", 
+																	button_text: "cancel" )
+	%>
+	
 </div>
 
 <script>
