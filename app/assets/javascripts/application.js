@@ -26,5 +26,6 @@
 //= require jquery
 //= require tether
 //= require bootstrap-sprockets
-//= require widgets_control
+//= require profile_navtabs
+//= require abstract_widget
 //= require app

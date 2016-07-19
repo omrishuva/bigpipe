@@ -1,0 +1,9 @@
+<div class="textInputBox">
+	<div class="row">
+		<h1 class="centeredText block"> <%=locals[:value] %> </h1>
+		</br>
+		<%=render "widgets/widget_button", 
+							locals: locals.merge( class: "fa fa-pencil #{current_direction}", state: "edit", button_text: "edit" )
+		%>
+	</div>
+</div>

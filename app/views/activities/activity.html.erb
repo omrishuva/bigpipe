@@ -1,14 +1,37 @@
 <div class="container activityContainer">
 	<div class="row">
-		<h1 class="centeredText"><%=@activity.title %></h1>
-		<div class="dropdown-divider"></div>
+		
+		<%= render 'widgets/widget', 
+	    		locals: {  
+	    							widgetName: "text_input_box",
+	    							elementName: "textInputBox",
+	    							objectName: "activities", 
+	    							objectId: @activity.id,
+	    							key: "title",
+	    							value: @activity.title,
+	    							state: params[:state],
+	    							isWidgetOwner: @is_widget_owner,
+	    							placeholder: "name_it"
+	    							
+	    						}
+	    %>
 	</div>
 	</br>
+	
 	<div class="row">
-		 <%= render 'widgets/widget', 
+		
+		<div class="col-md-6 gridItem">
+			 <%=
+		    render "shared/components/cover_image",
+		    locals: { overlay_text: current_user.display_name, src: current_user.cover_image } 
+    		%>
+		</div>
+		
+		<div class="col-md-6 gridItem">
+		 	<%= render 'widgets/widget', 
 	    		locals: {  
 	    							widgetName: "text_area_box",
-	    							divClass: ".textAreaBox",
+	    							elementName: "textAreaBox",
 	    							objectName: "activities", 
 	    							objectId: @activity.id,
 	    							key: "about_text",
@@ -19,5 +42,7 @@
 
 	    						}
 	    %>
+		</div>
+
 	</div>
 </div>

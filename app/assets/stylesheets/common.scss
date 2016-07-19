@@ -17,6 +17,8 @@ body
 @media (min-width: 1000px) { .mainContainer { z-index: -1; font-size: 120%; margin-top: 7.5%;    } }
 @media (min-width: 1500px) { .mainContainer { z-index: -1; font-size: 120%; margin-top: 5%;      } }
 
+.activityContainer{  }
+
 .signinLoader{  display: none; }
 
 .NavBarLogo{ width: 4.5em; height: 4em; position: absolute;  }
@@ -79,7 +81,7 @@ body
     z-index: 2000;
     background-color: #fff;
 }
-
+.block{ display: inline-block; }
 .nav-link{margin-top: 1.5em; }
 .btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }

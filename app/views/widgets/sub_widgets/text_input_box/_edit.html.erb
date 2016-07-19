@@ -1,0 +1,25 @@
+<div class="textInputBox">
+		<%=I18n.t locals[:placeholder]%>
+		</br>
+		<input 
+		class="form-control block" 
+		value="<%="#{locals[:value]}"%>"
+		type="text"
+		placeholder="<%=locals[:placeholder]%>"
+
+		/>
+
+		<%=render "widgets/widget_button", 
+							locals: locals.merge( 
+																		class: "save block #{current_direction.to_s}", 
+																		state: "save", 
+																		button_text: "save" )
+		%>
+		<%=render "widgets/widget_button", 
+							locals: locals.merge( 
+																		class: "cancel block #{current_direction.to_s}", 
+																		state: "cancel", 
+																		button_text: "cancel" )
+		%>
+		
+</div>

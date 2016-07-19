@@ -10,7 +10,7 @@
     <%= render 'widgets/widget', 
     		locals: { 
                   widgetName: "text_area_box",
-                  divClass: ".textAreaBox",
+                  elementName: "textAreaBox",
                   objectName: "users", 
                   objectId: locals[:userId], 
                   isWidgetOwner: current_user.id.to_s == locals[:userId],
