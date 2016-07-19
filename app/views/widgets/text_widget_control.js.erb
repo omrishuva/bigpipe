@@ -1,0 +1,1 @@
+$("." + "<%= escape_javascript(@widget_data[:elementName])%>").replaceWith("<%= escape_javascript( render 'widgets/ugc/text/widget',locals: @widget_data ) %>");

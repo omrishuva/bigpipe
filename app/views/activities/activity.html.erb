@@ -1,7 +1,7 @@
 <div class="container activityContainer">
 	<div class="row">
 		
-		<%= render 'widgets/widget', 
+		<%= render 'widgets/ugc/text/widget', 
 	    		locals: {  
 	    							widgetName: "text_input_box",
 	    							elementName: "textInputBox",
@@ -16,19 +16,35 @@
 	    						}
 	    %>
 	</div>
-	</br>
-	
+	<div class="dropdown-divider"></div>
+
+	<div class="row">
+		<p class="smallText"><%=@activity.user.name%></p>
+		<div class="dropdown-divider"></div>
+	</div>
+
 	<div class="row">
 		
 		<div class="col-md-6 gridItem">
-			 <%=
-		    render "shared/components/cover_image",
-		    locals: { overlay_text: current_user.display_name, src: current_user.cover_image } 
-    		%>
+			 <%= render 'widgets/ugc/image/widget', 
+	    		locals: {  
+	    							widgetName: "image_box",
+	    							elementName: "imageBox",
+	    							objectName: "activities", 
+	    							objectId: @activity.id,
+	    							key: "cover_image_id",
+	    							value: @activity.cover_image,
+	    							state: params[:state],
+	    							isWidgetOwner: @is_widget_owner,
+	    							placeholder: "update_image",
+	    							overlayText: @activity.title
+	    							
+	    						}
+	    %>
 		</div>
 		
 		<div class="col-md-6 gridItem">
-		 	<%= render 'widgets/widget', 
+		 	<%= render 'widgets/ugc/text/widget', 
 	    		locals: {  
 	    							widgetName: "text_area_box",
 	    							elementName: "textAreaBox",

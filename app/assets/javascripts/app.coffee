@@ -14,7 +14,7 @@ loadListeners = ( exclude ) ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
-  onImageUpload();
+  # onImageUpload();
   logOut();
 
 

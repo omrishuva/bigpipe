@@ -133,7 +133,7 @@ body
 }
 .textAreaBox { min-width: 20%;  min-height: 15em; }
 .thinBorder{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px;  }
-.widgetControl{ margin: 5px; }
+.widgetControl{ margin: 5px; text-decoration: none !important; }
 .textAreaBoxTextLocation{  margin-left: 20px; margin-top: 10px;  }
 .textAreaBoxTextBeforeEdit{ @extend .textAreaBoxTextLocation; opacity: 0.3; }
 
@@ -147,13 +147,14 @@ body
 .imageOverlayText { 
                     position: absolute;
                     top: 5px; 
-                    width: 50%; 
+                    width: 100%; 
                     opacity:0.7; 
                     background-color: #fff; 
                     color: black;
                     font-weight: bold; 
                     text-align: center; 
                 }
+
 .ltrimageOverlayText{ @extend .imageOverlayText; left: 20px; }
 .rtlimageOverlayText{ @extend .imageOverlayText; right: 20px; }
 

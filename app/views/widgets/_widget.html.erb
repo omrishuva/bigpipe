@@ -1,9 +1,0 @@
-<%if widget_state(locals) == :owner_before_commit %>
-	<%=render "widgets/sub_widgets/#{locals[:widgetName]}/owner_before_commit", locals: locals%>
-<%elsif widget_state(locals) == :owner_after_commit %>
-	<%=render "widgets/sub_widgets/#{locals[:widgetName]}/owner_after_commit", locals: locals%>
-<%elsif widget_state(locals) == :user_before_commit %>
-	<%=render "widgets/sub_widgets/#{locals[:widgetName]}/user_after_commit", locals: locals%>
-<%elsif widget_state(locals) == :edit %>
-	<%=render "widgets/sub_widgets/#{locals[:widgetName]}/edit", locals: locals%>
-<%end%>

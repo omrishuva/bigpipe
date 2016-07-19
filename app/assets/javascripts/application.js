@@ -27,5 +27,5 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require profile_navtabs
-//= require abstract_widget
+//= require ugc_widgets
 //= require app

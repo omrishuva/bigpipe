@@ -2,7 +2,7 @@
 	<div class="row">
 		<h1 class="centeredText block"> <%=locals[:value] %> </h1>
 		</br>
-		<%=render "widgets/widget_button", 
+		<%=render "widgets/ugc/text/button", 
 							locals: locals.merge( class: "fa fa-pencil #{current_direction}", state: "edit", button_text: "edit" )
 		%>
 	</div>
