@@ -1,6 +1,4 @@
 $(document).ready ->
-  @exclude = { }
-  window.App = { }
   loadListeners();
 
 loadListeners = ( exclude ) ->
@@ -17,12 +15,8 @@ loadListeners = ( exclude ) ->
   resendPhoneNumber();
   onFileUpload();
   onImageUpload();
-  widgetControl();
-  changeUserNavTab() unless document.exclude && document.exclude['changeUserNavTab'] == true
   logOut();
 
-loadOnce =(func) ->
-  document.exclude[func] = true
 
 showLoader = ->
   $('.signinLoader').show()
@@ -208,42 +202,5 @@ onImageUpload = ->
         contentType: false
         success: (data) ->
           loadListeners();
-
-changeUserNavTab =( exclude ) ->
-  loadOnce( "changeUserNavTab" );
-  $('.userNavtabLink').click (e) ->
-    $("a.userNavtabLink.active").removeClass('active');
-    $("a.userNavtabLink[name='#{e.target.name}']").addClass('active');
-    data = e.target.dataset
-    $.ajax
-      type: 'GET'
-      url: "/profile/navigation/#{e.target.name}"
-      data: data
-      success: (data) ->
-        loadListeners( exclude );
-
-widgetControl = ->
-  $('.widgetControl').click (e) ->
-    widget = {} 
-    widget = e.target.dataset
-    if widget.state == 'cancel'
-      CKEDITOR.instances.editor1.destroy();
-      $( widget.divClass ).hide();
-      location.search = "" 
-    if widget.state == 'save'
-      widget['data'] = CKEDITOR.instances.editor1.getData()
-      location.search = ""
-    $.ajax
-        type: 'GET'
-        url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
-        data: widget
-        success: (data) ->
-          loadListeners();
-
-
-
-
-
-
-
+  
 

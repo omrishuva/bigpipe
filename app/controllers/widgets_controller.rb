@@ -17,7 +17,7 @@ class WidgetsController < ApplicationController
 	def prepare_widget_data
 		{
 			widgetName: params[:widgetName],
-			divClass: params[:divClass],
+			elementName: params[:elementName],
 			objectName: @object.class.name.downcase.pluralize, 
 			objectId: @object.id, 
 			key: params[:key],
