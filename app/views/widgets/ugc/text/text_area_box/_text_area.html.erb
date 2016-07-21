@@ -1,0 +1,24 @@
+<textarea name=<%="editor" + locals[:objectId].to_s%>>
+	<%=locals[:value] %>
+</textarea>
+</br>
+<div class="<%="#{current_direction.to_s}"%>" >
+	<%=render "widgets/ugc/text/button", 
+						locals: locals.merge( 
+																	class: "save", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+	<%=render "widgets/ugc/text/button", 
+						locals: locals.merge( 
+																	class: "cancel", 
+																	state: "cancel", 
+																	button_text: "cancel" )
+	%>
+	
+</div>
+
+<script>
+	CKEDITOR.replace( "<%='editor' + locals[:objectId].to_s%>",{ language: "<%=I18n.locale.to_s%>"} );
+	window.scrollTo(500, 0)
+</script>
