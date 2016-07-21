@@ -1,5 +1,5 @@
 <div class="container" id="meSectionContainer">
-	<%if current_user.activities.present? %>
+	<%if locals[:user].activities.present? %>
 		
 		<div class="container">
 			
@@ -9,12 +9,14 @@
 			</a>
 			</br></br>
 
-			<%current_user.activities.in_groups_of(2,false) do |activity_group|%>		
+			<% locals[:user].activities.in_groups_of(2,false) do |activity_group|%>		
 			  <div class="row">
 		  		<%activity_group.each do |activity|%>
 				    <div class="col-md-6 gridItem">
 			        <h4 class="centeredText"><a href="<%="/activities/#{activity.id}"%>"><%=activity.title %></a></h4>
-			        <a href="#"><img class="img-fluid" src="http://placehold.it/700x400" alt=""></a>
+			        <a href="#">
+			        	<%=cl_image_tag(activity.cover_image, width: 500, height: 285, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage"  )%>
+			        </a>
 			        	<%if activity.about_text.present?%>
 				        	<div class=smallText><%=activity.about_text[0..200].html_safe + "..." %></div>
 								<%end%>

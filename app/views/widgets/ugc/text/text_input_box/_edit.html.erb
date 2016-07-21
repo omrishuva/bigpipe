@@ -1,26 +1,20 @@
-<div class="textInputBox">
-		<%=I18n.t locals[:placeholder]%>
-		</br>
-		<input 
-		class="form-control block"
-		name="<%="#{locals[:widgetName]}"%>"
-		value="<%="#{locals[:value]}"%>"
-		type="text"
-		placeholder="<%=locals[:placeholder]%>"
+<input 
+class="<%=" widgetTextInput form-control-sm widgetTextInput centeredText #{locals[:textClass]}"%>"
+name="<%="#{locals[:widgetName]}"%>"
+value="<%="#{locals[:value]}"%>"
+type="text"
+placeholder="<%=locals[:placeholder]%>"
 
-		/>
-
-		<%=render "widgets/ugc/text/button", 
-							locals: locals.merge( 
-																		class: "save block #{current_direction.to_s}", 
-																		state: "save", 
-																		button_text: "save" )
-		%>
-		<%=render "widgets/ugc/text/button", 
-							locals: locals.merge( 
-																		class: "cancel block #{current_direction.to_s}", 
-																		state: "cancel", 
-																		button_text: "cancel" )
-		%>
-		
-</div>
+/>
+<%=render "widgets/ugc/text/button", 
+					locals: locals.merge( 
+																class: "#{locals[:buttonClass]} #{current_direction.to_s} imageOveralySave", 
+																state: "save", 
+																button_text: "save" )
+%>
+<%=render "widgets/ugc/text/button", 
+					locals: locals.merge( 
+																class: "#{locals[:buttonClass]}  #{current_direction.to_s} imageOveralyCancel", 
+																state: "cancel", 
+																button_text: "cancel" )
+%>

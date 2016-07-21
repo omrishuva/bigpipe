@@ -14,7 +14,6 @@ loadListeners = ( exclude ) ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
-  # onImageUpload();
   logOut();
 
 
@@ -188,19 +187,5 @@ onFileUpload = ->
     splitedFileName = fileName.split("\\")
     fileName = splitedFileName[ (splitedFileName.length - 1) ]
     $('.fileName').text(fileName)
-
-onImageUpload = ->
-  $('.imageUploadInput').change (e) ->
-    formData = new FormData
-    file = e.target.files[0]
-    formData.append( 'image', file, file.name )
-    $.ajax
-        type: 'POST'
-        url: '/upload_image'
-        data: formData
-        processData: false
-        contentType: false
-        success: (data) ->
-          loadListeners();
   
 

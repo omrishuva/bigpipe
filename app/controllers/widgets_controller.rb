@@ -25,7 +25,10 @@ class WidgetsController < ApplicationController
 			value: @object.send( params[:key] ),
 			state: params[:state],
 			isWidgetOwner: is_widget_owner,
-			placeholder: params[:placeholder]
+			placeholder: params[:placeholder],
+			editableOverlayText: params[:editableOverlayText],
+			textClass: params[:textClass],
+			buttonClass: params[:buttonClass]
 		}
 	end
 	

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    
-  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login, :upload_image, :save_about_text]
+  skip_before_action :verify_authenticity_token, only: [:fb_lead, :service_provider_login]
 
   def new
     respond_to do |format|
@@ -138,6 +138,11 @@ class UsersController < ApplicationController
   end
   
   def profile_navigation
+    if current_user.id == params[:userId]
+      @user = current_user
+    else
+      @user = User.find( params[:userId] )
+    end
     respond_to do |format|
       format.js { }
     end
@@ -150,16 +155,6 @@ class UsersController < ApplicationController
       flash[:success] = "Logged in"
       redirect_to '/me' and return
     end  
-  end
-
-  def upload_image
-    cloudinary_image = Cloudinary::Uploader.upload( params["image"].tempfile, eager:{ width: 700, height: 400, crop: :thumb, gravity: :face } )
-    current_user.update( cover_image_cloudinary_id: cloudinary_image["public_id"] )
-    @image_url =  "#{cloudinary_image['public_id']}.jpg"
-    respond_to do |format|
-      format.js { }
-      format.json { render json: @image_url }
-    end
   end
   
   def home_page

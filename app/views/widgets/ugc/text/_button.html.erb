@@ -1,6 +1,7 @@
 <a 
 	href="#"
 	class="widgetControl <%= locals[:class] %>"
+	id="<%=locals[:objectId]%>"
 	aria-hidden="true"
 	data-widget-name="<%=locals[:widgetName]%>"
 	data-element-name="<%=locals[:elementName]%>"
@@ -8,6 +9,9 @@
 	data-object-id="<%="#{locals[:objectId]}"%>"
 	data-key="<%="#{locals[:key]}"%>"
 	data-placeholder="<%="#{locals[:placeholder]}"%>"
+	data-editable-overlay-text="<%="#{locals[:editableOverlayText]}"%>"
+	data-text-class="<%="#{locals[:textClass]}"%>"
+	data-button-class="<%="#{locals[:buttonClass]}"%>"
 	data-state="<%="#{locals[:state]}"%>"
 >
 	<%=I18n.t locals[:button_text]%>

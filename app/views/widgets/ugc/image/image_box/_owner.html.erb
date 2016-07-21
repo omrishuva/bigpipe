@@ -1,24 +1,46 @@
-<div class="imageBox">
-	<%=cl_image_tag(locals[:value], width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage"  )%>
-	
-	<span class="<%="#{current_direction}imageOverlayText"%>"><%=locals[:overlayText]%></span>
-	
-	<div class="<%="#{current_direction}imageUploadButton"%>" >
-		
-		<input 
-			type="file"
-			data-widget-name="<%="#{locals[:widgetName]}"%>"
-			data-element-name="<%=locals[:elementName]%>"
-			data-object-name="<%=locals[:objectName]%>"
-			data-object-id="<%="#{locals[:objectId]}"%>"
-			data-key="<%="#{locals[:key]}"%>"
-			data-placeholder="<%="#{locals[:placeholder]}"%>"
-			data-overlay-text="<%="#{locals[:overlayText]}"%>"
-			value="<%="#{locals[:value]}"%>"
-			class="imageUploadInput"
-		/>
+<%=cl_image_tag(locals[:value], width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage"  )%>
 
-		<i class="fa fa-camera" aria-hidden="true"><%=I18n.t :update_image%></i>
-	</div>
+<%if locals[:editableOverlayText]%>
 
+	<%= render 'widgets/ugc/text/widget', 
+    		locals: {  
+    							widgetName: "text_input_box",
+    							elementName: "textInputBox",
+    							objectName: "activities", 
+    							objectId: @activity.id,
+    							key: "title",
+    							value: @activity.title,
+    							state: params[:state],
+    							isWidgetOwner: @is_widget_owner,
+    							placeholder: "name_it",
+    							textClass: "#{current_direction}imageOverlayText activityTitle",
+    							buttonClass: "imageOveralyButton"
+    							
+    						}
+    %>
+
+<%else%>
+	<span class="imageOverlayText"%>
+	 <%=locals[:overlayText]%>
+	</span>
+<%end%>
+
+<div class="<%="#{current_direction}imageUploadButton"%>" >
+	
+	<input 
+		type="file"
+		data-widget-name="<%="#{locals[:widgetName]}"%>"
+		data-element-name="<%=locals[:elementName]%>"
+		data-object-name="<%=locals[:objectName]%>"
+		data-object-id="<%="#{locals[:objectId]}"%>"
+		data-key="<%="#{locals[:key]}"%>"
+		data-placeholder="<%="#{locals[:placeholder]}"%>"
+		data-overlay-text="<%="#{locals[:overlayText]}"%>"
+		value="<%="#{locals[:value]}"%>"
+		class="imageUploadInput widgetControl"
+		id="<%=locals[:objectId]%>"
+	/>
+
+	<i class="fa fa-camera" aria-hidden="true"><%=I18n.t :update_image%></i>
 </div>
+

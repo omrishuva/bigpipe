@@ -1,42 +1,47 @@
 $(document).ready ->
-	textWidgetControl("textAreaBox");
-	textWidgetControl("textInputBox");
-	imageWidgetControl();
+	loadWidgets();
 
 document.addEventListener 'loadWidgetListeners',(e) ->
-  textWidgetControl("textAreaBox");
-  textWidgetControl("textInputBox");
-  imageWidgetControl();
+  loadWidgets();
 
-textWidgetControl =( widgetName ) ->
-	$("[data-element-name='#{widgetName}'].widgetControl").click (e) ->
+loadWidgets = ->
+	widgetControls = $('.widgetControl')	 
+	for widgetControl in widgetControls
+	 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset )
+	 	textWidgetControl( selectorKey ) if widgetControl.dataset.widgetName in [ "text_area_box", "text_input_box"]
+		imageWidgetControl( selectorKey ) if widgetControl.dataset.widgetName == "image_box"
+
+buildWidgetSelectorKey = ( widgetData) ->
+	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}']"
+
+textWidgetControl =( selectorKey ) ->
+	$( selectorKey ).click (e) ->
 	  widget = {}
 	  widget = e.target.dataset
-	  cancel( widget ) if widget.state == 'cancel'	  
-	  widget['data'] = save( widget ) if widget.state == 'save'
+	  textWidgetControlCancel( widget ) if widget.state == 'cancel'	  
+	  widget['data'] = textWidgetControlSave( widget ) if widget.state == 'save'
 	  $.ajax
 	    type: 'GET'
 	    url: "/widgets/text_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 	    data: widget
    		success: (data) ->
-      	textWidgetControl( widgetName );
+      	textWidgetControl( selectorKey );
 
-save = ( widget ) ->
+textWidgetControlSave = ( widget ) ->
 	location.search = ""
 	if widget.widgetName == "text_area_box"
-		CKEDITOR.instances.editor1.getData()
+		CKEDITOR.instances["editor#{widget.objectId}"].getData()
 	else
 		$("input[name='#{widget.widgetName}']").val()
 
-
-cancel = ( widget ) ->
+textWidgetControlCancel = ( widget ) ->
 	location.search = ""
 	if widget.widgetName == "text_area_box"
-		CKEDITOR.instances.editor1.destroy()
-		$( ".textAreaBox" ).hide();
+		CKEDITOR.instances["editor#{widget.objectId}"].destroy()
+		$( "##{widget.objectId}.textAreaBox" ).hide();
 
-imageWidgetControl = ->
-  $('.imageUploadInput').change (e) ->
+imageWidgetControl = ( selectorKey ) ->
+  $( selectorKey ).change (e) ->
     formData = new FormData
     file = e.target.files[0]
     widget = e.target.dataset
@@ -49,4 +54,4 @@ imageWidgetControl = ->
         processData: false
         contentType: false
         success: (data) ->
-          onImageUpload();
+          imageWidgetControl( selectorKey );

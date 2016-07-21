@@ -50,6 +50,10 @@ module ApplicationHelper
       :edit
     end
   end
-  
+
+  def is_widget_owner( locals )
+    return false if locals[:isWidgetOwner] == false
+    locals[:user].id == current_user.id
+  end
 
 end
