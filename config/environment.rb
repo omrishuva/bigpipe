@@ -5,7 +5,7 @@ def define_env
 	elsif ENV["GAE_MODULE_VERSION"] && ENV["GAE_MODULE_VERSION"].split("-")[0] != "master" 
 		"staging"
 	else
-		"development"
+		"production"
 	end
 end
 

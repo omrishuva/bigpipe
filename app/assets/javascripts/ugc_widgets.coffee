@@ -5,11 +5,18 @@ document.addEventListener 'loadWidgetListeners',(e) ->
   loadWidgets();
 
 loadWidgets = ->
-	widgetControls = $('.widgetControl')	 
-	for widgetControl in widgetControls
-	 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset )
-	 	textWidgetControl( selectorKey ) if widgetControl.dataset.widgetName in [ "text_area_box", "text_input_box"]
-		imageWidgetControl( selectorKey ) if widgetControl.dataset.widgetName == "image_box"
+	widgetControls = $('.widgetControl')
+	if widgetControls.length > 0
+		for widgetControl in widgetControls
+		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset )
+		 	switch widgetControl.dataset.widgetName  
+		 		when "text_area_box" 
+		 			textWidgetControl( selectorKey )
+		 		when	"text_input_box"
+		 			textWidgetControl( selectorKey )
+		 		when "image_box"
+			 		imageWidgetControl( selectorKey )
+				
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}']"
