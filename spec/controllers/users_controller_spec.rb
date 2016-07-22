@@ -152,7 +152,7 @@ RSpec.describe UsersController do
     it "should generate a matching pipedrive deal" do
       post :fb_lead, @fb_lead_params
       new_user = User.last
-      expect(new_user.pipedrive_person.deals[0].weighted_value).to eq 270
+      expect(new_user.pipedrive_person.deals[0].value).to eq 270
     end
 
   end
