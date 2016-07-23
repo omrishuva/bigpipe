@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
   
   def user_is_admin_or_owner
-    params[:user_id] == current_user.id || current_user.admin?
+    params[:user_id].to_s == current_user.id.to_s || current_user.admin?
   end
   
   def controller_permissions
