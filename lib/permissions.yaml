@@ -4,7 +4,7 @@ controllers:
     add_service_provider: admin
     profile: consumer
   activities:
-    new_activity: service_provider
+    new_activity: owner_or_admin
 
 views:
   user_navtabs:

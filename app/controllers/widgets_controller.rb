@@ -74,7 +74,7 @@ class WidgetsController < ApplicationController
 	end
 
 	def is_widget_owner
-		 @object.owners.include?( current_user.try(:id) )
+		@object.owners.map(&:to_s).include?( current_user.try(:id).to_s )
 	end
 
 	######################################################
