@@ -86,15 +86,15 @@ body
 .btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }
 .btnBrand1{ @extend .btnBrand; background-color: #5D33F4; color: #FFB941;  }
-.btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #FFB941; }
+.smallBtn{ @extend .smallText; @extend .btn-sm; }
 .btnBrandHover{ text-decoration: none; }
 .btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #5D33F4 ; }
 .btnBrand1:active{  background-color: #5D33F4; color: #FFB941; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #AF3245 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
-.save{ color: #00cc66; }
-.cancel{ color: #FF4040; }
+// .save{ color: #00cc66; }
+// .cancel{ color: #FF4040; }
 
 .fileUploadButton
 {
@@ -132,6 +132,8 @@ body
 // .fixedGridItem{ @extend .gridItem;  position: fixed; }
 .textAreaBox { min-width: 20%;  min-height: 15em; }
 .thinBorder{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px;  }
+.thinUnderline{ border-radius: 5px;  border-bottom-style: solid; border-bottom-color: #e5e5e5; border-bottom-width: 1px;  }
+
 .widgetControl{ margin: 5px; text-decoration: none !important;  font-weight: bold;}
 .textAreaBoxTextLocation{  margin-left: 20px; margin-top: 10px;  }
 .textAreaBoxTextBeforeEdit{ @extend .textAreaBoxTextLocation; opacity: 0.3; }
@@ -153,9 +155,10 @@ body
                     text-align: center; 
                     top: 0px;
                 }
-.imageOveralyButton{ position: absolute; top: 2.5em;  }
-.imageOveralySave{ @extend .save; left: 5%; }
-.imageOveralyCancel{ @extend .cancel; left: 20%; }
+
+.imageOveralyButton{ position: absolute; top: 4.5em; @extend .smallBtn; }
+.imageOveralySave{ left: 5%; }
+.imageOveralyCancel{ left: 20%; }
 .widgetTextInput{ opacity: 1 !important; }
 .activityTitle{ font-size: 130%; }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
@@ -193,7 +196,7 @@ body
     top: 0px;
     left: 0px;
 }
-
+.chosen-select{ width: 12em; }
 
 .userProfileNavItem{ @extend .nav-item;  } 
 .rtluserProfileNavItem{ @extend .userProfileNavItem; margin-bottom: -1px; }

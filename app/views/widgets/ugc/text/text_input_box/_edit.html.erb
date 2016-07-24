@@ -8,13 +8,13 @@ placeholder="<%=locals[:placeholder]%>"
 />
 <%=render "widgets/ugc/text/button", 
 					locals: locals.merge( 
-																class: "#{locals[:buttonClass]} #{current_direction.to_s} imageOveralySave", 
+																class: "#{locals[:buttonClass]} #{current_direction.to_s} imageOveralySave btn btn-success", 
 																state: "save", 
 																button_text: "save" )
 %>
 <%=render "widgets/ugc/text/button", 
 					locals: locals.merge( 
-																class: "#{locals[:buttonClass]}  #{current_direction.to_s} imageOveralyCancel", 
+																class: "#{locals[:buttonClass]}  #{current_direction.to_s} imageOveralyCancel btn btn-danger", 
 																state: "cancel", 
 																button_text: "cancel" )
 %>

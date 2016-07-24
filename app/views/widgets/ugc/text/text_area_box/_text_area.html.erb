@@ -5,13 +5,13 @@
 <div class="<%="#{current_direction.to_s}"%>" >
 	<%=render "widgets/ugc/text/button", 
 						locals: locals.merge( 
-																	class: "save", 
+																	class: "btn btn-success smallBtn", 
 																	state: "save", 
 																	button_text: "save" )
 	%>
 	<%=render "widgets/ugc/text/button", 
 						locals: locals.merge( 
-																	class: "cancel", 
+																	class: "btn btn-danger smallBtn", 
 																	state: "cancel", 
 																	button_text: "cancel" )
 	%>

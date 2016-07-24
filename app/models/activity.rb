@@ -1,6 +1,6 @@
 class Activity < Entity
 
-	attr_accessor :id, :user_id ,:title, :locale, :gender, :cover_image_id, :about_text, :created_by, :owner_id, :created_at, :updated_at
+	attr_accessor :id, :user_id ,:title, :locale, :gender, :cover_image_id, :about_text, :categories, :tags, :levels, :created_by, :owner_id, :created_at, :updated_at
 
 	def self.create( params )
     self.new(params).save

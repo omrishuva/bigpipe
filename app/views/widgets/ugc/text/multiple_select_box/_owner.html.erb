@@ -1,0 +1,9 @@
+<p>
+<%= I18n.t locals[:placeholder]%>
+<%=render "widgets/ugc/text/button", 
+			locals: locals.merge( 
+															class: "fa fa-pencil #{current_direction.to_s}", 
+															state: "edit", 
+															button_text: "edit" )
+%>
+</p>

@@ -55,5 +55,13 @@ module ApplicationHelper
     return false if locals[:isWidgetOwner] == false
     locals[:user].id == current_user.id
   end
+  
+  def widget_replace_selector( widget_data )
+    "##{widget_data[:objectId]}_#{widget_data[:key]}.#{widget_data[:elementName]}"
+  end
+
+  def widget_id(locals)
+    "#{locals[:objectId]}_#{locals[:key]}"
+  end
 
 end

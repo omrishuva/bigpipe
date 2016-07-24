@@ -1,1 +1,1 @@
-$("#" +  "<%= escape_javascript(@widget_data[:objectId].to_s)%>" + "." + "<%= escape_javascript(@widget_data[:elementName])%>").replaceWith("<%= escape_javascript( render 'widgets/ugc/image/widget', locals: @widget_data ) %>");
+$("<%= escape_javascript( widget_replace_selector(@widget_data) )%>").replaceWith("<%= escape_javascript( render 'widgets/ugc/image/widget', locals: @widget_data ) %>");

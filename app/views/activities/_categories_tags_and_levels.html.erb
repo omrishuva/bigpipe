@@ -1,0 +1,46 @@
+<%= render 'widgets/ugc/text/widget', 
+		locals: {  
+							widgetName: "multiple_select_box",
+							elementName: "multipleSelectBox",
+							objectName: "activities", 
+							objectId: @activity.id,
+							key: "categories",
+							value: @activity.categories,
+							state: params[:state],
+							isWidgetOwner: @is_widget_owner,
+							placeholder: "categories"
+
+						}
+%>
+</br>
+
+<%= render 'widgets/ugc/text/widget', 
+	locals: {  
+						widgetName: "multiple_select_box",
+						elementName: "multipleSelectBox",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "levels",
+						value: @activity.levels,
+						state: params[:state],
+						isWidgetOwner: @is_widget_owner,
+						placeholder: "levels"
+
+					}
+%>
+</br>
+<%= render 'widgets/ugc/text/widget', 
+		locals: {  
+							widgetName: "multiple_select_box",
+							elementName: "multipleSelectBox",
+							objectName: "activities", 
+							objectId: @activity.id,
+							key: "tags",
+							value: @activity.tags,
+							state: params[:state],
+							isWidgetOwner: @is_widget_owner,
+							placeholder: "tags"
+
+						}
+%>
+

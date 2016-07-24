@@ -14,12 +14,14 @@ loadWidgets = ->
 		 			textWidgetControl( selectorKey )
 		 		when	"text_input_box"
 		 			textWidgetControl( selectorKey )
+		 		when	"multiple_select_box"
+		 			textWidgetControl( selectorKey )
 		 		when "image_box"
 			 		imageWidgetControl( selectorKey )
 				
 
 buildWidgetSelectorKey = ( widgetData) ->
-	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}']"
+	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
 
 textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
@@ -38,19 +40,18 @@ textWidgetControl =( selectorKey ) ->
 	    data: widget
    		success: (data) ->
       	textWidgetControl( selectorKey );
+      	$(".chosen-select").chosen()
 
 textWidgetControlSave = ( widget ) ->
-	location.search = ""
 	if widget.widgetName == "text_area_box"
 		CKEDITOR.instances["editor#{widget.objectId}"].getData()
 	else
 		$("input[name='#{widget.widgetName}']").val()
 
 textWidgetControlCancel = ( widget ) ->
-	location.search = ""
 	if widget.widgetName == "text_area_box"
 		CKEDITOR.instances["editor#{widget.objectId}"].destroy()
-		$( "##{widget.objectId}.textAreaBox" ).hide();
+		$( "##{widget.objectId}_#{widget.key}.textAreaBox" ).hide();
 
 imageWidgetControl = ( selectorKey ) ->
   $( selectorKey ).change (e) ->

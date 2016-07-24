@@ -1,0 +1,14 @@
+<%= render 'widgets/ugc/text/widget', 
+	locals: {  
+						widgetName: "text_area_box",
+						elementName: "textAreaBox",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "about_text",
+						value: @activity.about_text,
+						state: params[:state],
+						isWidgetOwner: @is_widget_owner,
+						placeholder: "describe_your_activity"
+
+					}
+%>

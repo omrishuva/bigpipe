@@ -2,50 +2,19 @@
 	
 	<div class="col-lg-8 gridItem">
 		<div class="row">
-			<%= render 'widgets/ugc/image/widget', 
-	    		locals: {  
-	    							widgetName: "image_box",
-	    							elementName: "imageBox",
-	    							objectName: "activities", 
-	    							objectId: @activity.id,
-	    							key: "cover_image_id",
-	    							value: @activity.cover_image,
-	    							state: params[:state],
-	    							isWidgetOwner: @is_widget_owner,
-	    							placeholder: "update_image",
-	    							editableOverlayText: true,
-	    							overlayText: @activity.title
-	    							
-	    						}
-	    %>
+			<%= render 'cover_image'%>
 	  </div>
-
-		<div class="row">
-		 	<div class="dropdown-divider"></div>
-		 	<%= render 'widgets/ugc/text/widget', 
-	    		locals: {  
-	    							widgetName: "text_area_box",
-	    							elementName: "textAreaBox",
-	    							objectName: "activities", 
-	    							objectId: @activity.id,
-	    							key: "about_text",
-	    							value: @activity.about_text,
-	    							state: params[:state],
-	    							isWidgetOwner: @is_widget_owner,
-	    							placeholder: "describe_your_activity"
-
-	    						}
-	    %>
-  	</div>
   	</br>
+
   	<div class="row">
-  		<div class="dropdown-divider"></div>
-	  	<p>Tags and Categories</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<h4>Properties<i class="fa fa-tags" aria-hidden="true"></i></h4>
+			</br>
+  		<%=render 'categories_tags_and_levels'%>
+		</div>
+
+  	<div class="row">
+		 	<div class="dropdown-divider"></div>
+		 	<%= render 'description'%>
   	</div>
 
 	</div>

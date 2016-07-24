@@ -51,7 +51,9 @@ en:
  create_your_first_activity: "Create your first activity now" 
  name_it: "Name it" 
  describe_your_activity: "Describe it in few words"
-
+ categories: "Categories"
+ tags: "Tags"
+ levels: "Levels"
  locations: "Locations"
  events: "Events"
  stats: "Stats"
