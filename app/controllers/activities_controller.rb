@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
 
 	def activity
 		@activity = Activity.find( params[:activity_id] )
-		@is_widget_owner = @activity.user_id == current_user.try(:id).to_s
+		@is_widget_owner = @activity.user_id.to_s == current_user.try(:id).to_s
 		params[:state] = nil if params[:state] == 'edit' && !@is_widget_owner
 	end
 

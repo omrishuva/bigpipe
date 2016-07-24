@@ -74,6 +74,18 @@ class Entity
   def owners
   	[id]
   end
+  
+  def upload_image( image_file, image_field, cropping_params = nil )
+  	default_cropping_params = { width: 700, height: 400, crop: :thumb, gravity: :face }
+  	cropping_params = cropping_params || default_cropping_params
+  	cloudinary_image = Cloudinary::Uploader.upload( image_file, eager: cropping_params )
+  	Cloudinary::Uploader.destroy( self.send( image_field ) ) if self.send( image_field ).present?
+  	self.update( image_field => cloudinary_image["public_id"] )
+  end
+  
+  def reload!
+  	self.class.find( self.id )
+  end
 
 	class << self
 		

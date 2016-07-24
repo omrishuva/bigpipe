@@ -25,10 +25,15 @@ textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 	  widget = {}
 	  widget = e.target.dataset
-	  textWidgetControlCancel( widget ) if widget.state == 'cancel'	  
-	  widget['data'] = textWidgetControlSave( widget ) if widget.state == 'save'
+	  requestMethod = 'GET'
+	  switch widget.state
+	  	when 'cancel'
+	  		textWidgetControlCancel( widget ) 
+	  	when 'save'
+		  	requestMethod = 'POST'
+		  	widget['data'] = textWidgetControlSave( widget )
 	  $.ajax
-	    type: 'GET'
+	    type: requestMethod
 	    url: "/widgets/text_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 	    data: widget
    		success: (data) ->

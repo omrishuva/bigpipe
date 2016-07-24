@@ -68,5 +68,9 @@ RSpec.describe Entity do
   	book = Book.new(@valid_params)
   	expect( book.persisted? ).to be false
   end
+  
+  # it "should set entity owners field" do
+    
+  # end
 
 end

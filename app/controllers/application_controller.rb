@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   
   def allowed?
     return true unless controller_permissions
-    return user_is_admin_or_owner if action_permissions == "owner_or_admin"
+    return user_is_owner_or_admin if action_permissions == "owner_or_admin"
     if action_permissions.nil?
       true
     else
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def user_is_admin_or_owner
+  def user_is_owner_or_admin
     params[:user_id].to_s == current_user.id.to_s || current_user.admin?
   end
   

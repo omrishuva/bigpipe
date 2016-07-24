@@ -1,17 +1,17 @@
 <%=cl_image_tag(locals[:value], secure: true, width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage"  )%>
 
-<%if locals[:editableOverlayText]%>
+<%if locals[:editableOverlayText].present?%>
 
 	<%= render 'widgets/ugc/text/widget', 
     		locals: {  
     							widgetName: "text_input_box",
     							elementName: "textInputBox",
     							objectName: "activities", 
-    							objectId: @activity.id,
+    							objectId: locals[:objectId],
     							key: "title",
-    							value: @activity.title,
+    							value: locals[:overlayText],
     							state: params[:state],
-    							isWidgetOwner: @is_widget_owner,
+    							isWidgetOwner: locals[:isWidgetOwner],
     							placeholder: "name_it",
     							textClass: "#{current_direction}imageOverlayText activityTitle",
     							buttonClass: "imageOveralyButton"
@@ -20,9 +20,11 @@
     %>
 
 <%else%>
+
 	<span class="imageOverlayText"%>
 	 <%=locals[:overlayText]%>
 	</span>
+
 <%end%>
 
 <div class="<%="#{current_direction}imageUploadButton"%>" >
@@ -36,6 +38,7 @@
 		data-key="<%="#{locals[:key]}"%>"
 		data-placeholder="<%="#{locals[:placeholder]}"%>"
 		data-overlay-text="<%="#{locals[:overlayText]}"%>"
+		data-editable-overlay-text="<%="#{locals[:editableOverlayText]}"%>"
 		value="<%="#{locals[:value]}"%>"
 		class="imageUploadInput widgetControl"
 		id="<%=locals[:objectId]%>"
