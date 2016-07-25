@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class Entity 
+class Entity
   	
 	include ActiveModel::Model
 	extend ActiveModel::Callbacks
@@ -18,7 +18,7 @@ class Entity
 	    self.created_at = Time.now unless persisted?
 	    if valid? self
 	      entity = to_entity
-	      entity.key.namespace = Rails.env.to_s
+	      entity.key.namespace = self.class.namespace
 	      entity["updated_at"] = Time.now
 	      $datastore.save entity
 	      self.id = entity.key.id
@@ -49,7 +49,7 @@ class Entity
   
   def set_key_properties(entity)
   	entity.key.kind = self.class.name
-  	entity.key.namespace = Rails.env.to_s
+  	entity.key.namespace = self.class.namespace
   	entity.key.id = self.id.to_i if self.id
   	entity
   end
@@ -89,6 +89,10 @@ class Entity
 
 	class << self
 		
+		def namespace
+			Rails.env.to_s
+		end
+
 		def from_entity( entity )
 	    if entity
 		    object = self.new
@@ -116,7 +120,7 @@ class Entity
 
 	  def find( id )
 	    key = $datastore.entity.key
-	    key.kind = self.name; key.namespace = Rails.env.to_s; key.id = id.to_i
+	    key.kind = self.name; key.namespace = self.namespace; key.id = id.to_i
 	    entity = $datastore.find key
 	    from_entity( entity ) if entity
 	  end
@@ -153,7 +157,7 @@ class Entity
 		end
 
 		def run_query( query_obj )
-			$datastore.run( query_obj, namespace: Rails.env.to_s )
+			$datastore.run( query_obj, namespace: self.namespace )
 		end
 
 		def new_entity( properties = { } )
@@ -161,7 +165,7 @@ class Entity
 											properties.each do |k,v|
 												e[k.to_s] = v
 											end
-											e.key.namespace = Rails.env.to_s
+											e.key.namespace = self.namespace
  									 end
 			entity
 		end

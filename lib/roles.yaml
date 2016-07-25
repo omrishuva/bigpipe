@@ -2,7 +2,7 @@ roles:
   consumer: 1
   service_provider: 2
   admin: 3
-
+  
 roles_mapping:
   1: consumer
   2: service_provider
@@ -15,4 +15,3 @@ services:
 services_mapping:
  1: trainer
  2: location_owner
-

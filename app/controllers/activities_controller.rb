@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
 		activity.save
 		redirect_to "/activities/#{activity.id}"
 	end
-
+	
 	def activity
 		@activity = Activity.find( params[:activity_id] )
 		@is_widget_owner = @activity.user_id.to_s == current_user.try(:id).to_s
