@@ -1,27 +1,27 @@
 ---
 development:
-  cloud_name: play
+  cloud_name: kommunal
   api_key: '535774731394177' 
   api_secret: g2Tn8Fb4_PWPWXG16P2WnWBcw5E
   enhance_image_tag: true
   static_image_support: false
 
 staging:
-  cloud_name: play
+  cloud_name: kommunal
   api_key: '535774731394177' 
   api_secret: g2Tn8Fb4_PWPWXG16P2WnWBcw5E
   enhance_image_tag: true
   static_image_support: true
 
 production:
-  cloud_name: play
+  cloud_name: kommunal
   api_key: '535774731394177'
   api_secret: g2Tn8Fb4_PWPWXG16P2WnWBcw5E
   enhance_image_tag: true
   static_image_support: true
 
 test:
-  cloud_name: play
+  cloud_name: kommunal
   api_key: '535774731394177'
   api_secret: g2Tn8Fb4_PWPWXG16P2WnWBcw5E
   enhance_image_tag: true
