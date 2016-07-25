@@ -17,7 +17,7 @@
 /public/assets/
 /config/database.yml
 /gcd_dataset_directory/
-/config/initializers/play-prod.json
+/config/initializers/kommunal.json
 *.db
 *.sqlite3
 .bundle/*

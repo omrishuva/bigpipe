@@ -61,7 +61,7 @@ class AppVersion
 		end
 		
 		def app_name
-			"Play"
+			"kommunal"
 		end
 
 	end
