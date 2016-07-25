@@ -1,6 +1,6 @@
 # require './current_env'
 require 'gcloud'
-$gcloud = Gcloud.new "play-prod", "config/initializers/play-prod.json"
+$gcloud = Gcloud.new "kommunal-1383", "config/initializers/kommunal.json"
 $datastore = $gcloud.datastore
 $bigquery = $gcloud.bigquery
 $storage = $gcloud.storage

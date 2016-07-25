@@ -35,6 +35,6 @@ automatic_scaling:
 
 env_variables:
   FORMATION: web=1
-  pipedrive_api_key: 39079b99d1beb5e08121fb4b7c4833e50550d4c5
+  # pipedrive_api_key: 39079b99d1beb5e08121fb4b7c4833e50550d4c5
   plivo_auth_id: MAMZK2YJM5NDKYNDUZZD
   plivo_auth_token: NDc0NmJmOWIyMWM5Y2RmMjhkMjVkYTUzY2RhMGJj
