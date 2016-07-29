@@ -1,0 +1,10 @@
+<div class="searchBox">
+  <input id="pac-input" class="controls" type="text"
+  placeholder="<%="#{I18n.t locals[:placeholder]}"%>" >
+  <%=render "widgets/ugc/text/button", 
+						locals: locals.merge( 
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+</div>

@@ -55,6 +55,7 @@ en:
  tags: "Tags"
  levels: "Levels"
  locations: "Locations"
+ enter_location: "Enter a Location"
  events: "Events"
  stats: "Stats"
  my_schedule: "My Schedule"

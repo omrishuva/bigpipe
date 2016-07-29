@@ -33,6 +33,9 @@ gem 'pipedrive-api-client'
 gem 'cloudinary'
 gem 'compass-rails'
 gem 'chosen-rails'
+# gem 'gmaps_geocoding'
+# gem 'gmaps4rails'
+# gem 'underscore-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

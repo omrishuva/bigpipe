@@ -1,0 +1,21 @@
+ <div class=googleMapContainer>
+  		<%=render "widgets/ugc/text/button", 
+					locals: locals.merge( 
+																	class: "TextAreaBoxEditButton fa fa-pencil #{current_direction.to_s}", 
+																	state: "edit", 
+																	button_text: "edit" )
+		%>
+  <div id="map"></div>
+</div>
+
+<script>
+  function initMap() {
+    var event;
+    event = new Event('initMap');
+    document.dispatchEvent(event);
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsLV8D8FUiZuP1XvXZTQkzTKzzj5fgCPc&libraries=places&callback=initMap"
+    async defer>
+</script>

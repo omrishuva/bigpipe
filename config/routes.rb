@@ -27,13 +27,14 @@ Rails.application.routes.draw do
 	#activities	
 	get '/new_activity/:user_id'											 										 	   => 'activities#new_activity'
 	get '/activities/:activity_id' 						                             	   => 'activities#activity'
-
+	get '/map_test' 																													 => 'activities#map_test'
 	#widgets
-	get   '/widgets/text_widget_control/:widgetName/:objectName/:key'          => 'widgets#text_widget_control'
-	post  '/widgets/text_widget_control/:widgetName/:objectName/:key'          => 'widgets#text_widget_control'
-	get   '/widgets/image_widget_control/:widgetName/:objectName/:key'         => 'widgets#image_widget_control'
-	post  '/widgets/image_widget_control/:widgetName/:objectName/:key'         => 'widgets#image_widget_control'
-
+	get   '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
+	post  '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
+	get   '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
+	post  '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
+	get   '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
+	post  '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
 
 	#service_providers
 	get  '/service_provider/:spt/new'         				 											  => 'users#add_service_provider'

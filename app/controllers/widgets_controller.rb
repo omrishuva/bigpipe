@@ -1,6 +1,6 @@
 class WidgetsController < ApplicationController
 
-	skip_before_action :verify_authenticity_token, only: [ :image_widget_control, :text_widget_control ]
+	skip_before_action :verify_authenticity_token, only: [ :image_widget_control, :text_widget_control, :location_widget_control ]
 
 	#Text#####################################################
 
@@ -62,6 +62,31 @@ class WidgetsController < ApplicationController
 			overlayText: image_widget_data[:overlayText],
 			placeholder: image_widget_data[:placeholder],
 			editableOverlayText: image_widget_data[:editableOverlayText]
+		}
+	end
+	#Location#####################################################
+	
+	def location_widget_control
+		@object = get_object( params[:objectName], params[:objectId] )
+		@object.update(params[:key] => JSON.parse( params[:data] ).symbolize_keys ) if params[:state] == "save"
+		@widget_data = prepare_location_widget_data
+
+		respond_to do |format|
+      format.js { }
+    end
+
+	end
+	
+	def prepare_location_widget_data
+		{
+			widgetName: params[:widgetName],
+			elementName: params[:elementName],
+			objectName: @object.class.name.downcase.pluralize, 
+			objectId: @object.id, 
+			key: params[:key],
+			value: @object.send( params[:key] ),
+			isWidgetOwner: is_widget_owner,
+			placeholder: params[:placeholder]
 		}
 	end
 

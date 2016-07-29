@@ -53,7 +53,7 @@ class User < Entity
   end
 
   def activities
-    Activity.where( [{ k: "user_id", v: id, op: "=" }] )
+    Activity.where( [{ k: "user_id", v: id.to_s, op: "=" }] )
   end
 
 	protected

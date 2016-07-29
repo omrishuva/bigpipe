@@ -1,0 +1,13 @@
+<%= render 'widgets/ugc/location/widget', 
+  locals: {  
+            widgetName: "location",
+            elementName: "location",
+            objectName: "activities", 
+            objectId: @activity.id,
+            key: "location",
+            value: @activity.location,
+            state: params[:state],
+            isWidgetOwner: @is_widget_owner,
+            placeholder: "enter_location"            
+          }
+%>

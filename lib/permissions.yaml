@@ -10,7 +10,7 @@ views:
   user_navtabs:
     permissions:
       about_me: ["admin", "service_provider"]
-      my_activities: [ "trainer" ]
+      my_activities: [ "trainer", "tour_guide" ]
       my_locations: ["location_owner"]
       my_schedule: ["consumer", "service_provider"]
       goals: ["consumer"]

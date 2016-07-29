@@ -19,8 +19,10 @@
   </head>
 
   <body>
-    <%=render "shared/scripts/fb_sdk"%>
-    <%=render "shared/components/modals/signin_modal"%>
+    <%unless current_user%>
+      <%=render "shared/scripts/fb_sdk"%>
+      <%=render "shared/components/modals/signin_modal"%>
+    <%end%>
     <%=render "shared/components/navigation/navigation_bar"%>
     <%=render "shared/components/navigation/user_menu"%>
     <div class="container mainContainer">

@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_direction
-    I18n.locale == :he ? :rtl : :ltr
+    @current_direction ||= I18n.locale == :he ? :rtl : :ltr
   end
 
   helper_method :current_direction

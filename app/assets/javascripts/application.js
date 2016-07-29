@@ -28,6 +28,8 @@
 //= require bootstrap-sprockets
 //= require chosen-jquery
 //= require profile_navtabs
+//= require widgets
+//= require map_widget
 //= require ugc_widgets
 //= require app
 

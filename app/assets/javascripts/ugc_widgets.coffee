@@ -18,6 +18,8 @@ loadWidgets = ->
 		 			textWidgetControl( selectorKey )
 		 		when "image_box"
 			 		imageWidgetControl( selectorKey )
+			 	when "location"
+			 		locationWidgetControl( selectorKey )
 				
 
 buildWidgetSelectorKey = ( widgetData) ->
@@ -68,3 +70,29 @@ imageWidgetControl = ( selectorKey ) ->
         contentType: false
         success: (data) ->
           imageWidgetControl( selectorKey );
+
+locationWidgetControl = ( selectorKey ) ->
+	$( selectorKey ).click (e) ->
+		widget = e.target.dataset
+		switch widget.state
+	  	when 'cancel'
+	  		textWidgetControlCancel( widget ) 
+	  	when 'save'
+		  	requestMethod = 'POST'
+		  	widget['data'] = JSON.stringify( getLocationGeometryPoints() )
+		$.ajax
+	    type: requestMethod
+	    url: "/widgets/location_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+	    data: widget
+   		success: (data) ->
+      	locationWidgetControl( selectorKey );
+
+getLocationGeometryPoints = ->
+	{ 'longitude': place.geometry.location.lng(), 'latitude': place.geometry.location.lat() }
+
+
+
+
+
+
+
