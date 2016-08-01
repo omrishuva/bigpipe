@@ -1,6 +1,6 @@
 require 'pry'
 require "readline"
-require './config/application'
+require './config/initializers/gcloud'
 require './app/models/entity'
 
 class AppVersion < Entity
