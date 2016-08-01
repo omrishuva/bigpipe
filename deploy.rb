@@ -6,6 +6,9 @@ require './app/models/entity'
 class AppVersion < Entity
 	
 	class << self
+		def namespace
+			"app_versions"
+		end
 
 		def deploy!
 			answer = user_deployment_approval
