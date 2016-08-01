@@ -9,8 +9,9 @@ class AppVersion < Entity
 	attr_accessor :id, :created_at, :version_number, :branch, :developer
 
 	class << self
+		
 		def namespace
-			"app_versions"
+			app_name
 		end
 
 		def deploy!
