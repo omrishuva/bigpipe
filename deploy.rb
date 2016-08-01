@@ -6,6 +6,8 @@ require './app/models/entity'
 
 class AppVersion < Entity
 	
+	attr_accessor :id, :created_at, :version_number, :branch, :developer
+
 	class << self
 		def namespace
 			"app_versions"
@@ -29,18 +31,18 @@ class AppVersion < Entity
 		end
 
 		def create_new_version_number
-			binding.pry
 			#last_version_query = $datastore.query.kind(app_name).where( "branch", "=", branch ).order("created_at", :desc).limit(1)
-			app_version = AppVersion.last #$datastore.run( last_version_query, namespace: "app_versions" )[0]["version_number"] rescue 0
-			new_version_number = app_version + 1
-			new_app_version_entity =  $datastore.entity app_name do |e|
-																	e["created_at"] = Time.now.utc
-																	e["version_number"] = new_version_number
-																	e["branch"] = branch
-																	e["developer"] = `whoami`
-																	e.key.namespace = "app_versions"
-																end
-			$datastore.save(new_app_version_entity)[0]["version_number"]
+			app_version = AppVersion.last.to_i #$datastore.run( last_version_query, namespace: "app_versions" )[0]["version_number"] rescue 0
+			new_app_version = AppVersion.new( created_at: Time.now.utc, :version_number: (app_version + 1), branch: branch, developer: `whoami`  )
+			binding.pry
+			# new_app_version_entity =  $datastore.entity app_name do |e|
+			# 														e["created_at"] = Time.now.utc
+			# 														e["version_number"] = new_version_number
+			# 														e["branch"] = branch
+			# 														e["developer"] = `whoami`
+			# 														e.key.namespace = "app_versions"
+			# 													end
+			# $datastore.save(new_app_version_entity)[0]["version_number"]
 		end
 
 		def run_gcloud_sdk_deploy_commands
@@ -72,6 +74,7 @@ class AppVersion < Entity
 
 	end
 end
+
 start_time = Time.now
 AppVersion.deploy!
 took = ((Time.now  - start_time)/60).round(2)
