@@ -1,49 +1,61 @@
 <div class="activityContainer">
 	
-	<div class="col-lg-8 gridItem">
-		<div class="row">
+	<div class="col-lg-12 gridItem">
+		<div class="col-lg-8 gridItem">
 			<%= render 'cover_image'%>
-	  </div>
-  	</br>
-
-  	<div class="row">
-			<h4><i class="fa fa-tags" aria-hidden="true"></i> Properties</h4>
-			</br>
-  		<%=render 'categories_tags_and_levels'%>
 		</div>
-
-  	<div class="row">
-		 	<div class="dropdown-divider"></div>
-		 	<%= render 'description'%>
-  	</div>
-
+		<div class="col-lg-4 gridItem">
+			<div class="scheduling">
+				<p>Scheduling & Booking</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			</div>
+		</div>	
 	</div>
 
-	<div class="col-lg-4 thinBorder gridItem">
-			<p>Scheduling</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			</br>
-			<p>Location</p>
-			
-<!-- 			<div style='width: 100%;'>
-	  		<div id="map" style='width: 100%; height: 400px;'></div>
-			</div> -->
+	<div class="col-lg-12 gridItem">
+		<h4><i class="fa fa-tags" aria-hidden="true"></i> Properties</h4>
+		<div class="dropdown-divider"></div>
+		</br>
+		<%=render 'categories_tags_and_levels'%>
+	</div>
 
+	<div class="col-lg-12 gridItem">
+		<div class="dropdown-divider"></div>
+		<%= render 'description'%>
+	</div>
+			
+
+	<div class="col-lg-12 gridItem">
+	  	<p>
+	  	<%=cl_image_tag("Map_Marker-100_skxapo.png", :width=>30, :crop=>"scale")%>
+	  	</p>
+	  	<div class="dropdown-divider"></div>
+			<%= render 'widgets/ugc/location/widget', 
+				  locals: {  
+				            widgetName: "location",
+				            elementName: "location",
+				            objectName: "activities", 
+				            objectId: @activity.id,
+				            key: "place_id",
+				            value: @activity.place_id,
+				            state: params[:state],
+				            isWidgetOwner: @is_widget_owner,
+				            placeholder: "enter_location"            
+				          }
+						%>
 	</div>
 
 	<div class="col-lg-12">
 		<div class="dropdown-divider"></div>
-  	<div class="aboutOrganizer">
-			<p>About the Activity Organizer</p>
+		<div class="aboutOrganizer">
 			<%= render "users/#{current_direction.to_s}_about_me", locals: { user: @activity.user, isWidgetOwner: false } %>
 		</div>
-  </div>
-
+	</div>
 </div>

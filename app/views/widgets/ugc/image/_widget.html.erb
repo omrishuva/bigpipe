@@ -1,26 +1,27 @@
-<%if widget_state(locals) == :owner_before_commit %>
+<%state = widget_state(locals) %>
+<%if state == :owner_before_commit %>
 
 	<div class=<%="#{locals[:elementName]}"%> id=<%=widget_id(locals)%>  >
 		<%=render "widgets/ugc/image/#{locals[:widgetName]}/owner", locals: locals%>
 	</div>
 
-<%elsif widget_state(locals) == :owner_after_commit %>
+<%elsif state == :owner_after_commit %>
 
 	<div class=<%="#{locals[:elementName]}"%> id=<%=widget_id(locals)%>  >
 		<%=render "widgets/ugc/image/#{locals[:widgetName]}/owner", locals: locals%>
 	</div>
 
-<%elsif widget_state(locals) == :user_before_commit %>
+<%elsif state == :user_before_commit %>
 
 	<div class=<%="#{locals[:elementName]}"%> id=<%=widget_id(locals)%>  >
 		<%=render "widgets/ugc/image/#{locals[:widgetName]}/user", locals: locals%>
 	</div>
 
-<%elsif widget_state(locals) == :user_after_commit %>
+<%elsif state == :user_after_commit %>
 
 	<div class=<%="#{locals[:elementName]}"%> id=<%=widget_id(locals)%>  >
 		<%=render "widgets/ugc/image/#{locals[:widgetName]}/user", locals: locals%>	
 	</div>
-<%elsif widget_state(locals) == :edit %>
+<%elsif state == :edit %>
 	<%=render "widgets/ugc/image/#{locals[:widgetName]}/owner", locals: locals%>
 <%end%>

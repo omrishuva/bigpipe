@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 	#activities	
 	get '/new_activity/:user_id'											 										 	   => 'activities#new_activity'
 	get '/activities/:activity_id' 						                             	   => 'activities#activity'
-	get '/map_test' 																													 => 'activities#map_test'
+
 	#widgets
 	get   '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
 	post  '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'

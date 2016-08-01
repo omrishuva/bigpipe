@@ -42,7 +42,7 @@ textWidgetControl =( selectorKey ) ->
 	    data: widget
    		success: (data) ->
       	textWidgetControl( selectorKey );
-      	$(".chosen-select").chosen()
+      	$(".chosen-select").chosen( )
 
 textWidgetControlSave = ( widget ) ->
 	if widget.widgetName == "text_area_box"
@@ -74,21 +74,30 @@ imageWidgetControl = ( selectorKey ) ->
 locationWidgetControl = ( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 		widget = e.target.dataset
+		widget['loadScriptAfterServerResponse'] = true
+		shouldSendRequest = true
 		switch widget.state
 	  	when 'cancel'
+	  		widget['loadScriptAfterServerResponse'] = false
 	  		textWidgetControlCancel( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
-		  	widget['data'] = JSON.stringify( getLocationGeometryPoints() )
-		$.ajax
-	    type: requestMethod
-	    url: "/widgets/location_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
-	    data: widget
-   		success: (data) ->
-      	locationWidgetControl( selectorKey );
+		  	widget['data'] = getPlaceid(); 	
+		  	widget['loadScriptAfterServerResponse'] = false
+		  	if !getPlaceid()
+				  window.alert( "Please choose a location for your activity before saving" );
+				  shouldSendRequest = false
+					
+		if shouldSendRequest
+			$.ajax
+		    type: requestMethod
+		    url: "/widgets/location_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+		    data: widget
+	   		success: (data) ->
+	      	locationWidgetControl( selectorKey );
 
-getLocationGeometryPoints = ->
-	{ 'longitude': place.geometry.location.lng(), 'latitude': place.geometry.location.lat() }
+getPlaceid = ->
+	currentPlace.place_id if currentPlace
 
 
 

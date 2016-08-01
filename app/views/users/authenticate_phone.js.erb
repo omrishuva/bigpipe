@@ -1,6 +1,5 @@
 <%if current_user.phone_verified %>
 	$('#signupModal').modal('hide');
-	$("#navItems").replaceWith("<%= escape_javascript( render 'shared/components/navigation/nav_items') %>")
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");
 <%elsif !current_user.has_phone? %>
 	$("#enterPhoneTemplate").replaceWith("<%= escape_javascript( render 'shared/components/enter_phone_template') %>")

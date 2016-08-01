@@ -7,4 +7,12 @@
 																	state: "save", 
 																	button_text: "save" )
 	%>
+	<% if locals[:state] == "edit" %>
+		<%=render "widgets/ugc/text/button", 
+							locals: locals.merge( 
+																		class: "btn btn-danger smallBtn", 
+																		state: "cancel", 
+																		button_text: "cancel" )
+		%>
+	<%end%>
 </div>

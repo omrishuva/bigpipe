@@ -1,7 +1,7 @@
- <div class=googleMapContainer>
+<div class=googleMapContainer>
   		<%=render "widgets/ugc/text/button", 
 					locals: locals.merge( 
-																	class: "TextAreaBoxEditButton fa fa-pencil #{current_direction.to_s}", 
+																	class: "fa fa-pencil #{current_direction.to_s}", 
 																	state: "edit", 
 																	button_text: "edit" )
 		%>
@@ -9,13 +9,17 @@
 </div>
 
 <script>
-  function initMap() {
+  function initMap( ) {
     var event;
-    event = new Event('initMap');
+    event = new CustomEvent( 'initMap', { 'detail':{ 'place_id': "<%=locals[:value]%>" } } );
     document.dispatchEvent(event);
   }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsLV8D8FUiZuP1XvXZTQkzTKzzj5fgCPc&libraries=places&callback=initMap"
-    async defer>
-</script>
+<%unless params[:loadScriptAfterServerResponse] == "false" %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaxhT2SJvK6MwGjYHB7pZB0Al0IYTknw&libraries=places&callback=initMap"
+      async defer>
+  </script>
+<%else%>
+  <script>initMap()</script>
+<%end%>

@@ -4,13 +4,7 @@
 </div>
 
 <script>
-  function initMap() {
-    var event;
-    event = new Event('initMap');
-    document.dispatchEvent(event);
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsLV8D8FUiZuP1XvXZTQkzTKzzj5fgCPc&libraries=places&callback=initMap"
-    async defer>
+  var event;
+  event = new CustomEvent( 'initMap', { 'detail':{ 'place_id': "<%=locals[:value]%>" } } );
+  document.dispatchEvent(event);
 </script>

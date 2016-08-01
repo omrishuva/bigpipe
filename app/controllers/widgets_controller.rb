@@ -58,6 +58,7 @@ class WidgetsController < ApplicationController
 			objectId: @object.id, 
 			key: image_widget_data[:key],
 			value: @object.send( image_widget_data[:key] ),
+			state: params[:state],
 			isWidgetOwner: is_widget_owner,
 			overlayText: image_widget_data[:overlayText],
 			placeholder: image_widget_data[:placeholder],
@@ -68,7 +69,7 @@ class WidgetsController < ApplicationController
 	
 	def location_widget_control
 		@object = get_object( params[:objectName], params[:objectId] )
-		@object.update(params[:key] => JSON.parse( params[:data] ).symbolize_keys ) if params[:state] == "save"
+		@object.update(params[:key] => params[:data] ) if params[:state] == "save"
 		@widget_data = prepare_location_widget_data
 
 		respond_to do |format|
@@ -85,7 +86,9 @@ class WidgetsController < ApplicationController
 			objectId: @object.id, 
 			key: params[:key],
 			value: @object.send( params[:key] ),
+			state: params[:state],
 			isWidgetOwner: is_widget_owner,
+			loadScriptAfterServerResponse: params[:loadScriptAfterServerResponse],
 			placeholder: params[:placeholder]
 		}
 	end
