@@ -1,13 +1,9 @@
 require 'pry'
 require "readline"
-#!/usr/bin/env ruby
-APP_PATH = File.expand_path('../../config/application', __FILE__)
-require_relative '../config/boot'
-require 'rails/commands'
-# require './config/application'
-# require './app/models/entity'
+require './config/application'
+require './app/models/entity'
 
-class AppVersion < entity
+class AppVersion < Entity
 	
 	class << self
 
