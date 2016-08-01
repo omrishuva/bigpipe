@@ -25,6 +25,7 @@ class AppVersion
 
 		def create_new_version_number
 			last_version_query = $datastore.query.kind(app_name).where( "branch", "=", branch ).order("created_at", :desc).limit(1)
+			binding.pry
 			app_version =  $datastore.run( last_version_query, namespace: "app_versions" )[0]["version_number"] rescue 0
 			new_version_number = app_version + 1
 			new_app_version_entity =  $datastore.entity app_name do |e|
