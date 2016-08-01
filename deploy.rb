@@ -1,8 +1,9 @@
 require 'pry'
 require "readline"
 require './config/initializers/gcloud'
+require './app/models/entity'
 
-class AppVersion
+class AppVersion < entity
 	
 	class << self
 
