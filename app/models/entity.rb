@@ -157,7 +157,6 @@ class Entity
 		end
 
 		def run_query( query_obj )
-			binding.pry
 			$datastore.run( query_obj, namespace: self.namespace )
 		end
 
