@@ -76,9 +76,9 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.digest = true
 
-  config.assets.compress = false
-  # config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  # config.assets.compress = true
+  config.assets.js_compressor = :uglifier
+  config.assets.css_compressor = :sass
   
 
   config.action_mailer.default_url_options = { :host => 'http://www.activity.market' }
