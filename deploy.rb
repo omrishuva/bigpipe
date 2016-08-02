@@ -6,7 +6,7 @@ require './app/models/entity'
 
 class AppVersion < Entity
 	
-	attr_accessor :id, :created_at, :app, :version_number, :branch, :developer
+	attr_accessor :id, :app, :version_number, :branch, :developer, :created_at, :updated_at
 
 	class << self
 		

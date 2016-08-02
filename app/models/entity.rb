@@ -12,8 +12,6 @@ class Entity
 	end
 
 	define_model_callbacks :save, :create, :update, :initialize, :destroy
-	
-	DEPRECATED_FIELDS = []
 
 	def save
 		run_callbacks :save do
@@ -101,7 +99,6 @@ class Entity
 		    object.id = entity.key.id
 		    entity.properties.to_hash.each do |name, value|
 		      begin
-		      	binding.pry
 			      object.send( "#{name}=", value)
 					rescue => e
 						raise e unless remove_deprecated_fields( entity, name )
