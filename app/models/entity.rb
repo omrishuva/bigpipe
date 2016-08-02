@@ -101,6 +101,7 @@ class Entity
 		    object.id = entity.key.id
 		    entity.properties.to_hash.each do |name, value|
 		      begin
+		      	binding.pry
 			      object.send( "#{name}=", value)
 					rescue => e
 						raise e unless remove_deprecated_fields( entity, name )
