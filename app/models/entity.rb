@@ -12,7 +12,9 @@ class Entity
 	end
 
 	define_model_callbacks :save, :create, :update, :initialize, :destroy
-	DEPRECATED_FIELDS = [ ]
+	
+	DEPRECATED_FIELDS = []
+
 	def save
 		run_callbacks :save do
 	    self.created_at = Time.now unless persisted?
