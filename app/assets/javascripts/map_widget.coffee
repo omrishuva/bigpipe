@@ -11,7 +11,7 @@ initMap = ( placeId ) ->
    
 setCurrentUserLocation = ->
   @currentPlace = null
-  if navigator.geolocation
+  if navigator.geolocation && not(window.location.protocol == "http:") 
     navigator.geolocation.getCurrentPosition (position) ->
       radarSearch( { lat: position.coords.latitude, lng: position.coords.longitude } )
   else
