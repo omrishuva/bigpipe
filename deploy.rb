@@ -32,7 +32,7 @@ class AppVersion < Entity
 		end
 
 		def create_new_version_number
-			app_version = (AppVersion.last.to_i + 1)
+			app_version = (AppVersion.last.app_version.to_i + 1)
 			AppVersion.create( created_at: Time.now.utc, app: app_name, version_number: app_version, branch: branch, developer: `whoami`  )
 			app_version
 		end
