@@ -2,7 +2,7 @@ document.addEventListener 'initMap',(e) ->
   initMap( e.detail );
 
 initMap = ( placeId ) ->
-  @map = new (google.maps.Map)( document.getElementById( 'map' ), maxZoom: 25, scaleControl: false, scrollwheel: false )
+  @map = new (google.maps.Map)( document.getElementById( 'map' ), maxZoom: 20, scaleControl: false, scrollwheel: false )
   @placesService = new (google.maps.places.PlacesService)( @map )
   if placeId
     findPlaceById( placeId.place_id )

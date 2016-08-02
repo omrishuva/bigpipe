@@ -122,40 +122,40 @@ RSpec.describe UsersController do
 
   end
 
-  describe "POST fb_lead" do
+  # describe "POST fb_lead" do
     
-    before :all do
-      @fb_lead_params = { name: "test user", email: "testuser@play.org.il", phone: "0526333333", fb_id: 111111, campaign: "Tennis", media_source: "facebook", created_at: Time.now.to_i  }
-    end
+  #   before :all do
+  #     @fb_lead_params = { name: "test user", email: "testuser@play.org.il", phone: "0526333333", fb_id: 111111, campaign: "Tennis", media_source: "facebook", created_at: Time.now.to_i  }
+  #   end
     
-    before :each do
-      User.destroy_all
-      User.any_instance.stub(:pipeline_id).and_return( { leads: 3 } ) #test pipeline
-    end
+  #   before :each do
+  #     User.destroy_all
+  #     User.any_instance.stub(:pipeline_id).and_return( { leads: 3 } ) #test pipeline
+  #   end
 
-    after :each do
-      User.last.destroy
-    end
+  #   after :each do
+  #     User.last.destroy
+  #   end
 
-    it "should create a user record in the database" do
-      users_count = User.all.size
-      post :fb_lead, @fb_lead_params
-      expect(User.all.size).to eq ( users_count + 1 )
-    end
+  #   it "should create a user record in the database" do
+  #     users_count = User.all.size
+  #     post :fb_lead, @fb_lead_params
+  #     expect(User.all.size).to eq ( users_count + 1 )
+  #   end
     
-    it "should generate a matching pipedrive person" do
-      post :fb_lead, @fb_lead_params
-      new_user = User.last
-      expect(new_user.pipedrive_person.id).to eq new_user.pipedrive_id
-    end
+  #   it "should generate a matching pipedrive person" do
+  #     post :fb_lead, @fb_lead_params
+  #     new_user = User.last
+  #     expect(new_user.pipedrive_person.id).to eq new_user.pipedrive_id
+  #   end
 
-    it "should generate a matching pipedrive deal" do
-      post :fb_lead, @fb_lead_params
-      new_user = User.last
-      expect(new_user.pipedrive_person.deals[0].value).to eq 270
-    end
+  #   it "should generate a matching pipedrive deal" do
+  #     post :fb_lead, @fb_lead_params
+  #     new_user = User.last
+  #     expect(new_user.pipedrive_person.deals[0].value).to eq 270
+  #   end
 
-  end
+  # end
 
   describe "GET users/:role" do
 

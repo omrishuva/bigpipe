@@ -19,7 +19,7 @@ module AuthenticationUtils
         user
       elsif user && user.from_facebook?
         user
-      elsif user && user.from_play?
+      elsif user && user.from_email?
         if user && user.password_hash == BCrypt::Engine.hash_secret(params[:password], user.password_salt)
           user
         else
@@ -74,7 +74,7 @@ module AuthenticationUtils
     auth_provider == 'facebook'
   end
   
-  def from_play?( entity = nil )
+  def from_email?( entity = nil )
     auth_provider == 'play'
   end
 

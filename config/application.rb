@@ -16,7 +16,7 @@ require 'bcrypt'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Play
+module ActivityMarket
   class Application < Rails::Application
   	config.autoload_paths += Dir["#{config.root}/lib/**/"]
   	config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
