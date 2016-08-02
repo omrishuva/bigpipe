@@ -15,7 +15,7 @@ setCurrentUserLocation = ->
     navigator.geolocation.getCurrentPosition (position) ->
       radarSearch( { lat: position.coords.latitude, lng: position.coords.longitude } )
   else
-    window.alert( 'Geolocation is not supported by this browser.' )
+    radarSearch( { lat: 32.0864361, lng: 34.7863192 } )
 
 radarSearch = ( coords ) ->
   @placesService.nearbySearch( { location: coords, radius: 1 }, placeServiceCallback )

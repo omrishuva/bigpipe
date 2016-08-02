@@ -58,7 +58,6 @@ class WidgetsController < ApplicationController
 			objectId: @object.id, 
 			key: image_widget_data[:key],
 			value: @object.send( image_widget_data[:key] ),
-			state: params[:state],
 			isWidgetOwner: is_widget_owner,
 			overlayText: image_widget_data[:overlayText],
 			placeholder: image_widget_data[:placeholder],
