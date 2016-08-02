@@ -31,7 +31,7 @@ gem 'google-api-client'
 gem "foreman"
 gem 'pipedrive-api-client'
 gem 'cloudinary'
-gem 'compass-rails'
+# gem 'compass-rails'
 gem 'chosen-rails'
 # gem 'gmaps_geocoding'
 # gem 'gmaps4rails'
