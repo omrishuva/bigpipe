@@ -2,7 +2,7 @@
 <ul class="nav nav-pills UserProfileNavbar">
 	<% available_navtabs.each do |navtab| %>
 		<li class="<%=" #{current_direction} userProfileNavItem"%>" >
-			<%link_class = (navtab == default_active_action ? "nav-link active userNavtabLink" : "nav-link userNavtabLink") %>
+			<%link_class = (navtab == default_active_action ? "active userNavtabLink" : "userNavtabLink") %>
 			<a class="<%=link_class%>" id="<%=navtab%>" name="<%=navtab%>" href="#" data-user-id="<%="#{params[:user_id]}"%>">
 				<%= I18n.t navtab %>
 			</a>

@@ -10,61 +10,85 @@ body
 @media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 30%;}
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  }   
+                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
                           }
 
 @media (min-width: 360px)  { .mainContainer { z-index: -1; font-size: 75%;  margin-top: 27.5%;}
                              .ltrUserSidebar{  right: 0;  }
                              .rtlUserSideBar{  left: 0;  }  
+                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 375px) { 
                             .mainContainer { z-index: -1; font-size: 80%;  margin-top: 25%;}
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  }  
+                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 411px) { 
                             .mainContainer { z-index: -1; font-size: 90%;  margin-top: 24%;} 
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  } 
+                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 414px)  { 
                               .mainContainer { z-index: -1; font-size: 90%;  margin-top: 24%;}
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  } 
+                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 435px)   { 
                               .mainContainer { z-index: -1; font-size: 95%;  margin-top: 22%;     } 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
+                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 768px)   { 
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 13.5%;} 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
+                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 800px)   { 
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 12.5%;} 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
+                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
                             }
 
 @media (min-width: 1000px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 7.5%;}
-                            .ltrUserSidebar{  right: 15%;  }
-                            .rtlUserSideBar{  left: 15%;  }
+                            .ltrUserSidebar{  right: 5%;  }
+                            .rtlUserSideBar{  left: 10%;  }
+                            .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
+                            .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                            }
 
 @media (min-width: 1500px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 5%;} 
-                            .ltrUserSidebar{  right: 15%;  }
+                            .ltrUserSidebar{  right: 10%;  }
                             .rtlUserSideBar{  left: 15%;  }
+                            .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
+                            .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
+                            .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             }
 .hidden{ visibility: hidden; }
+
+.ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
+.ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
+
+.rtlNavBarLogo { @extend .NavBarLogo;  right: 0.5em; }
+.rtlInfo{ top: 2px; right: 50%; position: absolute; }
+.rtlUserLogin{ top: 2px; right: 10%; position: absolute; }
+
+// .ltrCallUs{ top: 2px; left: 50%; position: absolute; }
+// .rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
+
 .userSideBarStyle { 
                     width: 13em; 
                     top: 5em; 
@@ -78,15 +102,9 @@ body
                     position: fixed; 
                     text-align: center; 
                     opacity:0.95;
-                    overflow: scroll;
                 }
 
 .signinLoader{  display: none; }
-
-.NavBarLogo{ position: absolute; width: 10em; height: 4em;  } 
-// width: 4.5em; height: 4em; position: absolute;
-.ltrNavBarLogo { @extend .NavBarLogo; top:5px; left: 15px; }
-.rtlNavBarLogo { @extend .NavBarLogo; top:5px; right: 15px; }
 
 .navBarProfilePic {  
                     border-radius: 2px; 
@@ -96,15 +114,6 @@ body
                     width: 30px; 
                     height: 30px;
                   }
-
-.ltrInfo{ top: 2px; left: 30%; position: absolute; }
-.ltrCallUs{ top: 2px; left: 50%; position: absolute; }
-.ltrUserLogin{ top: 2px; left: 75%;  position: absolute;  }
-
-.rtlInfo{ top: 2px; right: 30%; position: absolute; }
-.rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
-.rtlUserLogin{ top: 2px; right: 75%; position: absolute;  }
-
 
 .dropdown-item{ color: #5D33F4; }
 .userMenuSection{ display: inline; }
@@ -129,7 +138,6 @@ body
     background-color: #fff;
 }
 .block{ display: inline-block; }
-.nav-link{margin-top: 1.5em; }
 .btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }
 .btnBrand1{ @extend .btnBrand; background-color: #5D33F4; color: #FFB941;  }
