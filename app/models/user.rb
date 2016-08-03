@@ -45,7 +45,7 @@ class User < Entity
   end
 
   def cover_image
-    cover_image_cloudinary_id || "http://placehold.it/700x400"
+    cover_image_cloudinary_id || "https://placehold.it/700x400"
   end
 
   def save_about_text(field, data)

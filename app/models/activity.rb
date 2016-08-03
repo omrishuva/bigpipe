@@ -21,7 +21,7 @@ class Activity < Entity
   end
 
   def cover_image
-    cover_image_id || "http://placehold.it/700x400"
+    cover_image_id || "https://placehold.it/700x400"
   end
 
 end

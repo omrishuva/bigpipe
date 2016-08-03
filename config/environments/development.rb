@@ -25,7 +25,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
-
+  config.force_ssl = false
   config.serve_static_files = false
   config.assets.debug = true
   config.assets.digest = false
