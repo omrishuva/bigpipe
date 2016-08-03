@@ -65,7 +65,7 @@ setMarker =  ( place ) ->
     anchorPoint: new (google.maps.Point)(0, -29))
   
   marker.setIcon
-      url: "http://res.cloudinary.com/kommunal/image/upload/v1470046197/Map_Pin-100_ysareo.png"
+      url: "https://res.cloudinary.com/kommunal/image/upload/v1470046197/Map_Pin-100_ysareo.png"
       size: new (google.maps.Size)(71, 71)
       origin: new (google.maps.Point)(0, 0)
       anchor: new (google.maps.Point)(17, 34)
