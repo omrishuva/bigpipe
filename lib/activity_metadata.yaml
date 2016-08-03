@@ -1,12 +1,14 @@
 categories:
-  - City Tours
-  - Trips
-  - Nightlife
-  - Special Events
-  - Few Days Trip
-  - Workshops
-  - Extreme Sports
-  - Fitness & Movement
+  city_tours:
+
+  trips:
+
+  nightlife:
+  special_events:
+  workshops:
+  lectures:
+  extreme_sports:
+  fitness_and_Movement:
 
 tags:
   - Food
@@ -26,7 +28,6 @@ tags:
   - Theatre
   - Shows
   - Story Telling
-  - Lecture
   - For Famlies
   - For Couples
   - For Singles

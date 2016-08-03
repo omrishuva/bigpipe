@@ -158,6 +158,7 @@ class UsersController < ApplicationController
   end
   
   def home_page
+    @activities = Activity.all
   end
 
 end

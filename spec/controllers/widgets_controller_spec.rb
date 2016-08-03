@@ -19,6 +19,7 @@ RSpec.describe WidgetsController do
                       objectId: @user.id,
                       key: "about_text",
                       placeholder: "name_it",
+                      placeholderClass: "textArea",
                       textClass: "ltrimageOverlayText activityTitle",
                       buttonClass: "imageOveralyButton",
                       state: "edit"
