@@ -26,6 +26,7 @@ class WidgetsController < ApplicationController
 			state: params[:state],
 			isWidgetOwner: is_widget_owner,
 			placeholder: params[:placeholder],
+			placeholderClass: params[:placeholderClass],
 			editableOverlayText: params[:editableOverlayText],
 			textClass: params[:textClass],
 			buttonClass: params[:buttonClass]

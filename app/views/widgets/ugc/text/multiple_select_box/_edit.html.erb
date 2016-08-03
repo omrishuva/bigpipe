@@ -1,11 +1,11 @@
-<p><%=locals[:placeholder].capitalize%></p>
-<select multiple class="<%="chosen-select"%>" data-placeholder="<%="#{locals[:placeholder].capitalize}"%>">
+<p class="<%="#{locals[:placeholderClass]}"%>" ><%=locals[:placeholder].capitalize%></p>
+<select multiple class="select2" data-placeholder="<%="#{locals[:placeholder].capitalize}"%>">
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="opel">Opel</option>
   <option value="audi">Audi</option>
 </select>
-
+</br>
 <%=render "widgets/ugc/text/button", 
 						locals: locals.merge( 
 																	class: "btn btn-success smallBtn", 

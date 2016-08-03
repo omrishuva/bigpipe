@@ -5,38 +5,47 @@
 			<%= render 'cover_image'%>
 		</div>
 		<div class="col-lg-4 gridItem">
-			<div class="scheduling">
-				<p>Scheduling & Booking</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-				<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			</div>
-		</div>	
+			<%=cl_image_tag("Settings-30_m8vu9e.png", :width=>20, :crop=>"scale")%>
+			</br></br>
+			<%=render 'categories_tags_and_levels'%>
+		</div>
 	</div>
 
 	<div class="col-lg-12 gridItem">
-		<h4><i class="fa fa-tags" aria-hidden="true"></i> Properties</h4>
 		<div class="dropdown-divider"></div>
 		</br>
-		<%=render 'categories_tags_and_levels'%>
+		<div class="col-lg-6 scheduling">
+			<%=cl_image_tag("Calendar-30_mkoubs.png", :width=>20, :crop=>"scale")%>
+			<%=cl_image_tag("Clock-30_jppzvm.png", :width=>20, :crop=>"scale")%>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+		</div>
+		<div class="col-lg-6 pricing">
+			<%=cl_image_tag("Price_Tag-30_b3gkga.png", :width=>20, :crop=>"scale")%>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+		</div>
 	</div>
 
 	<div class="col-lg-12 gridItem">
-		<div class="dropdown-divider"></div>
 		<%= render 'description'%>
 	</div>
 			
 
 	<div class="col-lg-12 gridItem">
-	  	<p>
-	  	<%=cl_image_tag("Map_Marker-100_skxapo.png", :width=>30, :crop=>"scale")%>
-	  	</p>
-	  	<div class="dropdown-divider"></div>
+
 			<%= render 'widgets/ugc/location/widget', 
 				  locals: {  
 				            widgetName: "location",

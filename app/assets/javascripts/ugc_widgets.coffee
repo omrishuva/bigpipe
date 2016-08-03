@@ -42,7 +42,7 @@ textWidgetControl =( selectorKey ) ->
 	    data: widget
    		success: (data) ->
       	textWidgetControl( selectorKey );
-      	$(".chosen-select").chosen( )
+      	$(".select2").select2({ theme: "bootstrap"});
 
 textWidgetControlSave = ( widget ) ->
 	if widget.widgetName == "text_area_box"
@@ -57,11 +57,12 @@ textWidgetControlCancel = ( widget ) ->
 
 imageWidgetControl = ( selectorKey ) ->
   $( selectorKey ).change (e) ->
-    formData = new FormData
-    file = e.target.files[0]
-    widget = e.target.dataset
-    formData.append( 'image', file, file.name )
-    formData.append( 'widget', JSON.stringify(widget) )
+    formData = new FormData;
+    file = e.target.files[0];
+    widget = e.target.dataset;
+    formData.append( 'image', file, file.name );
+    formData.append( 'widget', JSON.stringify(widget) );
+    initUploadImageLoader();
     $.ajax
         type: 'POST'
         url: "/widgets/image_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -70,6 +71,11 @@ imageWidgetControl = ( selectorKey ) ->
         contentType: false
         success: (data) ->
           imageWidgetControl( selectorKey );
+
+initUploadImageLoader = ->
+	cameraIcon = $('.fa-camera');
+	cameraIcon.text("");
+	cameraIcon.addClass('fa-spin');
 
 locationWidgetControl = ( selectorKey ) ->
 	$( selectorKey ).click (e) ->

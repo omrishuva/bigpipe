@@ -26,7 +26,7 @@
 //= require jquery
 //= require tether
 //= require bootstrap-sprockets
-//= require chosen-jquery
+//= require select2
 //= require profile_navtabs
 //= require map_widget
 //= require ugc_widgets
