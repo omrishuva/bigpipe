@@ -22,6 +22,5 @@ module ActivityMarket
   	config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
   	config.i18n.default_locale = :en
   	config.active_job.queue_adapter = :pub_sub_queue
-  	# config.force_ssl = true
   end
 end
