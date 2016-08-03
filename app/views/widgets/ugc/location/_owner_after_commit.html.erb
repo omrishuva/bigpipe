@@ -1,5 +1,5 @@
 <div class=googleMapContainer>
-  <%=cl_image_tag("Map_Marker-30_uvmgwm.png", :width=>20, :crop=>"scale")%>
+  <%=cl_image_tag("Map_Marker-30_uvmgwm.png", :width=>20, :crop=>"scale", secure: true)%>
 	<%=render "widgets/ugc/text/button", 
 			locals: locals.merge( 
 															class: "fa fa-pencil #{current_direction.to_s}", 

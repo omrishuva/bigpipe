@@ -33,6 +33,11 @@ automatic_scaling:
     target_utilization: 0.8
 # [END scaling]
 
+handlers:
+- url: /.*
+  script: IGNORED
+  secure: always
+
 env_variables:
   FORMATION: web=1
   # pipedrive_api_key: 39079b99d1beb5e08121fb4b7c4833e50550d4c5

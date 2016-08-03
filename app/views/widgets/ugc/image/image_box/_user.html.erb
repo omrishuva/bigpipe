@@ -1,5 +1,5 @@
 <div class="imageBox">
-	<%=cl_image_tag(locals[:value], width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage"  )%>
+	<%=cl_image_tag(locals[:value], width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage", secure: true  )%>
 	<span class="<%="#{current_direction}imageOverlayText"%>"><%=locals[:overlayText]%></span>
 	
 </div>
