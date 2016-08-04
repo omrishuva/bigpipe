@@ -14,6 +14,7 @@ loadListeners = ( exclude ) ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
+  createNewActivty();
   logOut();
 
 
@@ -187,5 +188,19 @@ onFileUpload = ->
     splitedFileName = fileName.split("\\")
     fileName = splitedFileName[ (splitedFileName.length - 1) ]
     $('.fileName').text(fileName)
-  
+
+
+createNewActivty = ->
+  $('#createNewActivty').click (e) ->
+    userId = e.target.dataset.userId
+    if userId == undefined || userId == ""
+      openSignupModal();
+    else
+      showLoader();
+      window.location.href = "/new_activity/#{userId}"
+
+openSignupModal = ->
+  $('.modal#signupModal').modal('toggle') 
+
+
 

@@ -3,16 +3,18 @@
   	var sideBar;
   	sideBar = $('#userSideBar');
   	if (sideBar.is(":visible")) {
-    	return sideBar.hide();
+    	 sideBar.hide();
+       $('.userSideBarShadow').hide();
   	} 
   	else {
-    	return sideBar.show();
+    	 sideBar.show();
+       $('.userSideBarShadow').show();
   	}
 	};
 </script>
-
+<div class="userSideBarShadow"></div>
 <div class="btn-group userDropdown" id="userDropdown" onclick="openUsersideBar();">
-  <button data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     &#9776;
     <span class = "sr-only">Toggle navigation</span>
   </button>

@@ -2,11 +2,7 @@
 	<%if locals[:user].activities.present? %>
 		
 		<div class="container">
-			
-			<a class="btnBrand1" href="<%="/new_activity/#{current_user.id}"%>"%>
-			<i class="fa fa-plus-square-o" aria-hidden="true"></i>
-				<%=I18n.t :create_new_activity %>
-			</a>
+			<%= render "shared/buttons/create_new_activity"%>			
 			</br></br>
 
 			<% locals[:user].activities.in_groups_of(2,false) do |activity_group|%>		

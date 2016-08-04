@@ -1,5 +1,8 @@
-<p class="<%="#{locals[:placeholderClass]}"%>" id=<%=widget_id(locals)%> ><%=locals[:placeholder].capitalize%></p>
-<select multiple class="select2" id="<%="#{input_id(locals)}"%>" data-placeholder="<%="#{locals[:placeholder].capitalize}"%>">
+<select 
+	multiple 
+	class="select2" 
+	id="<%="#{input_id(locals)}"%>"
+	data-placeholder="<%="#{(I18n.t locals[:placeholder])}"%>">
 
 	<%locals[:selectOptions].each do |option| %>
 		<%if locals[:value] && locals[:value].include?( option )%>

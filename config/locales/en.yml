@@ -53,6 +53,7 @@ en:
  name_it: "Name it" 
  describe_your_activity: "Describe it in few words"
  categories: "Categories"
+ select_3_categories: "Select up to 3 categories"
  tags: "Tags"
  levels: "Levels"
  location: "Location"

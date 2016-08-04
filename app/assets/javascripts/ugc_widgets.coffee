@@ -64,8 +64,7 @@ textWidgetControl =( selectorKey ) ->
 	    data: widget
    		success: (data) ->
       	textWidgetControl( selectorKey );
-      	$(".select2").select2({ theme: "bootstrap"});
-      	console.log( requestMethod )
+      	$(".select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt(widget.maxSelections) });
 
 textWidgetControlSave = ( widget ) ->
 	switch widget.widgetName
@@ -89,7 +88,7 @@ imageWidgetControl = ( selectorKey ) ->
     widget = e.target.dataset;
     formData.append( 'image', file, file.name );
     formData.append( 'widget', JSON.stringify(widget) );
-    initUploadImageLoader();
+    initUploadImageLoader(widget);
     $.ajax
         type: 'POST'
         url: "/widgets/image_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -99,10 +98,9 @@ imageWidgetControl = ( selectorKey ) ->
         success: (data) ->
           imageWidgetControl( selectorKey );
 
-initUploadImageLoader = ->
-	cameraIcon = $('.fa-camera');
-	cameraIcon.text("");
-	cameraIcon.addClass('fa-spin');
+initUploadImageLoader = ( widget ) ->
+	$('.fa-camera').addClass('fa-spin');
+	$("##{widget.objectId}updateCoverImageText").text("Updating Image")
 
 locationWidgetControl = ( selectorKey ) ->
 	$( selectorKey ).click (e) ->

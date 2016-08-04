@@ -7,7 +7,7 @@ body
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   overflow-x: hidden;
 }
-
+a{ color: #056cf9; }
 @media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 30%;}
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  }   
@@ -68,6 +68,7 @@ body
                             .rtlUserSideBar{  left: 10%;  }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
+                            .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                            }
 
 @media (min-width: 1500px) { 
@@ -90,12 +91,32 @@ body
 // .ltrCallUs{ top: 2px; left: 50%; position: absolute; }
 // .rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
 
+.userDropdown:active{ color: #FFB941; }
+
+.userSideBarShadow{  
+                   border-style: solid;
+                   border-width: 0px;
+                   border-radius: 25px;
+                   border-color: #fff;
+                   min-width: 13em;
+                   min-height: 85px;
+                   background-color: #FFB941;
+                   display: none;
+                   z-index: -2000;
+                   position: absolute;
+                   text-align: center;
+                   opacity: 0.85;
+                   top: 0px;
+                   left: -71px;
+                  }
 .userSideBarStyle { 
                     width: 13em; 
                     top: 5em; 
                     border-style: solid; 
                     border-width: 1px; 
-                    border-radius: 2px; 
+                    // border-bottom-radius: 25px; 
+                    border-bottom-left-radius: 25px;
+                    border-bottom-right-radius: 25px;
                     border-color: #fff; 
                     background-color: #FFB941; 
                     display: none; 
@@ -127,8 +148,8 @@ body
 .largeText{ font-size: 120% }
 
 .navigationBar{  
-    background: #F7F7F7;
-    top: 0px;
+  background: #F7F7F7;
+  top: 0px;
 	width: 100%;
 	border-bottom: 1px solid #FFB941;
 	box-shadow: 4px 4px 10px #FFB941;
@@ -142,11 +163,12 @@ body
 .block{ display: inline-block; }
 .btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }
-.btnBrand1{ @extend .btnBrand; background-color: #5D33F4; color: #FFB941;  }
+.btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }
 .btnBrandHover{ text-decoration: none; }
-.btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #5D33F4 ; }
-.btnBrand1:active{  background-color: #5D33F4; color: #FFB941; }
+.btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #056cf9 ; }
+.btnBrand1:active{  background-color: #056cf9; color: #FFB941; }
+.btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #FFB941;  ; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #AF3245 ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
@@ -177,7 +199,7 @@ body
     top: 0px;
     left: 0px;
 }
-.tag{  font-weight: bold; background-color: #5bc0de; padding: 5px; border-radius: 20px; margin-bottom: 5px; }
+.tag{  font-weight: bold; background-color: #056cf9; color: #fff; padding: 5px; border-radius: 20px; margin-bottom: 5px; }
 .smallTag{ @extend .smallText; @extend .tag; }
 .mediumlTag{ @extend .mediumText;  @extend .tag; }
 .largeTag{ @extend .largeText; @extend .tag; }
@@ -204,6 +226,7 @@ body
 
 .userAboutText:hover{ text-decoration: none; opacity: 1;}
 
+// .coverImage{ display: block; margin: 0 auto; }
 .imageOverlayText { 
                     position: absolute;
                     width: 100%; 
@@ -237,8 +260,8 @@ body
     top: 5em; 
     font-weight: bold; 
 }
-.ltrimageUploadButton{ @extend .imageUploadButton; left: 15px; }
-.rtlimageUploadButton{ @extend .imageUploadButton; right: 15px; }
+.ltrimageUploadButton{ @extend .imageUploadButton; left: 5%; }
+.rtlimageUploadButton{ @extend .imageUploadButton; right: 5%; }
 
 .imageUploadButton:hover
 {
@@ -249,7 +272,7 @@ body
 .imageUploadInput
 {
     opacity: 0;
-    width: 250px;
+    width: 100%;
     height: 35px;
     position: absolute;
     top: 0px;

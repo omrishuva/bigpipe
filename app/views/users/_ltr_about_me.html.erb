@@ -7,6 +7,11 @@
                 objectName: "users", 
                 objectId: locals[:user].id, 
                 isWidgetOwner: is_widget_owner( locals ),
+                imageWidth: 700,
+                imageHeight: 400,
+                imageCrop: "thumb",
+                imageGravity: "face",
+                imageTagClass: "img-fluid",
                 key: "cover_image_cloudinary_id",
                 value: locals[:user].cover_image,
                 overlayText: locals[:user].name

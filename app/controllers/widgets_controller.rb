@@ -39,7 +39,8 @@ class WidgetsController < ApplicationController
 			placeholderClass: params[:placeholderClass],
 			editableOverlayText: params[:editableOverlayText],
 			textClass: params[:textClass],
-			buttonClass: params[:buttonClass]
+			buttonClass: params[:buttonClass],
+			maxSelections: params[:maxSelections]
 		}
 	end
 	
@@ -69,6 +70,10 @@ class WidgetsController < ApplicationController
 			objectId: @object.id, 
 			key: image_widget_data[:key],
 			value: @object.send( image_widget_data[:key] ),
+			imageWidth: image_widget_data[:imageWidth],
+			imageHeight: image_widget_data[:imageHeight],
+			imageCrop: image_widget_data[:imageCrop],
+			imageGravity: image_widget_data[:imageGravity],
 			isWidgetOwner: is_widget_owner,
 			overlayText: image_widget_data[:overlayText],
 			placeholder: image_widget_data[:placeholder],

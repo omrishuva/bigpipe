@@ -1,5 +1,4 @@
-<%=cl_image_tag( locals[:value], width: 700, height: 400, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage", secure: true)%>
-
+<%= render "widgets/ugc/image/image_box/image_tag", locals: locals%>
 <%if locals[:editableOverlayText].present?%>
 
 	<%= render 'widgets/ugc/text/widget', 
@@ -24,7 +23,7 @@
 	<span class="imageOverlayText"%>
 	 <%=locals[:overlayText]%>
 	</span>
-
+	
 <%end%>
 
 <div class="<%="#{current_direction}imageUploadButton"%>" >
@@ -39,11 +38,15 @@
 		data-placeholder="<%="#{locals[:placeholder]}"%>"
 		data-overlay-text="<%="#{locals[:overlayText]}"%>"
 		data-editable-overlay-text="<%="#{locals[:editableOverlayText]}"%>"
+		data-image-width="<%="#{locals[:imageWidth]}"%>"
+		data-image-height="<%="#{locals[:imageHeight]}"%>"
+		data-image-crop="<%="#{locals[:imageCrop]}"%>"
+		data-image-gravity="<%="#{locals[:imageGravity]}"%>"
 		value="<%="#{locals[:value]}"%>"
 		class="imageUploadInput widgetControl"
 		id="<%=locals[:objectId]%>"
 	/>
-
-	<i class="fa fa-camera" aria-hidden="true"><%=I18n.t :update_image%></i>
+	<i class="fa fa-camera" aria-hidden="true"></i>
+	<span id="<%="#{locals[:objectId]}updateCoverImageText"%>" ><%=I18n.t :update_image%><span>
 </div>
 

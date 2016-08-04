@@ -1,10 +1,10 @@
-<p class="<%=locals[:placeholderClass]%>"><%= I18n.t locals[:placeholder]%>
+<p class="<%=locals[:placeholderClass]%>">
 
 <%=render "widgets/ugc/text/button", 
 			locals: locals.merge( 
 															class: "fa fa-pencil #{current_direction.to_s} #{locals[:placeholderClass]}", 
 															state: "edit", 
-															button_text: "edit" )
+															button_text: locals[:placeholder] )
 %>
 
 
@@ -12,6 +12,5 @@
 <%if locals[:value]%>
 	<%locals[:value].each do |selected_option|%>
 		<span class="smallTag"><%=selected_option%></span>
-		</br>
 	<%end%>
 <%end%>

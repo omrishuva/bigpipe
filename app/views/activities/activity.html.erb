@@ -1,24 +1,17 @@
 <div class="activityContainer">
 	
+	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
+		<div class="col-lg-12 gridItem">
+			<input type="checkbox" data-on-text=Published data-off-text="Publish it" data-on-color="success"	data-size="mini" name="publish-activity">
+			<a class="btnBrand1 fa" href="#">Preview</a>
+		</div>
+	<%end%>
+	
 	<div class="col-lg-12 gridItem">
 		<div class="col-lg-8 gridItem">
-			<%= render 'cover_image'%>
+			<%= render 'cover_image', locals: { imageTagClass: "coverImage img-fluid" } %>
 		</div>
-		<div class="col-lg-4 gridItem thinBorder">
-			<%=cl_image_tag("Settings-30_m8vu9e.png", :width=>20, :crop=>"scale", secure: true)%>
-			</br></br>
-			<p class="mediumText">State
-			<input type="checkbox" data-on-text=published data-off-text=draft	data-size="mini" name="publish-activity">
-			</p>
-			</br>
-			<%=render 'categories_tags_and_levels'%>
-		</div>
-	</div>
-
-	<div class="col-lg-12 gridItem">
-		<div class="dropdown-divider"></div>
-		</br>
-		<div class="col-lg-6 scheduling">
+		<div class="col-lg-4 gridItem schedulingAndBooking">
 			<%=cl_image_tag("Calendar-30_mkoubs.png", :width=>20, :crop=>"scale", secure: true)%>
 			<%=cl_image_tag("Clock-30_jppzvm.png", :width=>20, :crop=>"scale", secure: true)%>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
@@ -30,7 +23,18 @@
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 		</div>
-		<div class="col-lg-6 pricing">
+	</div>
+	
+	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
+	
+		<div class="col-lg-12 gridItem">
+			<%=render 'categories_tags_and_levels'%>
+		</div>
+	
+	<%end%>
+
+	<div class="col-lg-12 gridItem pricing">
+		<div class="dropdown-divider"></div>
 			<%=cl_image_tag("Price_Tag-30_b3gkga.png", :width=>20, :crop=>"scale", secure: true)%>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
@@ -44,7 +48,9 @@
 	</div>
 
 	<div class="col-lg-12 gridItem">
+		<div class="dropdown-divider"></div>
 		<%= render 'description'%>
+		<div class="dropdown-divider"></div>
 	</div>
 			
 
@@ -63,13 +69,15 @@
 				            placeholder: "enter_location"            
 				          }
 						%>
+	
 	</div>
 
 	<div class="col-lg-12">
 		<div class="dropdown-divider"></div>
 		<div class="aboutOrganizer">
 			<%= render "users/#{current_direction.to_s}_about_me", locals: { user: @activity.user, isWidgetOwner: false } %>
-		</div>
+				<a class="btnBrandCancel fa fa-trash-o" href="#">delete</a>
+			</div>
 	</div>
 </div>
 
