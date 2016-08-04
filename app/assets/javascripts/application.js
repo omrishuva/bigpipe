@@ -27,6 +27,7 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require select2
+//= require bootstrap-switch
 //= require profile_navtabs
 //= require map_widget
 //= require ugc_widgets

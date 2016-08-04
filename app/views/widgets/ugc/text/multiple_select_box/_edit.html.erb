@@ -1,9 +1,14 @@
-<p class="<%="#{locals[:placeholderClass]}"%>" ><%=locals[:placeholder].capitalize%></p>
-<select multiple class="select2" data-placeholder="<%="#{locals[:placeholder].capitalize}"%>">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
+<p class="<%="#{locals[:placeholderClass]}"%>" id=<%=widget_id(locals)%> ><%=locals[:placeholder].capitalize%></p>
+<select multiple class="select2" id="<%="#{input_id(locals)}"%>" data-placeholder="<%="#{locals[:placeholder].capitalize}"%>">
+
+	<%locals[:selectOptions].each do |option| %>
+		<%if locals[:value] && locals[:value].include?( option )%>
+		  <option selected=true value="<%=option%>"><%=option%></option>
+  	<%else%>
+	  	<option value="<%=option%>"><%=option%></option>
+  	<%end%>
+  <%end%>
+
 </select>
 
 <%=render "widgets/ugc/text/button", 

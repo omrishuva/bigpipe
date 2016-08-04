@@ -5,6 +5,7 @@
 							objectName: "activities", 
 							objectId: @activity.id,
 							key: "categories",
+							selectOptions: Activity.metadata["categories"],
 							value: @activity.categories,
 							state: params[:state],
 							isWidgetOwner: @is_widget_owner,
@@ -13,20 +14,3 @@
 
 						}
 %>
-
-<%= render 'widgets/ugc/text/widget', 
-		locals: {  
-							widgetName: "multiple_select_box",
-							elementName: "multipleSelectBox",
-							objectName: "activities", 
-							objectId: @activity.id,
-							key: "tags",
-							value: @activity.tags,
-							state: params[:state],
-							isWidgetOwner: @is_widget_owner,
-							placeholder: "tags",
-							placeholderClass: "mediumText"
-
-						}
-%>
-

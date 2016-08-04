@@ -6,7 +6,7 @@ class WidgetsController < ApplicationController
 
 	def text_widget_control
 		@object = get_object( params[:objectName], params[:objectId] )
-		@object.update(params[:key] => params[:data].to_s.strip ) if params[:state] == "save"
+		save_value if params[:state] == "save"
 		@widget_data = prepare_text_widget_data
 		
 		respond_to do |format|
@@ -15,6 +15,15 @@ class WidgetsController < ApplicationController
 	
 	end
 	
+	def save_value
+		if params[:data].class == Array
+			value = params[:data]
+		else
+			value = params[:data].to_s.strip
+		end
+		@object.update( params[:key] => value )
+	end
+
 	def prepare_text_widget_data
 		{
 			widgetName: params[:widgetName],
@@ -24,6 +33,7 @@ class WidgetsController < ApplicationController
 			key: params[:key],
 			value: @object.send( params[:key] ),
 			state: params[:state],
+			selectOptions: (JSON.parse(params[:selectOptions]) rescue nil ),
 			isWidgetOwner: is_widget_owner,
 			placeholder: params[:placeholder],
 			placeholderClass: params[:placeholderClass],

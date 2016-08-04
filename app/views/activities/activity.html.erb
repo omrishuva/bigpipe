@@ -4,9 +4,13 @@
 		<div class="col-lg-8 gridItem">
 			<%= render 'cover_image'%>
 		</div>
-		<div class="col-lg-4 gridItem">
+		<div class="col-lg-4 gridItem thinBorder">
 			<%=cl_image_tag("Settings-30_m8vu9e.png", :width=>20, :crop=>"scale", secure: true)%>
 			</br></br>
+			<p class="mediumText">State
+			<input type="checkbox" data-on-text=published data-off-text=draft	data-size="mini" name="publish-activity">
+			</p>
+			</br>
 			<%=render 'categories_tags_and_levels'%>
 		</div>
 	</div>
@@ -68,3 +72,5 @@
 		</div>
 	</div>
 </div>
+
+<%= render 'meta_tags' if @activity.state == "published"%>

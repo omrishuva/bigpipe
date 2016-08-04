@@ -63,5 +63,9 @@ module ApplicationHelper
   def widget_id(locals)
     "#{locals[:objectId]}_#{locals[:key]}"
   end
+  
+  def input_id( locals )
+    "input_#{widget_id(locals)}"
+  end
 
 end

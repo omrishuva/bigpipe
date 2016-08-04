@@ -32,6 +32,7 @@ gem "foreman"
 gem 'pipedrive-api-client'
 gem 'cloudinary'
 gem "select2-rails"
+gem "bootstrap-switch-rails"
 
 
 # gem 'gmaps_geocoding'

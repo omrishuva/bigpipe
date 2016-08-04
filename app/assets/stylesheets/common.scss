@@ -3,8 +3,9 @@
 @import 'map';
 body
 {
-    width: 100%;
+  width: 100%;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  overflow-x: hidden;
 }
 
 @media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 30%;}
@@ -121,8 +122,9 @@ body
 .ModalInput { width: 100%; }
 .formModalTitle{ font-weight: bold; }
 .centeredText{ text-align: center; }
-.mediumText{ font-size: 80%; }
 .smallText{ font-size: 60%; }
+.mediumText{ font-size: 80%; }
+.largeText{ font-size: 120% }
 
 .navigationBar{  
     background: #F7F7F7;
@@ -175,6 +177,10 @@ body
     top: 0px;
     left: 0px;
 }
+.tag{  font-weight: bold; background-color: #5bc0de; padding: 5px; border-radius: 20px; margin-bottom: 5px; }
+.smallTag{ @extend .smallText; @extend .tag; }
+.mediumlTag{ @extend .mediumText;  @extend .tag; }
+.largeTag{ @extend .largeText; @extend .tag; }
 
 .fileName{ color: #fff; }
 .addTrainer{ width: 50%; position: absolute; right: 25%; }

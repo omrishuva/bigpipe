@@ -5,6 +5,7 @@ document.addEventListener 'loadWidgetListeners',(e) ->
   loadWidgets();
 
 loadWidgets = ->
+	initCheckbox();
 	widgetControls = $('.widgetControl')
 	if widgetControls.length > 0
 		for widgetControl in widgetControls
@@ -20,22 +21,43 @@ loadWidgets = ->
 			 		imageWidgetControl( selectorKey )
 			 	when "location"
 			 		locationWidgetControl( selectorKey )
-				
+
+
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
 
+widgetId = ( widget ) ->
+	"#{widget.objectId}_#{widget.key}"
+
+inputId = ( widget ) ->				
+	"input_#{widgetId(widget)}"
+
+initCheckbox = ->
+	$("[name='publish-activity']").bootstrapSwitch();
+	checkBoxWidgetControl();
+
+checkBoxWidgetControl = ->
+	$('input[name="publish-activity"]').on 'switchChange.bootstrapSwitch', (event, state) ->
+	  console.log this
+	  console.log event
+	  console.log state
+  
+  
+  
+
 textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 	  widget = {}
-	  widget = e.target.dataset
+	  widget = Object.assign({}, e.target.dataset )
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
 	  		textWidgetControlCancel( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
-		  	widget['data'] = textWidgetControlSave( widget )
+		  	widget = textWidgetControlSave( widget )
+		  	console.log( widget['data'] )
 	  $.ajax
 	    type: requestMethod
 	    url: "/widgets/text_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -43,17 +65,22 @@ textWidgetControl =( selectorKey ) ->
    		success: (data) ->
       	textWidgetControl( selectorKey );
       	$(".select2").select2({ theme: "bootstrap"});
+      	console.log( requestMethod )
 
 textWidgetControlSave = ( widget ) ->
-	if widget.widgetName == "text_area_box"
-		CKEDITOR.instances["editor#{widget.objectId}"].getData()
-	else
-		$("input[name='#{widget.widgetName}']").val()
+	switch widget.widgetName
+		when "text_area_box"
+			widget['data'] = CKEDITOR.instances["editor#{inputId( widget )}"].getData()
+		when "text_input_box"
+			widget['data'] = $("##{inputId(widget)}").val()
+		when "multiple_select_box"
+			widget['data'] = $("##{inputId(widget)}").val()
+	widget
 
 textWidgetControlCancel = ( widget ) ->
 	if widget.widgetName == "text_area_box"
-		CKEDITOR.instances["editor#{widget.objectId}"].destroy()
-		$( "##{widget.objectId}_#{widget.key}.textAreaBox" ).hide();
+		CKEDITOR.instances["editor#{inputId(widget)}"].destroy()
+		$( "##{ widgetId(widget) }.textAreaBox" ).hide();
 
 imageWidgetControl = ( selectorKey ) ->
   $( selectorKey ).change (e) ->

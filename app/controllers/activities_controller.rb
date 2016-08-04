@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
 
 	def new_activity
-		activity = Activity.new( user_id: params[:user_id], title: "Untitled Activity" )
+		activity = Activity.new( user_id: params[:user_id], title: "Untitled Activity", state: "draft" )
 		activity.save
 		redirect_to "/activities/#{activity.id}"
 	end
