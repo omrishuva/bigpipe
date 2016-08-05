@@ -1,5 +1,5 @@
 <div class="textAreaBox">
-	<div class="textAreaBoxTextLocation"><%= locals[:value].html_safe %></div>
+	<div class="textAreaBoxTextLocation mediumText"><%= locals[:value].html_safe %></div>
 		<%=render "widgets/ugc/text/button", 
 					locals: locals.merge( 
 																	class: "TextAreaBoxEditButton fa fa-pencil #{current_direction.to_s}", 

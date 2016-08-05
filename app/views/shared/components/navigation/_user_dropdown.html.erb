@@ -2,17 +2,17 @@
 	openUsersideBar = function() {
   	var sideBar;
   	sideBar = $('#userSideBar');
+    sideBar[0].style.transition = "width 2s, height 4s";
   	if (sideBar.is(":visible")) {
     	 sideBar.hide();
-       $('.userSideBarShadow').hide();
+       // $('.userSideBarShadow').hide();
   	} 
   	else {
     	 sideBar.show();
-       $('.userSideBarShadow').show();
+       // $('.userSideBarShadow').show();
   	}
 	};
 </script>
-<div class="userSideBarShadow"></div>
 <div class="btn-group userDropdown" id="userDropdown" onclick="openUsersideBar();">
   <button class="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     &#9776;

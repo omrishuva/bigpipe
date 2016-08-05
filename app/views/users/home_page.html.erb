@@ -2,9 +2,9 @@
 	<div class="row">
 		<%activity_group.each do |activity|%>
 			<div class="col-md-6 gridItem">
-				<h4 class="centeredText"><a href="<%="/activities/#{activity.id}"%>"><%=activity.title %></a></h4>
-				<a href="#">
-					<%=cl_image_tag(activity.cover_image, width: 500, height: 285, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage", secure: true )%>
+				<a href="<%="/activities/#{activity.id}"%>">
+					<h4 class="centeredText"><%=activity.title %></h4>
+						<%=cl_image_tag(activity.cover_image, width: 500, height: 285, crop: :thumb, gravity: :face, class: "img-fluid", id: "coverImage", secure: true )%>
 				</a>
 				<%if activity.about_text.present?%>
 					<div class=mediumText><%=activity.about_text[0..200].html_safe %></div>

@@ -137,7 +137,7 @@ a{ color: #056cf9; }
                     height: 30px;
                   }
 
-.dropdown-item{ color: #5D33F4; }
+.dropdown-item{ color: #056cf9; }
 .userMenuSection{ display: inline; }
 .modal{ top: 5em; }
 .ModalInput { width: 100%; }
@@ -168,8 +168,8 @@ a{ color: #056cf9; }
 .btnBrandHover{ text-decoration: none; }
 .btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #056cf9 ; }
 .btnBrand1:active{  background-color: #056cf9; color: #FFB941; }
-.btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #FFB941;  ; }
-.btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #AF3245 ;    }
+.btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #fff;  ; }
+.btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #000; color: #fff ;    }
 .bthModalForm{ width: 100%; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
 
@@ -243,6 +243,7 @@ a{ color: #056cf9; }
 .imageOveralyCancel{ left: 20%; }
 .widgetTextInput{ opacity: 1 !important; }
 .activityTitle{ font-size: 130%; }
+.activitySubtitle{ color: #056cf9; text-decoration: underline;  }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
 // left: 20px;
 .rtlimageOverlayText{ @extend .imageOverlayText;  }
