@@ -24,14 +24,10 @@
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 		</div>
 	</div>
-	
-	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
-	
-		<div class="col-lg-12 gridItem">
-			<%=render 'categories_tags_and_levels'%>
-		</div>
-	
-	<%end%>
+		
+	<div class="col-lg-12 gridItem">
+		<%=render 'categories_tags_and_levels'%>
+	</div>
 
 	<div class="col-lg-12 gridItem pricing">
 		<div class="dropdown-divider"></div>
@@ -55,7 +51,7 @@
 			
 
 	<div class="col-lg-12 gridItem">
-
+			<p class=activitySubtitle >Whereabouts</p>
 			<%= render 'widgets/ugc/location/widget', 
 				  locals: {  
 				            widgetName: "location",
@@ -80,5 +76,4 @@
 			</div>
 	</div>
 </div>
-
 <%= render 'meta_tags' if @activity.state == "published"%>

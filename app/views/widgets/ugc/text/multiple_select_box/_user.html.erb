@@ -1,0 +1,5 @@
+<%if locals[:value]%>
+	<%locals[:value].each do |selected_option|%>
+		<span class="smallTag"><%=selected_option%></span>
+	<%end%>
+<%end%>

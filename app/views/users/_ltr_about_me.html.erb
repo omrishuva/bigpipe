@@ -11,14 +11,14 @@
                 imageHeight: 400,
                 imageCrop: "thumb",
                 imageGravity: "face",
-                imageTagClass: "img-fluid",
+                imageTagClass: "img-fluid coverImage",
                 key: "cover_image_cloudinary_id",
                 value: locals[:user].cover_image,
                 overlayText: locals[:user].name
               }
   %>
-
 </div>
+
 <div class="col-lg-8 gridItem">
   <%= render 'widgets/ugc/text/widget', 
   		locals: { 
