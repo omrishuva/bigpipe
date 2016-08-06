@@ -1,0 +1,5 @@
+<script>
+	document.publishEvent= ( function(eventName, data ){
+		if ( navigator.browserType.indexOf("Chrome")  !== -1 ) { chromPublishEvent( eventName, data ) }
+	});
+</script>

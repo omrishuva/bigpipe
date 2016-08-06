@@ -14,6 +14,9 @@
     var event;
     event = new CustomEvent( 'initMap', { 'detail':{ 'place_id': "<%=locals[:value]%>" } } );
     document.dispatchEvent(event);
+    // var evt = document.createEvent("initMap");
+    // evt.initEvent("custom", true, false);
+    // document.dispatchEvent(evt); 
   }
 </script>
 
