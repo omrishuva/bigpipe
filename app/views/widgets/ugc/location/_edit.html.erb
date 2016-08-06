@@ -5,7 +5,8 @@
 </div>
 
 <script>
-  var event;
-  event = new CustomEvent( 'initMap', { 'detail':{ 'place_id': "<%=locals[:value]%>" } } );
-  document.dispatchEvent(event);
+  // var event;
+  // event = new CustomEvent( 'initMap', { 'detail':{ 'place_id': "<%=locals[:value]%>" } } );
+  // document.dispatchEvent(event);
+  document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )
 </script>

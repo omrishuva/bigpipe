@@ -1,0 +1,23 @@
+<script>
+	document.publishEvent= ( function( eventName, data ){
+		if ( navigator.browserType.indexOf("IE")  === -1 ) { 
+			commonPublishEvent( eventName, data );
+		} else {
+			iePublishEvent( eventName, data);
+		}
+
+		function commonPublishEvent( eventName, data  ) {
+		  var event;
+	    event = new CustomEvent( eventName, { 'detail': data } );
+	    document.dispatchEvent( event );
+		};
+
+		function iePublishEvent( eventName, data ) {
+			var event = document.createEvent("initMap");
+			// event.initEvent("custom", true, false);
+			evt.initCustomEvent("MyEventType", true, true, data);
+			document.dispatchEvent(eventName); 
+		};
+
+	});
+</script>

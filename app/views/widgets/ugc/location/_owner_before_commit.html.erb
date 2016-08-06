@@ -5,9 +5,10 @@
 
 <script>
   function initMap() {
-    var event;
-    event = new CustomEvent('initMap');
-    document.dispatchEvent(event);
+    // var event;
+    // event = new CustomEvent('initMap');
+    // document.dispatchEvent(event);
+    document.publishEvent('initMap')
   }
 </script>
 

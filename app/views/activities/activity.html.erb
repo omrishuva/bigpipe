@@ -19,36 +19,21 @@
 					<i class="fa fa-calendar" aria-hidden="true"></i>
 				</span>
 			</div>
-			
 		</div>
 	</div>
 		
 	<div class="col-lg-12 gridItem">
-		<%=render 'categories_tags_and_levels'%>
-	</div>
-
-	<div class="col-lg-12 gridItem pricing">
 		<div class="dropdown-divider"></div>
-			<%=cl_image_tag("Price_Tag-30_b3gkga.png", :width=>20, :crop=>"scale", secure: true)%>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-		</div>
+		<%=render 'categories_tags_and_levels'%>
 	</div>
 
 	<div class="col-lg-12 gridItem">
 		<div class="dropdown-divider"></div>
 		<%= render 'description'%>
-		<div class="dropdown-divider"></div>
 	</div>
-			
 
 	<div class="col-lg-12 gridItem">
+			<div class="dropdown-divider"></div>
 			<p class=activitySubtitle >Location</p>
 			<%= render 'widgets/ugc/location/widget', 
 				  locals: {  
@@ -64,6 +49,20 @@
 				          }
 						%>
 	
+	</div>
+
+	<div class="col-lg-12 gridItem pricing">
+			<div class="dropdown-divider"></div>	
+			<%=cl_image_tag("Price_Tag-30_b3gkga.png", :width=>20, :crop=>"scale", secure: true)%>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+		</div>
 	</div>
 
 	<div class="col-lg-12">
