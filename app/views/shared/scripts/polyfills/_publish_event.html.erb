@@ -13,10 +13,9 @@
 		};
 
 		function iePublishEvent( eventName, data ) {
-			var event = document.createEvent("initMap");
-			// event.initEvent("custom", true, false);
-			evt.initCustomEvent("MyEventType", true, true, data);
-			document.dispatchEvent(eventName); 
+			var event = document.createEvent("Event");
+			event.initCustomEvent(eventName, true, true, data);
+			document.dispatchEvent( event ); 
 		};
 
 	});
