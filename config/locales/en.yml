@@ -45,7 +45,7 @@ en:
  about_me: "About Me"
  my_activities: "My Activities"
  my_locations: "My Locations"
- create_new_activity: "Create New Activity"
+ new_activity: "New Activity"
  upcoming_events: "Upcoming Events"
  activities: "Activities"
  didnt_create_activities: "You didn't create any activities yet"
