@@ -67,5 +67,9 @@ module ApplicationHelper
   def input_id( locals )
     "input_#{widget_id(locals)}"
   end
+  
+  def build_nested_widget_selector_key( object_id, element_name, key )
+    "##{object_id}.widgetControl[data-element-name='#{element_name}'][data-key='#{key}']"
+  end
 
 end

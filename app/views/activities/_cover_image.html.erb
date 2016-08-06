@@ -15,8 +15,17 @@
 						state: params[:state],
 						isWidgetOwner: @is_widget_owner,
 						placeholder: "update_image",
-						editableOverlayText: true,
-						overlayText: @activity.title
-						
+						overlayText:{
+											enabled: true,
+											key: "title",
+											value: @activity.title,
+											objectName: "activities",
+											objectId: @activity.id,
+											state: params[:state],
+		    							isWidgetOwner: @is_widget_owner,
+		    							placeholder: "name_it",
+		    							textClass: "#{current_direction}imageOverlayText activityTitle",
+		    							buttonClass: "imageOveralyButton"
+										}
 					}
 %>

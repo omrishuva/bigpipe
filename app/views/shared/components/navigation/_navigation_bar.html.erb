@@ -19,7 +19,9 @@
 
 	<div class="navigationBar" id="navbarContainer" >
 		<div class="navItems"> 
+			 <%= render "shared/components/navigation/rtl_create_new_activity"%>		
 		  <%=render "shared/components/navigation/rtl_user_login" unless params["action"] == "service_provider_onboarding"%>
+
 		  <%=render "shared/components/navigation/rtl_info"%>
 		  <%=render "shared/components/navigation/rtl_logo"%>
 		</div>

@@ -5,6 +5,10 @@ controllers:
     profile: consumer
   activities:
     new_activity: owner_or_admin
+  widgets:
+    text_widget_control: owner_or_admin
+    image_widget_control: owner_or_admin
+    location_widget_control: owner_or_admin
 
 views:
   user_navtabs:

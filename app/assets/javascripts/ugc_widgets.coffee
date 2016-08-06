@@ -6,6 +6,7 @@ document.addEventListener 'loadWidgetListeners',(e) ->
 
 loadWidgets = ->
 	initCheckbox();
+	initDateTimePicker();
 	widgetControls = $('.widgetControl')
 	if widgetControls.length > 0
 		for widgetControl in widgetControls
@@ -33,17 +34,27 @@ widgetId = ( widget ) ->
 inputId = ( widget ) ->				
 	"input_#{widgetId(widget)}"
 
+initDateTimePicker = ->
+	$('#datePicker').datetimepicker( 
+																		{ 
+																			sideBySide: true
+																			viewMode: 'days'
+																			locale: moment().local('es')
+																			minDate: new Date()
+																			stepping: 15
+																			icons:{ time: "fa fa-clock-o", up: "fa fa-arrow-up", down: "fa fa-arrow-down", previous: 'fa fa-arrow-left', next: 'fa fa-arrow-right' }
+																		}
+																	);
+
 initCheckbox = ->
 	$("[name='publish-activity']").bootstrapSwitch();
-	checkBoxWidgetControl();
+	checkBoxWidgetControl();																	
 
 checkBoxWidgetControl = ->
 	$('input[name="publish-activity"]').on 'switchChange.bootstrapSwitch', (event, state) ->
 	  console.log this
 	  console.log event
 	  console.log state
-  
-  
   
 
 textWidgetControl =( selectorKey ) ->
@@ -89,6 +100,7 @@ imageWidgetControl = ( selectorKey ) ->
     formData.append( 'image', file, file.name );
     formData.append( 'widget', JSON.stringify(widget) );
     initUploadImageLoader(widget);
+    localStorage.setItem(selectorKey, widget.nestedWidgetSelectorKey)
     $.ajax
         type: 'POST'
         url: "/widgets/image_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -96,6 +108,9 @@ imageWidgetControl = ( selectorKey ) ->
         processData: false
         contentType: false
         success: (data) ->
+        	if localStorage["#{selectorKey}"]
+	        	textWidgetControl( localStorage["#{selectorKey}"] )
+	        	localStorage.setItem(selectorKey, null)
           imageWidgetControl( selectorKey );
 
 initUploadImageLoader = ( widget ) ->

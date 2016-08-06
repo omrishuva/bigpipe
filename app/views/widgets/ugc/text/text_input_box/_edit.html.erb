@@ -4,7 +4,7 @@ id="<%="#{input_id(locals)}"%>"
 name="<%="#{locals[:widgetName]}"%>"
 value="<%="#{locals[:value]}"%>"
 type="text"
-placeholder="<%=locals[:placeholder]%>"
+placeholder="<%=I18n.t locals[:placeholder]%>"
 
 />
 <%=render "widgets/ugc/text/button", 

@@ -51,6 +51,7 @@ he:
  name_it: "בחר שם"
  describe_your_activity: "כתוב כמה מילים על הפעילות שלך"
  categories: "קטגוריות"
+ select_3_categories: "בחר עד 3 קטגוריות"
  tags: "תגיות"
  levels: "רמות"
  my_locations: "מקומות שלי"

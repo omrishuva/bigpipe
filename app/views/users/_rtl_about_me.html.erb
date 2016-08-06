@@ -7,13 +7,18 @@
                 objectName: "users", 
                 objectId: locals[:user].id, 
                 isWidgetOwner: is_widget_owner( locals ),
+                imageWidth: 700,
+                imageHeight: 400,
+                imageCrop: "thumb",
+                imageGravity: "face",
+                imageTagClass: "img-fluid coverImage",
                 key: "cover_image_cloudinary_id",
-                value: locals[:user].cover_image_cloudinary_id,
-                overlayText: locals[:user].name
+                value: locals[:user].cover_image,
+                overlayText: { value: locals[:user].name }
               }
   %>
-
 </div>
+
 <div class="col-lg-8 col-lg-pull-4 gridItem">
   <%= render 'widgets/ugc/text/widget', 
       locals: { 

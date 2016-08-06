@@ -65,28 +65,33 @@ a{ color: #056cf9; }
 @media (min-width: 1000px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 7.5%;}
                             .ltrUserSidebar{  right: 5%;  }
-                            .rtlUserSideBar{  left: 10%;  }
+                            .rtlUserSideBar{  left: 0;  }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
+                            .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                             .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+
                            }
 
 @media (min-width: 1500px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 5%;} 
                             .ltrUserSidebar{  right: 10%;  }
                             .rtlUserSideBar{  left: 15%;  }
-                            .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
+                            // .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
+                            .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                             }
+
 .hidden{ visibility: hidden; }
 
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
 
 .rtlNavBarLogo { @extend .NavBarLogo;  right: 0.5em; }
-.rtlInfo{ top: 2px; right: 50%; position: absolute; }
-.rtlUserLogin{ top: 2px; right: 10%; position: absolute; }
+// .rtlInfo{ top: 2px; right: 50%; position: absolute; }
+.rtlUserLogin{ top: 20px; left: 10%; position: absolute; }
 
 // .ltrCallUs{ top: 2px; left: 50%; position: absolute; }
 // .rtlCallUs{ top: 2px; right: 50%; position: absolute;  }
@@ -156,9 +161,9 @@ a{ color: #056cf9; }
 	border-radius: 5px;
 	height: 5em;
 	overflow:hidden;
-    position: fixed;
-    z-index: 2000;
-    background-color: #fff;
+  position: fixed;
+  z-index: 2000;
+  background-color: #fff;
 }
 .block{ display: inline-block; }
 .btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
@@ -227,6 +232,7 @@ a{ color: #056cf9; }
 .userAboutText:hover{ text-decoration: none; opacity: 1;}
 
 .coverImage{ border-radius: 20px; }
+
 .imageOverlayText { 
                     position: absolute;
                     width: 100%; 
@@ -242,8 +248,9 @@ a{ color: #056cf9; }
 .imageOveralySave{ left: 5%; }
 .imageOveralyCancel{ left: 20%; }
 .widgetTextInput{ opacity: 1 !important; }
+.activityContainer{  }
 .activityTitle{ font-size: 130%; }
-.activitySubtitle{ color: #056cf9; text-decoration: underline;  }
+.activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px;  }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
 // left: 20px;
 .rtlimageOverlayText{ @extend .imageOverlayText;  }
@@ -262,7 +269,7 @@ a{ color: #056cf9; }
     font-weight: bold; 
 }
 .ltrimageUploadButton{ @extend .imageUploadButton; left: 5%; }
-.rtlimageUploadButton{ @extend .imageUploadButton; right: 5%; }
+.rtlimageUploadButton{ @extend .imageUploadButton; left: 5%; }
 
 .imageUploadButton:hover
 {
@@ -280,7 +287,8 @@ a{ color: #056cf9; }
     left: 0px;
 }
 .select2{ width: 16em; }
-
+.schedulingAndBooking{ min-height: 20em; border-radius: 20px; border: 1px solid #FFB941;
+  text-align: center; }
 .userProfileNavItem{ @extend .nav-item;  } 
 .rtluserProfileNavItem{ @extend .userProfileNavItem; margin-bottom: -1px; }
 .rtl{ float :right !important; direction: right !important; }

@@ -1,5 +1,5 @@
 <div class="imageBox">
 	<%= render "widgets/ugc/image/image_box/image_tag", locals: locals%>
-	<span class="<%="#{current_direction}imageOverlayText"%>"><%=locals[:overlayText]%></span>
+	<span class="<%="#{current_direction}imageOverlayText"%>"><%=locals[:overlayText][:value]%></span>
 	
 </div>

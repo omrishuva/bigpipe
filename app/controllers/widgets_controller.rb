@@ -47,7 +47,6 @@ class WidgetsController < ApplicationController
 	#Image#####################################################
 
 	def image_widget_control
-    
     temp_widget_data = parse_image_image_widget_data
     @object = get_object( temp_widget_data[:objectName], temp_widget_data[:objectId] )
     @object.upload_image( params[:image].tempfile, temp_widget_data[:key] )
@@ -59,7 +58,9 @@ class WidgetsController < ApplicationController
   end
   
   def parse_image_image_widget_data
-  	JSON.parse( params[:widget] ).with_indifferent_access
+  	temp = JSON.parse( params[:widget] ).with_indifferent_access
+  	temp[:overlayText] = JSON.parse( temp[:overlayText] ) if temp[:overlayText]
+  	temp
   end
 
   def prepare_image_widget_data( image_widget_data )
@@ -74,6 +75,8 @@ class WidgetsController < ApplicationController
 			imageHeight: image_widget_data[:imageHeight],
 			imageCrop: image_widget_data[:imageCrop],
 			imageGravity: image_widget_data[:imageGravity],
+			imageTagClass: image_widget_data[:imageTagClass],
+			imageTagId: image_widget_data[:imageTagId],
 			isWidgetOwner: is_widget_owner,
 			overlayText: image_widget_data[:overlayText],
 			placeholder: image_widget_data[:placeholder],
