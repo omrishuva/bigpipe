@@ -60,7 +60,7 @@ checkBoxWidgetControl = ->
 textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 	  widget = {}
-	  widget = Object.assign({}, e.target.dataset )
+	  widget = e.target.dataset #Can't use Object.assign({},  ) due to lack of IE support
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
@@ -68,7 +68,6 @@ textWidgetControl =( selectorKey ) ->
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget = textWidgetControlSave( widget )
-		  	console.log( widget['data'] )
 	  $.ajax
 	    type: requestMethod
 	    url: "/widgets/text_widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"

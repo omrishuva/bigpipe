@@ -16,8 +16,8 @@ class WidgetsController < ApplicationController
 	end
 	
 	def save_value
-		if params[:data].class == Array
-			value = params[:data]
+		if params[:dataType] == "StringArray"
+			value = params[:data].split(",")
 		else
 			value = params[:data].to_s.strip
 		end
@@ -32,6 +32,7 @@ class WidgetsController < ApplicationController
 			objectId: @object.id,
 			key: params[:key],
 			value: @object.send( params[:key] ),
+			dataType: params[:dataType],
 			state: params[:state],
 			selectOptions: (JSON.parse(params[:selectOptions]) rescue nil ),
 			isWidgetOwner: is_widget_owner,

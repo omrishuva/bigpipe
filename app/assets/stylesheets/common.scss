@@ -231,7 +231,7 @@ a{ color: #056cf9; }
 
 .userAboutText:hover{ text-decoration: none; opacity: 1;}
 
-.coverImage{ border-radius: 20px; }
+.coverImage{ border-radius: 5px; }
 
 .imageOverlayText { 
                     position: absolute;
@@ -287,7 +287,7 @@ a{ color: #056cf9; }
     left: 0px;
 }
 .select2{ width: 16em; }
-.schedulingAndBooking{ min-height: 20em; border-radius: 20px; border: 1px solid #FFB941;
+.schedulingAndBooking{ min-height: 20em; border-radius: 5px; ;
   text-align: center; }
 .userProfileNavItem{ @extend .nav-item;  } 
 .rtluserProfileNavItem{ @extend .userProfileNavItem; margin-bottom: -1px; }
