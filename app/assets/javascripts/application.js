@@ -25,7 +25,6 @@
 //
 //= require jquery
 //= require tether
-//= require bootstrap-sprockets
 //= require select2
 //= require moment
 //= require bootstrap-datetimepicker
