@@ -5,7 +5,6 @@ document.addEventListener 'loadWidgetListeners',(e) ->
   loadWidgets();
 
 loadWidgets = ->
-	initCheckbox();
 	initDateTimePicker();
 	widgetControls = $('.widgetControl')
 	if widgetControls.length > 0
@@ -44,11 +43,7 @@ initDateTimePicker = ->
 																			stepping: 15
 																			icons:{ time: "fa fa-clock-o", up: "fa fa-arrow-up", down: "fa fa-arrow-down", previous: 'fa fa-arrow-left', next: 'fa fa-arrow-right' }
 																		}
-																	);
-
-initCheckbox = ->
-	$("[name='publish-activity']").bootstrapSwitch();
-	checkBoxWidgetControl();																	
+																	);															
 
 checkBoxWidgetControl = ->
 	$('input[name="publish-activity"]').on 'switchChange.bootstrapSwitch', (event, state) ->
