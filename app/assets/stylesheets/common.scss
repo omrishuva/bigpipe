@@ -52,14 +52,22 @@ a{ color: #056cf9; }
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 13.5%;} 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
-                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                              .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
+                              .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
+                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
+                              .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 800px)   { 
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 12.5%;} 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
+                              .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
+                              .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
+                              .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 1000px) { 
@@ -82,9 +90,23 @@ a{ color: #056cf9; }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
+                            .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 .hidden{ visibility: hidden; }
+
+.activityContainer
+{
+  // min-height: 120em;
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh;
+  border-radius: 5px;
+  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.3);
+  background-color: #F9F9F9;
+
+}
 
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
@@ -114,6 +136,7 @@ a{ color: #056cf9; }
                    top: 0px;
                    left: -71px;
                   }
+
 .userSideBarStyle { 
                     width: 13em; 
                     top: 5em; 
@@ -156,8 +179,8 @@ a{ color: #056cf9; }
   background: #F7F7F7;
   top: 0px;
 	width: 100%;
-	border-bottom: 1px solid #FFB941;
-	box-shadow: 4px 4px 10px #FFB941;
+	border-bottom: 1px solid #ff7f66;
+	box-shadow: 4px 4px 10px #ff7f66;
 	border-radius: 5px;
 	height: 5em;
 	overflow:hidden;
@@ -166,13 +189,17 @@ a{ color: #056cf9; }
   background-color: #fff;
 }
 .block{ display: inline-block; }
-.btnBrand{  padding: 2px 4px; font-size: 14px; border-radius: 3px; font-weight: bold;  }
+.btnBrand{  padding: 2px 4px; border-radius: 3px; font-weight: bold;  }
 .btnFull{ width: 100%; }
 .btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  }
+.btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #056cf9; ;  }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }
+.largeBtn{ @extend .largeText;  }
 .btnBrandHover{ text-decoration: none; }
 .btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #056cf9 ; }
-.btnBrand1:active{  background-color: #056cf9; color: #FFB941; }
+.btnBrand1Inverse:hover{ @extend .btnBrandHover; background-color: #056cf9; color: #FFB941; }
+
+.btnBrand1:active{  background-color: #056cf9; color: #FFB941; text-decoration: none;}
 .btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #fff;  ; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #000; color: #fff ;    }
 .bthModalForm{ width: 100%; }
@@ -204,7 +231,8 @@ a{ color: #056cf9; }
     top: 0px;
     left: 0px;
 }
-.tag{  font-weight: bold; background-color: #056cf9; color: #fff; padding: 5px; border-radius: 20px; margin-bottom: 5px; }
+.tag{  font-weight: bold; background-color: #ff7f66; color: #fff; padding: 5px; border-radius: 20px; margin-bottom: 5px; }
+// #056cf9
 .smallTag{ @extend .smallText; @extend .tag; }
 .mediumlTag{ @extend .mediumText;  @extend .tag; }
 .largeTag{ @extend .largeText; @extend .tag; }
@@ -237,7 +265,7 @@ a{ color: #056cf9; }
                     position: absolute;
                     width: 100%; 
                     opacity:0.9; 
-                    background-color: #fff; 
+                    background-color: #F9F9F9; 
                     color: black;
                     font-weight: bold; 
                     text-align: center; 
@@ -248,7 +276,6 @@ a{ color: #056cf9; }
 .imageOveralySave{ left: 5%; }
 .imageOveralyCancel{ left: 20%; }
 .widgetTextInput{ opacity: 1 !important; }
-.activityContainer{  }
 .activityTitle{ font-size: 130%; }
 .activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px;  }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
@@ -287,8 +314,10 @@ a{ color: #056cf9; }
     left: 0px;
 }
 .select2{ width: 16em; }
-.schedulingAndBooking{ min-height: 20em; border-radius: 5px; ;
+.schedulingAndBooking{ border-radius: 5px; ;
   text-align: center; }
+.previewPublish{ width: 100%;  margin:10px; }  
+.previewPublishBtn{ margin-left: 10px; margin-right: 10px; }
 .userProfileNavItem{ @extend .nav-item;  } 
 .rtluserProfileNavItem{ @extend .userProfileNavItem; margin-bottom: -1px; }
 .rtl{ float :right !important; direction: right !important; }

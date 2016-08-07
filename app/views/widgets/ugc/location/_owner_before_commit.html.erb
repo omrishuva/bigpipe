@@ -4,12 +4,7 @@
 </div>
 
 <script>
-  function initMap() {
-    // var event;
-    // event = new CustomEvent('initMap');
-    // document.dispatchEvent(event);
-    document.publishEvent('initMap')
-  }
+  function initMap() { document.publishEvent('initMap')  }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaxhT2SJvK6MwGjYHB7pZB0Al0IYTknw&libraries=places&callback=initMap"

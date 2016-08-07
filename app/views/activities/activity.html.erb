@@ -1,30 +1,24 @@
 <div class="activityContainer">
 	
 	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
-		<div class="col-lg-12 gridItem">
-			<input type="checkbox" data-on-text=Published data-off-text="Publish it" data-on-color="success"	data-size="mini" name="publish-activity">
-			<a class="btnBrand1 fa" href="#">Preview</a>
+		<div class="previewPublish gridItem">
+				<!-- <input type="checkbox" data-on-text=Published data-off-text="Publish it" data-on-color="success"	data-size="large" name="publish-activity"> -->
+				
+				<a class="btnBrand1Inverse largeBtn previewPublishBtn" href="#">Preview</a>
+				<a class="btnBrand1 largeBtn previewPublishBtn" href="#">Publish</a>
+				</br>
+				<div class="dropdown-divider"></div>
 		</div>
+
 	<%end%>
 	
 	<div class="col-lg-12 gridItem">
 		<div class="col-lg-8 gridItem">
 			<%= render 'cover_image', locals: { imageTagClass: "coverImage img-fluid" } %>
 		</div>
-		<div class="col-lg-4 gridItem schedulingAndBooking ">
-			<p class=activitySubtitle >Schedule</p>
-			<div class='input-group date' id='datePicker'>
-				<input type='text' class="form-control" />
-				<span class="input-group-addon">
-					<i class="fa fa-calendar" aria-hidden="true"></i>
-				</span>
-			</div>
+		<div class="col-lg-4 gridItem">
+			<%=render 'categories_tags_and_levels'%>
 		</div>
-	</div>
-		
-	<div class="col-lg-12 gridItem">
-		<div class="dropdown-divider"></div>
-		<%=render 'categories_tags_and_levels'%>
 	</div>
 
 	<div class="col-lg-12 gridItem">
@@ -50,6 +44,17 @@
 						%>
 	
 	</div>
+	
+	<div class="col-lg-12 gridItem schedulingAndBooking">
+		<div class="dropdown-divider"></div>
+		<p class=activitySubtitle >Schedule</p>
+		<div class='input-group date' id='datePicker'>
+			<input type='text' class="form-control" />
+			<span class="input-group-addon">
+				<i class="fa fa-calendar" aria-hidden="true"></i>
+			</span>
+		</div>
+	</div>
 
 	<div class="col-lg-12 gridItem pricing">
 			<div class="dropdown-divider"></div>	
@@ -63,14 +68,18 @@
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 		</div>
-	</div>
-
-	<div class="col-lg-12">
-		<div class="dropdown-divider"></div>
-		<div class="aboutOrganizer">
-			<%= render "users/#{current_direction.to_s}_about_me", locals: { user: @activity.user, isWidgetOwner: false } %>
+		
+		<div class="col-lg-12">
+			<div class="dropdown-divider"></div>
+			<div class="aboutOrganizer">
+				<%= render "users/#{current_direction.to_s}_about_me", locals: { user: @activity.user, isWidgetOwner: false } %>
 				<a class="btnBrandCancel fa fa-trash-o" href="#">delete</a>
 			</div>
+		</div>
+
 	</div>
+
+	
+
 </div>
 <%= render 'meta_tags' if @activity.state == "published"%>
