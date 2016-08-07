@@ -11,5 +11,4 @@ changeUserNavTab =( exclude ) ->
       url: "/profile/navigation/#{e.target.name}"
       data: data
       success: (data) ->
-        event = new Event('loadWidgetListeners');
-        document.dispatchEvent(event);
+        document.publishEvent('loadWidgetListeners' );

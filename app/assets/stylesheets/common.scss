@@ -8,48 +8,48 @@ body
   overflow-x: hidden;
 }
 a{ color: #056cf9; }
-@media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 30%;}
+@media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 20%;}
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  }   
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
                           }
 
-@media (min-width: 360px)  { .mainContainer { z-index: -1; font-size: 75%;  margin-top: 27.5%;}
+@media (min-width: 360px)  { .mainContainer { z-index: -1; font-size: 75%;  margin-top: 20%;}
                              .ltrUserSidebar{  right: 0;  }
                              .rtlUserSideBar{  left: 0;  }  
                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 375px) { 
-                            .mainContainer { z-index: -1; font-size: 80%;  margin-top: 25%;}
+                            .mainContainer { z-index: -1; font-size: 80%;  margin-top: 18%;}
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  }  
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 411px) { 
-                            .mainContainer { z-index: -1; font-size: 90%;  margin-top: 24%;} 
+                            .mainContainer { z-index: -1; font-size: 90%;  margin-top: 18%;} 
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSideBar{  left: 0;  } 
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 414px)  { 
-                              .mainContainer { z-index: -1; font-size: 90%;  margin-top: 24%;}
+                              .mainContainer { z-index: -1; font-size: 90%;  margin-top:  18%;}
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  } 
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 435px)   { 
-                              .mainContainer { z-index: -1; font-size: 95%;  margin-top: 22%;     } 
+                              .mainContainer { z-index: -1; font-size: 95%;  margin-top: 16%;     } 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 768px)   { 
-                              .mainContainer { z-index: -1; font-size: 120%; margin-top: 13.5%;} 
+                              .mainContainer { z-index: -1; font-size: 120%; margin-top: 10%;} 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSideBar{  left: 0;  }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
@@ -318,6 +318,7 @@ a{ color: #056cf9; }
   text-align: center; }
 .previewPublish{ width: 100%;  margin:10px; }  
 .previewPublishBtn{ margin-left: 10px; margin-right: 10px; }
+.activityHeader{ margin: 10px; }
 .userProfileNavItem{ @extend .nav-item;  } 
 .rtluserProfileNavItem{ @extend .userProfileNavItem; margin-bottom: -1px; }
 .rtl{ float :right !important; direction: right !important; }
