@@ -27,7 +27,6 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require select2
-//= require bootstrap-switch
 //= require moment
 //= require bootstrap-datetimepicker
 //= require profile_navtabs

@@ -2,7 +2,6 @@
 	
 	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
 		<div class="previewPublish gridItem">
-				<!-- <input type="checkbox" data-on-text=Published data-off-text="Publish it" data-on-color="success"	data-size="large" name="publish-activity"> -->
 				<div class="previewPublishBtnGroup">
 					<a class="btnBrand1Inverse largeBtn previewPublishBtn" href="#">Preview</a>
 					<a class="btnBrand1 largeBtn previewPublishBtn" href="#">Publish</a>
