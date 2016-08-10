@@ -24,18 +24,26 @@ module ApplicationHelper
 
   def available_navtabs
     allowed_navtabs = []
-    $permissions["views"]["user_navtabs"]["permissions"].each do |key, values|
-      allowed_navtabs << key if values.size > [values - current_user.roles_and_services ].flatten.size
+    $permissions["views"]["user_navtabs"]["permissions"].each do |navtab, permissions|
+      if permissions["permitted_accounts"].present?
+        allowed_navtabs << navtab if account_permitted?( permissions ) && role_permitted?( permissions )
+      else
+          allowed_navtabs << navtab if role_permitted?( permissions )
+      end
     end
     allowed_navtabs
   end
+  
+  def account_permitted?( permissions )
+    permissions["permitted_accounts"].size > [permissions["permitted_accounts"] - [current_user.account_type] ].flatten.size
+  end
+  
+  def role_permitted?( permissions )
+    permissions["permitted_roles"].size > [permissions["permitted_roles"] - current_user.roles ].flatten.size
+  end
 
   def default_active
-    if current_user.service_provider?
-      key = User.service_name( current_user.service_ids.max )
-    else
-      key = User.role_name( current_user.role_ids.max )
-    end
+    key = User.role_name( current_user.role_ids.max )
     $permissions["views"]["user_navtabs"]["default_active"][key]
   end
 
@@ -53,7 +61,7 @@ module ApplicationHelper
 
   def is_widget_owner( locals )
     return false if locals[:isWidgetOwner] == false
-    locals[:user].id == current_user.id
+    locals[:user].id == current_user_id
   end
   
   def widget_replace_selector( widget_data )

@@ -27,8 +27,9 @@
 //= require tether
 //= require select2
 //= require moment
+//= require bootstrap-sprockets
 //= require bootstrap-datetimepicker
-//= require profile_navtabs
+//= require profile
 //= require map_widget
 //= require ugc_widgets
 //= require app

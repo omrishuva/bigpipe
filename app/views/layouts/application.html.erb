@@ -20,19 +20,17 @@
   </head>
 
   <body>
-    <%unless current_user%>
+    <%if !current_user%>
       <%=render "shared/scripts/fb_sdk"%>
       <%=render "shared/components/modals/signin_modal"%>
     <%end%>
-    
-    <%=render "shared/components/navigation/navigation_bar"%>
-    <%=render "shared/components/navigation/user_menu"%>
-    </br>
+      <%=render "shared/components/navigation/navigation_bar"%>
+      <%=render "shared/components/navigation/user_menu"%>
+      <%=render "shared/data/current_user"%>
+      </br>
     <div class="container mainContainer">
       <%= yield %>
     </div>
-
-    <%=render "shared/scripts/add_this_share_widget"%>
     
   </body>
   <footer>

@@ -1,26 +1,42 @@
 controllers:
   users:
-    users: admin
-    add_service_provider: admin
-    profile: consumer
-  activities:
-    new_activity: owner_or_admin
-  widgets:
-    text_widget_control: owner_or_admin
-    image_widget_control: owner_or_admin
-    location_widget_control: owner_or_admin
+    users: super_admin
+    add_account_user: seller_account_owner
+  accounts:
+    upgrade_to_business_account: seller_account_owner
+    # profile: consumer
+  # activities:
+  #   new_activity: owner_or_admin
+  # widgets:
+  #   text_widget_control: owner_or_admin
+  #   image_widget_control: owner_or_admin
+  #   location_widget_control: owner_or_admin
 
 views:
   user_navtabs:
     permissions:
-      about_me: ["admin", "service_provider"]
-      my_activities: [ "trainer", "tour_guide" ]
-      my_locations: ["location_owner"]
-      my_schedule: ["consumer", "service_provider"]
-      goals: ["consumer"]
-      stats: ["service_provider"]
+      account_info:
+        permitted_accounts: ["freelancer", "business" ]
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
+      about_me: 
+        permitted_roles: [ "super_admin","seller_account_owner", "seller_account_editor", "seller_account_user" ]
+      staff: 
+        permitted_accounts: [ "business" ]
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
+      my_activities: 
+        permitted_accounts:  ["freelancer", "business" ]
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
+      my_bookings:
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user", "consumer" ]
+      my_schedule:
+        permitted_accounts:  ["freelancer", "business" ]
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
+      stats: 
+        permitted_accounts:  ["freelancer", "business" ]
+        permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
     default_active:
-      consumer: "my_schedule"
-      trainer: "my_activities"
-      location_owner: "stats"
-      admin: "my_schedule"
+      consumer: "my_bookings"
+      seller_account_owner: "my_activities"
+      seller_account_editor: "my_activities"
+      seller_account_user: "my_schedule"
+      super_admin: "about_me"

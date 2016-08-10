@@ -2,9 +2,6 @@
 	<%if locals[:user].activities.present? %>
 		
 		<div class="container">
-			<%= render "shared/buttons/create_new_activity"%>			
-			</br></br>
-
 			<% locals[:user].activities.in_groups_of(2,false) do |activity_group|%>		
 			  <div class="row">
 		  		<%activity_group.each do |activity|%>
@@ -24,6 +21,6 @@
 	
 	<%else%>
 		<p ><%= I18n.t :didnt_create_activities%></p>
-		<a href="<%="/new_activity/#{current_user.id}"%>" ><%= I18n.t :create_your_first_activity %></a>
+		<a href="<%="/new_activity/#{current_user_id}"%>" ><%= I18n.t :create_your_first_activity %></a>
 	<%end%>
 </div>

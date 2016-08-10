@@ -68,24 +68,8 @@ RSpec.describe UsersController do
           expect(@user.phone_verification_code).to_not be nil
         end
     
-        # it "should send verification code in sms to user" do
-        #   controller.stub(:current_user).and_return(@user)
-        #   Sms.any_instance.stub(:send_message).and_return(:return_value)
-          
-        #   xhr :post, :authenticate_phone, { user: { phone: "972526733740" } }
-        #   expect_any_instance_of(Sms).to receive(:send_message).and_return(true)
-        # end
-      
       end
     
-    end
-
-    context "second step - verification code" do
-
-      it "should assign phone_verified attribute to true" do
-
-      end
-
     end
 
   end 
@@ -156,30 +140,162 @@ RSpec.describe UsersController do
     end
 
   end
+  describe "invite account user" do
 
-  describe "GET users/:role" do
+    context "new" do
+      
+      before :all do
+        @account_editor_params = { name: "editor", email: "editor@.activity.market", password: "123456", auth_provider: "email", role: "seller_account_editor"  }
+      end
 
-    before :all do
-      @valid_params = { name: "omri shuva", email: "omrishuva1@gmail.com", auth_provider: "facebook" }
-      @user = User.new(@valid_params)
-      @user.save
+      before :each do
+        account_owner_params = { name: "owner", email: "owner@.activity.market", password: "123456", auth_provider: "email"  }
+        @account_owner = User.new( account_owner_params )
+        @account_owner.save
+        @account = Account.create_freelancer_account( @account_owner )
+        SendAccountUserInvitationEmail.stub(:perform_later).and_return( true )
+      end
+    
+      after :each do
+        User.destroy_all
+        Account.destroy_all
+      end
+
+      it "should create a new user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( User.last.email).to eql @account_editor_params[:email]
+      end
+
+      it "should assign the account id as current_account" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( User.last.current_account.id ).to eql @account.id
+      end
+
+      it "should add the account id to the user linked accounts" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( User.last.linked_account_ids ).to eql [@account.id]
+      end
+      
+      it "should assign the chosen role to the new account user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( User.last.roles ).to eql ["consumer","seller_account_editor"]
+      end
+      
+       it "should add the user id to the accout editors list" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( @account.reload!.editors.include?(User.last.id) ).to be true
+      end
+
     end
     
-    after :all do
-      @user.destroy
+    context " exists and doesn't have other linked accounts" do
+      
+      before :all do
+        @account_editor_params = { name: "user", email: "user@.activity.market", role: "seller_account_editor"  }
+      end
+
+      before :each do
+        account_owner_params = { name: "owner", email: "owner@.activity.market", password: "123456", auth_provider: "email"  }
+        @account_owner = User.new( account_owner_params )
+        @account_owner.save
+        @account = Account.create_freelancer_account( @account_owner )
+        user_params = { name: "user", email: "user@.activity.market", password: "123456", auth_provider: "email"  }
+        @user = User.new( user_params )
+        @user.save
+        SendAccountUserInvitationEmail.stub(:perform_later).and_return( true )
+      end
+    
+      after :each do
+        User.destroy_all
+        Account.destroy_all
+      end
+
+      it "should assign the account id as current_account" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( @user.reload!.current_account_id).to eql @account.id
+      end
+
+      it "should add the account id to the user linked accounts" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( @user.reload!.linked_account_ids ).to eql [@account.id]
+      end
+
+      it "should assign the chosen role to the new account user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( @user.reload!.roles ).to eql ["consumer","seller_account_editor"]
+      end
+      
+      it "should add the user id to the accout editors list" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_editor_params
+        expect( @account.reload!.editors.include?(@user.id) ).to be true
+      end
+
     end
 
-    it "should redirect to root url when user is not an admin" do
-      controller.stub( :current_user ).and_return( @user )
-      get :users, role: "consumer"
-      expect( response).to redirect_to  "/"
-    end
+    context "exists and has other linked accounts" do
+      
+       before :all do
+        @account_user_params = { name: "user", email: "user@.activity.market", role: "seller_account_user"  }
+      end
 
-    it "should be allowed for admin users" do
-      @user.add_role( "admin" )
-      controller.stub( :current_user ).and_return( @user )
-      get :users, role: "service_provider", spt: "trainer"
-      expect( response.status ).to be 200
+      before :each do
+        account_owner_params = { name: "owner", email: "owner@.activity.market", password: "123456", auth_provider: "email"  }
+        @account_owner = User.new( account_owner_params )
+        @account_owner.save
+        @account = Account.create_freelancer_account( @account_owner )
+        user_params = { name: "user", email: "user@.activity.market", password: "123456", auth_provider: "email", linked_account_ids: [122345]  }
+        @user = User.new( user_params )
+        @user.save
+        SendAccountUserInvitationEmail.stub(:perform_later).and_return( true )
+      end
+    
+      after :each do
+        User.destroy_all
+        Account.destroy_all
+      end
+
+      it "should add the account id to the user linked accounts" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_user_params
+        expect( @user.reload!.linked_account_ids ).to eql [122345, @account.id]
+      end
+      
+      it "should assign the chosen role to the new account user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_user_params
+        expect( @user.reload!.roles ).to eql ["consumer"]
+      end
+      
+      #should be moved to user spec
+      it "should change the user current_account when switching accounts" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_user_params
+        @user.switch_current_account( @account.id )
+        expect( @user.reload!.current_account_id ).to eql @account.id
+      end
+
+      it "should change the user roles when switching accounts" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_user_params
+        @user.switch_current_account( @account.id )
+        expect( @user.reload!.roles ).to eql ["consumer", "seller_account_user"]
+      end
+
+       it "should add the user id to the account users list" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :invite_account_user, user: @account_user_params
+        expect( @account.reload!.users.include?(@user.id) ).to be true
+      end
+
     end
 
   end

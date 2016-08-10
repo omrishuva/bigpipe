@@ -1,0 +1,9 @@
+<div id=currentUserScript>
+<%if current_user%>
+		<script>
+			if ( !localStorage.getItem("currentUserId")  ) {  localStorage.setItem( "currentUserId", <%=current_user_id%>)  };
+		</script>
+<%end%>
+</div>
+
+

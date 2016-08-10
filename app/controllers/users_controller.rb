@@ -115,15 +115,17 @@ class UsersController < ApplicationController
     render status: 200, json: user_params
   end
   
-  def add_service_provider
-    @service_type = params[:spt]
-    @user = User.send( "new_#{@service_type}", params[:user]) if params[:user].present?
-    if !@user
-      render "add_service_provider"
-    elsif @user && @user.errors.present?
-      render "add_service_provider"
-    else
-      redirect_to '/users/service_provider'
+  def invite_account_user
+    if !params[:user]
+      render "invite_account_user"
+    else 
+      @user = User.new_account_user( params[:user], current_user.current_account )
+      if @user.errors
+        render "invite_account_user"
+      else
+        flash[:success] = "invitation sent to #{@user.name}"
+        redirect_to '/users/service_provider'
+      end
     end
   end
   
@@ -134,11 +136,12 @@ class UsersController < ApplicationController
   end
 
   def profile
+    @nav = params[:nav]
     @user = User.find( params[:user_id] )
   end
   
   def profile_navigation
-    if current_user.id == params[:userId]
+    if current_user_id == params[:userId]
       @user = current_user
     else
       @user = User.find( params[:userId] )

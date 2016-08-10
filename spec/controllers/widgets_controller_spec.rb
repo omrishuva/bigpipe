@@ -29,18 +29,18 @@ RSpec.describe WidgetsController do
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return(@user)
       xhr :get, "text_widget_control", @widget_data
-      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text )
+      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
 
-     it "should assign isWidgetOwner to true when the user is admin" do
+     it "should assign isWidgetOwner to true when the user is super_admin" do
       @admin = User.new(  name: "omri shuva", email: "omri@gmail.com", phone: "0526733430", password: "zzzaaaa123", auth_provider: "play" )
       @admin.save
       sleep 1
-      @admin.add_role( "admin" )
+      @admin.add_role( "super_admin" )
       controller.stub(:current_user).and_return( @admin )
       xhr :get, "text_widget_control", @widget_data
-      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: false, value: @user.about_text )
+      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
         
@@ -49,7 +49,7 @@ RSpec.describe WidgetsController do
       @widget_data[:state] = "save"
       @widget_data[:data] = "about text"
       xhr :post, "text_widget_control", @widget_data
-      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text )
+      @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( @user.about_text ).to eq "about text"  
     end
 
@@ -62,22 +62,27 @@ RSpec.describe WidgetsController do
       User.destroy_all
       @user = User.new(  name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" )
       @user.save
-      @activity = Activity.new( user_id: @user.id, title: "Untitled Activity" )
+      account = Account.create_freelancer_account( @user )
+      @activity = Activity.new( account_id: account.id, title: "Untitled Activity" )
       @activity.save
       test_photo = ActionDispatch::Http::UploadedFile.new({
         :filename => 'test_photo_1.jpg',
         :type => 'image/jpeg',
         :tempfile => File.new("#{Rails.root}/spec/fixtures/example.jpg")
       })
+      
       @widget_data = {
-                      image: test_photo,
-                      widget: "{\"widgetName\":\"image_box\",\"elementName\":\"imageBox\",\"objectName\":\"activities\",\"objectId\":\"#{@activity.id}\",\"key\":\"cover_image_id\",\"placeholder\":\"update_image\",\"editableOverlayText\":\"true\",\"overlayText\":\"Yoga on the best roof in Tel Aviv\"}",
-                      widgetName: "image_box",
-                      elementName: "imageBox",
-                      objectName: "activities",
-                      key: "cover_image_id"
-                    }
+                        image: test_photo,
+                        widget: "{\"nestedWidgetSelectorKey\":\"#5685925472370688.widgetControl[data-element-name='textInputBox'][data-key='title']\",\"widgetName\":\"image_box\",\"elementName\":\"imageBox\",\"objectName\":\"activities\",\"objectId\":\"#{@activity.id}\",\"key\":\"cover_image_id\",\"placeholder\":\"update_image\",\"overlayText\":\"{\\\"enabled\\\":true,\\\"key\\\":\\\"title\\\",\\\"value\\\":\\\"Street Art Tour\\\",\\\"objectName\\\":\\\"activities\\\",\\\"objectId\\\":#{@activity.id},\\\"state\\\":null,\\\"isWidgetOwner\\\":true,\\\"placeholder\\\":\\\"name_it\\\",\\\"textClass\\\":\\\"ltrimageOverlayText activityTitle\\\",\\\"buttonClass\\\":\\\"imageOveralyButton\\\"}\",\"editableOverlayText\":\"\",\"imageWidth\":\"770\",\"imageHeight\":\"430\",\"imageCrop\":\"fill\",\"imageGravity\":\"center\",\"imageTagClass\":\"coverImage img-fluid\",\"imageTagId\":\"\"}",
+                        widgetName: "image_box",
+                        objectName: "activities",
+                        key: "cover_image_id"
+                      }
     end
+
+
+
+
     after :each do
       Cloudinary::Uploader.destroy( @activity.reload!.cover_image_id )
     end
@@ -85,17 +90,17 @@ RSpec.describe WidgetsController do
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return( @user )
       xhr :post, "image_widget_control", @widget_data
-      expect( assigns(:widget_data) ).to eq ( { widgetName: "image_box", elementName: "imageBox", objectName: "activities", objectId: @activity.id, key: "cover_image_id",value: @activity.reload!.cover_image_id, isWidgetOwner: true, overlayText: "Yoga on the best roof in Tel Aviv", placeholder: "update_image", editableOverlayText: "true" } )
+      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
      it "should assign isWidgetOwner to true when the user is admin" do
       @admin = User.new(  name: "omri shuva", email: "omri@gmail.com", phone: "0526733430", password: "zzzaaaa123", auth_provider: "play" )
       @admin.save
       sleep 1
-      @admin.add_role( "admin" )
+      @admin.add_role( "super_admin" )
       controller.stub(:current_user).and_return( @user )
       xhr :post, "image_widget_control", @widget_data
-      expect( assigns(:widget_data) ).to eq ( { widgetName: "image_box", elementName: "imageBox", objectName: "activities", objectId: @activity.id, key: "cover_image_id",value: @activity.reload!.cover_image_id, isWidgetOwner: true, overlayText: "Yoga on the best roof in Tel Aviv", placeholder: "update_image", editableOverlayText: "true" } )
+      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
     it "should update the correct entity and field according to widget data" do

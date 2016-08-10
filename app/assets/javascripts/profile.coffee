@@ -11,4 +11,13 @@ changeUserNavTab =( exclude ) ->
       url: "/profile/navigation/#{e.target.name}"
       data: data
       success: (data) ->
+        upgradeToBusiness();
+        document.publishEvent('loadWidgetListeners' );
+
+upgradeToBusiness = ->
+  $('#upgradeToBusiness').click (e) ->
+    $.ajax
+      type: 'POST'
+      url: "/accounts/upgrade_business/#{e.target.dataset.accountId}"
+      success: (data) ->
         document.publishEvent('loadWidgetListeners' );

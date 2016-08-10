@@ -3,7 +3,7 @@ RSpec.describe SessionsController do
   
   before :all do
     User.destroy_all
-    params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+    params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "email" }
     @user = User.new(params)
     @user.save
     sleep 1

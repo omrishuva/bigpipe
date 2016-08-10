@@ -17,12 +17,14 @@
     						}
     %>
 <%else%>
-	<span class="imageOverlayText"%>
-	 <%=locals[:overlayText][:value]%>
-	</span>
-	
+	<%if locals[:overlayTextlinkTo].present?%>
+		<a href=<%="#{locals[:overlayTextlinkTo]}"%>>
+			<span class="imageOverlayTextWithLink"%><%=locals[:overlayText][:value]%></span>	
+		</a>
+	<%else%>
+		<span class="imageOverlayText"%><%=locals[:overlayText][:value]%></span>	
+	<%end%>
 <%end%>
-
 <div class="<%="#{current_direction}imageUploadButton"%>" >
 	
 	<input 
@@ -35,7 +37,7 @@
 		data-key="<%="#{locals[:key]}"%>"
 		data-placeholder="<%="#{locals[:placeholder]}"%>"
 		data-overlay-text="<%="#{locals[:overlayText].to_json}"%>"
-		data-editable-overlay-text="<%="#{locals[:editableOverlayText]}"%>"
+		data-editable-overlay-text="<%="#{locals[:overlayText][:editble]}"%>"
 		data-image-width="<%="#{locals[:imageWidth]}"%>"
 		data-image-height="<%="#{locals[:imageHeight]}"%>"
 		data-image-crop="<%="#{locals[:imageCrop]}"%>"

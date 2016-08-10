@@ -26,12 +26,12 @@ RSpec.describe User do
 			expect( user.errors ).to eq  email: ["already_exists"]
 		end
 		
-		it "should validate email format" do
-			@invalid_email_format_params = { name: "omri shuva", email: "omrishuva1gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
-			user = User.new(@invalid_email_format_params)
-			user.save
-			expect(user.errors).to eq  email: ["wrong_format"]
-		end
+		# it "should validate email format" do
+		# 	@invalid_email_format_params = { name: "omri shuva", email: "omrishuva1gmail.com", phone: "0526111111", password: "zzzaaaa123", auth_provider: "play" }
+		# 	user = User.new(@invalid_email_format_params)
+		# 	user.save
+		# 	expect(user.errors).to eq  email: ["wrong_format"]
+		# end
 
 		it "should validate uniqueness of phone" do
 			User.create(@valid_params)
@@ -70,13 +70,13 @@ RSpec.describe User do
 	context "Authentication" do
 
 		before :each do
-			@play_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+			@email_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "email" }
 			User.destroy_all
 			@fb_params = { auth_provider: "facebook", name: "omri shuva", email: "omrishuva1@gmail.com" }				
 		end
 		
 		it "should encrypt password correctrly" do
-			user = User.new(@play_params)
+			user = User.new(@email_params)
 			user.save
 			expect(user.password_hash).to eq BCrypt::Engine.hash_secret("zzzaaaa123", user.password_salt)
 		end
@@ -97,8 +97,8 @@ RSpec.describe User do
 				expect(User.authenticate(@fb_params)).to_not be nil
 			end
 
-			it "should authenticate users that signed in originally with play" do
-				user = User.new(@play_params)
+			it "should authenticate users that signed in originally with email" do
+				user = User.new(@email_params)
 				user.save
 				sleep 1
 				expect(User.authenticate(@fb_params).id).to eq user.id
@@ -106,23 +106,23 @@ RSpec.describe User do
 
 		end
 	
-		context "auth provider is play" do
+		context "auth provider is email" do
 			
 			it "should authenticate user" do
-				user = User.new(@play_params)
+				user = User.new(@email_params)
 				user.save
-				@play_params.merge!(password: "zzzaaaa123")
-				expect(User.authenticate(@play_params)).to_not be nil
+				@email_params.merge!(password: "zzzaaaa123")
+				expect(User.authenticate(@email_params)).to_not be nil
 			end
 
 			it "should not authenticate user if password is not correct" do
-				user = User.new(@play_params)
+				user = User.new(@email_params)
 				user.save
-				expect(User.authenticate(@play_params)).to be nil
+				expect(User.authenticate(@email_params)).to be nil
 			end
 
 			it "should not authenticate user if not exists" do
-				expect(User.authenticate(@play_params)).to be nil
+				expect(User.authenticate(@email_params)).to be nil
 			end
 
 		end
@@ -130,56 +130,26 @@ RSpec.describe User do
 
 	context "roles & permissions" do
 		
-		context "administraion" do
+		# context "administraion" do
 			
-			before :all do
-				User.destroy_all
-				consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
-				@consumer = User.new( consumer_params )
-				@consumer.save
-			end
+		# 	before :all do
+		# 		User.destroy_all
+		# 		consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+		# 		@consumer = User.new( consumer_params )
+		# 		@consumer.save
+		# 	end
 			
-			it "should add role" do
-				@consumer.add_role( "admin" )
-				expect( @consumer.admin? ).to be true
-			end
+		# 	it "should add role" do
+		# 		@consumer.add_role( "admin" )
+		# 		expect( @consumer.admin? ).to be true
+		# 	end
 
-			it "should remove role" do 
-				@consumer.remove_role("admin")
-				expect( @consumer.admin? ).to be false
-			end
-			
-			it "should not add service_provider only by using add_service" do
-				@consumer.add_role( "service_provider" )
-				expect( @consumer.service_provider? ).to be false
-			end
-			
-			it "should add service_provider role when adding a service" do
-				@consumer.add_service( "trainer" )
-				expect( @consumer.service_provider? ).to be true
-			end
-			
-			it "should add service" do
-				expect( @consumer.services ).to eql ["trainer"]
-			end
-			
-			it "should remove service" do
-				@consumer.remove_service( "trainer" )
-				expect( @consumer.services ).to eql []
-			end
+		# 	it "should remove role" do 
+		# 		@consumer.remove_role("admin")
+		# 		expect( @consumer.admin? ).to be false
+		# 	end
 
-			it "should remove service_provider role if user has no other services" do
-				expect( @consumer.service_provider? ).to be false
-			end
-			
-			it "should keep service_provider role if user has other services" do
-				@consumer.add_service("trainer")
-				@consumer.add_service("location_owner")
-				@consumer.remove_service("location_owner")
-				expect( @consumer.service_provider? ).to be true
-			end
-
-		end
+		# end
 
 		context "Consumer" do
 			
@@ -199,69 +169,48 @@ RSpec.describe User do
 			end
 		end
 
-		context "Service Provider" do
+		# context "Seller Account Owner" do
 
-			before :all do
-				User.destroy_all
-				trainer_params = { name: "yuval klien", email: "yuval@play.org.il", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "play"}
-				@trainer = User.new_trainer( trainer_params )
-				@trainer.save
-			end
+		# 	before :all do
+		# 		User.destroy_all
+		# 		account_owner_params = { name: "shimi shimon", email: "shimi@gmail.com", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "email"}
+		# 		@account_owner = User.new_account_owner( account_owner_params )
+		# 		@account_owner.save
+		# 	end
 			
-			it "can should multiple roles" do
-				expect(@trainer.role_ids.sort).to eq [1,2]
-			end
-			
-			it "should not set the role if user already has a role" do
-				expect(@trainer.service_ids).to eq [0,1]
-			end
-		end
+		# 	it "should multiple consumer and account owner roles" do
+		# 		expect(@account_owner.role_ids.sort).to eq [1,4]
+		# 	end
+	
+		# end
 		
-		context "Services" do
+		# context "Seller Account Admin" do
+
+		# 	before :all do
+		# 		User.destroy_all
+		# 		account_admin_params = { name: "shimi shimon", email: "shimi@gmail.com", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "email"}
+		# 		@account_admin = User.new_account_owner( account_owner_params )
+		# 		@account_admin.save
+		# 	end
 			
-			context "Trainer" do
-					
-				describe "add new trainer" do
-					
-					before :all do
-						tempfile = File.new "cert.pdf","w"
-						certificate = OpenStruct.new( tempfile: tempfile )
-						@trainer_params = { user: { name: "omri shuva", email:"omri@play.org.il" ,phone:"0526733740" ,  gender:"male"}, certificate: certificate  }
-						@user = User.new_trainer( @trainer_params[:user], @trainer_params[:certificate] )
-						@file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
-						@sub = $pubsub.find_subscription( "test-now" )
-					end
-					
-					after :all do
-						`rm cert.pdf`
-						@file.delete
-						@user.destroy
-						@sub.pull.each{ |msg| msg.ack! }
-					end
+		# 	it "should multiple consumer and account owner roles" do
+		# 		expect(@account_admin.role_ids.sort).to eq [1,3]
+		# 	end
+		# end
 
-					it "should create the user with service_provider and consumer role" do
-						expect( @user.roles ).to eq ["consumer", "service_provider"]
-					end
-					
-					it "should create the user with service provider type trainer" do
-						expect( @user.services ).to eq ["trainer"]
-					end
+		# context "Seller Account User" do
 
-					it "should should save the certificate file in the storage" do
-						file = $storage.find_bucket("test_certificates").file("certificate_#{@user.id}")
-						expect(file).to_not be nil
-					end
-					
-					it "should save the certificate path in the database" do
-						expect(@file.public_url).to eq @user.trainer_certificate_url
-					end
+		# 		before :all do
+		# 		User.destroy_all
+		# 		account_user_params = { name: "shimi shimon", email: "shimi@gmail.com", phone: "05263333333", password: "f2ev123v1v1", auth_provider: "email"}
+		# 		@account_user = User.new_account_owner( account_owner_params )
+		# 		@account_user.save
+		# 	end
+			
+		# 	it "should multiple consumer and account owner roles" do
+		# 		expect(@account_user.role_ids.sort).to eq [1,2]
+		# 	end
+		# end
 
-					it "should enqueue an invitation email task" do
-						expect(@sub.pull.first.attributes["class"]).to eq "SendTrainerInvitationEmail"	
-					end
-					
-				end
-			end
-		end
 	end
 end

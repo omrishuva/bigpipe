@@ -24,6 +24,15 @@ Rails.application.routes.draw do
 	get  '/profile/navigation/:navtab'               	 										 	 => 'users#profile_navigation'
 	post '/upload_image'								 							 										 	 => 'users#upload_image'
 	
+	#invite users
+	get  '/account_user/new'         				 																	=> 'users#invite_account_user'
+	post '/account_user/new'         				 																	=> 'users#invite_account_user'
+	# get  '/service_provider/:account_id/onboarding'       				 						=> 'users#account_user_onboarding'
+	# post '/service_provider/:account_id/onboarding'      					 						=> 'users#account_user_login'
+
+	#accounts
+	post 'accounts/upgrade_business/:account_id'													   => 'accounts#upgrade_to_business_account'
+
 	#activities	
 	get '/new_activity/:user_id'											 										 	   => 'activities#new_activity'
 	get '/activities/:activity_id' 						                             	   => 'activities#activity'
@@ -36,11 +45,6 @@ Rails.application.routes.draw do
 	get   '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
 	post  '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
 
-	#service_providers
-	get  '/service_provider/:spt/new'         				 											  => 'users#add_service_provider'
-	post '/service_provider/:spt/new'         				 												=> 'users#add_service_provider'
-	get  '/service_provider/onboarding'       				 												=> 'users#service_provider_onboarding'
-	post '/service_provider/onboarding'      					 												=> 'users#service_provider_login'
 	
 	#health checks
 	get '_ah/health'      																						=> 'application_health#health'

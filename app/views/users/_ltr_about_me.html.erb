@@ -14,9 +14,11 @@
                 imageTagClass: "img-fluid coverImage",
                 key: "cover_image_cloudinary_id",
                 value: locals[:user].cover_image,
-                overlayText: { value: locals[:user].name }
+                overlayText: { value: locals[:user].name },
+                overlayTextlinkTo: "/profile/#{locals[:user].id}"
               }
   %>
+
 </div>
 
 <div class="col-lg-8 gridItem">

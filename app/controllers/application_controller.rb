@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+  
+  def current_user_id
+    current_user.try(:id)
+  end
+  helper_method :current_user_id
 
   def authorize
     redirect_to root_url and return if not allowed?
@@ -32,7 +37,7 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
-    if current_user && current_user.admin? && controller_permissions.present? && action_permissions == "admin"
+    if current_user && current_user.super_admin? && controller_permissions.present? && action_permissions == "admin"
       I18n.locale = DEFAULT_LOCALE
     else
       I18n.locale = current_user.try(:locale) || session[:current_locale]
@@ -54,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
   
   def user_is_owner_or_admin
-    params[:user_id].to_s == current_user.id.to_s || current_user.admin?
+    params[:user_id].to_s == current_user_id.to_s || current_user.admin?
   end
   
   def controller_permissions

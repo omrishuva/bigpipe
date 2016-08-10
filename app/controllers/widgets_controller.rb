@@ -115,12 +115,13 @@ class WidgetsController < ApplicationController
   #Utilities#####################################################
 
   def get_object( object_name, object_id )
-		return current_user if object_name == "users" && current_user.id.to_s == params[:objectId]
+		return current_user if object_name == "users" && current_user_id.to_s == params[:objectId]
 		eval( object_name.classify ).find( object_id )
 	end
 
 	def is_widget_owner
-		@object.owners.map(&:to_s).include?( current_user.try(:id).to_s )
+		return true if @object.class.name == "User" && ( @object.id == current_user_id  || current_user.super_admin?  )
+		@object.account.is_editor?( current_user )
 	end
 
 	######################################################

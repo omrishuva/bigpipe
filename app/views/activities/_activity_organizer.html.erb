@@ -1,0 +1,17 @@
+<div class="aboutOrganizerBox clearfix">
+	<%if @activity.account_public_info_completed? %>
+		<div class="inlineBlock aboutOragnizerImage">  
+			<%= render "widgets/ugc/image/image_box/image_tag", 
+									locals: { 
+														value: @activity.account.public_info[:image],
+														imageWidth: 150, 
+														imageHeight: 100,
+														crop: "scale"
+														 } %>
+		</div>
+	<div class="inlineBlock mediumText"><%= @activity.account.public_info[:text].html_safe%></div>												
+<%else%>
+	<p style="margin-bottom: 0px;">Your public profile info goes here</p>
+	<a href=<%="/profile/#{current_user_id}?nav=about_me"%> class="navigateToProfileTab" data-navtab="about_me" >Click here to complete your profile</a>
+<%end%>
+</div>

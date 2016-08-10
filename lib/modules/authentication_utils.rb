@@ -75,7 +75,7 @@ module AuthenticationUtils
   end
   
   def from_email?( entity = nil )
-    auth_provider == 'play'
+    auth_provider == 'email'
   end
 
   def has_phone?( entity = nil )

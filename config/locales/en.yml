@@ -43,8 +43,11 @@ en:
  update_image: "Update Image"
  edit: "Edit"
  about_me: "About Me"
- my_activities: "My Activities"
- my_locations: "My Locations"
+ account_info: "Account Info"
+ my_activities: "Activities"
+ my_bookings: "Bookings"
+ my_schedule: "Schedule"
+ staff: "Staff"
  new_activity: "New Activity"
  upcoming_events: "Upcoming Events"
  activities: "Activities"
@@ -61,7 +64,7 @@ en:
  enter_location: "Enter a Location"
  events: "Events"
  stats: "Stats"
- my_schedule: "My Schedule"
+ 
  goals: "Goals"
 
  error_messages:

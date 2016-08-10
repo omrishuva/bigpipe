@@ -34,53 +34,28 @@ module RoleUtils
       roles_data["roles"][role_name]
     end
 
-    def service_name( service_id )
-      roles_data["services_mapping"][service_id]
-    end
-    
-    def service_id( service_name )
-      roles_data["services"][service_name]
-    end
-
-    def service_ids
-      roles_data["services"].map{|k,v| v } 
-    end
-    
-    def services
-       roles_data["services"].map{|k,v| k } 
+    def seller_role_short_names
+      roles_data["seller_roles_short_name"]
     end
 
   end
 
-  def set_default_role_and_service
+  def set_default_role
     self.role_ids = self.class.default_role unless self.role_ids.present?
-    self.service_ids = self.class.default_service unless self.service_ids.present?
   end
 
-  def has_role_and_service?
-    self.service_ids.present? && self.role_ids.present?
+  def has_role?
+    self.role_ids.present?
   end
   
   def roles
     self.role_ids.map{ |role_id| User.role_name( role_id )  }.compact
   end
   
-  def services
-    self.service_ids.map{ |service_id| User.service_name( service_id )  }.compact
-  end
-
-  def roles_and_services
-    [self.roles, self.services].flatten
-  end
-
-  def admin?
-    self.role_ids.include?(  User.role_id( "admin" ) )
+  def super_admin?
+    self.role_ids.include?(  User.role_id( "super_admin" ) )
   end
   
-  def service_provider?
-    self.role_ids.include?(  User.role_id( "service_provider" ) )
-  end 
-
   def add_role( role_name )
     if User.role_id( role_name ) && role_name != "service_provider"
       self.role_ids << User.role_id( role_name )
@@ -93,22 +68,5 @@ module RoleUtils
     self.role_ids = ( self.role_ids - [ User.role_id( role_name ) ]).flatten.compact
     self.save
   end
-
-
-  def add_service( service_name )
-    set_default_role_and_service
-    self.service_ids << User.service_id( service_name )
-    self.service_ids.uniq!
-    self.role_ids << User.role_id( "service_provider" )
-    self.role_ids = self.role_ids.uniq.compact
-    save
-  end
-  
-  def remove_service( service_name )
-    self.service_ids = ( self.service_ids - [ User.service_id( service_name ) ]).flatten.compact
-    self.remove_role("service_provider") unless self.service_ids.max > 0
-    self.save
-  end
-
 
 end

@@ -48,7 +48,7 @@ facebookSignIn = ->
               if window.location.pathname == "/service_provider/onboarding"
                 window.location.pathname = "/me"
               else
-                loadListeners();
+                postSignUp();
             complete: ->
             error: (xhr, textStatus, errorThrown) ->
               console.log 'ajax loading error...'
@@ -58,11 +58,64 @@ facebookSignIn = ->
       return
     ), scope: 'email,public_profile'
 
+submitSignUpForm = ->
+  $('#signUpForm').submit (e) ->
+    disableSubmitButton();
+    showLoader();
+    e.preventDefault()
+    url = '/signup'
+    $.ajax
+      type: 'POST'
+      url: url
+      data: $('#signUpForm').serialize()
+      success: (data) ->
+        postSignUp();
+
+currentUserId = ->
+  localStorage.getItem('currentUserId')
+
+postSignUp = ->
+  if localStorage.getItem("createNewActivty") == "true"
+    localStorage.removeItem("createNewActivty")
+    window.location.href = "/new_activity/#{currentUserId()}"
+  else
+    loadListeners();
+
+createNewActivty = ->
+  $('#createNewActivty').click (e) ->
+    userId = e.target.dataset.userId
+    if userId == undefined || userId == ""
+      localStorage.setItem("createNewActivty", true)
+      openSignupModal();
+    else
+      showLoader();
+      window.location.href = "/new_activity/#{userId}"
+
+openSignupModal = ->
+  $('.modal#signupModal').modal('toggle') 
+
+submitLoginForm = ->
+  $('#loginForm').submit (e) ->
+    disableSubmitButton();
+    showLoader();
+    e.preventDefault()
+    url = '/login'
+    $.ajax
+      type: 'POST'
+      url: url
+      data: $('#loginForm').serialize()
+      success: (data) ->
+       loadListeners();
+
+
 logOut = ->
-  $('#sign_out').click (e) ->
-    FB.getLoginStatus (response) ->
-      FB.logout() if response.authResponse
-    true
+  $('#logout').click (e) ->
+    localStorage.removeItem('currentUserId')
+    location.reload();
+    # FB.getLoginStatus (response) ->
+    #   FB.logout() if response.authResponse
+    # true
+    localStorage.removeItem("currentUserId", null)
 
 loadLoginForm = ->
   $('a#haveAccount').click ->
@@ -79,32 +132,6 @@ loadSignUpForm = ->
       url: '/signup'
       success: (data) ->
        loadListeners();
-
-submitLoginForm = ->
-  $('#loginForm').submit (e) ->
-    disableSubmitButton();
-    showLoader();
-    e.preventDefault()
-    url = '/login'
-    $.ajax
-      type: 'POST'
-      url: url
-      data: $('#loginForm').serialize()
-      success: (data) ->
-       loadListeners();
-
-submitSignUpForm = ->
-  $('#signUpForm').submit (e) ->
-    disableSubmitButton();
-    showLoader();
-    e.preventDefault()
-    url = '/signup'
-    $.ajax
-      type: 'POST'
-      url: url
-      data: $('#signUpForm').serialize()
-      success: (data) ->
-        loadListeners();
 
 submitPhoneForm = ->
   $('#phoneForm').submit (e) ->
@@ -189,19 +216,3 @@ onFileUpload = ->
     splitedFileName = fileName.split("\\")
     fileName = splitedFileName[ (splitedFileName.length - 1) ]
     $('.fileName').text(fileName)
-
-
-createNewActivty = ->
-  $('#createNewActivty').click (e) ->
-    userId = e.target.dataset.userId
-    if userId == undefined || userId == ""
-      openSignupModal();
-    else
-      showLoader();
-      window.location.href = "/new_activity/#{userId}"
-
-openSignupModal = ->
-  $('.modal#signupModal').modal('toggle') 
-
-
-

@@ -63,6 +63,9 @@ he:
  events: "אירועים"
  stats: "סטטיסטיקות"
  my_schedule: "הלו״ז שלי"
+ my_bookings: "ההזמנות שלי"
+ staff: "צוות"
+ account_info: "חשבון"
  goals: "מטרות"
  error_messages:
   password:  

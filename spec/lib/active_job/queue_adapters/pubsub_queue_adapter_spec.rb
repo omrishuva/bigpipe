@@ -2,11 +2,6 @@ require "spec_helper"
 
 RSpec.describe ActiveJob::QueueAdapters::PubSubQueueAdapter do
 	
-	before :each do
-		PubsubUtils.delete_all_topics
-		PubsubUtils.delete_all_subscriptions
-	end
-	
 	after :all do
 		PubsubUtils.delete_all_topics
 		PubsubUtils.delete_all_subscriptions
@@ -14,6 +9,11 @@ RSpec.describe ActiveJob::QueueAdapters::PubSubQueueAdapter do
 
 	describe :enqueue do
 		
+		before :each do
+			PubsubUtils.delete_all_topics
+			PubsubUtils.delete_all_subscriptions
+		end
+
 		before :each do
 			SendPasswordRecoveryEmail.perform_later( email: "omrishuva1@gmail.com", name: "omri shuva", password_recovery_code: "1234" )
 		end

@@ -1,0 +1,17 @@
+<div class="container" id="meSectionContainer">
+	<div class="col-lg-12 gridItem accountType">
+		<p><%="Account Type: #{current_user.account_type.capitalize}"%>	</p>
+		<%if current_user.account_type == "freelancer"%>
+			<p class="mediumText">Own a Business ? </p>
+			<p class="smallText" style="margin-bottom: 0px">
+			<a href="#" id="upgradeToBusiness" data-account-id=<%="#{current_user.current_account.id}"%> >Upgrade to Activty.Market pro</a>
+			and invite your team members to collaborate with you.
+			</p>
+			<p class="smallText">Activty.Market pro helps you manage your schedule, bookings and team easily</p>
+			</br>
+			<%=cl_image_tag("ks4cwaxdnmorggnaeitx.jpg", width: 300, height: 250)%>
+		<%end%>
+	</div>
+	
+
+</div>

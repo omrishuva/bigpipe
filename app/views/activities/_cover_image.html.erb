@@ -13,7 +13,7 @@
 						imageTagClass: locals[:imageTagClass],
 						imageTagId: locals[:imageTagId],
 						state: params[:state],
-						isWidgetOwner: @is_widget_owner,
+						isWidgetOwner: @is_widget_editor,
 						placeholder: "update_image",
 						overlayText:{
 											enabled: true,
@@ -22,7 +22,7 @@
 											objectName: "activities",
 											objectId: @activity.id,
 											state: params[:state],
-		    							isWidgetOwner: @is_widget_owner,
+		    							isWidgetOwner: @is_widget_editor,
 		    							placeholder: "name_it",
 		    							textClass: "#{current_direction}imageOverlayText activityTitle",
 		    							buttonClass: "imageOveralyButton"

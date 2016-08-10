@@ -111,7 +111,7 @@ class Entity
 	  end
 		
 		def remove_deprecated_fields( entity, field )
-			if self.class::DEPRECATED_FIELDS && self.class::DEPRECATED_FIELDS.include?( field.to_sym )
+			if self::DEPRECATED_FIELDS && self::DEPRECATED_FIELDS.include?( field.to_sym )
 				entity.properties.delete( field )
 			else
 				false

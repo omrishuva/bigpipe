@@ -1,12 +1,11 @@
 class User < Entity
 
   DEFAULT_SERVICE = []
-  DEPRECATED_FIELDS = [:service_provider_type, :role]
+  DEPRECATED_FIELDS = [:service_provider_type, :service_ids ,:role, :trainer_certificate_url]
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 
-  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role_ids, :service_ids, 
-  :trainer_certificate_url, :invited_by, 
+  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role_ids, :invited_by, :linked_account_ids, :current_account_id,
   :created_at, :updated_at
 	
   attr_reader :password_salt, :password_hash
@@ -16,17 +15,17 @@ class User < Entity
   include RoleUtils
   include LocaleUtils
   include AuthenticationUtils
-  include TrainerUtils
+  include AccountUtils
 
   validates :name, presence: true
   validates :email, presence: true
   validates :password_hash, presence: true, :unless => :from_facebook?
-  validates :email, :format => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+  validates :email
   validate :uniqueness_of_email
   validate :uniqueness_of_phone
   
   before_destroy :delete_related_pipedrive_records
-  before_save :set_default_role_and_service, unless: :has_role_and_service?
+  before_save :set_default_role, unless: :has_role?
   before_save :set_locale, unless: :has_locale?
 
   def self.create( params )
@@ -53,8 +52,13 @@ class User < Entity
   end
 
   def activities
-    Activity.where( [{ k: "user_id", v: id.to_s, op: "=" }] )
+    @activities ||= Activity.where( [{ k: "account_id", v: current_account_id, op: "=" }] )
   end
+  
+  def completed_profile_personal_info?
+    cover_image_cloudinary_id.present? && about_text.present?
+  end
+  
 
 	protected
 

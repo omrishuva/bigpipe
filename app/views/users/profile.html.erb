@@ -1,8 +1,13 @@
-<%if current_user.id == @user.id %>
+<%if current_user.try(:id) == @user.id %>
 	<%= render 'user_navigation_tabs' %>
 	<div class="dropdown-divider"></div>
-	</br>
-	<%= render  default_active, locals: { user: @user } %>
+	<%if @nav.present?%>
+		<%= render  @nav, locals: { user: @user } %>
+	<%else%>
+		<%= render  default_active, locals: { user: @user } %>
+	<%end%>
+
 <%else%>
 	<%= render 'about_me', locals: { user: @user } %>
+	<%= render 'my_activities', locals: { user: @user } %>
 <%end%>

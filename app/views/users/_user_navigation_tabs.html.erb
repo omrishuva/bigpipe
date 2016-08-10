@@ -1,4 +1,4 @@
-<%default_active_action = default_active %>
+<%default_active_action = @nav || default_active %>
 <ul class="nav nav-pills UserProfileNavbar">
 	<% available_navtabs.each do |navtab| %>
 		<li class="<%=" #{current_direction} userProfileNavItem"%>" >

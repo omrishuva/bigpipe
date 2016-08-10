@@ -1,6 +1,5 @@
 <div class="activityContainer">
-	
-	<%if current_user && ( current_user.admin? || current_user.id == @activity.user_id ) %>
+	<%if @activity.account.is_editor?( current_user )  %>
 		<div class="previewPublish gridItem">
 				<div class="previewPublishBtnGroup">
 					<a class="btnBrand1Inverse largeBtn previewPublishBtn" href="#">Preview</a>
@@ -11,8 +10,8 @@
 
 	<%end%>
 	
-	<div class="col-lg-12 gridItem activityHeader">
-		<div class="col-lg-8 gridItem">
+	<div class="gridItem activityHeader">
+		<div class="col-lg-8 col-sm-12 gridItem">
 			<%= render 'cover_image', locals: { imageTagClass: "coverImage img-fluid" } %>
 		</div>
 		<div class="col-lg-4 gridItem">
@@ -20,8 +19,11 @@
 		</div>
 	</div>
 
+	<div class="col-lg-12 gridItem aboutOrganizer">
+		<%=render "activity_organizer", locals: @activity%>
+	</div>
+
 	<div class="col-lg-12 gridItem">
-		<div class="dropdown-divider"></div>
 		<%= render 'description'%>
 	</div>
 
@@ -32,12 +34,12 @@
 				  locals: {  
 				            widgetName: "location",
 				            elementName: "location",
-				            objectName: "activities", 
+				            objectName: "activities",
 				            objectId: @activity.id,
 				            key: "place_id",
 				            value: @activity.place_id,
 				            state: params[:state],
-				            isWidgetOwner: @is_widget_owner,
+				            isWidgetOwner: @is_widget_editor,
 				            placeholder: "enter_location"            
 				          }
 						%>
@@ -67,18 +69,11 @@
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 			<p>xxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
 		</div>
-		
-		<div class="col-lg-12">
-			<div class="dropdown-divider"></div>
-			<div class="aboutOrganizer">
-				<%= render "users/#{current_direction.to_s}_about_me", locals: { user: @activity.user, isWidgetOwner: false } %>
-				<a class="btnBrandCancel fa fa-trash-o" href="#">delete</a>
-			</div>
-		</div>
-
+	<%if @is_widget_editor%>	
+		<a class="btnBrandCancel fa fa-trash-o" href="#">delete</a>
+	<%end%>
 	</div>
-
 	
-
 </div>
 <%= render 'meta_tags' if @activity.state == "published"%>
+ <%=render "shared/scripts/add_this_share_widget"%>
