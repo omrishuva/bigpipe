@@ -23,5 +23,6 @@ upgradeToBusiness = ->
     $.ajax
       type: 'POST'
       url: "/accounts/upgrade_business/#{e.target.dataset.accountId}"
+      data: e.target.dataset.accountId
       success: (data) ->
         document.publishEvent('loadWidgetListeners' );
