@@ -43,7 +43,7 @@ module AccountUtils
 	end
 	
 	def account_type
-		current_account.account_type
+		current_account.account_type if current_account_id
 	end
 
 	def switch_current_account( account_id )
