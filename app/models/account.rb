@@ -23,7 +23,6 @@ class Account < Entity
 	end
 	
 	def add_account_user( user, role )
-		
 		case role
 		when "seller_account_owner"
 			add_owner( user )
