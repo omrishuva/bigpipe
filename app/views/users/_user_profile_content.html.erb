@@ -1,0 +1,7 @@
+<div id="userProfileContent">
+	<%if locals[:nav].present?%>
+		<%= render "users/#{locals[:nav]}", locals: { user: @user } %>
+	<%else%>
+		<%= render  default_active, locals: { user: @user } %>
+	<%end%>
+</div>

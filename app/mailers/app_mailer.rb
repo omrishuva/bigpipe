@@ -8,11 +8,13 @@ class AppMailer < ApplicationMailer
 		mail(to: email, subject: 'Activity Market - Password Recovery')
 	end
 
-	def account_user_invitation_email( user_id, email, name, invited_by )
-		@user_id = user_id
-		@user_name = name
-		@invited_by = User.find( invited_by ).name
-		mail(to: email, subject: 'Welcome To Activity.Market')
+	def account_user_invitation_email( args )
+		@invitee_name = args["invitee_name"]
+		@invitee_id = args["invitee_id"]
+		@inviter_name = args["inviter_name"]
+		@inviter_account_id = args["inviter_account_id"]
+		@inviter_account_name = args["inviter_account_name"]
+		mail(to: args["invitee_email"], subject: 'Welcome To Activity.Market')
 	end
 
 end

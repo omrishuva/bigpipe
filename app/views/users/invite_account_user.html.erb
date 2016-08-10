@@ -1,8 +1,6 @@
 <form action=<%="/account_user/new"%> class="addAccountUser" id="addAccountUser" method="post" enctype="multipart/form-data">
-
 	<%= render "shared/form_helpers/flash_messages" %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-	<%= hidden_field_tag "user[invited_by]", current_user.current_account_id %>
 	<%= label_tag :name %>
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: @user } %>
 	<%= label_tag :email %>

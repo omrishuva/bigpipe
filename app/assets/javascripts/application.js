@@ -29,6 +29,7 @@
 //= require moment
 //= require bootstrap-sprockets
 //= require bootstrap-datetimepicker
+//= require bootstrap-table
 //= require profile
 //= require map_widget
 //= require ugc_widgets

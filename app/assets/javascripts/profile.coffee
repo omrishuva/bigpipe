@@ -1,7 +1,7 @@
-$(document).ready ->
+document.addEventListener 'loadNavigationTabs',(e) ->
   changeUserNavTab();
 
-changeUserNavTab =( exclude ) ->
+changeUserNavTab =( ) ->
   $('.userNavtabLink').click (e) ->
     $("a.userNavtabLink.active").removeClass('active');
     $("a.userNavtabLink[name='#{e.target.name}']").addClass('active');
@@ -12,7 +12,11 @@ changeUserNavTab =( exclude ) ->
       data: data
       success: (data) ->
         upgradeToBusiness();
+        loadStaffTable();
         document.publishEvent('loadWidgetListeners' );
+
+loadStaffTable = ->
+  $('#staffTable').bootstrapTable()
 
 upgradeToBusiness = ->
   $('#upgradeToBusiness').click (e) ->

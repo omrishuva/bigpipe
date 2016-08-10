@@ -25,7 +25,7 @@ RSpec.describe Account do
 		end
 
 		it "should assign the user id to the owners field in the account" do
-			expect( Account.last.owners ).to eql [@user.id]
+			expect( Account.last.owner_ids ).to eql [@user.id]
 		end
 		
 		it "should assign the account id to the current_account_id field in the user record" do
@@ -37,7 +37,7 @@ RSpec.describe Account do
 		end
 
 		it "should create only one account record" do
-			expect( Account.where( [{ k: "owners", v: @user.id, op: "=" }] ).size ).to eql 1
+			expect( Account.where( [{ k: "owner_ids", v: @user.id, op: "=" }] ).size ).to eql 1
 		end
 
 	end

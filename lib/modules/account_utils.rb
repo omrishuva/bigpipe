@@ -1,35 +1,41 @@
 module AccountUtils
-	
-	def self.included(base)
-    base.extend(AccountClassMethods)
-  end	
-	
-	module AccountClassMethods
-	
-		def new_account_user( params, account )
-			if user = User.find_by([{ k: "email", v: params[:email] ,op: "=" }])
-				if user.has_linked_accounts?
-					account.add_account_user( user, params[:role] )
-					user.add_linked_account(account.id)
-					SendAccountUserInvitationEmail.perform_later( params.merge( account_name: account.name ) )
-				else
-					account.add_account_user( user, params[:role] )
-					user.add_linked_account(account.id)
-					user.switch_current_account( account.id )
-					SendAccountUserInvitationEmail.perform_later( params.merge( account_name: account.name ) )
-				end
-			else
-				user = User.new( email: params[:email], name: params[:email], phone: params[:phone], password:  User.generate_password )
-				user.save
-				account.add_account_user( user, params[:role] )
-				user.add_linked_account(account.id)
-				user.switch_current_account( account.id )
-				SendAccountUserInvitationEmail.perform_later( params.merge( account_name: account.name ) )
-			end
-			user
-		end
 		
+	def new_account_user( params )
+		if user = User.find_by([{ k: "email", v: params[:email] ,op: "=" }])
+			if user.has_linked_accounts?
+				current_account.add_account_user( user, params[:role] )
+				user.add_linked_account( current_account.id ) 
+				send_invitation_email( user )
+			else
+				current_account.add_account_user( user, params[:role] )
+				user.add_linked_account( current_account.id )
+				user.switch_current_account( current_account.id )
+				send_invitation_email( user )
+			end
+		else
+			user = User.new( email: params[:email], name: params[:name], phone: params[:phone], password:  User.generate_password )
+			user.save
+			current_account.add_account_user( user, params[:role] )
+			user.add_linked_account(current_account.id)
+			user.switch_current_account( current_account.id )
+			send_invitation_email( user )
+		end
+		user
 	end
+	
+	def send_invitation_email( invitee_user )
+		email_params = 	{ 
+										"inviter_user_id" => id,
+										"inviter_name" => name,
+										"inviter_account_id" => current_account.id,
+										"inviter_account_name" => current_account.name,
+										"invitee_name" => invitee_user.name,
+										"invitee_id" => invitee_user.id, 
+										"invitee_email" => invitee_user.email
+									}
+		SendAccountUserInvitationEmail.perform_later( email_params )
+	end
+
 
 	def current_account( account_id = nil )
 		account_id = account_id.nil? ? self.current_account_id : account_id
@@ -69,15 +75,15 @@ module AccountUtils
 	end
 
 	def is_account_owner?
-		current_account.owners.map(&:to_i).include?(self.id.to_i) if current_account.owners.present?
+		current_account.owner_ids.map(&:to_i).include?(self.id.to_i) if current_account.owner_ids.present?
 	end	
 
  	def is_account_editor?
- 		current_account.editors.map(&:to_i).include?(self.id.to_i) if current_account.editors.present?
+ 		current_account.editor_ids.map(&:to_i).include?(self.id.to_i) if current_account.editor_ids.present?
  	end
 
  	def is_account_user?
- 		current_account.users.map(&:to_i).include?(self.id.to_i) if current_account.users.present?
+ 		current_account.user_ids.map(&:to_i).include?(self.id.to_i) if current_account.user_ids.present?
  	end
 
 end

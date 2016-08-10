@@ -16,18 +16,10 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="//cdn.ckeditor.com/4.5.9/basic/ckeditor.js"></script>
   </head>
 
   <body>
-    <%if !current_user%>
-      <%=render "shared/components/modals/signin_modal"%>
-    <%end%>
-      <%=render "shared/scripts/fb_sdk"%>
-      <%=render "shared/components/navigation/navigation_bar"%>
-      <%=render "shared/components/navigation/user_menu"%>
-      <%=render "shared/data/current_user"%>
-      </br>
+    <%=render "shared/scripts/fb_sdk"%>
     <div class="container mainContainer">
       <%= yield %>
     </div>

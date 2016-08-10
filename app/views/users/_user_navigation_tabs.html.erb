@@ -1,12 +1,14 @@
-<%default_active_action = @nav || default_active %>
-<ul class="nav nav-pills UserProfileNavbar">
+<%default_active_action = locals[:nav] || default_active %>
+<ul id="UserProfileNavbar" class="nav nav-pills">
 	<% available_navtabs.each do |navtab| %>
 		<li class="<%=" #{current_direction} userProfileNavItem"%>" >
 			<%link_class = (navtab == default_active_action ? "active userNavtabLink" : "userNavtabLink") %>
-			<a class="<%=link_class%> nav-link" id="<%=navtab%>" name="<%=navtab%>" href="#" data-user-id="<%="#{params[:user_id]}"%>">
+			<a class="<%=link_class%> nav-link" id="<%=navtab%>" name="<%=navtab%>" href="#" data-user-id="<%="#{locals[:user_id]}"%>">
 				<%= I18n.t navtab %>
 			</a>
 		</li>
 	<%end%>
 </ul>
 </br>
+
+<script>document.publishEvent('loadNavigationTabs')</script>

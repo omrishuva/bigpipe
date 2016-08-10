@@ -59,7 +59,6 @@ class User < Entity
     cover_image_cloudinary_id.present? && about_text.present?
   end
   
-
 	protected
 
 	attr_writer  :password_salt, :password_hash

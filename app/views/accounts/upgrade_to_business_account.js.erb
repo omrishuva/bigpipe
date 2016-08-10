@@ -1,0 +1,2 @@
+$("#UserProfileNavbar").replaceWith("<%= escape_javascript( render 'users/user_navigation_tabs', locals: { nav: 'staff', user_id: current_user.id } ) %>")
+$("#userProfileContent").replaceWith("<%= escape_javascript( render 'users/user_profile_content', locals: { nav: 'staff' } ) %>")

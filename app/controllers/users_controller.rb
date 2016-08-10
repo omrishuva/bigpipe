@@ -116,23 +116,27 @@ class UsersController < ApplicationController
   end
   
   def invite_account_user
-    if !params[:user]
+  end
+  
+  def add_account_user
+    if !params[:user][:email].present?
+      flash[:error] = "Please fill in all the fields"
       render "invite_account_user"
     else 
-      @user = User.new_account_user( params[:user], current_user.current_account )
-      if @user.errors
+      @user = current_user.new_account_user( params[:user] )
+      if @user.errors.present?
         render "invite_account_user"
       else
-        flash[:success] = "invitation sent to #{@user.name}"
-        redirect_to '/users/service_provider'
+        redirect_to "/account_user/new", :flash => { :success => "invitation sent to #{@user.name}" }
       end
     end
   end
-  
-  def service_provider_onboarding
-    redirect_to root_url and return unless params[:spid]
-    @user = User.find( params[:spid] )
+
+  def account_user_onboarding
+    redirect_to root_url and return unless params[:account_id]
+    @user = User.find( params[:user_id] )
     session[:current_locale] = @user.locale
+    render layout: 'account_user_onboarding'
   end
 
   def profile
