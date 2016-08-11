@@ -191,6 +191,12 @@ RSpec.describe UsersController do
         expect( @account.reload!.editor_ids.include?(User.last.id) ).to be true
       end
 
+       it "should generate an onboarding code for the user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :add_account_user, user: @account_editor_params
+        expect( User.last.reload!.onboarding_code ).to_not be nil
+      end
+
     end
     
     context " exists and doesn't have other linked accounts" do
@@ -238,7 +244,13 @@ RSpec.describe UsersController do
         post :add_account_user, user: @account_editor_params
         expect( @account.reload!.editor_ids.include?(@user.id) ).to be true
       end
-
+      
+      it "should generate an onboarding code for the user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :add_account_user, user: @account_editor_params
+        expect( @user.reload!.onboarding_code ).to_not be nil
+      end
+    
     end
 
     context "exists and has other linked accounts" do
@@ -294,6 +306,12 @@ RSpec.describe UsersController do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_user_params
         expect( @account.reload!.user_ids.include?(@user.id) ).to be true
+      end
+
+       it "should generate an onboarding code for the user" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :add_account_user, user: @account_user_params
+        expect( @user.reload!.onboarding_code ).to_not be nil
       end
 
     end
