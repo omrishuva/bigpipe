@@ -76,9 +76,7 @@ class UsersController < ApplicationController
   
   def set_new_password
 
-    @user = User.find_by( [ { k: "email", v: params[:user][:email], op: "=" } ] )
-    if params[:user][:authentication_code] == @user.password_recovery_code
-      @user.set_password( params[:user][:password] )
+    if User.set_new_password( params[:user][:email], :password_recovery_code, params[:user][:authentication_code],  params[:user][:new_password] )
       flash[:success] = "Password changed successfully"
       @success = true
     else
@@ -132,11 +130,20 @@ class UsersController < ApplicationController
     end
   end
 
-  def account_user_onboarding
+  def onboarding_page
     redirect_to root_url and return unless params[:account_id]
     @user = User.find( params[:user_id] )
     session[:current_locale] = @user.locale
-    render layout: 'account_user_onboarding'
+    render layout: 'onboarding_page'
+  end
+
+  def onboarding_form_submit
+    if user = User.set_new_password( params[:email], :onboarding_code, params[:onboardingCode],  params[:password] )
+      session[:user_id] = user.id
+      redirect_to "/"
+    else
+      flash[:error] = "The code you entered does not match the one we sent you"
+    end
   end
 
   def profile

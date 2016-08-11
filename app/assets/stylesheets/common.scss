@@ -169,7 +169,6 @@ a{ color: #056cf9; }
 .dropdown-item{ color: #056cf9; }
 .userMenuSection{ display: inline; }
 .modal{ top: 5em; }
-.ModalInput { width: 100%; }
 .formModalTitle{ font-weight: bold; }
 .centeredText{ text-align: center; }
 .smallText{ font-size: 60%; }
@@ -192,7 +191,7 @@ a{ color: #056cf9; }
 .proColor{ color: #ff7f66; }
 .block{ display: inline-block; }
 .btnBrand{  padding: 2px 4px; border-radius: 3px; font-weight: bold;  }
-.btnFull{ width: 100%; }
+.fullWidth{ width: 100%; }
 .btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  }
 .btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #056cf9; ;  }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }

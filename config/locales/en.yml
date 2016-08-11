@@ -16,7 +16,7 @@ en:
  name_input_placeholder: "Enter your Full Name"
  password_input_placeholder: "Choose your password"
  phone_input_placeholder: "Please enter your phone number"
- authentication_code_input_placeholder: "Enter the code you just received in the email"
+ authentication_code_input_placeholder: "Enter the code you received in the email"
  new_password_input_placeholder: "Enter you new password"
  phone_verification_code_input_placeholder: "Enter the code you received in the SMS message"
  forgot_password_link: "I forgot my password"

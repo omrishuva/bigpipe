@@ -24,7 +24,10 @@ module AccountUtils
 	end
 	
 	def send_invitation_email( invitee_user )
+		onboarding_code = rand.to_s[2..5]
+		invitee_user.update( onboarding_code: onboarding_code )
 		email_params = 	{ 
+										"onboarding_code" => onboarding_code,
 										"inviter_user_id" => id,
 										"inviter_name" => name,
 										"inviter_account_id" => current_account.id,
@@ -49,7 +52,7 @@ module AccountUtils
 	def switch_current_account( account_id )
 		@current_account = nil
 		current_account( account_id )
-		self.update(current_account_id: account_id, role_ids: [ 1, get_current_account_role_id ].compact )
+		self.update(current_account_id: account_id, role_ids: [ 1, current_account_role_id ].compact )
 	end
 	
 	def has_linked_accounts?
@@ -64,7 +67,7 @@ module AccountUtils
 		
 	end
 
-	def get_current_account_role_id
+	def current_account_role_id
 		if is_account_owner?
 			User.role_id( "seller_account_owner" )
 		elsif is_account_editor?
@@ -72,6 +75,10 @@ module AccountUtils
 		elsif is_account_user?
 			User.role_id( "seller_account_user" )
 		end
+	end
+	
+	def can_edit_account?
+		[current_account.owner_ids, current_account.editor_ids ].flatten.map(&:to_i).include?(self.id.to_i)
 	end
 
 	def is_account_owner?

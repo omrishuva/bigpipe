@@ -1,5 +1,6 @@
-<h2><%="Dear #{@invitee_name.strip.capitalize}"%></h2>
-<P>
-<%="#{@inviter_name.strip.capitalize} invited you to join #{@account_inviter_name} team at Activity.Market pro"%>
+<p style="font-size:20px; font-weight:bold;" ><%="Dear #{@invitee_name.strip.capitalize}"%></p>
+<P style="font-size:16px;">
+	<%="#{@inviter_name.strip.capitalize} invited you to join his team at Activity.Market"%>
 </P>
-<a href=<%="#{root_url}/account/onboarding/#{@inviter_account_id}/#{@invitee_id}"%>>Click here to join</a>
+<p style="font-size:14px;"><%="Use this code #{@onboarding_code} to Login"%></p>
+<a style="font-size:18px;" href=<%="#{root_url}/account/onboarding/#{@inviter_account_id}/#{@invitee_id}"%>>Click here to join</a>

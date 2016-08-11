@@ -1,0 +1,40 @@
+<div id="onboardingTemplate" >
+  <div class="onboardingHeader">
+      <h4 class='formModalTitle centeredText'><%=I18n.t :welcome_message%></h4>
+      <p class="centeredText"><%=image_tag("loader.gif", class: "signinLoader")%></p>
+  </div>  
+    <div class="onboardingBody">
+    <form action=<%="/account/onboarding/#{params[:account_id]}/#{params[:user_id]}"%> id="onboardingForm" accept-charset="UTF-8" method="post" remote=true>
+      <input name="utf8" type="hidden" value="&#x2713;" />
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        
+        <div class="form-group">
+          <input type="email" name="email" 
+            class="form-control-sm fullWidth" 
+            id="email"
+            placeholder="<%= I18n.t :email_input_placeholder%>"
+            >
+        </div>
+
+         <div class="form-group">
+          <input type="text" name="onboardingCode" 
+                 class="form-control-sm fullWidth" 
+                 id="onboardingCode" 
+                 placeholder="<%= I18n.t :authentication_code_input_placeholder%>"
+          >
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password" 
+                 class="form-control-sm fullWidth" 
+                 id="password" 
+                 placeholder="<%= I18n.t :password_input_placeholder%>"
+          >
+        </div>
+      
+      <button type="submit" class="btn btnBrand1 fullWidth"><%= I18n.t :sign_in_button%></button>
+      <%= render "shared/form_helpers/flash_messages" %>
+    
+    </form>
+  </div>
+</div>

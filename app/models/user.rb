@@ -4,7 +4,7 @@ class User < Entity
   DEPRECATED_FIELDS = [:service_provider_type, :service_ids ,:role, :trainer_certificate_url]
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
-  :media_source, :campaign, :phone_verification_code, :password_recovery_code, :phone_verified, 
+  :media_source, :campaign, :phone_verification_code, :password_recovery_code, :onboarding_code, :phone_verified, 
   :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role_ids, :invited_by, :linked_account_ids, :current_account_id,
   :created_at, :updated_at
 	
@@ -27,7 +27,7 @@ class User < Entity
   before_destroy :delete_related_pipedrive_records
   before_save :set_default_role, unless: :has_role?
   before_save :set_locale, unless: :has_locale?
-
+  before_save :set_default_auth_provider, unless: :auth_provider_exists?
   def self.create( params )
     self.new(params).save
   end

@@ -9,6 +9,7 @@ class AppMailer < ApplicationMailer
 	end
 
 	def account_user_invitation_email( args )
+		@onboarding_code = args["onboarding_code"]
 		@invitee_name = args["invitee_name"]
 		@invitee_id = args["invitee_id"]
 		@inviter_name = args["inviter_name"]

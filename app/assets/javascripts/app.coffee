@@ -105,7 +105,8 @@ submitLoginForm = ->
       url: url
       data: $('#loginForm').serialize()
       success: (data) ->
-       loadListeners();
+        location.href = "/" if location.pathname.indexOf("/account/onboarding/")  != -1
+        loadListeners();
 
 
 logOut = ->

@@ -4,7 +4,7 @@
 <% disallowed_fields = [:phone_verification_code, :password, :password_confirmation] %>
 <%if value.present? && !disallowed_fields.include?( locals[:field_name] ) %>
 	<input 
-		class="form-control-sm ModalInput" 
+		class="form-control-sm fullWidth" 
 		type=<%=locals[:input_type]%> 
 		name=<%="user[#{locals[:field_name]}]"%> 
 		id=<%="user_#{locals[:field_name]}" %> 
@@ -13,7 +13,7 @@
 		/>
 <%else%>
 	<input 
-		class="form-control-sm ModalInput"
+		class="form-control-sm fullWidth"
 		type=<%=locals[:input_type]%> 
 		name=<%="user[#{locals[:field_name]}]"%> 
 		id=<%="user_#{locals[:field_name]}" %> 

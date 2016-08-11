@@ -1,5 +1,7 @@
 <div class="container" id="meSectionContainer">	
-	<a href="/account_user/new">Invite team member</a>
+	<%if current_user.is_account_owner?%>
+		<a href="/account_user/new">Invite team member</a>
+	<%end%>
 	</br></br>
 
 	<div class="accountMemebers">
@@ -18,7 +20,7 @@
 					<%if members.present?%>
 						<%members.each do|member, index|%>
 							<tr>
-								<td><%=member.name%></td>
+								<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
 								<td><%=member.email%></td>
 								<td><%=member.phone%></td>
 								<td><%=role.to_s.singularize%></td>

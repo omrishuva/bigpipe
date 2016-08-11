@@ -27,6 +27,17 @@ module AuthenticationUtils
         end
       end
     end
+    
+    def set_new_password( email, auth_code_type ,auth_code, new_password )
+      user = User.find_by( [ { k: "email", v: email, op: "=" } ] )
+      if auth_code == user.send( auth_code_type )
+        user.set_password( new_password )
+        user.save
+        user
+      else
+        false
+      end
+    end
 
     def generate_password
       SecureRandom.hex[0..8]
@@ -76,6 +87,14 @@ module AuthenticationUtils
   
   def from_email?( entity = nil )
     auth_provider == 'email'
+  end
+  
+  def auth_provider_exists?
+    self.auth_provider.present?
+  end
+  
+  def set_default_auth_provider
+    self.auth_provider = "email"
   end
 
   def has_phone?( entity = nil )

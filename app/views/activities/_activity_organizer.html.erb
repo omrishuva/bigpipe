@@ -11,7 +11,11 @@
 		</div>
 	<div class="inlineBlock mediumText"><%= @activity.account.public_info[:text].html_safe%></div>												
 <%else%>
-	<p style="margin-bottom: 0px;">Your public profile info goes here</p>
-	<a href=<%="/profile/#{current_user_id}?nav=about_me"%> class="navigateToProfileTab" data-navtab="about_me" >Click here to complete your profile</a>
+	<p style="margin-bottom: 0px;">Your Account public profile info goes here</p>
+	<%if current_user.is_account_owner?%>
+		<a href=<%="/profile/#{current_user_id}?nav=about_me"%> class="navigateToProfileTab" data-navtab="about_me" >Click here to complete your profile</a>
+	<%else%>
+		<p style="margin-bottom: 0px;">Ask your account owners to complete the profile in order to publish this activity</p>
+	<%end%>
 <%end%>
 </div>

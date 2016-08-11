@@ -27,8 +27,8 @@ Rails.application.routes.draw do
 	#invite users
 	get  '/account_user/new'         				 																	=> 'users#invite_account_user'
 	post '/account_user/new'         				 																	=> 'users#add_account_user'
-	get  '/account/onboarding/:account_id/:user_id'								       			=> 'users#account_user_onboarding'
-	# post '/service_provider/:account_id/onboarding'      					 						=> 'users#account_user_login'
+	get  '/account/onboarding/:account_id/:user_id'								       			=> 'users#onboarding_page'
+	post '/account/onboarding/:account_id/:user_id'      					 						=> 'users#onboarding_form_submit'
 
 	#accounts
 	post 'accounts/upgrade_business/:account_id'													   => 'accounts#upgrade_to_business_account'
