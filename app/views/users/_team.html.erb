@@ -1,8 +1,4 @@
 <div class="container" id="meSectionContainer">	
-	<%if current_user.is_account_owner?%>
-		<a href="/account_user/new">Invite team member</a>
-	<%end%>
-	</br></br>
 
 	<div class="accountMemebers">
 			
@@ -32,8 +28,10 @@
 		</table>
 
 	</div>
-
-
+	</br>
+	<%if current_user.is_account_owner?%>
+		<a href="/account_user/new">Invite Team Member</a>
+	<%end%>
 
 </div>
 

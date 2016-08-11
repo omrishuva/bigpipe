@@ -20,7 +20,7 @@ views:
         permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
       about_me: 
         permitted_roles: [ "super_admin","seller_account_owner", "seller_account_editor", "seller_account_user" ]
-      staff: 
+      team: 
         permitted_accounts: [ "business" ]
         permitted_roles: [ "seller_account_owner", "seller_account_editor", "seller_account_user" ]
       my_activities: 

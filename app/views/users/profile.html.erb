@@ -1,7 +1,6 @@
 <div id="userProfile">
 	<%if current_user.try(:id) == @user.id %>
 		<%= render 'user_navigation_tabs', locals: { nav: @nav, user_id: params[:user_id] } %>
-		<div id="dropdown-divider"></div>
 		<%= render 'user_profile_content', locals:{ nav: @nav } %>
 	<%else%>
 		<%= render 'about_me', locals: { user: @user } %>
