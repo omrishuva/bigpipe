@@ -55,7 +55,10 @@ checkBoxWidgetControl = ->
 textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 	  widget = {}
-	  widget = e.target.dataset #Can't use Object.assign({},  ) due to lack of IE support
+	  if e.target.className == "buttonText"
+	  	widget = e.target.parentElement.dataset
+	  else
+	  	widget = e.target.dataset
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
