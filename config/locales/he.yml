@@ -67,6 +67,12 @@ he:
  team: "צוות"
  account_info: "חשבון"
  goals: "מטרות"
+ name: "שם"
+ email: "אי מייל"
+ role: "תפקיד"
+ phone: "טלפון"
+ invite_team_member: "הזמן חבר צוות"
+ send_invitation: "שלח הזמנה"
  error_messages:
   password:  
    is_missing: " הכנס/י סיסמה"

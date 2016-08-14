@@ -2,27 +2,23 @@
 
 	<div class="accountMemebers">
 			
-		<table class="table table-striped sortable" data-toggle="table" id="staffTable">
+		<table class="table table-striped sortable" id="staffTable">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Phone</th>
-					<th>Role</th>
+					<th><%=I18n.t :name%></th>
+					<th><%=I18n.t :email%></th>
+					<th><%=I18n.t :phone%></th>
+					<th><%=I18n.t :role%></th>
 				</tr>
 			</thead>
 			<tbody>
-				<%current_user.current_account.all_members.each do |role,members|%>
-					<%if members.present?%>
-						<%members.each do|member, index|%>
-							<tr>
-								<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
-								<td><%=member.email%></td>
-								<td><%=member.phone%></td>
-								<td><%=role.to_s.singularize%></td>
-							</tr>
-						<%end%>
-					<%end%>
+				<%current_user.current_account.members.each do |member|%>
+					<tr>
+						<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
+						<td><%=member.email%></td>
+						<td><%=member.phone%></td>
+						<td><%=member.role_name.to_s.singularize%></td>
+					</tr>
 				<%end%>
 			</tbody>
 		</table>
@@ -30,8 +26,11 @@
 	</div>
 	</br>
 	<%if current_user.is_account_owner?%>
-		<a href="/account_user/new">Invite Team Member</a>
+		<a href="/account_user/new"><%=I18n.t :invite_team_member%></a>
 	<%end%>
 
 </div>
 
+<script>
+  document.publishEvent( 'loadBootstrapTable', { 'locale': "<%=I18n.locale%>" } )
+</script>

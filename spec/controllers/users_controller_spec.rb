@@ -176,19 +176,19 @@ RSpec.describe UsersController do
       it "should add the account id to the user linked accounts" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( User.last.linked_account_ids ).to eql [@account.id]
+        expect( User.last.linked_accounts.first.id ).to eql @account.id
       end
       
       it "should assign the chosen role to the new account user" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( User.last.roles ).to eql ["consumer","seller_account_editor"]
+        expect( User.last.role_id ).to eql 3
       end
       
        it "should add the user id to the accout editors list" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( @account.reload!.editor_ids.include?(User.last.id) ).to be true
+        expect( @account.reload!.editors.map(&:id).include?(User.last.id) ).to be true
       end
 
        it "should generate an onboarding code for the user" do
@@ -230,19 +230,19 @@ RSpec.describe UsersController do
       it "should add the account id to the user linked accounts" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( @user.reload!.linked_account_ids ).to eql [@account.id]
+        expect( @user.reload!.linked_accounts.map(&:id) ).to eql [@account.id]
       end
 
       it "should assign the chosen role to the new account user" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( @user.reload!.roles ).to eql ["consumer","seller_account_editor"]
+        expect( @user.reload!.role_id ).to eql 3
       end
       
       it "should add the user id to the accout editors list" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( @account.reload!.editor_ids.include?(@user.id) ).to be true
+        expect( @account.reload!.editors.map(&:id).include?(@user.id) ).to be true
       end
       
       it "should generate an onboarding code for the user" do
@@ -264,9 +264,10 @@ RSpec.describe UsersController do
         @account_owner = User.new( account_owner_params )
         @account_owner.save
         @account = Account.create_freelancer_account( @account_owner )
-        user_params = { name: "user", email: "user@.activity.market", password: "123456", auth_provider: "email", linked_account_ids: [122345]  }
+        user_params = { name: "user", email: "user@.activity.market", password: "123456", auth_provider: "email"  }
         @user = User.new( user_params )
         @user.save
+        @first_account = Account.create_freelancer_account( @user )
         SendAccountUserInvitationEmail.stub(:perform_later).and_return( true )
       end
     
@@ -278,13 +279,13 @@ RSpec.describe UsersController do
       it "should add the account id to the user linked accounts" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_user_params
-        expect( @user.reload!.linked_account_ids ).to eql [122345, @account.id]
+        expect( @user.reload!.linked_accounts.map(&:id).sort ).to eql [ @first_account.id, @account.id].sort
       end
       
       it "should assign the chosen role to the new account user" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_user_params
-        expect( @user.reload!.roles ).to eql ["consumer"]
+        expect( @user.reload!.role_id ).to eql 4
       end
       
       #should be moved to user spec
@@ -299,13 +300,7 @@ RSpec.describe UsersController do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_user_params
         @user.switch_current_account( @account.id )
-        expect( @user.reload!.roles ).to eql ["consumer", "seller_account_user"]
-      end
-
-       it "should add the user id to the account users list" do
-        controller.stub(:current_user).and_return(@account_owner)
-        post :add_account_user, user: @account_user_params
-        expect( @account.reload!.user_ids.include?(@user.id) ).to be true
+        expect( @user.reload!.role_id ).to eql 2
       end
 
        it "should generate an onboarding code for the user" do

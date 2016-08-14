@@ -137,6 +137,10 @@ class Entity
 	  	run_query(query_obj).map{ |ent| from_entity(ent)  }	
 	  end
 
+	  def raw_gql( query_string )
+	  	$datastore.gql( query_string )
+	  end
+
 
 		def all( opts = { } )
 			results = run_query( $datastore.query.kind(self.name) )

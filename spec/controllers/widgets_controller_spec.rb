@@ -37,7 +37,7 @@ RSpec.describe WidgetsController do
       @admin = User.new(  name: "omri shuva", email: "omri@gmail.com", phone: "0526733430", password: "zzzaaaa123", auth_provider: "play" )
       @admin.save
       sleep 1
-      @admin.add_role( "super_admin" )
+      @admin.make_super_admin
       controller.stub(:current_user).and_return( @admin )
       xhr :get, "text_widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
@@ -97,7 +97,7 @@ RSpec.describe WidgetsController do
       @admin = User.new(  name: "omri shuva", email: "omri@gmail.com", phone: "0526733430", password: "zzzaaaa123", auth_provider: "play" )
       @admin.save
       sleep 1
-      @admin.add_role( "super_admin" )
+      @admin.make_super_admin
       controller.stub(:current_user).and_return( @user )
       xhr :post, "image_widget_control", @widget_data
       expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )

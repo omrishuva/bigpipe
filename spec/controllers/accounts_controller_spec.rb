@@ -14,6 +14,7 @@ RSpec.describe AccountsController do
     User.destroy_all
     Activity.destroy_all
     Account.destroy_all
+    AccountRole.destroy_all
   end
 
   describe "POST upgrade_to_business_account" do

@@ -30,6 +30,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datetimepicker
 //= require bootstrap-table
+//= require bootstrap-table-he-IL
 //= require profile
 //= require map_widget
 //= require ugc_widgets

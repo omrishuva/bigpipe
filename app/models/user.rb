@@ -5,8 +5,8 @@ class User < Entity
 
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :onboarding_code, :phone_verified, 
-  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :role_ids, :invited_by, :linked_account_ids, :current_account_id,
-  :created_at, :updated_at
+  :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :invited_by, 
+  :current_account_id, :super_admin,:created_at, :updated_at
 	
   attr_reader :password_salt, :password_hash
 
@@ -25,9 +25,9 @@ class User < Entity
   validate :uniqueness_of_phone
   
   before_destroy :delete_related_pipedrive_records
-  before_save :set_default_role, unless: :has_role?
   before_save :set_locale, unless: :has_locale?
   before_save :set_default_auth_provider, unless: :auth_provider_exists?
+
   def self.create( params )
     self.new(params).save
   end

@@ -7,51 +7,52 @@ body
   font-family: 'Raleway', sans-serif !important;
   overflow-x: hidden;
 }
+
 a{ color: #056cf9; }
 @media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 20%;}
                             .ltrUserSidebar{  right: 0;  }
-                            .rtlUserSideBar{  left: 0;  }   
+                            .rtlUserSidebar{  left: 0;  }   
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
                           }
 
 @media (min-width: 360px)  { .mainContainer { z-index: -1; font-size: 75%;  margin-top: 20%;}
                              .ltrUserSidebar{  right: 0;  }
-                             .rtlUserSideBar{  left: 0;  }  
+                             .rtlUserSidebars{  left: 0;  }  
                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 375px) { 
                             .mainContainer { z-index: -1; font-size: 80%;  margin-top: 18%;}
                             .ltrUserSidebar{  right: 0;  }
-                            .rtlUserSideBar{  left: 0;  }  
+                            .rtlUserSidebar{  left: 0;  }  
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 411px) { 
                             .mainContainer { z-index: -1; font-size: 90%;  margin-top: 18%;} 
                             .ltrUserSidebar{  right: 0;  }
-                            .rtlUserSideBar{  left: 0;  } 
+                            .rtlUserSidebar{  left: 0;  } 
                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                           }
 
 @media (min-width: 414px)  { 
                               .mainContainer { z-index: -1; font-size: 90%;  margin-top:  18%;}
                               .ltrUserSidebar{  right: 0;  }
-                              .rtlUserSideBar{  left: 0;  } 
+                              .rtlUserSidebar{  left: 0;  } 
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 435px)   { 
                               .mainContainer { z-index: -1; font-size: 95%;  margin-top: 16%;     } 
                               .ltrUserSidebar{  right: 0;  }
-                              .rtlUserSideBar{  left: 0;  }
+                              .rtlUserSidebar{  left: 0;  }
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
                             }
 
 @media (min-width: 768px)   { 
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 10%;} 
                               .ltrUserSidebar{  right: 0;  }
-                              .rtlUserSideBar{  left: 0;  }
+                              .rtlUserSidebar{  left: 0;  }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
@@ -61,8 +62,8 @@ a{ color: #056cf9; }
 
 @media (min-width: 800px)   { 
                               .mainContainer { z-index: -1; font-size: 120%; margin-top: 12.5%;} 
-                              .ltrUserSidebar{  right: 0;  }
-                              .rtlUserSideBar{  left: 0;  }
+                              .ltrUserSidebar{  right: 5%;  }
+                              .rtlUserSidebar{  left: 5%;  }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
@@ -73,7 +74,7 @@ a{ color: #056cf9; }
 @media (min-width: 1000px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 7.5%;}
                             .ltrUserSidebar{  right: 5%;  }
-                            .rtlUserSideBar{  left: 0;  }
+                            .rtlUserSideBar{  left: 5%;  }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
@@ -84,8 +85,8 @@ a{ color: #056cf9; }
 
 @media (min-width: 1500px) { 
                             .mainContainer { z-index: -1; font-size: 120%; margin-top: 5%;} 
-                            .ltrUserSidebar{  right: 10%;  }
-                            .rtlUserSideBar{  left: 15%;  }
+                            .ltrUserSidebar{  right: 15%;  }
+                            .rtlUserSidebar{  left: 15%;  }
                             // .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }

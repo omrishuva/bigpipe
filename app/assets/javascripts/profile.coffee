@@ -1,6 +1,9 @@
 document.addEventListener 'loadNavigationTabs',(e) ->
   changeUserNavTab();
 
+document.addEventListener 'loadBootstrapTable', (e) ->
+  loadStaffTable( e.detail )
+
 changeUserNavTab =( ) ->
   $('.userNavtabLink').click (e) ->
     $("a.userNavtabLink.active").removeClass('active');
@@ -12,11 +15,18 @@ changeUserNavTab =( ) ->
       data: data
       success: (data) ->
         upgradeToBusiness();
-        loadStaffTable();
         document.publishEvent('loadWidgetListeners' );
 
-loadStaffTable = ->
-  $('#staffTable').bootstrapTable()
+loadStaffTable = ( options ) ->
+  jQuery.fn.bootstrapTable.columnDefaults.sortable = true
+  if options.locale == 'he'
+    jQuery.fn.bootstrapTable.columnDefaults.align = 'right'
+    jQuery.fn.bootstrapTable.columnDefaults.halign = 'right'
+    tableOptions = { locale:'he' }
+  else
+    tableOptions = { }
+  $('#staffTable').bootstrapTable( tableOptions );
+  $('#staffTable').bootstrapTable('hideLoading');
 
 upgradeToBusiness = ->
   $('#upgradeToBusiness').click (e) ->
