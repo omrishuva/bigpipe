@@ -9,6 +9,14 @@
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         
         <div class="form-group">
+          <input type="name" name="name" 
+            class="form-control-sm fullWidth" 
+            id="name"
+            placeholder="<%= I18n.t :name_input_placeholder%>"
+            >
+        </div>
+
+        <div class="form-group">
           <input type="email" name="email" 
             class="form-control-sm fullWidth" 
             id="email"

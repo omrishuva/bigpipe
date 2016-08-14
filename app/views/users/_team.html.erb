@@ -7,17 +7,18 @@
 				<tr>
 					<th><%=I18n.t :name%></th>
 					<th><%=I18n.t :email%></th>
-					<th><%=I18n.t :phone%></th>
 					<th><%=I18n.t :role%></th>
+					<th><%=I18n.t :status%></th>
 				</tr>
 			</thead>
 			<tbody>
 				<%current_user.current_account.members.each do |member|%>
+					<%account_role = member.get_account_role( current_user.current_account.id ) %>
 					<tr>
 						<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
 						<td><%=member.email%></td>
-						<td><%=member.phone%></td>
-						<td><%=member.role_name.to_s.singularize%></td>
+						<td><%=User.role_name( account_role.role_id ).singularize%></td>
+						<td><%=account_role.status%></td>
 					</tr>
 				<%end%>
 			</tbody>
@@ -31,6 +32,4 @@
 
 </div>
 
-<script>
-  document.publishEvent( 'loadBootstrapTable', { 'locale': "<%=I18n.locale%>" } )
-</script>
+<script>document.publishEvent( 'loadBootstrapTable', { 'locale': "<%=I18n.locale%>" } )</script>

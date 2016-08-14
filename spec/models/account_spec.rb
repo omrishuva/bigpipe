@@ -36,8 +36,13 @@ RSpec.describe Account do
 		it "should create a linked account record" do
 			expect(@user.linked_accounts.first.id).to eql Account.last.id
 		end
+		
 		it "should create an AccountUser record" do
 			expect( AccountRole.last.user_id ).to eql @user.id
+		end
+
+		it "should set the account user status to active" do
+			expect( AccountRole.last.status ).to eql "active"
 		end
 
 	end

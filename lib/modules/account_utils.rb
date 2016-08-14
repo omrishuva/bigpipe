@@ -4,11 +4,11 @@ module AccountUtils
 		if user = User.find_by([{ k: "email", v: params[:email] ,op: "=" }])
 			if user.has_linked_accounts?
 				current_account.assign_account_role_to_user( user, User.role_id( params[:role] ) )
-				send_invitation_email( user )
+				send_invitation_email( user, true )
 			else
 				current_account.assign_account_role_to_user( user, User.role_id( params[:role] ) )
 				user.switch_current_account( current_account.id )
-				send_invitation_email( user )
+				send_invitation_email( user, true )
 			end
 		else
 			user = User.new( email: params[:email], name: params[:name], phone: params[:phone], password:  User.generate_password )
@@ -20,7 +20,7 @@ module AccountUtils
 		user
 	end
 	
-	def send_invitation_email( invitee_user )
+	def send_invitation_email( invitee_user, exists = false )
 		onboarding_code = rand.to_s[2..5]
 		invitee_user.update( onboarding_code: onboarding_code )
 		email_params = 	{ 
@@ -31,7 +31,8 @@ module AccountUtils
 										"inviter_account_name" => current_account.name,
 										"invitee_name" => invitee_user.name,
 										"invitee_id" => invitee_user.id, 
-										"invitee_email" => invitee_user.email
+										"invitee_email" => invitee_user.email,
+										"exists" => exists
 									}
 		SendAccountUserInvitationEmail.perform_later( email_params )
 	end
@@ -39,6 +40,10 @@ module AccountUtils
 	
 	def accounts_roles
 		@accounts_roles ||= AccountRole.where( [{ k: "user_id", v: self.id, op: "=" }] )
+	end
+
+	def get_account_role( account_id )
+		accounts_roles.select{|account_role| account_role.account_id == account_id }.first
 	end
 
 	def linked_accounts
@@ -72,7 +77,7 @@ module AccountUtils
 	end
 
 	def account_type
-		current_account.account_type if current_account_id
+		current_account.try(:account_type) if current_account_id
 	end
 	
 	def has_linked_accounts?

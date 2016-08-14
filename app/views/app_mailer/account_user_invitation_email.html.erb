@@ -3,4 +3,9 @@
 	<%="#{@inviter_name.strip.capitalize} invited you to join his team at Activity.Market"%>
 </P>
 <p style="font-size:14px;"><%="Use this code #{@onboarding_code} to Login"%></p>
-<a style="font-size:18px;" href=<%="#{root_url}/account/onboarding/#{@inviter_account_id}/#{@invitee_id}"%>>Click here to join</a>
+<%if @exists%>
+	<%link = "#{root_url}/account/existing_user/onboarding/#{@inviter_account_id}/#{@invitee_id}"%>
+<%else%>
+	<%link = "#{root_url}/account/onboarding/#{@inviter_account_id}/#{@invitee_id}"%>
+<%end%>
+<a style="font-size:18px;" href=<%=link%>>Click here to join</a>

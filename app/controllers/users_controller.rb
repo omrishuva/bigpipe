@@ -139,11 +139,19 @@ class UsersController < ApplicationController
 
   def onboarding_form_submit
     if user = User.set_new_password( params[:email], :onboarding_code, params[:onboardingCode],  params[:password] )
+      user.current_account_role.update( status: "active" )
       session[:user_id] = user.id
       redirect_to "/"
     else
       flash[:error] = "The code you entered does not match the one we sent you"
     end
+  end
+
+  def existing_user_onboarding
+    user = User.find( params[:user_id] )
+    user.current_account_role.update( statue: "active" )
+    user.switch_current_account( params[:account_id] )
+    redirect_to "/"
   end
 
   def profile

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 	post '/account_user/new'         				 																	=> 'users#add_account_user'
 	get  '/account/onboarding/:account_id/:user_id'								       			=> 'users#onboarding_page'
 	post '/account/onboarding/:account_id/:user_id'      					 						=> 'users#onboarding_form_submit'
-
+	get  '/account/existing_user/onboarding/:account_id/:user_id'							=> 'users#existing_user_onboarding'
 	#accounts
 	post 'accounts/upgrade_business/:account_id'													   => 'accounts#upgrade_to_business_account'
 

@@ -15,6 +15,7 @@ class AppMailer < ApplicationMailer
 		@inviter_name = args["inviter_name"]
 		@inviter_account_id = args["inviter_account_id"]
 		@inviter_account_name = args["inviter_account_name"]
+		@exists = args["exists"]
 		mail(to: args["invitee_email"], subject: 'Welcome To Activity.Market')
 	end
 

@@ -69,6 +69,7 @@ en:
  email: "Email"
  role: "Role"
  phone: "Phone"
+ status: "Status"
  invite_team_member: "Invite Team Member"
  send_invitation: "Send Invitation"
  error_messages:

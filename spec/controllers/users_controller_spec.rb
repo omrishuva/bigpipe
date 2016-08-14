@@ -140,6 +140,7 @@ RSpec.describe UsersController do
     end
 
   end
+  
   describe "invite account user" do
 
     context "new" do
@@ -194,7 +195,13 @@ RSpec.describe UsersController do
        it "should generate an onboarding code for the user" do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_editor_params
-        expect( User.last.reload!.onboarding_code ).to_not be nil
+        expect( User.last.onboarding_code ).to_not be nil
+      end
+
+      it "should set the user account status to pending" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :add_account_user, user: @account_editor_params
+        expect( User.last.current_account_role.status ).to eql "pending"
       end
 
     end
@@ -250,7 +257,13 @@ RSpec.describe UsersController do
         post :add_account_user, user: @account_editor_params
         expect( @user.reload!.onboarding_code ).to_not be nil
       end
-    
+
+      it "should set the user account status to pending" do
+        controller.stub(:current_user).and_return(@account_owner)
+        post :add_account_user, user: @account_editor_params
+        expect( @user.reload!.current_account_role.status ).to eql "pending"
+      end
+
     end
 
     context "exists and has other linked accounts" do
@@ -307,6 +320,18 @@ RSpec.describe UsersController do
         controller.stub(:current_user).and_return(@account_owner)
         post :add_account_user, user: @account_user_params
         expect( @user.reload!.onboarding_code ).to_not be nil
+      end
+
+    end
+    
+    describe "account user onboarding" do
+      
+      context "new" do
+        
+      end
+
+      context "already exists in the system" do
+        
       end
 
     end

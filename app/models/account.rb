@@ -5,7 +5,7 @@ class Account < Entity
 	def self.create_freelancer_account( user )
 		account = Account.new(  account_type: "freelancer", name: user.name )
 		account.save
-		account.assign_account_role_to_user( user, User.role_id( "seller_account_owner" ) )
+		account.assign_account_role_to_user( user, User.role_id( "seller_account_owner" ), "active" )
 		user.switch_current_account( account.id )
 		account
 	end
@@ -14,8 +14,8 @@ class Account < Entity
 		self.update( account_type: "business", logo: freelancer_account_owner.cover_image, about: freelancer_account_owner.about_text  )
 	end
 
-	def assign_account_role_to_user( user, role_id )
-		AccountRole.create( account_id: self.id, user_id: user.id, role_id: role_id )
+	def assign_account_role_to_user( user, role_id, status = nil )
+		AccountRole.create( account_id: self.id, user_id: user.id, role_id: role_id, status: status )
 		user.reset_linked_accounts
 		reset_members
 	end
