@@ -17,7 +17,7 @@ roles_mapping:
   5: super_admin
 
 seller_roles_short_name:
-   seller_account_user: user
-   seller_account_editor: editor
-   seller_account_owner: owner
+   2: user
+   3: editor
+   4: owner
   

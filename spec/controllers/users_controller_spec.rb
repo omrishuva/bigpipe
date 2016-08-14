@@ -146,7 +146,7 @@ RSpec.describe UsersController do
     context "new" do
       
       before :all do
-        @account_editor_params = { name: "editor", email: "editor@.activity.market", password: "123456", auth_provider: "email", role: "seller_account_editor"  }
+        @account_editor_params = { name: "editor", email: "editor@.activity.market", password: "123456", auth_provider: "email", role: 3  }
       end
 
       before :each do
@@ -209,7 +209,7 @@ RSpec.describe UsersController do
     context " exists and doesn't have other linked accounts" do
       
       before :all do
-        @account_editor_params = { name: "user", email: "user@.activity.market", role: "seller_account_editor"  }
+        @account_editor_params = { name: "user", email: "user@.activity.market", role: 3  }
       end
 
       before :each do
@@ -269,7 +269,7 @@ RSpec.describe UsersController do
     context "exists and has other linked accounts" do
       
        before :all do
-        @account_user_params = { name: "user", email: "user@.activity.market", role: "seller_account_user"  }
+        @account_user_params = { name: "user", email: "user@.activity.market", role: 2  }
       end
 
       before :each do
@@ -331,7 +331,7 @@ RSpec.describe UsersController do
       end
 
       context "already exists in the system" do
-        
+
       end
 
     end

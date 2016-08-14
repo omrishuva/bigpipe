@@ -6,10 +6,6 @@ module RoleUtils
 	
   module RoleClassMethods
     
-    # def default_role
-    #   [ User.role_id( "consumer" ) ]
-    # end
-
     def roles_data
       $user_roles
     end
@@ -22,6 +18,15 @@ module RoleUtils
       roles_data["roles"].map{|k,v| k } 
     end
 
+    def role_ui_names
+      roles_data["seller_roles_short_name"]
+    end
+
+    def role_ui_name( role_id )
+      role_ui_names[role_id]
+    end
+
+
     def role_name( role_id )
       roles_data["roles_mapping"][role_id]
     end
@@ -30,9 +35,7 @@ module RoleUtils
       roles_data["roles"][role_name]
     end
 
-    def seller_role_short_names
-      roles_data["seller_roles_short_name"]
-    end
+    
 
   end
 

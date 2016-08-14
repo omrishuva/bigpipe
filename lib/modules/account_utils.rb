@@ -3,17 +3,17 @@ module AccountUtils
 	def new_account_user( params )
 		if user = User.find_by([{ k: "email", v: params[:email] ,op: "=" }])
 			if user.has_linked_accounts?
-				current_account.assign_account_role_to_user( user, User.role_id( params[:role] ) )
+				current_account.assign_account_role_to_user( user, params[:role].to_i )
 				send_invitation_email( user, true )
 			else
-				current_account.assign_account_role_to_user( user, User.role_id( params[:role] ) )
+				current_account.assign_account_role_to_user( user, params[:role].to_i )
 				user.switch_current_account( current_account.id )
 				send_invitation_email( user, true )
 			end
 		else
-			user = User.new( email: params[:email], name: params[:name], phone: params[:phone], password:  User.generate_password )
+			user = User.new( email: params[:email], name: params[:name], password:  User.generate_password )
 			user.save
-			current_account.assign_account_role_to_user( user, User.role_id( params[:role] ) )
+			current_account.assign_account_role_to_user( user, params[:role].to_i )
 			user.switch_current_account( current_account.id )
 			send_invitation_email( user )
 		end

@@ -7,7 +7,7 @@
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "email", field_name: :email, user: @user } %>
 	</br>
 	<%= label_tag(:role, (I18n.t :role) ) %>
-	<%= select_tag "user[role]", options_for_select(User.seller_role_short_names.map{ |k,v| [v, k] })%>
+	<%= select_tag "user[role]", options_for_select(User.role_ui_names.map{ |k,v| [v, k] })%>
 	</br></br>
   <button type="submit" class="btn btnBrand1 fullWidth"><%=I18n.t :send_invitation%></button>
 
