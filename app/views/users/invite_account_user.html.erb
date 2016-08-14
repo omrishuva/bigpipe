@@ -1,18 +1,17 @@
 <form action=<%="/account_user/new"%> class="addAccountUser" id="addAccountUser" method="post" enctype="multipart/form-data">
-<h2 style="text-decoration: underline;">Invite Team Member</h2>
+<h2 style="text-decoration: underline;"><%= I18n.t :invite_team_member%></h2>
 	<%= render "shared/form_helpers/flash_messages" %>
 	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-	<%= label_tag :name %>
+	<%= label_tag(:name, (I18n.t :name) ) %>
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: @user } %>
-	<%= label_tag :email %>
+	<%= label_tag(:email, (I18n.t :email) ) %>
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "email", field_name: :email, user: @user } %>
-	<%= label_tag :phone %>
+	<%= label_tag(:phone, (I18n.t :phone) ) %>
 	<%= render "shared/form_helpers/input_field", locals: {input_type: "phone", field_name: :phone, user: @user } 
 	%>
-	<%= label_tag :role %>
-	</br>
+	<%= label_tag(:role, (I18n.t :role) ) %>
 	<%= select_tag "user[role]", options_for_select(User.seller_role_short_names.map{ |k,v| [v, k] })%>
-	<div class="dropdown-divider"></div>
-  <button type="submit" class="btn btnBrand1 fullWidth">Send Invitation</button>
+
+  <button type="submit" class="btn btnBrand1 fullWidth"><%=I18n.t :send_invitation%></button>
 
 </form>

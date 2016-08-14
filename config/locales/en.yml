@@ -64,9 +64,13 @@ en:
  enter_location: "Enter a Location"
  events: "Events"
  stats: "Stats"
- 
  goals: "Goals"
-
+ name: "Name"
+ email: "Email"
+ role: "Role"
+ phone: "Phone"
+ invite_team_member: "Invite Team Member"
+ send_invitation: "Send Invitation"
  error_messages:
   password:
    is_missing: "Missing Password"

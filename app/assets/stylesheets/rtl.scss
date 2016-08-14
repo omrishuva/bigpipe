@@ -1,9 +1,16 @@
 html{ lang: "he" }
+h1{ direction: rtl; }
+h2{ direction: rtl; }
+h3{ direction: rtl; }
+h4{ direction: rtl; }
+h5{ direction: rtl; }
 p { direction: rtl; }
 a { direction: rtl; }
 input { direction: rtl; }
-label{ direction: rtl; }
+select{ direction: rtl; float: right; margin-right: 10px;}
+label{ direction: rtl; float: right; }
 i{ direction: rtl; }
 #meSectionContainer{ direction: rtl; }
 .UserProfileNavbar{ direction: rtl; }
 .modal{ direction: rtl; }
+body{ font-family: 'Varela Round', sans-serif !important; }
