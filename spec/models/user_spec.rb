@@ -151,23 +151,24 @@ RSpec.describe User do
 
 		# end
 
-		context "Consumer" do
+		# context "Consumer" do
 			
-			before :all do
-				User.destroy_all
-				consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
-				@consumer = User.new( consumer_params )
-				@consumer.save
-			end
+		# 	before :all do
+		# 		User.destroy_all
+		# 		consumer_params = { name: "omri shuva", email: "omrishuva1@gmail.com", phone: "0526733740", password: "zzzaaaa123", auth_provider: "play" }
+		# 		@consumer = User.new( consumer_params )
+		# 		@consumer.save
+		# 	end
 
-			it "should set the user a default role" do
-				expect(@consumer.role_ids).to eq [1]
-			end
+		# 	it "should set the user a default role" do
+		# 		expect(@consumer.role_ids).to eq [1]
+		# 	end
 			
-			it "should map role id to name" do
-				expect(@consumer.roles).to eq ["consumer"]
-			end
-		end
+		# 	it "should map role id to name" do
+		# 		expect(@consumer.roles).to eq ["consumer"]
+		# 	end
+		
+		# end
 
 		# context "Seller Account Owner" do
 

@@ -4,13 +4,6 @@ controllers:
     add_account_user: seller_account_owner
   accounts:
     upgrade_to_business_account: seller_account_owner
-    # profile: consumer
-  # activities:
-  #   new_activity: owner_or_admin
-  # widgets:
-  #   text_widget_control: owner_or_admin
-  #   image_widget_control: owner_or_admin
-  #   location_widget_control: owner_or_admin
 
 views:
   user_navtabs:

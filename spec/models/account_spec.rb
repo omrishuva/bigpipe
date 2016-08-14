@@ -12,6 +12,7 @@ RSpec.describe Account do
 	after :all do
 		User.destroy_all
 		Account.destroy_all
+		AccountRole.destroy_all
 	end
 
 	describe "create freelacer account" do
@@ -21,23 +22,22 @@ RSpec.describe Account do
 		end
 
 		it "should assign an owner role to the user" do
-			expect( @user.role_ids ).to eql [1,4]
+			expect( @user.is_account_owner? ).to eql true
 		end
 
 		it "should assign the user id to the owners field in the account" do
-			expect( Account.last.owner_ids ).to eql [@user.id]
+			expect( Account.last.owners.first.id ).to eql @user.id
 		end
 		
 		it "should assign the account id to the current_account_id field in the user record" do
 			expect(@user.current_account_id).to eql Account.last.id
 		end
 		
-		it "should the account id to the user linked accounts list" do
-			expect(@user.linked_account_ids).to eql [Account.last.id]
+		it "should create a linked account record" do
+			expect(@user.linked_accounts.first.id).to eql Account.last.id
 		end
-
-		it "should create only one account record" do
-			expect( Account.where( [{ k: "owner_ids", v: @user.id, op: "=" }] ).size ).to eql 1
+		it "should create an AccountUser record" do
+			expect( AccountRole.last.user_id ).to eql @user.id
 		end
 
 	end

@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
     if action_permissions.nil?
       true
     else
-      User.role_id( action_permissions ).to_i <= current_user.role_ids.max
+      User.role_id( action_permissions ).to_i <= current_user.role_id
     end
   end
   

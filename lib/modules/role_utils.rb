@@ -6,13 +6,9 @@ module RoleUtils
 	
   module RoleClassMethods
     
-    def default_role
-      [ User.role_id( "consumer" ) ]
-    end
-
-    def default_service
-      [0]
-    end
+    # def default_role
+    #   [ User.role_id( "consumer" ) ]
+    # end
 
     def roles_data
       $user_roles
@@ -40,33 +36,20 @@ module RoleUtils
 
   end
 
-  def set_default_role
-    self.role_ids = self.class.default_role unless self.role_ids.present?
+  def role_name
+    User.role_name( self.cuurent_account.role_id )
+  end
+  
+  def make_super_admin
+    self.update( super_admin: true )
+  end
+  
+  def remove_as_super_admin
+    self.update( super_admin: false )
   end
 
-  def has_role?
-    self.role_ids.present?
-  end
-  
-  def roles
-    self.role_ids.map{ |role_id| User.role_name( role_id )  }.compact
-  end
-  
   def super_admin?
-    self.role_ids.include?(  User.role_id( "super_admin" ) )
+    self.super_admin == true
   end
   
-  def add_role( role_name )
-    if User.role_id( role_name ) && role_name != "service_provider"
-      self.role_ids << User.role_id( role_name )
-      self.role_ids = self.role_ids.uniq.compact
-      self.save
-    end
-  end
-  
-  def remove_role(role_name)
-    self.role_ids = ( self.role_ids - [ User.role_id( role_name ) ]).flatten.compact
-    self.save
-  end
-
 end

@@ -39,11 +39,11 @@ module ApplicationHelper
   end
   
   def role_permitted?( permissions )
-    permissions["permitted_roles"].size > [permissions["permitted_roles"] - current_user.roles ].flatten.size
+    permissions["permitted_roles"].size > [permissions["permitted_roles"] - [current_user.role_name] ].flatten.size
   end
 
   def default_active
-    key = User.role_name( current_user.role_ids.max )
+    key = User.role_name( current_user.role_id )
     $permissions["views"]["user_navtabs"]["default_active"][key]
   end
 

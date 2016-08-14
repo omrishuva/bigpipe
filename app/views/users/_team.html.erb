@@ -12,17 +12,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%current_user.current_account.all_members.each do |role,members|%>
-					<%if members.present?%>
-						<%members.each do|member, index|%>
-							<tr>
-								<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
-								<td><%=member.email%></td>
-								<td><%=member.phone%></td>
-								<td><%=role.to_s.singularize%></td>
-							</tr>
-						<%end%>
-					<%end%>
+				<%current_user.current_account.members.each do |member|%>
+					<tr>
+						<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
+						<td><%=member.email%></td>
+						<td><%=member.phone%></td>
+						<td><%=member.role_name.to_s.singularize%></td>
+					</tr>
 				<%end%>
 			</tbody>
 		</table>
