@@ -1,0 +1,23 @@
+<input 
+class="<%=" widgetTextInput form-control-sm widgetTextInput centeredText #{locals[:textClass]}"%>"
+id="<%="#{input_id(locals)}"%>"
+name="<%="#{locals[:widgetName]}"%>"
+value="<%="#{locals[:value]}"%>"
+type="text"
+placeholder="<%=I18n.t locals[:placeholder]%>"
+
+/>
+<div class="saveCancelBox">
+	<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "#{locals[:buttonClass]} #{current_direction.to_s} imageOveralySave btn btn-success", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+	<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "#{locals[:buttonClass]}  #{current_direction.to_s} imageOveralyCancel btn btn-danger", 
+																	state: "cancel", 
+																	button_text: "cancel" )
+	%>
+</div>

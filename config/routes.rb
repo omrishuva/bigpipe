@@ -41,12 +41,13 @@ Rails.application.routes.draw do
 	get 'activities/scheduling/cancel/:activityId'											       => 'activities#cancel_scheduling'
 	
 	#widgets
-	get   '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
-	post  '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
-	get   '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
-	post  '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
-	get   '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
-	post  '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
+	get   '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#multiple_state_widget_control'
+	post  '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#multiple_state_widget_control'
+
+	# get   '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
+	# post  '/widgets/image_widget_control/:widgetName/:objectName/:key'             => 'widgets#image_widget_control'
+	# get   '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
+	# post  '/widgets/location_widget_control/:widgetName/:objectName/:key'          => 'widgets#location_widget_control'
 
 	
 	#health checks

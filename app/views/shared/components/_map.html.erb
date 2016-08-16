@@ -1,0 +1,21 @@
+ <div class=googleMapContainer>
+  <%if locals[:renderSearchBox] == true %>
+		<%=render "widgets/core_inputs/location_search_box", locals: locals%>
+  <%end%>
+  <div id="map"></div>
+</div>
+
+<script>
+  function initMap() { document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )  }
+</script>
+
+<%unless params[:loadScriptAfterServerResponse] == "false" %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaxhT2SJvK6MwGjYHB7pZB0Al0IYTknw&libraries=places&callback=initMap"
+      async defer>
+  </script>
+<%else%>
+  <script>initMap()</script>
+<%end%>
+
+
+

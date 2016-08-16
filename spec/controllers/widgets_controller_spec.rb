@@ -6,7 +6,7 @@ RSpec.describe WidgetsController do
     User.destroy_all
   end
 
-  describe "GET text_widget_control" do
+  describe "text_widget" do
     
     before :each do
       User.destroy_all
@@ -28,7 +28,7 @@ RSpec.describe WidgetsController do
 
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return(@user)
-      xhr :get, "text_widget_control", @widget_data
+      xhr :get, "multiple_state_widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
@@ -39,7 +39,7 @@ RSpec.describe WidgetsController do
       sleep 1
       @admin.make_super_admin
       controller.stub(:current_user).and_return( @admin )
-      xhr :get, "text_widget_control", @widget_data
+      xhr :get, "multiple_state_widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
@@ -48,7 +48,7 @@ RSpec.describe WidgetsController do
       controller.stub(:current_user).and_return(@user)
       @widget_data[:state] = "save"
       @widget_data[:data] = "about text"
-      xhr :post, "text_widget_control", @widget_data
+      xhr :post, "multiple_state_widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( @user.about_text ).to eq "about text"  
     end
@@ -56,7 +56,7 @@ RSpec.describe WidgetsController do
 
   end
 
-  describe "POST image_widget_control" do
+  describe "image_widget" do
      
      before :each do
       User.destroy_all
@@ -80,16 +80,13 @@ RSpec.describe WidgetsController do
                       }
     end
 
-
-
-
     after :each do
       Cloudinary::Uploader.destroy( @activity.reload!.cover_image_id )
     end
    
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "image_widget_control", @widget_data
+      xhr :post, "multiple_state_widget_control", @widget_data
       expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
@@ -99,13 +96,13 @@ RSpec.describe WidgetsController do
       sleep 1
       @admin.make_super_admin
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "image_widget_control", @widget_data
+      xhr :post, "multiple_state_widget_control", @widget_data
       expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
     it "should update the correct entity and field according to widget data" do
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "image_widget_control", @widget_data
+      xhr :post, "multiple_state_widget_control", @widget_data
       expect( @activity.reload!.cover_image_id ).to_not be nil
     end    
 

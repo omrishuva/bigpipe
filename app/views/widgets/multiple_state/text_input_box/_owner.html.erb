@@ -1,0 +1,8 @@
+<div class="textInputBox">
+		<p class="<%="#{locals[:textClass]}"%>">
+		<%=locals[:value] %> 
+		<%=render "widgets/multiple_state/button", 
+							locals: locals.merge( class: "fa fa-pencil #{current_direction}", state: "edit", button_text: "edit" )
+		%>
+		</p>
+</div>
