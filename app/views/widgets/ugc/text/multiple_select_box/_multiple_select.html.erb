@@ -1,0 +1,17 @@
+<select 
+	multiple 
+	class="<%="#{locals[:class]} select2"%>"
+	id="<%="#{locals[:id]}"%>"
+	data-placeholder="<%="#{(I18n.t locals[:placeholder])}"%>">
+
+	<%locals[:selectOptions].each do |id, name| %>
+		<%if locals[:selectedValues] && locals[:selectedValues].include?( id )%>
+		  <option selected=true value="<%=id%>"><%=name%></option>
+  	<%else%>
+	  	<option value="<%=id%>"><%=name%></option>
+  	<%end%>
+  <%end%>
+
+</select>
+
+<script>document.publishEvent('initMultipleSelectBox', { 'maxSelections': "<%=locals[:maxSelections]%>" })</script>

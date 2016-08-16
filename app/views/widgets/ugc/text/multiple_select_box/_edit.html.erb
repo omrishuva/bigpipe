@@ -1,18 +1,12 @@
-<select 
-	multiple 
-	class="select2" 
-	id="<%="#{input_id(locals)}"%>"
-	data-placeholder="<%="#{(I18n.t locals[:placeholder])}"%>">
-
-	<%locals[:selectOptions].each do |option| %>
-		<%if locals[:value] && locals[:value].include?( option )%>
-		  <option selected=true value="<%=option%>"><%=option%></option>
-  	<%else%>
-	  	<option value="<%=option%>"><%=option%></option>
-  	<%end%>
-  <%end%>
-
-</select>
+<%= render "widgets/ugc/text/multiple_select_box/multiple_select", 
+		locals: { 
+							id: input_id(locals), 
+							selectOptions: locals[:selectOptions], 
+							selectedValues: locals[:value], 
+							maxSelections: locals[:maxSelections],
+							placeholder: locals[:placeholder] 
+						}
+%>
 
 <%=render "widgets/ugc/text/button", 
 						locals: locals.merge( 

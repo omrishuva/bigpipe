@@ -4,8 +4,17 @@ $(document).ready ->
 document.addEventListener 'loadWidgetListeners',(e) ->
   loadWidgets();
 
+document.addEventListener 'initDateTimePicker',(e) ->
+  initDateTimePicker(e.detail.type);
+
+document.addEventListener 'initMultipleSelectBox', (e) ->
+	data = e.detail
+	$(".select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt(data['maxSelections']), 'closeOnSelect': false  });
+
+document.addEventListener 'initSider', (e) ->  	
+	$('.slider').slider( { tooltip: 'always' } )
+
 loadWidgets = ->
-	initDateTimePicker();
 	widgetControls = $('.widgetControl')
 	if widgetControls.length > 0
 		for widgetControl in widgetControls
@@ -32,33 +41,25 @@ widgetId = ( widget ) ->
 
 inputId = ( widget ) ->				
 	"input_#{widgetId(widget)}"
+initMultipleSelectBox = (e) ->
 
-initDateTimePicker = ->
-	$('#datePicker').datetimepicker( 
-																		{ 
-																			sideBySide: true
-																			viewMode: 'days'
-																			locale: moment().local('es')
-																			minDate: new Date()
-																			stepping: 15
-																			icons:{ time: "fa fa-clock-o", up: "fa fa-arrow-up", down: "fa fa-arrow-down", previous: 'fa fa-arrow-left', next: 'fa fa-arrow-right' }
-																		}
-																	);															
+initDateTimePicker = ( type ) ->
+	options = { 
+							sideBySide: true
+							viewMode: 'days'
+							minDate: new Date()
+							stepping: 15
+							icons:{ time: "fa fa-clock-o", up: "fa fa-arrow-up", down: "fa fa-arrow-down", previous: 'fa fa-arrow-left', next: 'fa fa-arrow-right' }
+						};
+	if type == 'time'
+		options['format'] = 'LT'
+	$('.dateTimePicker').datetimepicker( options );															
 
-checkBoxWidgetControl = ->
-	$('input[name="publish-activity"]').on 'switchChange.bootstrapSwitch', (event, state) ->
-	  console.log this
-	  console.log event
-	  console.log state
-  
 
 textWidgetControl =( selectorKey ) ->
 	$( selectorKey ).click (e) ->
 	  widget = {}
-	  if e.target.className == "buttonText"
-	  	widget = e.target.parentElement.dataset
-	  else
-	  	widget = e.target.dataset
+	 	widget = getDataset( e.target )
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
@@ -72,7 +73,6 @@ textWidgetControl =( selectorKey ) ->
 	    data: widget
    		success: (data) ->
       	textWidgetControl( selectorKey );
-      	$(".select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt(widget.maxSelections) });
 
 textWidgetControlSave = ( widget ) ->
 	switch widget.widgetName
@@ -116,7 +116,7 @@ initUploadImageLoader = ( widget ) ->
 
 locationWidgetControl = ( selectorKey ) ->
 	$( selectorKey ).click (e) ->
-		widget = e.target.dataset
+		widget = getDataset( e.target )
 		widget['loadScriptAfterServerResponse'] = true
 		shouldSendRequest = true
 		switch widget.state
@@ -142,9 +142,11 @@ locationWidgetControl = ( selectorKey ) ->
 getPlaceid = ->
 	currentPlace.place_id if currentPlace
 
-
-
-
+getDataset = ( el ) ->
+	if el.className == "buttonText"
+	 el.parentElement.dataset
+	else
+	 el.dataset
 
 
 

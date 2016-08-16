@@ -1,0 +1,8 @@
+<%if @activity.account.is_editor?( current_user )  %>
+	<div class="previewPublish gridItem">
+			<div class="previewPublishBtnGroup">
+				<a class="btnBrand1Inverse largeBtn previewPublishBtn" href="#">Preview</a>
+				<a class="btnBrand1 largeBtn previewPublishBtn" href="#">Publish</a>
+			</div>		
+	</div>
+<%end%>

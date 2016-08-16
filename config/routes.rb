@@ -35,8 +35,11 @@ Rails.application.routes.draw do
 
 	#activities	
 	get '/new_activity/:user_id'											 										 	   => 'activities#new_activity'
-	get '/activities/:activity_id' 						                             	   => 'activities#activity'
-
+	get '/activities/:activityId' 						                             	   => 'activities#activity'
+	get 'activities/select_scheduling_type/:activityId'											   => 'activities#select_scheduling_type'
+	get 'activities/scheduling/save/:activityId'											         => 'activities#save_scheduling'
+	get 'activities/scheduling/cancel/:activityId'											       => 'activities#cancel_scheduling'
+	
 	#widgets
 	get   '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'
 	post  '/widgets/text_widget_control/:widgetName/:objectName/:key'              => 'widgets#text_widget_control'

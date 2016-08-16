@@ -16,10 +16,6 @@ class Activity < Entity
   	[user_id, owner_id ].uniq.compact
   end
 
-  # def user
-  #   @user ||= User.find(user_id.to_i)
-  # end
-
   def cover_image
     cover_image_id || "https://placehold.it/700x400"
   end

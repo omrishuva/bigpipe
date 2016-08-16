@@ -1,0 +1,22 @@
+<div class="editScheduling">
+	
+		<span>Every:</span>
+		<%= render "widgets/ugc/text/multiple_select_box/multiple_select", 
+			locals: { 
+								id: "dayOfWeek", 
+								class: "dayOfWeek",
+								selectOptions: Date::DAYNAMES.map{|day| [day,day] },
+								# selectedValues: locals[:value], 
+								# defaultSelectedValue: ,
+								placeholder: :select_day_of_week
+							}
+		%>
+		<span>At:</span>
+		<%=render 'widgets/ugc/scheduling/date_time_picker', locals: {id: "recuringEvent", type: 'time' } %>
+	</br>
+	<%=render 'select_activity_leader'%>
+	</br>
+	<a href="javascript:void(0)" id="saveScheduling" class="btn btn-success smallBtn" data-scheduling-type="recuringEvent" data-activity-id="<%=locals[:activity].id%>" >Add</a>
+	<a href="javascript:void(0)" id="cancelScheduling" class="btn btn-danger smallBtn" data-activity-id="<%=locals[:activity].id%>">Cancel</a>
+	<script>document.publishEvent('enableEditSchedulingButtons');</script>
+</div>
