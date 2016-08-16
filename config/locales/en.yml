@@ -57,6 +57,8 @@ en:
  describe_your_activity: "Describe it in few words"
  categories: "Categories"
  select_3_categories: "Select up to 3 categories"
+ select_activity_leader: "Select who will be in charge"
+ select_day_of_week: "Select Day"
  tags: "Tags"
  levels: "Levels"
  location: "Location"

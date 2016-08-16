@@ -1,9 +1,0 @@
- <div class=googleMapContainer>
-  <%=cl_image_tag("Map_Marker-30_uvmgwm.png", :width=>20, :crop=>"scale", secure: true)%>
-  <%=render "widgets/ugc/location/search_box", locals: locals%>
-  <div id="map"></div>
-</div>
-
-<script>
-  document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )
-</script>

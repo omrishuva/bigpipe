@@ -1,18 +1,18 @@
 categories:
-  - City Tour 
-  - Trip
-  - Nightlife
-  - Special Events
-  - Workshop
-  - Lesson
-  - Class
-  - Lecture
-  - Extreme Sports
-  - Motor Sports
-  - Fitness 
-  - Dance
-  - Movement
-  - Adventure
+  - [City Tour, City Tour ]
+  - [Trip, Trip]
+  - [Nightlife, Nightlife]
+  - [Special Events,Special Events]
+  - [Workshop,Workshop]
+  - [Lesson,Lesson]
+  - [Class,Class]
+  - [Lecture,Lecture]
+  - [Extreme Sports,Extreme Sports]
+  - [Motor Sports,Motor Sports]
+  - [Fitness,Fitness] 
+  - [Dance,Dance]
+  - [Movement,Movement]
+  - [Adventure,Adventure]
 
 # categories:
 #   tour: 

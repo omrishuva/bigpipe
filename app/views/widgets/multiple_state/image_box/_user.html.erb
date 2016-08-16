@@ -1,0 +1,10 @@
+<div class="imageBox">
+	<%= render "shared/components/image_tag", locals: locals%>
+	<%if locals[:overlayTextlinkTo].present?%>
+		<a href=<%="#{locals[:overlayTextlinkTo]}"%>>
+			<span class="imageOverlayTextWithLink"%><%=locals[:overlayText][:value]%></span>	
+		</a>
+	<%else%>
+		<span class="imageOverlayText"%><%=locals[:overlayText][:value]%></span>	
+	<%end%>
+</div>

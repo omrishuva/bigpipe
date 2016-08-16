@@ -25,9 +25,21 @@ class Account < Entity
 		@freelancer_account_owner ||= User.find( AccountRole.find_by([{ k: "account_id", v: id, op: "=" }]).user_id )
 	end
 	alias freelancer freelancer_account_owner
+	
+	def member_roles
+		@member_roles ||= AccountRole.where( [ { k: "account_id", v: self.id, op: "=" } ] )
+	end
 
 	def member_ids
-		@member_ids ||= AccountRole.where( [ { k: "account_id", v: self.id, op: "=" } ] ).map(&:user_id)
+		@member_ids ||= member_roles.map(&:user_id)
+	end
+	
+	def active_member_ids
+		@active_member_ids ||= member_roles.select{ |member| member.status == "active" }.map(&:user_id)
+	end
+
+	def active_members
+		@active_members ||= active_member_ids.map{ |member_id| User.find( member_id )  }
 	end
 
 	def members
@@ -36,7 +48,7 @@ class Account < Entity
 	
 	def reset_members
 		@members = nil
-		@member_ids = nil
+		@member_roles = nil
 	end
 
 	def owners

@@ -1,22 +1,12 @@
 <div class="activityContainer">
-	<%if @activity.account.is_editor?( current_user )  %>
-		<div class="previewPublish gridItem">
-				<div class="previewPublishBtnGroup">
-					<a class="btnBrand1Inverse largeBtn previewPublishBtn" href="#">Preview</a>
-					<a class="btnBrand1 largeBtn previewPublishBtn" href="#">Publish</a>
-				</div>
-				
-		</div>
-
-	<%end%>
 	
+	<%= render 'activity_preview_and_publish'%>
+
 	<div class="gridItem activityHeader">
 		<div class="col-lg-8 col-sm-12 gridItem">
-			<%= render 'cover_image', locals: { imageTagClass: "coverImage img-fluid" } %>
+			<%= render 'activity_cover_image', locals: { imageTagClass: "coverImage img-fluid" } %>
 		</div>
-		<div class="col-lg-4 gridItem">
-			<%=render 'categories_tags_and_levels'%>
-		</div>
+		<div class="col-lg-4 gridItem"><%=render 'categories_tags_and_levels'%></div>
 	</div>
 
 	<div class="col-lg-12 gridItem aboutOrganizer">
@@ -24,48 +14,24 @@
 	</div>
 
 	<div class="col-lg-12 gridItem">
-		<%= render 'description'%>
+		<%= render 'activity_description'%>
 	</div>
 
+	<div class="col-lg-12 gridItem activityLocation">
+		<%= render 'activity_location'%>
+	</div>
+
+	<div class="dropdown-divider"></div>
+
 	<div class="col-lg-12 gridItem">
-			<div class="dropdown-divider"></div>
-			<p class=activitySubtitle >Location</p>
-			<%= render 'widgets/ugc/location/widget', 
-				  locals: {  
-				            widgetName: "location",
-				            elementName: "location",
-				            objectName: "activities",
-				            objectId: @activity.id,
-				            key: "place_id",
-				            value: @activity.place_id,
-				            state: params[:state],
-				            isWidgetOwner: @is_widget_editor,
-				            placeholder: "enter_location"            
-				          }
-						%>
-	
+		<%=render 'activity_scheduling'%>
 	</div>
 	
-	<div class="col-lg-12 gridItem schedulingAndPricing">
-		<div class="dropdown-divider"></div>
-			<div class="col-lg-6 col-sm-12 gridItem">
-				<p class=activitySubtitle >Schedule</p>
-				<div class='input-group date' id='datePicker'>
-					<input type='text' class="form-control" />
-					<span class="input-group-addon">
-						<i class="fa fa-calendar" aria-hidden="true"></i>
-					</span>
-				</div>
-				<div class="col-lg-6 col-sm-6 gridItem">
-				</div>
-			</div>
-		</div>
-	<%if @is_widget_editor%>		
-		<div class="col-lg-12 gridItem">
-			<a class="btnBrandCancel fa fa-trash-o" href="#">delete</a>
-		</div>
-	<%end%>
+	<%=render 'activity_delete'%>
 	
 </div>
-<%= render 'meta_tags' if @activity.state == "published"%>
- <%=render "shared/scripts/add_this_share_widget"%>
+
+<%if @activity.state == "published"%>
+	<%= render 'meta_tags'%>
+	<%=render "shared/scripts/add_this_share_widget" %>
+<%end%>

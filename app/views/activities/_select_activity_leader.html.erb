@@ -1,0 +1,14 @@
+<%if @activity.account.is_business?%>
+	<%= render "widgets/core_inputs/multiple_select", 
+			locals: { 
+								id: "activityLeader", 
+								class: "activityLeader",
+								selectOptions: @activity.account.active_members.map{|member| [ member.id, member.name ] },
+								# selectedValues: locals[:value], 
+								# defaultSelectedValue: ,
+								placeholder: :select_activity_leader
+							}
+	%>
+<%else%>
+	<input type="hidden" id="activityLeader" value="<%=@activity.account.freelancer_account_owner.id%>">
+<%end%>

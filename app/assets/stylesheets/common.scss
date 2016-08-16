@@ -276,6 +276,11 @@ a{ color: #056cf9; }
                     top: 0px;
                 }
 
+.dateTimePicker{ width: 13em; }
+.activityLeader{ width: 13em !important; }
+.dayOfWeek{ width: 13em !important; }
+.slider-selection{ background: #056cf9; }
+
 .imageOverlayTextWithLink{ @extend .imageOverlayText; color: #056cf9;  }
 
 .imageOveralyButton{ position: absolute; top: 4.5em; box-shadow: 0px 0px 7px 8px #fff; @extend .smallBtn; }
@@ -285,9 +290,8 @@ a{ color: #056cf9; }
 .activityTitle{ font-size: 130%; }
 .activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px;  }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
-// left: 20px;
 .rtlimageOverlayText{ @extend .imageOverlayText;  }
-// right: 20px;
+
 .imageUploadButton
 {
     background: #494949 center top no-repeat;

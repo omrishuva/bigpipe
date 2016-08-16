@@ -1,0 +1,12 @@
+<div class='input-group dateTimePicker' id="<%=locals[:id]%>">
+	<span class="input-group-addon">
+		<%if locals[:type] == "dateTime"%>
+			<i class="fa fa-calendar" aria-hidden="true"></i>
+		<%elsif locals[:type] == "time" %>
+			<i class="fa fa-clock-o" aria-hidden="true"></i>
+		<%end%>
+	</span>
+	<input type='text' class="form-control" />
+</div>
+
+<script>document.publishEvent('initDateTimePicker', { 'type': "<%=locals[:type]%>" })</script>

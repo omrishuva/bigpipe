@@ -1,0 +1,24 @@
+<%= render "widgets/core_inputs/multiple_select", 
+		locals: { 
+							id: input_id(locals), 
+							selectOptions: locals[:selectOptions], 
+							selectedValues: locals[:value], 
+							maxSelections: locals[:maxSelections],
+							placeholder: locals[:placeholder] 
+						}
+%>
+
+<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	dataType: "StringArray",
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+
+<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-danger smallBtn", 
+																	state: "cancel", 
+																	button_text: "cancel" )
+	%>

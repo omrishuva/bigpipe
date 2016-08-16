@@ -31,8 +31,11 @@
 //= require bootstrap-datetimepicker
 //= require bootstrap-table
 //= require bootstrap-table-he-IL
-//= require profile
+//= require bootstrap-slider
+//= require core_inputs
 //= require map_widget
-//= require ugc_widgets
+//= require profile
+//= require activity
+//= require multiple_state_widgets
 //= require app
 

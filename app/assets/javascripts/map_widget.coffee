@@ -55,7 +55,10 @@ setMapBounds = ( place ) ->
 setInfoWindowContent = ( place, marker ) ->
   infowindow = new (google.maps.InfoWindow)
   address = buildAddressName( place );
-  infowindow.setContent '<div><strong>' + place.name + '</strong><br>' + address
+  if address
+    infowindow.setContent '<div><strong>' + place.name + '</strong><br>' + address
+  else
+    infowindow.setContent '<div><strong>' + place.name
   infowindow.open @map, marker
   return infowindow
 
@@ -63,7 +66,6 @@ setMarker =  ( place ) ->
   marker = new (google.maps.Marker)(
     map: map
     anchorPoint: new (google.maps.Point)(0, -29))
-  
   marker.setIcon
       url: "https://res.cloudinary.com/kommunal/image/upload/v1470046197/Map_Pin-100_ysareo.png"
       size: new (google.maps.Size)(71, 71)

@@ -1,0 +1,31 @@
+<%= render 'widgets/multiple_state/widget', 
+	locals: {  
+						widgetName: "image_box",
+						elementName: "imageBox",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "cover_image_id",
+						value: @activity.cover_image,
+						imageWidth: 770,
+						imageHeight: 430,
+						imageCrop: "fill",
+						imageGravity: "center",
+						imageTagClass: locals[:imageTagClass],
+						imageTagId: locals[:imageTagId],
+						state: params[:state],
+						isWidgetOwner: @is_widget_editor,
+						placeholder: "update_image",
+						overlayText:{
+											enabled: true,
+											key: "title",
+											value: @activity.title,
+											objectName: "activities",
+											objectId: @activity.id,
+											state: params[:state],
+		    							isWidgetOwner: @is_widget_editor,
+		    							placeholder: "name_it",
+		    							textClass: "#{current_direction}imageOverlayText activityTitle",
+		    							buttonClass: "imageOveralyButton"
+										}
+					}
+%>

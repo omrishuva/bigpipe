@@ -1,0 +1,18 @@
+<div class="searchBox">
+  <input id="pac-input" class="controls" type="text"
+  placeholder="<%="#{I18n.t locals[:placeholder]}"%>" >
+  <%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	button_text: "save" )
+	%>
+	<% if locals[:state] == "edit" %>
+		<%=render "widgets/multiple_state/button", 
+							locals: locals.merge( 
+																		class: "btn btn-danger smallBtn", 
+																		state: "cancel", 
+																		button_text: "cancel" )
+		%>
+	<%end%>
+</div>

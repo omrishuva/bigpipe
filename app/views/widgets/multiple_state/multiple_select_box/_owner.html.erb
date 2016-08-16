@@ -1,0 +1,14 @@
+	
+	<%=render "widgets/multiple_state/button", 
+				locals: locals.merge( 
+																class: "fa fa-pencil #{current_direction.to_s} #{locals[:placeholderClass]}", 
+																state: "edit", 
+																button_text: locals[:placeholder] )
+	%>
+
+</br>
+<%if locals[:value]%>
+	<%locals[:value].each do |selected_option|%>
+		<span class="smallTag"><%=selected_option%></span>
+	<%end%>
+<%end%>

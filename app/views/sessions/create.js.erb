@@ -1,6 +1,6 @@
 <%if @user%>	
 	$('#signupModal').modal('hide')
-	$("#navbarContainer").replaceWith("<%= escape_javascript( render 'shared/components/navigation/navigation_bar') %>")
+	$("#navbarContainer").replaceWith("<%= escape_javascript( render 'shared/components/navigation/navigation_bar') %>");
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");
 	$('#userSideBar').replaceWith("<%= escape_javascript( render 'shared/components/navigation/user_menu') %>");
 	$('#currentUserScript').replaceWith("<%= escape_javascript( render 'shared/data/current_user') %>");

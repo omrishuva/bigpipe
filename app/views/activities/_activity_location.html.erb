@@ -1,0 +1,15 @@
+<div class="dropdown-divider"></div>
+<p class=activitySubtitle >Location</p>
+<%= render 'widgets/multiple_state/widget', 
+	  locals: {  
+	            widgetName: "location",
+	            elementName: "location",
+	            objectName: "activities",
+	            objectId: @activity.id,
+	            key: "place_id",
+	            value: @activity.place_id,
+	            state: params[:state],
+	            isWidgetOwner: @is_widget_editor,
+	            placeholder: "enter_location"            
+	          }
+%>

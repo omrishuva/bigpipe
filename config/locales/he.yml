@@ -52,6 +52,8 @@ he:
  describe_your_activity: "כתוב כמה מילים על הפעילות שלך"
  categories: "קטגוריות"
  select_3_categories: "בחר עד 3 קטגוריות"
+ select_activity_leader: "בחר מי יוביל את הפעילות"
+ select_day_of_week: "בחר יום"
  tags: "תגיות"
  levels: "רמות"
  my_locations: "מקומות שלי"

@@ -13,9 +13,29 @@ class ActivitiesController < ApplicationController
 	end
 	
 	def activity
-		@activity = Activity.find( params[:activity_id] )
+		activity_id = params[:activity_id] || params[:activityId]
+		@activity = Activity.find( activity_id )
 		@is_widget_editor =  @activity.account.is_editor?( current_user ) 
 		params[:state] = nil if params[:state] == 'edit' && !@is_widget_editor
+	end
+	
+	def select_scheduling_type
+		@activity = Activity.find( params[:activityId].to_i )
+		respond_to do |format|
+      format.js { }
+    end
+	end
+	
+	def save_scheduling
+		respond_to do |format|
+      format.js { }
+    end
+	end
+
+	def cancel_scheduling
+		respond_to do |format|
+      format.js { }
+    end
 	end
 
 end

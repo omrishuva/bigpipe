@@ -1,0 +1,7 @@
+<%=render "widgets/multiple_state/button", 
+      locals: locals.merge( 
+                              class: "fa fa-pencil #{current_direction.to_s}", 
+                              state: "edit", 
+                              button_text: "edit" )
+  %>
+<%= render 'shared/components/map', locals: locals%>
