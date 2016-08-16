@@ -8,18 +8,21 @@ loadWidgets = ->
 	widgetControls = $('.widgetControl')
 	if widgetControls.length > 0
 		for widgetControl in widgetControls
-		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset )
-		 	switch widgetControl.dataset.widgetName  
+		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset );
+		 	switch widgetControl.dataset.widgetName
 		 		when "text_area_box" 
-		 			textWidgetControl( selectorKey )
+		 			textWidgetControl( selectorKey );
 		 		when	"text_input_box"
-		 			textWidgetControl( selectorKey )
+		 			textWidgetControl( selectorKey );
 		 		when	"multiple_select_box"
-		 			textWidgetControl( selectorKey )
+		 			textWidgetControl( selectorKey );
+		 		when "slider"
+			 		textWidgetControl( selectorKey );
 		 		when "image_box"
-			 		imageWidgetControl( selectorKey )
+			 		imageWidgetControl( selectorKey );
 			 	when "location"
-			 		locationWidgetControl( selectorKey )
+			 		locationWidgetControl( selectorKey );
+
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
@@ -55,6 +58,8 @@ textWidgetControlSave = ( widget ) ->
 		when "text_input_box"
 			widget['data'] = $("##{inputId(widget)}").val()
 		when "multiple_select_box"
+			widget['data'] = $("##{inputId(widget)}").val()
+		when 'slider'
 			widget['data'] = $("##{inputId(widget)}").val()
 	widget
 

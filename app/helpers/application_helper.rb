@@ -79,5 +79,13 @@ module ApplicationHelper
   def build_nested_widget_selector_key( object_id, element_name, key )
     "##{object_id}.widgetControl[data-element-name='#{element_name}'][data-key='#{key}']"
   end
-
+  
+  def team_table_data
+    data = []  
+    current_user.current_account.members.each do |member|
+      account_role = member.get_account_role( current_user.current_account.id )
+      data << [member.name, member.email, User.role_ui_name( account_role.role_id.to_i ).singularize, account_role.status]
+    end
+    data
+  end
 end

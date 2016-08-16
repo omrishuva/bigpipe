@@ -1,6 +1,9 @@
 <input 
 type="text" 
-class="slider" value="0" data-slider-min="0" data-slider-max="100" data-slider-step="1" 
-data-slider-value="0" >
-
+id="<%=locals[:id]%>"
+class="sliderInput"  
+data-slider-min="0" 
+data-slider-max="100" 
+data-slider-step="1" 
+data-slider-value="<%=locals[:value]%>" >
 <script>document.publishEvent('initSider');</script>

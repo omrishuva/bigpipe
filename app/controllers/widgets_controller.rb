@@ -9,6 +9,7 @@ class WidgetsController < ApplicationController
 			when "text_area_box" then text_widget
 			when "text_input_box" then text_widget
 			when "multiple_select_box" then text_widget
+			when "slider" then text_widget
 			when "image_box" then image_widget
 			when "location" then location_widget
 		end
@@ -29,6 +30,8 @@ class WidgetsController < ApplicationController
 	def save_value
 		if params[:dataType] == "StringArray"
 			value = params[:data].split(",")
+		elsif  params[:dataType] == "Integer"
+			value = params[:data].to_i
 		else
 			value = params[:data].to_s.strip
 		end

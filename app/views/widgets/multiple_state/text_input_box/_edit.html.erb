@@ -1,1 +1,1 @@
-<%=render 'widgets/core_inputs/text_input', locals: locals%>
+<%=render 'widgets/core_inputs/text_input', locals: locals.merge( { id: input_id(locals) } )%>

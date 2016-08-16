@@ -6,7 +6,11 @@
 </div>
 
 <script>
-  function initMap() { document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )  }
+	<%if locals[:value].present?%>
+  	function initMap() { document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )  };
+  <%else%>
+  	function initMap() { document.publishEvent('initMap' )  }
+  <%end%>
 </script>
 
 <%unless params[:loadScriptAfterServerResponse] == "false" %>

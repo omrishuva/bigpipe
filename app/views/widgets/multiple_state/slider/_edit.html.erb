@@ -1,0 +1,19 @@
+<%=render 'widgets/core_inputs/slider', locals: locals.merge({ id: input_id(locals) })%>
+
+<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	button_text: "save",
+																	dataType: "Integer"
+																)
+	%>
+
+<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-danger smallBtn", 
+																	state: "cancel", 
+																	button_text: "cancel",
+																	dataType: "Integer"
+																)
+	%>

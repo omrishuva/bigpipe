@@ -1,0 +1,22 @@
+<table class="table table-striped sortable" id="<%=locals[:id]%>">
+	<thead>
+		<tr>
+		<%locals[:keys].each do |key|%>
+			<th><%=I18n.t key%></th>
+		<%end%>
+		</tr>
+	</thead>
+	<tbody>
+
+		
+			<%locals[:values].each do |values_group|%>
+				<tr>
+					<%values_group.each do |value|%>
+						<td><%=value%></td>
+					<%end%>
+				</tr>
+			<%end%>
+		
+
+	</tbody>
+</table>

@@ -1,3 +1,9 @@
-<%=render "widgets/ugc/text/button", 
-					locals: locals.merge( class: "fa fa-pencil textBoxTextBeforeEdit #{current_direction}", state: "edit", button_text: locals[:placeholder] )
+<span><%="Maximum Guests Allowed: Unlimited"%><span>
+<%=render "widgets/multiple_state/button", 
+					locals: locals.merge( { 
+																	class: "fa fa-pencil textBoxTextBeforeEdit #{current_direction}", 
+																	state: "edit", 
+																	button_text: "edit",
+																	dataType: "Integer"
+																} )
 %>

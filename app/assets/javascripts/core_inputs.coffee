@@ -8,7 +8,7 @@ document.addEventListener 'initSider', (e) ->
 	initSlider();
 
 initSlider = ->
-	$('.slider').slider( { tooltip: 'always' } )
+	$('.sliderInput').slider( { tooltip: 'always' } )
 
 initMultipleSelectBox = (data) ->
 	$(".select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt(data['maxSelections']), 'closeOnSelect': false  });

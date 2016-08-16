@@ -54,6 +54,7 @@ he:
  select_3_categories: "בחר עד 3 קטגוריות"
  select_activity_leader: "בחר מי יוביל את הפעילות"
  select_day_of_week: "בחר יום"
+ set_guest_limit: "הגדר מקסימום של משתתפים"
  tags: "תגיות"
  levels: "רמות"
  my_locations: "מקומות שלי"

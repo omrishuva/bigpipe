@@ -2,7 +2,7 @@ class Activity < Entity
   
   DEPRECATED_FIELDS = [:location_coordinates, :user_id]
 
-	attr_accessor :id, :state, :account_id, :title, :locale, :gender, :cover_image_id, :about_text, :location, :place_id, :categories, :tags, :levels, :created_by, :owner_id, :created_at, :updated_at
+	attr_accessor :id, :state, :account_id, :title, :locale, :gender, :cover_image_id, :about_text, :location, :place_id, :categories, :tags, :levels, :max_guest_limit, :created_by, :owner_id, :created_at, :updated_at
 
 	def self.create( params )
     self.new(params).save

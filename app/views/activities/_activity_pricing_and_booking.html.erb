@@ -1,0 +1,15 @@
+<p class=activitySubtitle >Pricing And Booking</p>
+<%= render 'widgets/multiple_state/widget', 
+	locals: {  
+						widgetName: "slider",
+						elementName: "slider",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "max_guest_limit",
+						value: @activity.max_guest_limit,
+						state: params[:state],
+						isWidgetOwner: @is_widget_editor,
+					placeholder: "set_guest_limit"
+
+					}
+%>

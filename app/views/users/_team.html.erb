@@ -1,29 +1,7 @@
 <div class="container" id="meSectionContainer">	
 
 	<div class="accountMemebers">
-			
-		<table class="table table-striped sortable" id="staffTable">
-			<thead>
-				<tr>
-					<th><%=I18n.t :name%></th>
-					<th><%=I18n.t :email%></th>
-					<th><%=I18n.t :role%></th>
-					<th><%=I18n.t :status%></th>
-				</tr>
-			</thead>
-			<tbody>
-				<%current_user.current_account.members.each do |member|%>
-					<%account_role = member.get_account_role( current_user.current_account.id ) %>
-					<tr>
-						<td><a href=<%="/profile/#{member.id}"%>><%=member.name%></td>
-						<td><%=member.email%></td>
-						<td><%=User.role_ui_name( account_role.role_id.to_i ).singularize%></td>
-						<td><%=account_role.status%></td>
-					</tr>
-				<%end%>
-			</tbody>
-		</table>
-
+		<%= render 'shared/components/table', locals: { keys: [:name, :email, :role, :status], values: team_table_data, id: "staffTable"  } %>
 	</div>
 	</br>
 	<%if current_user.is_account_owner?%>

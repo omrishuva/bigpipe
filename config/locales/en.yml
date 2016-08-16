@@ -59,6 +59,7 @@ en:
  select_3_categories: "Select up to 3 categories"
  select_activity_leader: "Select who will be in charge"
  select_day_of_week: "Select Day"
+ set_guest_limit: "Set a maximum guest limit"
  tags: "Tags"
  levels: "Levels"
  location: "Location"

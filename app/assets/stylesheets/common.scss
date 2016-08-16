@@ -288,7 +288,7 @@ a{ color: #056cf9; }
 .imageOveralyCancel{ left: 20%; }
 .widgetTextInput{ opacity: 1 !important; }
 .activityTitle{ font-size: 130%; }
-.activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px;  }
+.activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px; text-decoration: underline; }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
 .rtlimageOverlayText{ @extend .imageOverlayText;  }
 
