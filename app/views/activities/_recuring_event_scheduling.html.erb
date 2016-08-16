@@ -1,7 +1,7 @@
 <div class="editScheduling">
 	
 		<span>Every:</span>
-		<%= render "widgets/ugc/text/multiple_select_box/multiple_select", 
+		<%= render "widgets/core_inputs/multiple_select", 
 			locals: { 
 								id: "dayOfWeek", 
 								class: "dayOfWeek",
@@ -12,7 +12,7 @@
 							}
 		%>
 		<span>At:</span>
-		<%=render 'widgets/ugc/scheduling/date_time_picker', locals: {id: "recuringEvent", type: 'time' } %>
+		<%=render 'widgets/core_inputs/date_time_picker', locals: {id: "recuringEvent", type: 'time' } %>
 	</br>
 	<%=render 'select_activity_leader'%>
 	</br>

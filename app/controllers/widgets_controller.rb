@@ -1,18 +1,29 @@
 class WidgetsController < ApplicationController
 
-	skip_before_action :verify_authenticity_token, only: [ :image_widget_control, :text_widget_control, :location_widget_control ]
+	skip_before_action :verify_authenticity_token, only: [ :multiple_state_widget_control ]
 
-	#Text#####################################################
-
-	def text_widget_control
-		@object = get_object( params[:objectName], params[:objectId] )
-		save_value if params[:state] == "save"
-		@widget_data = prepare_text_widget_data
-		
+	
+	
+	def multiple_state_widget_control
+		case params[:widgetName]
+			when "text_area_box" then text_widget
+			when "text_input_box" then text_widget
+			when "multiple_select_box" then text_widget
+			when "image_box" then image_widget
+			when "location" then location_widget
+		end
 		respond_to do |format|
       format.js { }
     end
-	
+
+	end
+
+	#Text#####################################################
+
+	def text_widget
+		@object = get_object( params[:objectName], params[:objectId] )
+		save_value if params[:state] == "save"
+		@widget_data = prepare_text_widget_data
 	end
 	
 	def save_value
@@ -47,15 +58,11 @@ class WidgetsController < ApplicationController
 	
 	#Image#####################################################
 
-	def image_widget_control
+	def image_widget
     temp_widget_data = parse_image_image_widget_data
     @object = get_object( temp_widget_data[:objectName], temp_widget_data[:objectId] )
     @object.upload_image( params[:image].tempfile, temp_widget_data[:key] )
     @widget_data = prepare_image_widget_data( temp_widget_data )
-    respond_to do |format|
-      format.js { }
-    end
-  
   end
   
   def parse_image_image_widget_data
@@ -86,15 +93,10 @@ class WidgetsController < ApplicationController
 	end
 	#Location#####################################################
 	
-	def location_widget_control
+	def location_widget
 		@object = get_object( params[:objectName], params[:objectId] )
 		@object.update(params[:key] => params[:data] ) if params[:state] == "save"
 		@widget_data = prepare_location_widget_data
-
-		respond_to do |format|
-      format.js { }
-    end
-
 	end
 	
 	def prepare_location_widget_data

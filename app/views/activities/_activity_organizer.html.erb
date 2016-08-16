@@ -1,7 +1,7 @@
 <div class="aboutOrganizerBox clearfix">
 	<%if @activity.account_public_info_completed? %>
 		<div class="inlineBlock aboutOragnizerImage">  
-			<%= render "widgets/ugc/image/image_box/image_tag", 
+			<%= render "shared/components/image_tag", 
 									locals: { 
 														value: @activity.account.public_info[:image],
 														imageWidth: 150, 

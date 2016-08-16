@@ -1,8 +1,0 @@
-<div class="textInputBox">
-		<p class="<%="#{locals[:textClass]}"%>">
-		<%=locals[:value] %> 
-		<%=render "widgets/ugc/text/button", 
-							locals: locals.merge( class: "fa fa-pencil #{current_direction}", state: "edit", button_text: "edit" )
-		%>
-		</p>
-</div>
