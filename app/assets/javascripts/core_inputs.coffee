@@ -24,4 +24,5 @@ initDateTimePicker = ( type ) ->
 						};
 	if type == 'time'
 		options['format'] = 'LT'
+		options['defaultDate'] =  moment().add('days', 2)
 	$('.dateTimePicker').datetimepicker( options );		
