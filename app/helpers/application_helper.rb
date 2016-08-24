@@ -64,6 +64,10 @@ module ApplicationHelper
     locals[:user].id == current_user_id
   end
   
+  def generate_button_id
+    (0..32).to_a.map{|a| rand(16).to_s(16)}.join
+  end
+  
   def widget_replace_selector( widget_data )
     "##{widget_data[:objectId]}_#{widget_data[:key]}.#{widget_data[:elementName]}"
   end
@@ -88,4 +92,29 @@ module ApplicationHelper
     end
     data
   end
+
+  def prepare_placeholder( placeholder, objectName, key, value )
+    if placeholder == "placeholderPattern"
+      placeholder_patterns(value)["#{objectName}_#{key}"]
+    else
+      placeholder
+    end
+  end
+
+  def placeholder_patterns( value )
+    {
+      "activities_max_guest_limit" => "#{I18n.t :set_guest_limit}: #{value || I18n.t(:unlimited) } ",
+      "activities_duration" => "#{I18n.t :activity_duration}: #{value || '-' } #{I18n.t :hours} ",
+      "activities_price" => "#{I18n.t :price}: #{ activity_price(value) || 'free' } ",
+    }
+  end
+
+  def activity_price(value)
+    value.to_i == 0 ? nil : value
+  end
+
+  def prepare_wizard_data( wizard_type )
+    $wizards[wizard_type]
+  end
+
 end

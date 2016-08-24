@@ -35,7 +35,6 @@
 //= require core_inputs
 //= require map_widget
 //= require profile
-//= require activity
 //= require multiple_state_widgets
 //= require app
 

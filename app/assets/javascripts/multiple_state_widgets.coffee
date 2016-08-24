@@ -1,28 +1,64 @@
-$(document).ready ->
-	loadWidgets();
+# $(document).ready ->
+# 	loadWidgets();
 
-document.addEventListener 'loadWidgetListeners',(e) ->
-  loadWidgets();
+# document.addEventListener 'loadWidgetListeners',(e) ->
+#   loadWidgets();
 
-loadWidgets = ->
-	widgetControls = $('.widgetControl')
-	if widgetControls.length > 0
-		for widgetControl in widgetControls
-		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset );
-		 	switch widgetControl.dataset.widgetName
-		 		when "text_area_box" 
-		 			textWidgetControl( selectorKey );
-		 		when	"text_input_box"
-		 			textWidgetControl( selectorKey );
-		 		when	"multiple_select_box"
-		 			textWidgetControl( selectorKey );
-		 		when "slider"
-			 		textWidgetControl( selectorKey );
-		 		when "image_box"
-			 		imageWidgetControl( selectorKey );
-			 	when "location"
-			 		locationWidgetControl( selectorKey );
+document.addEventListener 'loadButton',(e) ->
+	widgetData = e.detail.widgetData;
+	addDataAttributesToButton( widgetData );
 
+addDataAttributesToButton = ( widgetData ) ->
+	$("##{widgetData.id}").data( widgetData: widgetData );
+	loadWidget( widgetData.widgetName, widgetData.id )
+
+loadWidget = ( widgetType, id ) ->
+ 	switch widgetType
+ 		when "text_area_box" 
+ 			baseWidgetControl( id );
+ 		when	"text_input_box"
+ 			baseWidgetControl( id );
+ 		when	"multiple_select_box"
+ 			baseWidgetControl( id );
+ 		when "slider_box"
+	 		baseWidgetControl( id );
+ 		when 'wizard_buttons'
+	 		baseWidgetControl( id );
+	 	when "checkbox_box"
+	 		baseWidgetControl( id );
+ 		when "image_box"
+	 		imageWidgetControl( id );
+	 	when "location"
+	 		locationWidgetControl( id );
+	 	when "scheduling_box"
+	 		schedulingWidgetControl( id );
+
+# loadWidgets = ->
+# 	widgetControls = $('.widgetControl')
+# 	if widgetControls.length > 0
+# 		for widgetControl in widgetControls
+# 		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset );
+# 		 	switch widgetControl.dataset.widgetName
+# 		 		when "text_area_box" 
+# 		 			baseWidgetControl( selectorKey );
+# 		 		when	"text_input_box"
+# 		 			baseWidgetControl( selectorKey );
+# 		 		when	"multiple_select_box"
+# 		 			baseWidgetControl( selectorKey );
+# 		 		when "slider_box"
+# 			 		baseWidgetControl( selectorKey );
+# 		 		when 'wizard_buttons'
+# 			 		baseWidgetControl( selectorKey );
+# 			 	when "checkbox_box"
+# 			 		baseWidgetControl( selectorKey );
+# 		 		when "image_box"
+# 			 		imageWidgetControl( selectorKey );
+# 			 	when "location"
+# 			 		locationWidgetControl( selectorKey );
+# 			 	when "scheduling_box"
+# 			 		schedulingWidgetControl( selectorKey );
+
+			 	
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
@@ -33,25 +69,25 @@ widgetId = ( widget ) ->
 inputId = ( widget ) ->				
 	"input_#{widgetId(widget)}"
 											
-textWidgetControl =( selectorKey ) ->
-	$( selectorKey ).click (e) ->
+baseWidgetControl =( id ) ->
+	$( "##{id}" ).click (e) ->
 	  widget = {}
 	 	widget = getDataset( e.target )
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
-	  		textWidgetControlCancel( widget ) 
+	  		baseWidgetControlCancel( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
-		  	widget = textWidgetControlSave( widget )
+		  	widget = baseWidgetControlSave( widget )
 	  $.ajax
 	    type: requestMethod
 	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 	    data: widget
    		success: (data) ->
-      	textWidgetControl( selectorKey );
+      	# baseWidgetControl( selectorKey );
 
-textWidgetControlSave = ( widget ) ->
+baseWidgetControlSave = ( widget ) ->
 	switch widget.widgetName
 		when "text_area_box"
 			widget['data'] = CKEDITOR.instances["editor#{inputId( widget )}"].getData()
@@ -59,24 +95,33 @@ textWidgetControlSave = ( widget ) ->
 			widget['data'] = $("##{inputId(widget)}").val()
 		when "multiple_select_box"
 			widget['data'] = $("##{inputId(widget)}").val()
-		when 'slider'
+		when 'slider_box'
 			widget['data'] = $("##{inputId(widget)}").val()
+		when "checkbox_box"
+			widget['data'] = getCheckboxSelectedValue();
+		when 'wizard_buttons'
+			widget['data'] = widget.value
 	widget
 
-textWidgetControlCancel = ( widget ) ->
+baseWidgetControlCancel = ( widget ) ->
 	if widget.widgetName == "text_area_box"
 		CKEDITOR.instances["editor#{inputId(widget)}"].destroy()
 		$( "##{ widgetId(widget) }.textAreaBox" ).hide();
 
-imageWidgetControl = ( selectorKey ) ->
-  $( selectorKey ).change (e) ->
+getCheckboxSelectedValue = ->
+	options = $('input[type="radio"]')
+	for option in options
+		return option.value if option.checked == true
+
+imageWidgetControl = ( id ) ->
+  $( "##{id}" ).change (e) ->
     formData = new FormData;
     file = e.target.files[0];
-    widget = e.target.dataset;
+    widget = getDataset( e.target);
     formData.append( 'image', file, file.name );
     formData.append( 'widget', JSON.stringify(widget) );
     initUploadImageLoader(widget);
-    localStorage.setItem(selectorKey, widget.nestedWidgetSelectorKey)
+    # localStorage.setItem(selectorKey, widget.nestedWidgetSelectorKey)
     $.ajax
         type: 'POST'
         url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -84,17 +129,17 @@ imageWidgetControl = ( selectorKey ) ->
         processData: false
         contentType: false
         success: (data) ->
-        	if localStorage["#{selectorKey}"]
-	        	textWidgetControl( localStorage["#{selectorKey}"] )
-	        	localStorage.setItem(selectorKey, null)
-          imageWidgetControl( selectorKey );
+        	# if localStorage["#{selectorKey}"]
+	        # 	textWidgetControl( localStorage["#{selectorKey}"] )
+	        # 	localStorage.setItem(selectorKey, null)
+          # imageWidgetControl( selectorKey );
 
 initUploadImageLoader = ( widget ) ->
 	$('.fa-camera').addClass('fa-spin');
-	$("##{widget.objectId}updateCoverImageText").text("Updating Image")
+	$("##{widget.id}updateCoverImageText").text("Updating Image")
 
-locationWidgetControl = ( selectorKey ) ->
-	$( selectorKey ).click (e) ->
+locationWidgetControl = ( id ) ->
+	$( "##{id}" ).click (e) ->
 		widget = getDataset( e.target )
 		widget['loadScriptAfterServerResponse'] = true
 		shouldSendRequest = true
@@ -103,7 +148,7 @@ locationWidgetControl = ( selectorKey ) ->
 	  		widget['loadScriptAfterServerResponse'] = false
 	  	when 'cancel'
 	  		widget['loadScriptAfterServerResponse'] = false
-	  		textWidgetControlCancel( widget ) 
+	  		locationWidgetControl( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget['data'] = getPlaceid(); 	
@@ -122,11 +167,44 @@ locationWidgetControl = ( selectorKey ) ->
 getPlaceid = ->
 	currentPlace.place_id if currentPlace
 
+schedulingWidgetControl = ( id ) ->
+	$( "##{id}" ).click (e) ->
+		widget = getDataset( e.target )
+		widget = schedulingWidgetSave( widget ) if widget.state == "save"
+		$.ajax
+	    type: "POST"
+	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+	    data: widget
+   		success: (data) ->
+      	# schedulingWidgetControl( selectorKey );
+
+schedulingWidgetSave = ( data ) ->
+	switch data.schedulingType
+    when "recurringEvent"
+      data = saverecurringEvent( data );
+    when "specificDates"
+      data = saveSpecificDate( data );
+  data['activityLeader'] = getActivityLeader( data );
+  data
+
+saverecurringEvent = (data) ->
+  data['selectedTime'] = $('.dateTimePicker').data('date');
+  data['selectedDayOfWeek'] = $('#dayOfWeek').val();
+  data
+
+saveSpecificDate = (data) ->
+  data['selectedDate'] =  new Date( $('.dateTimePicker').data('date') )
+  data  
+
+getActivityLeader = (data) ->
+  activityLeaders = $('#activityLeader').val();
+
+#Utilities###############################################################################################
 getDataset = ( el ) ->
 	if el.className == "buttonText"
-	 el.parentElement.dataset
+	 id = el.parentElement.id
 	else
-	 el.dataset
-
+	 id = el.id
+	$("##{id}").data('widgetData')
 
 

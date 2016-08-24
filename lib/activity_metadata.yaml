@@ -2,7 +2,7 @@ categories:
   - [City Tour, City Tour ]
   - [Trip, Trip]
   - [Nightlife, Nightlife]
-  - [Special Events,Special Events]
+  - [Special Event,Special Event]
   - [Workshop,Workshop]
   - [Lesson,Lesson]
   - [Class,Class]
@@ -13,6 +13,10 @@ categories:
   - [Dance,Dance]
   - [Movement,Movement]
   - [Adventure,Adventure]
+activity_types:
+  - [ itinirary, share_itinirary ]
+  - [ activity, sell_an_activity ]
+
 
 # categories:
 #   tour: 

@@ -31,14 +31,13 @@ Rails.application.routes.draw do
 	post '/account/onboarding/:account_id/:user_id'      					 						=> 'users#onboarding_form_submit'
 	get  '/account/existing_user/onboarding/:account_id/:user_id'							=> 'users#existing_user_onboarding'
 	#accounts
-	post 'accounts/upgrade_business/:account_id'													   => 'accounts#upgrade_to_business_account'
+	post '/accounts/upgrade_business/:account_id'													    => 'accounts#upgrade_to_business_account'
+	get '/account/setup/:accountId'																					 	=> 'accounts#account_setup'
 
 	#activities	
-	get '/new_activity/:user_id'											 										 	   => 'activities#new_activity'
+	post '/new_activity'											 										 	   				 => 'activities#new_activity'
+	get '/activity/setup/:activityId'																					 => 'activities#activity_setup'
 	get '/activities/:activityId' 						                             	   => 'activities#activity'
-	get 'activities/select_scheduling_type/:activityId'											   => 'activities#select_scheduling_type'
-	get 'activities/scheduling/save/:activityId'											         => 'activities#save_scheduling'
-	get 'activities/scheduling/cancel/:activityId'											       => 'activities#cancel_scheduling'
 	
 	#multiple state widget
 	get   '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#multiple_state_widget_control'

@@ -1,9 +1,8 @@
-<span><%="Maximum Guests Allowed: #{locals[:value]}"%><span>
+<span><%=prepare_placeholder( locals[:placeholder], locals[:objectName], locals[:key], locals[:value] )%><span>
 <%=render "widgets/multiple_state/button", 
 					locals: locals.merge( { 
 																	class: "fa fa-pencil textBoxTextBeforeEdit #{current_direction}", 
 																	state: "edit", 
-																	button_text: "edit",
-																	dataType: "Integer"
+																	button_text: "edit"
 																} )
 %>

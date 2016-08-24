@@ -50,10 +50,10 @@ class ApplicationController < ActionController::Base
   
   def allowed?
     return true unless controller_permissions
-    return user_is_owner_or_admin if action_permissions == "owner_or_admin"
     if action_permissions.nil?
       true
     else
+      return false unless current_user.present?
       User.role_id( action_permissions ).to_i <= current_user.role_id
     end
   end

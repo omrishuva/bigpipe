@@ -1,0 +1,7 @@
+</br>
+<h1><%= I18n.t locals[:placeholder] %></h1>
+</br>
+<%locals[:selectOptions].each do |option|%>
+	<input type="radio" name="<%=option[0]%>" value="<%=option[0]%>"> <%=I18n.t option[1]%></br></br>
+<%end%>
+<script>document.publishEvent('initCheckbox' );</script>

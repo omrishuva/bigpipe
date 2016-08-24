@@ -1,0 +1,12 @@
+<div class="<%="#{current_direction}imageUploadButton"%>" >
+	<%id = generate_button_id %>
+	<input 
+		type="file"
+		class="imageUploadInput widgetControl"
+		id="<%=id%>"
+	/>
+	<i class="fa fa-camera" aria-hidden="true"></i>
+	<span id="<%="#{id}updateCoverImageText"%>" ><%=I18n.t :update_image%><span>
+</div>
+
+<script> document.publishEvent('loadButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );</script>

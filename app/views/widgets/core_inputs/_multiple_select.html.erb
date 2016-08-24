@@ -1,7 +1,7 @@
 <select 
 	multiple 
 	class="<%="#{locals[:class]} select2"%>"
-	id="<%="#{locals[:id]}"%>"
+	id="<%="#{input_id(locals)}"%>"
 	data-placeholder="<%="#{(I18n.t locals[:placeholder])}"%>">
 
 	<%locals[:selectOptions].each do |id, name| %>
@@ -14,4 +14,6 @@
 
 </select>
 
-<script>document.publishEvent('initMultipleSelectBox', { 'maxSelections': "<%=locals[:maxSelections]%>" })</script>
+<script>
+	document.publishEvent('initMultipleSelectBox', { 'maxSelections': "<%=locals[:maxSelections]%>", 'id': "<%=input_id(locals)%>"  } )
+</script>

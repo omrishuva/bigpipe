@@ -98,7 +98,11 @@ a{ color: #056cf9; }
 .hidden{ visibility: hidden; }
 .inlineBlock{  display:inline-block; margin-right: 5px; }
 .clearfix { overflow: auto;}
-
+.relativeCenter{
+  -webkit-box-align:center;
+  -webkit-box-pack:center;
+  display:-webkit-box;
+}
 .activityContainer
 {
   
@@ -205,6 +209,7 @@ a{ color: #056cf9; }
 .btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #fff; width: 3.5em; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #000; color: #fff ;    }
 .bthModalForm{ width: 100%; }
+.wizardButton{ margin-top: 20px !important; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
 
 .fileUploadButton
@@ -279,6 +284,7 @@ a{ color: #056cf9; }
 .dateTimePicker{ width: 13em; }
 .activityLeader{ width: 13em !important; }
 .dayOfWeek{ width: 13em !important; }
+.slider{ width: 13em !important; }
 .slider-selection{ background: #056cf9; }
 
 .imageOverlayTextWithLink{ @extend .imageOverlayText; color: #056cf9;  }

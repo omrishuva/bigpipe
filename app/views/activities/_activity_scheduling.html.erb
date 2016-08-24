@@ -1,3 +1,32 @@
 <p class=activitySubtitle >Schedule</p>
 
-<%=render "select_scheduling_type"%>
+<%= render 'widgets/multiple_state/widget', 
+	locals: {  
+						widgetName: "slider_box",
+						elementName: "slider_box",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "duration",
+						value: @activity.duration,
+						state: params[:state],
+						isWidgetOwner: @is_widget_editor,
+						sliderSteps: 0.5,
+						maxValue: 72,
+						dataType: "Float",
+						placeholder: "placeholderPattern"
+
+					}
+%>
+</br>
+<%= render 'widgets/multiple_state/widget', 
+	locals: {  
+						widgetName: "scheduling_box",
+						elementName: "schedulingBox",
+						objectName: "activities", 
+						objectId: @activity.id,
+						key: "scheduling_configuration",
+						value: @activity.scheduling_configuration,
+						state: params[:state],
+						isWidgetOwner: @is_widget_editor
+					}
+%>

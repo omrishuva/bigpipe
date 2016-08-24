@@ -4,14 +4,27 @@ document.addEventListener 'initDateTimePicker',(e) ->
 document.addEventListener 'initMultipleSelectBox', (e) ->
 	initMultipleSelectBox( e.detail )
 
-document.addEventListener 'initSider', (e) ->  	
-	initSlider();
+document.addEventListener 'initSider', (e) ->
+	initSlider(e.detail.sliderData);
 
-initSlider = ->
-	$('.sliderInput').slider( { tooltip: 'always' } )
+document.addEventListener 'initCheckbox', (e) ->
+	initCheckbox();
+
+initCheckbox = ( data ) ->
+	$('input[type="radio"]').on 'change', ->
+		uncheckAllRadioButtons();
+		$(this)[0].checked = true;
+  	
+uncheckAllRadioButtons = ->
+	buttons = $('input[type="radio"]')
+	for button in buttons
+  	button.checked = false
+
+initSlider = ( data ) ->
+	$("##{data.id}.sliderInput").slider( { tooltip: 'always', 'min': 0, 'max': data.maxValue, 'steps': parseInt(data.sliderSteps), value: data.value  } )
 
 initMultipleSelectBox = (data) ->
-	$(".select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt(data['maxSelections']), 'closeOnSelect': false  });
+	$("##{data.id}.select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt( data.maxSelections )  });
 
 
 initDateTimePicker = ( type ) ->
@@ -24,5 +37,6 @@ initDateTimePicker = ( type ) ->
 						};
 	if type == 'time'
 		options['format'] = 'LT'
-		options['defaultDate'] =  moment().add('days', 2)
-	$('.dateTimePicker').datetimepicker( options );		
+		options['defaultDate'] =  moment().add('days', 10)
+	$('.dateTimePicker').datetimepicker( options );
+

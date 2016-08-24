@@ -1,0 +1,36 @@
+<div class="editScheduling">
+	
+		<span>Every:</span>
+		<%= render "widgets/core_inputs/multiple_select", 
+			locals: { 
+								id: "dayOfWeek", 
+								class: "dayOfWeek",
+								selectOptions: Date::DAYNAMES.map{|day| [day,day] },
+								maxSelections: 7,
+								# selectedValues: locals[:value], 
+								# defaultSelectedValue: ,
+								placeholder: :select_day_of_week
+							}
+		%>
+		<span>At:</span>
+		<%=render 'widgets/core_inputs/date_time_picker', locals: {id: "recurringEvent", type: 'time' } %>
+	</br>
+	<%=render 'widgets/multiple_state/scheduling_box/select_activity_leader', locals: locals%>
+	</br>
+
+	<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	schedulingType: "recurringEvent",
+																	button_text: "add" )
+	%>
+
+		<%=render "widgets/multiple_state/button", 
+						locals: locals.merge( 
+																	class: "btn btn-danger smallBtn", 
+																	state: "cancel", 
+																	schedulingType: "recurringEvent",
+																	button_text: "cancel" )
+	%>
+</div>

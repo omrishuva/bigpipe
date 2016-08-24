@@ -77,7 +77,10 @@ currentUserId = ->
 postSignUp = ->
   if localStorage.getItem("createNewActivty") == "true"
     localStorage.removeItem("createNewActivty")
-    window.location.href = "/new_activity/#{currentUserId()}"
+    $.ajax
+        type: 'POST'
+        url: "/new_activity"
+    # window.location.href = "/new_activity"
   else
     loadListeners();
 
@@ -89,7 +92,10 @@ createNewActivty = ->
       openSignupModal();
     else
       showLoader();
-      window.location.href = "/new_activity/#{userId}"
+      $.ajax
+        type: 'POST'
+        url: "/new_activity"
+      # window.location.href = "/new_activity"
 
 openSignupModal = ->
   $('.modal#signupModal').modal('toggle') 

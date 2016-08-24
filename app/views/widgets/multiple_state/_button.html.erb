@@ -1,26 +1,14 @@
+<%id = generate_button_id %>
 <a 
 	href="javascript:void(0)"
 	onclick='return false;'
 	class="widgetControl <%= locals[:class] %>"
-	id="<%=locals[:objectId]%>"
+	id="<%=id%>"
 	aria-hidden="true"
-	data-widget-name="<%=locals[:widgetName]%>"
-	data-element-name="<%=locals[:elementName]%>"
-	data-object-name="<%=locals[:objectName]%>"
-	data-object-id="<%="#{locals[:objectId]}"%>"
-	data-key="<%="#{locals[:key]}"%>"
-	data-data-type="<%="#{locals[:dataType]}"%>"
-	data-select-options="<%="#{locals[:selectOptions]}"%>"
-	data-placeholder="<%="#{locals[:placeholder]}"%>"
-	data-placeholder-class="<%="#{locals[:placeholderClass]}"%>"
-	data-editable-overlay-text="<%="#{locals[:editableOverlayText]}"%>"
-	data-text-class="<%="#{locals[:textClass]}"%>"
-	data-button-class="<%="#{locals[:buttonClass]}"%>"
-	data-state="<%="#{locals[:state]}"%>"
-	data-max-selections="<%="#{locals[:maxSelections]}"%>"
 >
 <span class="buttonText" style="font-family:'Raleway', sans-serif">
 	<%=I18n.t locals[:button_text]%>	
 </span>
 </a>
 
+<script> document.publishEvent('loadButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );</script>

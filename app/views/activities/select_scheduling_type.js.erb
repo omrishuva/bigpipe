@@ -1,5 +1,0 @@
-<% if params[:scheduling_type] == "addDates" %>
-	$(".selectSchedulingType").replaceWith("<%= escape_javascript( render 'specific_date_scheduling',locals: {activity: @activity})%>");
-<%elsif  params[:scheduling_type] == "recuringEvent"%>
-	$(".selectSchedulingType").replaceWith("<%= escape_javascript( render 'recuring_event_scheduling',locals: {activity: @activity})%>");
-<%end%>

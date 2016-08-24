@@ -4,7 +4,9 @@ controllers:
     add_account_user: seller_account_owner
   accounts:
     upgrade_to_business_account: seller_account_owner
-
+  activities:
+    # new_activity: seller_account_owner
+    activity_setup: seller_account_owner
 views:
   user_navtabs:
     permissions:

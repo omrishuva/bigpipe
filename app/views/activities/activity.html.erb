@@ -1,5 +1,5 @@
+
 <div class="activityContainer">
-	
 	<%= render 'activity_preview_and_publish'%>
 
 	<div class="gridItem activityHeader">
@@ -22,17 +22,17 @@
 	</div>
 
 	<div class="dropdown-divider"></div>
-
+	</br>
 	<div class="col-lg-12 gridItem scheduling">
 		<%=render 'activity_scheduling'%>
 	</div>
-	
-	<div class="col-lg-12 gridItem pricingAndBooking " >
+	</br>
+	<div class="dropdown-divider"></div>
+	</br>
+	<div class="col-lg-12 gridItem pricingAndBooking">
 		<%=render 'activity_pricing_and_booking'%>
 	</div>
-
 	<%=render 'activity_delete'%>
-	
 </div>
 
 <%if @activity.state == "published"%>

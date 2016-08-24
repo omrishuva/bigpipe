@@ -9,4 +9,8 @@ class AccountsController < ApplicationController
     end
 	end
 
+	def account_setup
+		@account = current_user.current_account
+	end
+
 end

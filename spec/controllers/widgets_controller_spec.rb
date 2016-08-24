@@ -6,7 +6,7 @@ RSpec.describe WidgetsController do
     User.destroy_all
   end
 
-  describe "text_widget" do
+  describe "base_widget" do
     
     before :each do
       User.destroy_all
@@ -22,7 +22,9 @@ RSpec.describe WidgetsController do
                       placeholderClass: "textArea",
                       textClass: "ltrimageOverlayText activityTitle",
                       buttonClass: "imageOveralyButton",
-                      state: "edit"
+                      state: "edit",
+                      maxValue: nil,
+                      sliderSteps: nil
                     }
     end
 
