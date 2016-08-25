@@ -13,7 +13,6 @@ account_types_wizard:
   tour_guide:
     placeholder: "tour_guide"
     class: "fa fa-suitcase"
-
 # personal_info_setup_wizard:
 
 # business_account_info_setup_wizard:

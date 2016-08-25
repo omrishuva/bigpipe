@@ -1,5 +1,5 @@
 </br>
-<h1><%= I18n.t locals[:placeholder] %></h1>
+<h1 ><%= I18n.t locals[:placeholder] %></h1>
 <%wizard_data = prepare_wizard_data( locals[:wizardType] )%>
 <%wizard_data.each do |value,options| %>
 	<%=render "widgets/multiple_state/button", 

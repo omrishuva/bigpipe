@@ -68,7 +68,7 @@ class Account < Entity
 	end
 	
 	def public_info
-		@public_info ||= { text: freelancer.about_text, image: freelancer.cover_image_cloudinary_id } if is_freelancer?
+		@public_info ||= { text: freelancer.about_text, image: freelancer.cover_image_cloudinary_id } #if is_freelancer?
 		@public_info ||= { text: self.about, image: self.logo } if is_business?
 		@public_info
 	end

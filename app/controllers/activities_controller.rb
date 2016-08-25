@@ -13,9 +13,7 @@ class ActivitiesController < ApplicationController
 				render js: "window.location = '/activity/setup/#{@activity.id}' "
 		else
 				account = Account.create_freelancer_account( current_user )
-				@activity = Activity.new( account_id: account.id, title: "Untitled Activity", state: "draft" )
-				@activity.save
-				render js: "window.location = '/account/setup/#{account.id}' "
+				render js: "window.location = '/account/setup/#{account.id}'"
 		end
 	end
 
