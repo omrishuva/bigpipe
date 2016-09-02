@@ -1,0 +1,21 @@
+
+<div class="row">
+	<%=render "widgets/button", 
+								locals: locals[:wizardConf].merge( 
+																			class: "btn btnBrand1 halfWidth wizardButton fa fa-user", 
+																			state: "save",
+																			data: "freelancer",
+																			button_text: "freelancer"
+																		)
+	%>
+	</br>
+	<%=render "widgets/button", 
+								locals: locals[:wizardConf].merge( 
+																			class: "btn btnBrand1 halfWidth wizardButton fa fa-users", 
+																			state: "save",
+																			data: "business",
+																			button_text: "business" 
+																		)
+	%>
+	</br></br></br>
+</div>

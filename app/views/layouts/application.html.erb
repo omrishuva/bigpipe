@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
     <meta name='B-verify' content='895a952d419d64d08ca175180cec0a5e7c4c0795' />
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script src="//cdn.ckeditor.com/4.5.9/full-all/ckeditor.js"></script>
     <%unless I18n.locale == :he %>
       <%= stylesheet_link_tag 'application', media: "all" %>
     <%else%>
@@ -17,7 +18,6 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="//cdn.ckeditor.com/4.5.9/basic/ckeditor.js"></script>
   </head>
 
   <body>

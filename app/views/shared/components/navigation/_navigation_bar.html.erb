@@ -11,7 +11,7 @@
 		  <%=render "shared/components/navigation/ltr_logo"%>
 		  <%=render "shared/components/navigation/ltr_info"%>
 		  <%=render "shared/components/navigation/ltr_user_login" unless params["action"] == "service_provider_onboarding"%>
-		  <%= render "shared/components/navigation/ltr_create_new_activity"%>		
+		  <%= render "shared/buttons/request_or_create_trip_plan"%>		
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="navigationBar" id="navbarContainer" >
 		<div class="navItems"> 
-			 <%= render "shared/components/navigation/rtl_create_new_activity"%>		
+			<%= render "shared/buttons/request_or_create_trip_plan"%>	
 		  <%=render "shared/components/navigation/rtl_user_login" unless params["action"] == "service_provider_onboarding"%>
 
 		  <%=render "shared/components/navigation/rtl_info"%>

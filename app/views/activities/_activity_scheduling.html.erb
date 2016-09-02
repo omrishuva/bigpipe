@@ -1,10 +1,10 @@
 <p class=activitySubtitle >Schedule</p>
 
-<%= render 'widgets/multiple_state/widget', 
+<%= render 'widgets/widget', 
 	locals: {  
 						widgetName: "slider_box",
 						elementName: "slider_box",
-						objectName: "activities", 
+						objectName: "Activity", 
 						objectId: @activity.id,
 						key: "duration",
 						value: @activity.duration,
@@ -18,11 +18,11 @@
 					}
 %>
 </br>
-<%= render 'widgets/multiple_state/widget', 
+<%= render 'widgets/widget', 
 	locals: {  
 						widgetName: "scheduling_box",
 						elementName: "schedulingBox",
-						objectName: "activities", 
+						objectName: "Activity", 
 						objectId: @activity.id,
 						key: "scheduling_configuration",
 						value: @activity.scheduling_configuration,

@@ -1,10 +1,10 @@
 <div class="dropdown-divider"></div>
 <p class=activitySubtitle >Location</p>
-<%= render 'widgets/multiple_state/widget', 
+<%= render 'widgets/widget', 
 	  locals: {  
 	            widgetName: "location",
 	            elementName: "location",
-	            objectName: "activities",
+	            objectName: "Activity",
 	            objectId: @activity.id,
 	            key: "place_id",
 	            value: @activity.place_id,

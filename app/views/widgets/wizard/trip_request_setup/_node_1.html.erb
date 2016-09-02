@@ -1,0 +1,8 @@
+<div style="float:left !important" class="textAreaBoxTextLocation"><%= $site_text["#{I18n.locale}_trip_request"].html_safe %></div>
+<%=render "widgets/button", 
+                    locals: locals.merge( 
+                                          class: "btn btn-success halfWidth wizardButton", 
+                                          state: "continue",
+                                          button_text: "build_my_trip" 
+                                        )
+%>

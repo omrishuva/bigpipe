@@ -1,0 +1,5 @@
+<%if locals[:wizardMode].present? %>
+	<%= render 'widgets/wizard/wizard_button_set', locals: locals %>
+<%else%>
+	<%= render "widgets/multiple_state/save_cancel_buttons", locals: locals %>
+<%end%>

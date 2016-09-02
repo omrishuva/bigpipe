@@ -1,13 +1,18 @@
-<div class="activityContainer">
-	<div class="col-lg-12 gridItem relativeCenter">
-		<%= render 'widgets/multiple_state/widget', 
-			locals: {  
-								widgetName: "account_setup_node_1",
-								elementName: "accountSetupNode1",
-								objectId: @account.id,
-								key: "account_setup_node_1",
-								isWidgetOwner: true
-							}
-		%>
-	</div>
-</div>
+<script> 
+document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloudinary.com/kommunal/image/upload/v1472689304/leaves-1363766_1920_o88kyu.jpg" })
+</script>
+
+<%= render 'widgets/widget', 
+	locals: {  
+						wizardConf:{
+							widgetName: "account_setup",
+							nodeNumber: 1,
+							elementName: "accountSetupWizard",
+							objectName: "Account",
+							objectId: @account.id,
+							key: "account_type",
+							isWidgetOwner: true,
+							placeholder: "i_am_a"
+						}
+					}
+%>

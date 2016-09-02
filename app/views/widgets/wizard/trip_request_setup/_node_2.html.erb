@@ -1,0 +1,14 @@
+<%= render 'widgets/widget', 
+	  locals: {  
+	            widgetName: "location",
+	            elementName: "location",
+	            objectName: "Activity",
+	            objectId: @object.id,
+	            key: "place_id",
+	            value: @object.place_id,
+	            state: "edit",
+	            isWidgetOwner: true,
+	            placeholder: "enter_location",
+	            wizardMode: locals[:wizardConf].merge( mandatory: true )            
+	          }
+%>

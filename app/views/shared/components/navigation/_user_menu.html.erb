@@ -18,11 +18,9 @@
 			  <p class="userMenuSection" >Admin</p>
 			  <i class="fa fa-lock userMenuSection" aria-hidden="true"></i>
 			 </div>
+			 	<a class="dropdown-item" href=<%="/admins/site_text/index" %>> Site Text </a>
 				 <a class="dropdown-item" href=<%="/users/admin" %>> Admins </a>
 				 <a class="dropdown-item" href=<%="/users/consumer" %>> Consumers </a>
-				 <%User.services.each do |k,v|%>
-				 		<a class="dropdown-item" href=<%="/users/service_provider?spt=#{k}" %>> <%=k.humanize.pluralize%> </a>
-			 	 <%end%>
 			 	<div class="dropdown-divider"></div>
 		<%end%>	 
 	  	<a class="dropdown-item" href="/logout">

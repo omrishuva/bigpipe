@@ -1,19 +1,18 @@
-# $(document).ready ->
-# 	loadWidgets();
-
-# document.addEventListener 'loadWidgetListeners',(e) ->
-#   loadWidgets();
-
 document.addEventListener 'loadButton',(e) ->
 	widgetData = e.detail.widgetData;
 	addDataAttributesToButton( widgetData );
 
 addDataAttributesToButton = ( widgetData ) ->
 	$("##{widgetData.id}").data( widgetData: widgetData );
-	loadWidget( widgetData.widgetName, widgetData.id )
+	loadWidget( widgetData )
 
-loadWidget = ( widgetType, id ) ->
- 	switch widgetType
+loadWidget = ( widgetData ) ->
+ 	if widgetData.wizardConf
+ 		widgetName = widgetData.wizardConf.widgetName
+ 	else
+ 		widgetName = widgetData.widgetName
+ 	id = widgetData.id
+ 	switch widgetName
  		when "text_area_box" 
  			baseWidgetControl( id );
  		when	"text_input_box"
@@ -26,39 +25,18 @@ loadWidget = ( widgetType, id ) ->
 	 		baseWidgetControl( id );
 	 	when "checkbox_box"
 	 		baseWidgetControl( id );
+	 	when "account_setup"
+	 		baseWidgetControl( id );
+	 	when "activity_setup"
+	 		baseWidgetControl( id );
+	 	when "trip_request_setup"
+	 		baseWidgetControl( id );
  		when "image_box"
 	 		imageWidgetControl( id );
 	 	when "location"
 	 		locationWidgetControl( id );
 	 	when "scheduling_box"
 	 		schedulingWidgetControl( id );
-
-# loadWidgets = ->
-# 	widgetControls = $('.widgetControl')
-# 	if widgetControls.length > 0
-# 		for widgetControl in widgetControls
-# 		 	selectorKey = buildWidgetSelectorKey( widgetControl.dataset );
-# 		 	switch widgetControl.dataset.widgetName
-# 		 		when "text_area_box" 
-# 		 			baseWidgetControl( selectorKey );
-# 		 		when	"text_input_box"
-# 		 			baseWidgetControl( selectorKey );
-# 		 		when	"multiple_select_box"
-# 		 			baseWidgetControl( selectorKey );
-# 		 		when "slider_box"
-# 			 		baseWidgetControl( selectorKey );
-# 		 		when 'wizard_buttons'
-# 			 		baseWidgetControl( selectorKey );
-# 			 	when "checkbox_box"
-# 			 		baseWidgetControl( selectorKey );
-# 		 		when "image_box"
-# 			 		imageWidgetControl( selectorKey );
-# 			 	when "location"
-# 			 		locationWidgetControl( selectorKey );
-# 			 	when "scheduling_box"
-# 			 		schedulingWidgetControl( selectorKey );
-
-			 	
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
@@ -76,7 +54,10 @@ baseWidgetControl =( id ) ->
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
-	  		baseWidgetControlCancel( widget ) 
+	  		baseWidgetControlCancel( widget )
+	  		widget.value = ""
+	  	when 'edit'
+	  		widget.value = ""
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget = baseWidgetControlSave( widget )
@@ -84,9 +65,7 @@ baseWidgetControl =( id ) ->
 	    type: requestMethod
 	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 	    data: widget
-   		success: (data) ->
-      	# baseWidgetControl( selectorKey );
-
+   		
 baseWidgetControlSave = ( widget ) ->
 	switch widget.widgetName
 		when "text_area_box"
@@ -121,19 +100,14 @@ imageWidgetControl = ( id ) ->
     formData.append( 'image', file, file.name );
     formData.append( 'widget', JSON.stringify(widget) );
     initUploadImageLoader(widget);
-    # localStorage.setItem(selectorKey, widget.nestedWidgetSelectorKey)
     $.ajax
         type: 'POST'
         url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
         data: formData
         processData: false
         contentType: false
-        success: (data) ->
-        	# if localStorage["#{selectorKey}"]
-	        # 	textWidgetControl( localStorage["#{selectorKey}"] )
-	        # 	localStorage.setItem(selectorKey, null)
-          # imageWidgetControl( selectorKey );
-
+        
+        	
 initUploadImageLoader = ( widget ) ->
 	$('.fa-camera').addClass('fa-spin');
 	$("##{widget.id}updateCoverImageText").text("Updating Image")
@@ -148,7 +122,7 @@ locationWidgetControl = ( id ) ->
 	  		widget['loadScriptAfterServerResponse'] = false
 	  	when 'cancel'
 	  		widget['loadScriptAfterServerResponse'] = false
-	  		locationWidgetControl( widget ) 
+	  		# locationWidgetControl( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget['data'] = getPlaceid(); 	
@@ -161,8 +135,6 @@ locationWidgetControl = ( id ) ->
 		    type: requestMethod
 		    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 		    data: widget
-	   		success: (data) ->
-	      	locationWidgetControl( selectorKey );
 
 getPlaceid = ->
 	currentPlace.place_id if currentPlace
@@ -175,8 +147,6 @@ schedulingWidgetControl = ( id ) ->
 	    type: "POST"
 	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 	    data: widget
-   		success: (data) ->
-      	# schedulingWidgetControl( selectorKey );
 
 schedulingWidgetSave = ( data ) ->
 	switch data.schedulingType

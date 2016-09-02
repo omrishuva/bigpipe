@@ -1,6 +1,6 @@
 <div class="textAreaBox">
 	<div class="textAreaBoxTextLocation mediumText"><%= locals[:value].html_safe %></div>
-		<%=render "widgets/multiple_state/button", 
+		<%=render "widgets/button", 
 					locals: locals.merge( 
 																	class: "TextAreaBoxEditButton fa fa-pencil #{current_direction.to_s}", 
 																	state: "edit", 

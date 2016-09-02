@@ -6,7 +6,7 @@ class User < Entity
 	attr_accessor :id, :pipedrive_id, :fb_id, :name, :email, :phone, :locale, :gender, :birthdate, 
   :media_source, :campaign, :phone_verification_code, :password_recovery_code, :onboarding_code, :phone_verified, 
   :profile_picture, :cover_image_cloudinary_id, :about_text, :auth_provider, :invited_by, 
-  :current_account_id, :super_admin,:created_at, :updated_at
+  :current_account_id, :super_admin,:created_at, :updated_at, :country
 	
   attr_reader :password_salt, :password_hash
 

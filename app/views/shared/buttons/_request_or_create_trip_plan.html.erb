@@ -1,0 +1,12 @@
+<div class="<%="#{current_direction}RequestCreateTripPlan hidden-sm-down"%>">
+	<a class="btnBrand1" href="#" data-user-id="<%=current_user.try(:id)%>" id=requestTripPlan %>
+		<%=I18n.t :request %>
+	</a>
+	<span class="fivePxMargin"><%=I18n.t :or %></span>
+	<a class="btnBrand1" href="#" data-user-id="<%=current_user.try(:id)%>" id=createTripPlan %>
+		<%=I18n.t :create %>
+	</a>
+	<span class="fivePxMargin"><%=I18n.t :the_perfect_trip %></span>
+</div>
+
+<script>  document.publishEvent('RequestCreateTrip'); </script>

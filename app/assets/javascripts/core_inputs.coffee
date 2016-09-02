@@ -10,6 +10,13 @@ document.addEventListener 'initSider', (e) ->
 document.addEventListener 'initCheckbox', (e) ->
 	initCheckbox();
 
+document.addEventListener 'initCKeditor', (e) ->
+	initCKeditor( e.detail )
+
+initCKeditor = ( data ) ->
+	data.options.extraPlugins = 'confighelper'
+	CKEDITOR.replace( data.id, data.options );
+
 initCheckbox = ( data ) ->
 	$('input[type="radio"]').on 'change', ->
 		uncheckAllRadioButtons();

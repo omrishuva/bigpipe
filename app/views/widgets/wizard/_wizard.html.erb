@@ -1,0 +1,4 @@
+<div class="textShadowContainer ">
+	<%= render "widgets/wizard/wizard_header", locals: locals%>	
+	<%= render "widgets/wizard/#{locals[:wizardConf][:widgetName]}/node_#{locals[:wizardConf][:nodeNumber]}", locals: locals %>
+</div>

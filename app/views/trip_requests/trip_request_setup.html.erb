@@ -1,0 +1,18 @@
+<script> 
+document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloudinary.com/kommunal/image/upload/v1472681768/lavender-flowers-1595487_1920_ezoljt.jpg" })
+</script>
+
+<%= render 'widgets/widget', 
+	locals: {  
+						wizardConf:{
+							widgetName: "trip_request_setup",
+							elementName: "tripRequestSetup",
+							nodeNumber: 1,
+							objectName: "TripRequest",
+							objectId: @trip_request.id,
+							key: "trip_request_setup",
+							isWidgetOwner: true,
+							placeholder: "build_your_perfect_trip"
+						}
+					}
+%>

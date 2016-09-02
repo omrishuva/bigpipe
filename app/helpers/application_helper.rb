@@ -58,6 +58,17 @@ module ApplicationHelper
       :edit
     end
   end
+  
+  def get_widget_type_from_name( locals )
+    multiple_state = $widget_names[:multiple_state]
+    wizards = $widget_names[:wizard]
+    return :multiple_state if multiple_state.include?( widget_name( locals ) )
+    return :wizard if wizards.include?( widget_name( locals ) )
+  end
+  
+  def widget_name( locals )
+    locals[:wizardName] || locals[:widgetName]
+  end
 
   def is_widget_owner( locals )
     return false if locals[:isWidgetOwner] == false
@@ -69,19 +80,17 @@ module ApplicationHelper
   end
   
   def widget_replace_selector( widget_data )
+    widget_data = widget_data[:wizardConf] if widget_data[:wizardConf].present?
     "##{widget_data[:objectId]}_#{widget_data[:key]}.#{widget_data[:elementName]}"
   end
-
+  
   def widget_id(locals)
+    locals = locals[:wizardConf] if locals[:wizardConf].present?
     "#{locals[:objectId]}_#{locals[:key]}"
   end
   
   def input_id( locals )
     "input_#{widget_id(locals)}"
-  end
-  
-  def build_nested_widget_selector_key( object_id, element_name, key )
-    "##{object_id}.widgetControl[data-element-name='#{element_name}'][data-key='#{key}']"
   end
   
   def team_table_data

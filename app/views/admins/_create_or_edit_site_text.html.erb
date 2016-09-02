@@ -1,0 +1,31 @@
+<div class="col-lg-12">
+  <%= render 'widgets/widget', 
+          locals: {  
+                    widgetName: "text_input_box",
+                    elementName: "textInputBox",
+                    objectName: "SiteText",
+                    objectId: @site_text.id, 
+                    key: "name",
+                    value: @site_text.name, 
+                    state: "edit",
+                    isWidgetOwner: true,
+                    textClass: "halfWidth",
+                    placeholder: "site_text_name",
+                  }
+      %>
+
+   <%= render 'widgets/widget', 
+  		locals: { 
+                widgetName: "text_area_box",
+                elementName: "textAreaBox",
+                objectName: "SiteText", 
+                objectId: @site_text.id, 
+                isWidgetOwner: true,
+                state: "edit",
+                key: "text",
+                value: @site_text.text,
+                dataType: "compressedText",
+                placeholder: "add_site_text",
+              }
+  	%>
+</div>

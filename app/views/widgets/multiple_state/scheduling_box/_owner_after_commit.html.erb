@@ -1,5 +1,5 @@
 <span>Add:</span>
-<%=render "widgets/multiple_state/button", 
+<%=render "widgets/button", 
 						locals: locals.merge( 
 																	class: "selectSchedulingTypeButton", 
 																	state: "edit", 
@@ -7,7 +7,7 @@
 																	button_text: "specific_dates" )
 	%>
 	<span><%=I18n.t :or%></span>
-	<%=render "widgets/multiple_state/button", 
+	<%=render "widgets/button", 
 						locals: locals.merge( 
 																	class: "selectSchedulingTypeButton", 
 																	state: "edit",

@@ -7,17 +7,6 @@ type="text"
 placeholder="<%=I18n.t locals[:placeholder]%>"
 
 />
-<div class="saveCancelBox">
-	<%=render "widgets/multiple_state/button", 
-						locals: locals.merge( 
-																	class: "#{locals[:buttonClass]} #{current_direction.to_s} imageOveralySave btn btn-success", 
-																	state: "save", 
-																	button_text: "save" )
-	%>
-	<%=render "widgets/multiple_state/button", 
-						locals: locals.merge( 
-																	class: "#{locals[:buttonClass]}  #{current_direction.to_s} imageOveralyCancel btn btn-danger", 
-																	state: "cancel", 
-																	button_text: "cancel" )
-	%>
+<div class="<%="#{current_direction.to_s}"%>" >
+	<%= render 'widgets/edit_button_set' ,locals: locals %>
 </div>

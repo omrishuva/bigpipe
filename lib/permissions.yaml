@@ -7,6 +7,8 @@ controllers:
   activities:
     # new_activity: seller_account_owner
     activity_setup: seller_account_owner
+  trip_request:
+    trip_request_setup: consumer
 views:
   user_navtabs:
     permissions:

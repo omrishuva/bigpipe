@@ -39,10 +39,18 @@ Rails.application.routes.draw do
 	get '/activity/setup/:activityId'																					 => 'activities#activity_setup'
 	get '/activities/:activityId' 						                             	   => 'activities#activity'
 	
+	#trip_request
+	post '/new_trip_request'											 										 	   		 => 'trip_requests#new_trip_request'
+	get '/trip_request/setup/:tripRequestId'                                   => 'trip_requests#trip_request_setup'
+
 	#multiple state widget
-	get   '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#multiple_state_widget_control'
-	post  '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#multiple_state_widget_control'
-	
+	get   '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#widget_control'
+	post  '/widgets/widget_control/:widgetName/:objectName/:key'               => 'widgets#widget_control'
+	#admins
+	get '/admins/site_text/create' 																						 => 'admins#create_site_text'
+	get '/admins/site_text/index' 																						 => 'admins#site_text_index'
+	get '/admins/site_text/edit/:id' 																				   => 'admins#edit_site_text'
+
 	#health checks
 	get '_ah/health'      																						=> 'application_health#health'
 	get '_ah/start'       														 								=> 'application_health#start'

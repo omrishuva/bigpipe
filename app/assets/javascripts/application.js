@@ -32,9 +32,4 @@
 //= require bootstrap-table
 //= require bootstrap-table-he-IL
 //= require bootstrap-slider
-//= require core_inputs
-//= require map_widget
-//= require profile
-//= require multiple_state_widgets
-//= require app
-
+//= require_tree .

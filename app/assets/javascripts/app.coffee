@@ -15,15 +15,25 @@ loadListeners = ( exclude ) ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
-  createNewActivty();
+  # createNewActivty();
   logOut();
 
+document.addEventListener 'ajaxRequest',(e) ->
+  ajaxRequest( e.detail.requestMethod, e.detail.url );
+
+document.addEventListener 'setBodyBackgroundImage',(e) ->
+  setBodyBackgroundImage( e.detail.imageUrl );
+document.addEventListener 'RequestCreateTrip',(e) ->
+  RequestCreateTrip();
 
 showLoader = ->
   $('.signinLoader').show()
 
 hideLoader = ->
    $('.signinLoader').hide()
+
+setBodyBackgroundImage = ( imageUrl ) ->
+  $("body").css("background", "url(#{imageUrl})" );
 
 facebookSignIn = ->
   $('#fbSignIn, #fbTrainerSignIn').on 'click', ->
@@ -95,7 +105,23 @@ createNewActivty = ->
       $.ajax
         type: 'POST'
         url: "/new_activity"
-      # window.location.href = "/new_activity"
+
+RequestCreateTrip = ->
+  $('#createTripPlan, #requestTripPlan').click (e) ->
+    userId = e.target.dataset.userId
+    if userId == undefined || userId == ""
+      openSignupModal();
+    else
+      url = { "createTripPlan": '/new_trip', 'requestTripPlan': '/new_trip_request'  }
+      showLoader();
+      $.ajax
+        type: 'POST'
+        url: url[e.target.id]
+
+ajaxRequest = ( requestMethod, url ) ->
+  $.ajax
+    type: requestMethod
+    url: url
 
 openSignupModal = ->
   $('.modal#signupModal').modal('toggle') 

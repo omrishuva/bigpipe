@@ -56,8 +56,8 @@ a{ color: #056cf9; }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
-                              .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                              .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 800px)   { 
@@ -67,8 +67,8 @@ a{ color: #056cf9; }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
                               .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
-                              .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                              .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 1000px) { 
@@ -78,8 +78,8 @@ a{ color: #056cf9; }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                            .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                            .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
 
                            }
 
@@ -91,21 +91,23 @@ a{ color: #056cf9; }
                             .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                            .ltrCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                            .rtlCreateNewActivity{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 .hidden{ visibility: hidden; }
 .inlineBlock{  display:inline-block; margin-right: 5px; }
 .clearfix { overflow: auto;}
 .relativeCenter{
-  -webkit-box-align:center;
-  -webkit-box-pack:center;
-  display:-webkit-box;
+  text-align: center;
+  // width: 50%; 
+  margin: 0 auto;
+  // -webkit-box-align:center;
+  // -webkit-box-pack:center;
+  // display:-webkit-box;
 }
-.activityContainer
-{
-  
+
+.textShadowContainer{ 
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -113,6 +115,7 @@ a{ color: #056cf9; }
   background-color: #F9F9F9;
 
 }
+.activityContainer{ @extend .textShadowContainer;  }
 
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
@@ -191,12 +194,13 @@ a{ color: #056cf9; }
 	overflow:hidden;
   position: fixed;
   z-index: 2000;
-  background-color: #fff;
+  background-color: #F9F9F9;
 }
 .proColor{ color: #ff7f66; }
 .block{ display: inline-block; }
 .btnBrand{  padding: 2px 4px; border-radius: 3px; font-weight: bold;  }
 .fullWidth{ width: 100%; }
+.halfWidth{ width: 50%; }
 .btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  }
 .btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #056cf9; ;  }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }
@@ -211,7 +215,7 @@ a{ color: #056cf9; }
 .bthModalForm{ width: 100%; }
 .wizardButton{ margin-top: 20px !important; }
 .mobileIcon{ color: #5D33F4; height: 100%; width:100%;  padding:10%; }
-
+.fivePxMargin{ margin: 5px }
 .fileUploadButton
 {
     background: #5D33F4 center top no-repeat;
@@ -290,8 +294,11 @@ a{ color: #056cf9; }
 .imageOverlayTextWithLink{ @extend .imageOverlayText; color: #056cf9;  }
 
 .imageOveralyButton{ position: absolute; top: 4.5em; box-shadow: 0px 0px 7px 8px #fff; @extend .smallBtn; }
-.imageOveralySave{ left: 5%; }
-.imageOveralyCancel{ left: 20%; }
+.ltrimageOveralySave{ left: 5%; }
+.ltrimageOveralyCancel{ left: 20%; }
+.rtlimageOveralySave{ right: 5%; }
+.rtlimageOveralyCancel{ right: 20%; }
+
 .widgetTextInput{ opacity: 1 !important; }
 .activityTitle{ font-size: 130%; }
 .activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px; text-decoration: underline; }

@@ -1,13 +1,18 @@
-<div class="activityContainer">
-	<div class="col-lg-12 gridItem relativeCenter">
-		<%= render 'widgets/multiple_state/widget', 
-			locals: {  
-								widgetName: "activity_setup_node_1",
-								elementName: "activitySetupNode1",
-								objectId: @activity.id,
-								key: "activity_setup_node_1",
-								isWidgetOwner: true
-							}
-		%>
-	</div>
-</div>
+<script> 
+document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloudinary.com/kommunal/image/upload/v1472681768/lavender-flowers-1595487_1920_ezoljt.jpg" })
+</script>
+
+<%= render 'widgets/widget', 
+	locals: {  
+						wizardConf:{
+							widgetName: "activity_setup",
+							elementName: "activitySetupNode1",
+							nodeNumber: 1,
+							objectName: "Activity",
+							objectId: @activity.id,
+							key: "activity_type",
+							isWidgetOwner: true,
+							placeholder: "select_activity_type"
+						}
+					}
+%>

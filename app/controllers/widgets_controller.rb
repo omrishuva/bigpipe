@@ -1,24 +1,32 @@
 class WidgetsController < ApplicationController
 
-	skip_before_action :verify_authenticity_token, only: [ :multiple_state_widget_control ]
+	skip_before_action :verify_authenticity_token, only: [ :widget_control ]
 
-	def multiple_state_widget_control
-		case params[:widgetName]
-			when "text_area_box" then base_widget
-			when "text_input_box" then base_widget
-			when "multiple_select_box" then base_widget
-			when "slider_box" then base_widget
-			when "checkbox_box" then base_widget
-			when "wizard_buttons" then base_widget
-			when "image_box" then image_widget
-			when "location" then location_widget
-			when "scheduling_box" then scheduling_widget
+	def widget_control
+		if params[:wizardMode].present?
+			wizard_widget
+		else
+			case widget_name
+				when "text_area_box" then base_widget
+				when "text_input_box" then base_widget
+				when "multiple_select_box" then base_widget
+				when "slider_box" then base_widget
+				when "checkbox_box" then base_widget
+				when "image_box" then image_widget
+				when "location" then location_widget
+				when "scheduling_box" then scheduling_widget
+				when "account_setup" then wizard_widget
+				when "trip_request_setup" then wizard_widget
+			end
 		end
 		
 		respond_to do |format|
       format.js { }
     end
+	end
 
+	def widget_name
+		params[:wizardConf].present? ? params[:wizardConf][:widgetName] : params[:widgetName]
 	end
 
 	#Base Widgt#####################################################
@@ -27,10 +35,10 @@ class WidgetsController < ApplicationController
 		@object = get_object( params[:objectName], params[:objectId] )
 		save_value if params[:state] == "save"
 		@widget_data = prepare_base_widget_data
-		# @next_widget_data = prepare_next_widget_data if params[:followed_action] && params[:followed_action][:render_wizard]
 	end
 
 	def save_value
+		key = params[:key]
 		if params[:dataType] == "StringArray"
 			value = params[:data].split(",")
 		elsif  params[:dataType] == "Integer"
@@ -39,17 +47,21 @@ class WidgetsController < ApplicationController
 			value = params[:data].to_f
 		elsif params[:dataType] == "Array"
 			value = params[:data]
+		elsif params[:dataType] == "compressedText"
+			compressed_text = Zlib::Deflate.deflate( params[:data] )
+			value = Base64.encode64(compressed_text)
+			key = :compressed_text
 		else
 			value = params[:data].to_s.strip
 		end
-		@object.update( params[:key] => value )
+		@object.update( key => value )
 	end
 
 	def prepare_base_widget_data
 		{
 			widgetName: params[:widgetName],
 			elementName: params[:elementName],
-			objectName: @object.class.name.downcase.pluralize, 
+			objectName: @object.class.name, 
 			objectId: @object.id,
 			key: params[:key],
 			value: @object.send( params[:key] ),
@@ -65,7 +77,6 @@ class WidgetsController < ApplicationController
 			maxSelections: params[:maxSelections],
 			maxValue: params[:maxValue],
 			sliderSteps: params[:sliderSteps],
-			parentNode: ( params[:parentNode].merge( value: params[:value] ) rescue nil )
 		}.delete_if { |k, v| !v.present? }
 	end
 	
@@ -87,7 +98,7 @@ class WidgetsController < ApplicationController
 		{
 			widgetName: image_widget_data[:widgetName],
 			elementName: image_widget_data[:elementName],
-			objectName: @object.class.name.downcase.pluralize, 
+			objectName: @object.class.name, 
 			objectId: @object.id, 
 			key: image_widget_data[:key],
 			value: @object.send( image_widget_data[:key] ),
@@ -115,7 +126,7 @@ class WidgetsController < ApplicationController
 		{
 			widgetName: params[:widgetName],
 			elementName: params[:elementName],
-			objectName: @object.class.name.downcase.pluralize, 
+			objectName: @object.class.name, 
 			objectId: @object.id, 
 			key: params[:key],
 			value: @object.send( params[:key] ),
@@ -130,14 +141,14 @@ class WidgetsController < ApplicationController
 	def scheduling_widget
 		@object = get_object( params[:objectName], params[:objectId] )
 		@object.save_scheduling_configuration( params ) if params[:state] == "save"
-		@widget_data = prepare_schedling_widget_data
+		@widget_data = prepare_scheduling_widget_data
 	end
 
-	def prepare_schedling_widget_data
+	def prepare_scheduling_widget_data
 		{
 			widgetName: params[:widgetName],
 			elementName: params[:elementName],
-			objectName: @object.class.name.downcase.pluralize, 
+			objectName: @object.class.name, 
 			objectId: @object.id,
 			key: params[:key],
 			value: @object.send( params[:key] ),
@@ -153,16 +164,54 @@ class WidgetsController < ApplicationController
 	end
 	
 	#Wizard########################################################
+	
+	def wizard_widget
+		if params[:wizardConf].present? 
+			objectName = params[:wizardConf][:objectName]
+			objectId =  params[:wizardConf][:objectId]
+		else
+			objectName = params[:wizardMode][:objectName]
+			objectId = params[:wizardMode][:objectId]
+		end
+		@object = get_object( objectName, objectId )
+		save_value if params[:state] == "save"
+		@widget_data = prepare_wizard_data
+	end
 
-	def wizard
-
+	def prepare_wizard_data
+		params.merge!( params[:wizardMode] ) if params[:wizardMode].present?
+		params.merge!( params[:wizardConf] ) if params[:wizardConf].present?
+		{ 
+			wizardConf: 
+									{
+										widgetName: params[:widgetName],
+										elementName: params[:elementName],
+										objectName: @object.class.name, 
+										objectId: @object.id,
+										key: params[:key],
+										value: get_value,
+										nodeNumber: nodeNumber,
+										dataType: params[:dataType],
+										state: params[:state],
+										selectOptions: (params[:selectOptions].map{|k,v| v } rescue nil ),
+										isWidgetOwner: is_widget_owner,
+										placeholder: $wizards["placeholders"][params[:widgetName]][nodeNumber],
+										placeholderClass: params[:placeholderClass],			
+										textClass: params[:textClass],
+										buttonClass: params[:buttonClass],
+									}.delete_if { |k, v| !v.present? }
+		}
+	end
+	
+	def nodeNumber
+		(params[:nodeNumber].to_i + 1)
 	end
 
   #Utilities#####################################################
 
   def get_object( object_name, object_id )
 		return current_user if object_name == "users" && current_user_id.to_s == params[:objectId]
-		eval( object_name.classify ).find( object_id )
+		eval( object_name ).find( object_id )
 	end
 
 	def is_widget_owner
@@ -171,5 +220,9 @@ class WidgetsController < ApplicationController
 		# @object.account.is_editor?( current_user )
 	end
 	
+	def get_value
+		@object.send( params[:key] ) rescue nil
+	end
+
 	######################################################
 end

@@ -1,23 +1,12 @@
-<textarea name=<%="editor" + input_id(locals)%>>
-	<%=locals[:value] %>
-</textarea>
-
-<div class="<%="#{current_direction.to_s}"%>" >
-	<%=render "widgets/multiple_state/button", 
-						locals: locals.merge( 
-																	class: "btn btn-success smallBtn", 
-																	state: "save", 
-																	button_text: "save" )
-	%>
-	<%=render "widgets/multiple_state/button", 
-						locals: locals.merge( 
-																	class: "btn btn-danger smallBtn", 
-																	state: "cancel", 
-																	button_text: "cancel" )
-	%>
-	
-</div>
+<textarea placeholder="<%=I18n.t locals[:placeholder]%>" name=<%="editor" + input_id(locals)%> ><%=locals[:value]%></textarea>
 
 <script>
-	CKEDITOR.replace( "<%='editor' + input_id(locals)%>",{ language: "<%=I18n.locale.to_s%>"} );
+
+	document.publishEvent( 'initCKeditor', {
+																				 'id': "<%='editor' + input_id(locals)%>",
+																				  options: {
+																					  'removePlugins': "<%=locals[:removePlugins]%>", 
+																					  language: "<%=I18n.locale.to_s%>"
+																					}
+																				} )
 </script>

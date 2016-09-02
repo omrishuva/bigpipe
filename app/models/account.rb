@@ -1,6 +1,6 @@
 class Account < Entity
 
-	attr_accessor :id, :account_type, :name, :logo, :about, :updated_at, :created_at
+	attr_accessor :id, :account_type, :default_currency, :main_sector, :name, :logo, :about, :updated_at, :created_at
 
 	def self.create_freelancer_account( user )
 		account = Account.new(  account_type: "freelancer", name: user.name )
@@ -68,7 +68,7 @@ class Account < Entity
 	end
 	
 	def public_info
-		@public_info ||= { text: freelancer.about_text, image: freelancer.cover_image_cloudinary_id } #if is_freelancer?
+		@public_info ||= { text: freelancer.about_text, image: freelancer.cover_image_cloudinary_id } if is_freelancer?
 		@public_info ||= { text: self.about, image: self.logo } if is_business?
 		@public_info
 	end
@@ -80,5 +80,13 @@ class Account < Entity
 	def is_business?
 		account_type == "business"
 	end
+	
+	def setup_completed?
+		account_type.present? && default_currency.present? && main_sector.present?
+	end
 
+	def cover_image
+    logo || "https://placehold.it/700x400"
+  end
+  
 end

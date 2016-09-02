@@ -1,3 +1,40 @@
 <div class="container" id="meSectionContainer">
-	<%= render "users/#{current_direction}_about_me", locals: locals%>
+	<%image_class = current_direction == "rtl" ? "col-lg-4 col-lg-push-8 gridItem" : "col-lg-4 gridItem" %>
+	<%text_class = current_direction == "rtl" ? "col-lg-8 col-lg-pull-4 gridItem" : "col-lg-8 gridItem" %>
+	<div class="<%=image_class%>">
+	 
+	 	<%= render 'widgets/widget', 
+      locals: { 
+                widgetName: "image_box",
+                elementName: "imageBox",
+                objectName: "User", 
+                objectId: locals[:user].id, 
+                isWidgetOwner: is_widget_owner( locals ),
+                imageWidth: 700,
+                imageHeight: 400,
+                imageCrop: "thumb",
+                imageGravity: "face",
+                imageTagClass: "img-fluid coverImage",
+                key: "cover_image_cloudinary_id",
+                value: locals[:user].cover_image,
+                overlayText: { value: locals[:user].name },
+                overlayTextlinkTo: "/profile/#{locals[:user].id}"
+              }
+  	%>
+	</div>
+
+	<div class="<%=text_class%>">
+	  <%= render 'widgets/widget', 
+  		locals: { 
+                widgetName: "text_area_box",
+                elementName: "textAreaBox",
+                objectName: "User", 
+                objectId: locals[:user].id, 
+                isWidgetOwner: is_widget_owner( locals ),
+                key: "about_text",
+                value: locals[:user].about_text,
+                placeholder: "write_few_words" 
+              }
+  	%>
+	</div>
 </div>

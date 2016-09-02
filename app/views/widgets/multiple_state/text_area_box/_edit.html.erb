@@ -1,1 +1,5 @@
 <%=render "widgets/core_inputs/text_area", locals: locals%>
+
+<div class="<%="#{current_direction.to_s}"%>" >
+	<%= render 'widgets/edit_button_set' ,locals: locals %>
+</div>

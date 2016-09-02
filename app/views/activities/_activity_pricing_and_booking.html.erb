@@ -1,10 +1,10 @@
 <p class=activitySubtitle >Pricing And Booking</p>
 
-<%= render 'widgets/multiple_state/widget', 
+<%= render 'widgets/widget', 
 	locals: {  
 						widgetName: "slider_box",
 						elementName: "slider_box",
-						objectName: "activities", 
+						objectName: "Activity", 
 						objectId: @activity.id,
 						key: "price",
 						value: @activity.price,
@@ -18,11 +18,11 @@
 					}
 %>
 </br>
-<%= render 'widgets/multiple_state/widget', 
+<%= render 'widgets/widget', 
 	locals: {  
 						widgetName: "slider_box",
 						elementName: "slider_box",
-						objectName: "activities", 
+						objectName: "Activity", 
 						objectId: @activity.id,
 						key: "max_guest_limit",
 						value: @activity.max_guest_limit,

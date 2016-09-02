@@ -1,0 +1,10 @@
+	<a href="/admins/site_text/create" >Create New Site Text</a>
+	</br></br>
+	<div class="accountMemebers">
+		<%= render 'shared/components/table', locals: { 
+																										keys: [:id, :key, :text], 
+																										values: @site_texts.map{|t| [t.id, t.name, t.text] }, 
+																										id: "siteTexts" 
+																									 } 
+		%>
+	</div>

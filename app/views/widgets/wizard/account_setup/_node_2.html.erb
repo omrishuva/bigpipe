@@ -1,0 +1,52 @@
+<%image_class = current_direction == "rtl" ? "col-lg-4 col-lg-push-8 gridItem" : "col-lg-4 gridItem" %>
+<%text_class = current_direction == "rtl" ? "col-lg-8 col-lg-pull-4 gridItem" : "col-lg-8 gridItem" %>
+</br>
+<div class="<%=image_class%>">
+ 
+ 	<%= render 'widgets/widget', 
+    locals: { 
+              widgetName: "image_box",
+              elementName: "imageBox",
+              objectName: "Account", 
+              objectId: @object.id, 
+              isWidgetOwner: true,
+              imageWidth: 700,
+              imageHeight: 400,
+              imageCrop: "fit",
+              imageTagClass: "img-fluid coverImage",
+              key: "logo",
+              value: @object.cover_image,
+              overlayText:{
+                    enabled: true,
+                    key: "name",
+                    value: @object.name,
+                    objectName: "accounts",
+                    objectId: @object.id,
+                    state: "edit",
+                    isWidgetOwner: true,
+                    placeholder: "name_it",
+                    textClass: "#{current_direction}imageOverlayText activityTitle",
+                    buttonClass: "imageOveralyButton"
+                  }
+             
+            }
+	%>
+</div>
+
+<div class="<%=text_class%>">
+  <%= render 'widgets/widget', 
+		locals: { 
+              widgetName: "text_area_box",
+              elementName: "textAreaBox",
+              objectName: "Account", 
+              objectId: @object.id, 
+              isWidgetOwner: true,
+              state: "edit",
+              key: "about",
+              value: @object.about,
+              placeholder: "write_few_words",
+              remove_plugins: "toolbar",
+              wizardMode: locals[:wizardConf]
+            }
+	%>
+</div>
