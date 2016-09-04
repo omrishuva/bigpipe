@@ -33,7 +33,7 @@ placeServiceCallback = (place, status) ->
 setAutocompleteListener = ( marker, infowindow ) ->
   input = document.getElementById('pac-input')
   if input
-    autocomplete = new (google.maps.places.Autocomplete)(input)
+    autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': ['(cities)'] })
     autocomplete.bindTo 'bounds', @map
     autocomplete.addListener 'place_changed', =>
       infowindow.close()

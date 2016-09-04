@@ -2,7 +2,11 @@
   <%if locals[:renderSearchBox] == true %>
 		<%=render "widgets/core_inputs/location_search_box", locals: locals%>
   <%end%>
-  <div id="map"></div>
+  <%if locals[:hideMap] ==true %>
+    <div id="map" class="hidden" ></div>
+  <%else%>
+    <div id="map"></div>
+  <%end%>
 </div>
 
 <script>

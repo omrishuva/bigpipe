@@ -204,7 +204,11 @@ class WidgetsController < ApplicationController
 	end
 	
 	def nodeNumber
-		(params[:nodeNumber].to_i + 1)
+		unless params[:promoteNode] == "false"
+			(params[:nodeNumber].to_i + 1)
+		else
+			params[:nodeNumber].to_i
+		end
 	end
 
   #Utilities#####################################################
