@@ -15,7 +15,7 @@ RSpec.describe WidgetsController do
       @widget_data = {
                       widgetName: "text_area_box",
                       elementName: "textAreaBox",
-                      objectName: "users",
+                      objectName: "User",
                       objectId: @user.id,
                       key: "about_text",
                       placeholder: "name_it",
@@ -30,7 +30,7 @@ RSpec.describe WidgetsController do
 
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return(@user)
-      xhr :get, "multiple_state_widget_control", @widget_data
+      xhr :get, "widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
@@ -41,7 +41,7 @@ RSpec.describe WidgetsController do
       sleep 1
       @admin.make_super_admin
       controller.stub(:current_user).and_return( @admin )
-      xhr :get, "multiple_state_widget_control", @widget_data
+      xhr :get, "widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( assigns(:widget_data) ).to eq @widget_data 
     end
@@ -50,7 +50,7 @@ RSpec.describe WidgetsController do
       controller.stub(:current_user).and_return(@user)
       @widget_data[:state] = "save"
       @widget_data[:data] = "about text"
-      xhr :post, "multiple_state_widget_control", @widget_data
+      xhr :post, "widget_control", @widget_data
       @widget_data.merge!( editableOverlayText: nil, isWidgetOwner: true, value: @user.about_text, dataType: nil, maxSelections: nil, selectOptions: nil  )
       expect( @user.about_text ).to eq "about text"  
     end
@@ -75,9 +75,9 @@ RSpec.describe WidgetsController do
       
       @widget_data = {
                         image: test_photo,
-                        widget: "{\"nestedWidgetSelectorKey\":\"#5685925472370688.widgetControl[data-element-name='textInputBox'][data-key='title']\",\"widgetName\":\"image_box\",\"elementName\":\"imageBox\",\"objectName\":\"activities\",\"objectId\":\"#{@activity.id}\",\"key\":\"cover_image_id\",\"placeholder\":\"update_image\",\"overlayText\":\"{\\\"enabled\\\":true,\\\"key\\\":\\\"title\\\",\\\"value\\\":\\\"Street Art Tour\\\",\\\"objectName\\\":\\\"activities\\\",\\\"objectId\\\":#{@activity.id},\\\"state\\\":null,\\\"isWidgetOwner\\\":true,\\\"placeholder\\\":\\\"name_it\\\",\\\"textClass\\\":\\\"ltrimageOverlayText activityTitle\\\",\\\"buttonClass\\\":\\\"imageOveralyButton\\\"}\",\"editableOverlayText\":\"\",\"imageWidth\":\"770\",\"imageHeight\":\"430\",\"imageCrop\":\"fill\",\"imageGravity\":\"center\",\"imageTagClass\":\"coverImage img-fluid\",\"imageTagId\":\"\"}",
+                        widget: "{\"nestedWidgetSelectorKey\":\"#5685925472370688.widgetControl[data-element-name='textInputBox'][data-key='title']\",\"widgetName\":\"image_box\",\"elementName\":\"imageBox\",\"objectName\":\"Activity\",\"objectId\":\"#{@activity.id}\",\"key\":\"cover_image_id\",\"placeholder\":\"update_image\",\"overlayText\":\"{\\\"enabled\\\":true,\\\"key\\\":\\\"title\\\",\\\"value\\\":\\\"Street Art Tour\\\",\\\"objectName\\\":\\\"Activity\\\",\\\"objectId\\\":#{@activity.id},\\\"state\\\":null,\\\"isWidgetOwner\\\":true,\\\"placeholder\\\":\\\"name_it\\\",\\\"textClass\\\":\\\"ltrimageOverlayText activityTitle\\\",\\\"buttonClass\\\":\\\"imageOveralyButton\\\"}\",\"editableOverlayText\":\"\",\"imageWidth\":\"770\",\"imageHeight\":\"430\",\"imageCrop\":\"fill\",\"imageGravity\":\"center\",\"imageTagClass\":\"coverImage img-fluid\",\"imageTagId\":\"\"}",
                         widgetName: "image_box",
-                        objectName: "activities",
+                        objectName: "Activity",
                         key: "cover_image_id"
                       }
     end
@@ -88,8 +88,8 @@ RSpec.describe WidgetsController do
    
     it "should assign isWidgetOwner to true when the user is the owner" do
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "multiple_state_widget_control", @widget_data
-      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
+      xhr :post, "widget_control", @widget_data
+      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"Activity", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"Activity", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
      it "should assign isWidgetOwner to true when the user is admin" do
@@ -98,13 +98,13 @@ RSpec.describe WidgetsController do
       sleep 1
       @admin.make_super_admin
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "multiple_state_widget_control", @widget_data
-      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"activities", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"activities", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
+      xhr :post, "widget_control", @widget_data
+      expect( assigns(:widget_data) ).to eq ( {:widgetName=>"image_box", :elementName=>"imageBox", :objectName=>"Activity", :objectId=>@activity.id, :key=>"cover_image_id", :value=>  @activity.reload!.cover_image_id, :imageWidth=>"770", :imageHeight=>"430", :imageCrop=>"fill", :imageGravity=>"center", :imageTagClass=>"coverImage img-fluid", :imageTagId=>"", :isWidgetOwner=>true, :overlayText=>{"enabled"=>true, "key"=>"title", "value"=>"Street Art Tour", "objectName"=>"Activity", "objectId"=>@activity.id, "state"=>nil, "isWidgetOwner"=>true, "placeholder"=>"name_it", "textClass"=>"ltrimageOverlayText activityTitle", "buttonClass"=>"imageOveralyButton"}, :placeholder=>"update_image", :editableOverlayText=>""} )
     end
 
     it "should update the correct entity and field according to widget data" do
       controller.stub(:current_user).and_return( @user )
-      xhr :post, "multiple_state_widget_control", @widget_data
+      xhr :post, "widget_control", @widget_data
       expect( @activity.reload!.cover_image_id ).to_not be nil
     end    
 

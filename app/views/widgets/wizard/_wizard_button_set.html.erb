@@ -1,16 +1,18 @@
-<%=render "widgets/button", 
-                    locals: locals.merge( 
-                                          class: "btn btn-success halfWidth wizardButton fa fa-arrow-right", 
-                                          state: "save",
-                                          button_text: "done" 
-                                        )
-      %>
-<%unless locals[:wizardMode][:mandatory] == true%>
+<div class="relativeCenter">
   <%=render "widgets/button", 
                       locals: locals.merge( 
-                                            class: "btn btn-danger wizardButton", 
-                                            state: "cancel",
-                                            button_text: "do_it_later" 
+                                            class: "btn btn-success halfWidth wizardButton relativeCenter", 
+                                            state: "save",
+                                            button_text: locals[:saveButtonText] 
                                           )
         %>
-<%end%>
+  <%if locals[:showCancelButton].to_s == "true" %>
+    <%=render "widgets/button", 
+                        locals: locals.merge( 
+                                              class: "btn btn-danger wizardButton relativeCenter", 
+                                              state: "cancel",
+                                              button_text: locals[:cancelButtonText]  
+                                            )
+          %>
+  <%end%>
+</div>

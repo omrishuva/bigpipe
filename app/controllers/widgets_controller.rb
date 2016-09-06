@@ -3,7 +3,7 @@ class WidgetsController < ApplicationController
 	skip_before_action :verify_authenticity_token, only: [ :widget_control ]
 
 	def widget_control
-		if params[:wizardMode].present?
+		if params[:wizard] == "true"
 			wizard_widget
 		else
 			case widget_name
@@ -19,7 +19,6 @@ class WidgetsController < ApplicationController
 				when "trip_request_setup" then wizard_widget
 			end
 		end
-		
 		respond_to do |format|
       format.js { }
     end
@@ -77,6 +76,7 @@ class WidgetsController < ApplicationController
 			maxSelections: params[:maxSelections],
 			maxValue: params[:maxValue],
 			sliderSteps: params[:sliderSteps],
+			imageOverlay: params[:imageOverlay]
 		}.delete_if { |k, v| !v.present? }
 	end
 	
@@ -118,7 +118,10 @@ class WidgetsController < ApplicationController
 	
 	def location_widget
 		@object = get_object( params[:objectName], params[:objectId] )
-		@object.update(params[:key] => params[:data] ) if params[:state] == "save"
+		if params[:state] == "save"
+			Place.create( place_id: params[:data], owner_object_type: params[:objectName], owner_object_id: params[:objectId], place_key: params[:key] )
+			@object.update(params[:key] => params[:data] )
+		end
 		@widget_data = prepare_location_widget_data
 	end
 	
@@ -133,6 +136,8 @@ class WidgetsController < ApplicationController
 			state: params[:state],
 			isWidgetOwner: is_widget_owner,
 			loadScriptAfterServerResponse: params[:loadScriptAfterServerResponse],
+			saveOnly: params[:saveOnly],
+			mapId: params[:mapId],
 			placeholder: params[:placeholder]
 		}.delete_if { |k, v| !v.present? }
 	end
@@ -166,41 +171,31 @@ class WidgetsController < ApplicationController
 	#Wizard########################################################
 	
 	def wizard_widget
-		if params[:wizardConf].present? 
-			objectName = params[:wizardConf][:objectName]
-			objectId =  params[:wizardConf][:objectId]
-		else
-			objectName = params[:wizardMode][:objectName]
-			objectId = params[:wizardMode][:objectId]
-		end
-		@object = get_object( objectName, objectId )
+		@object = get_object( params[:objectName], params[:objectId] )
 		save_value if params[:state] == "save"
 		@widget_data = prepare_wizard_data
 	end
 
 	def prepare_wizard_data
-		params.merge!( params[:wizardMode] ) if params[:wizardMode].present?
-		params.merge!( params[:wizardConf] ) if params[:wizardConf].present?
-		{ 
-			wizardConf: 
-									{
-										widgetName: params[:widgetName],
-										elementName: params[:elementName],
-										objectName: @object.class.name, 
-										objectId: @object.id,
-										key: params[:key],
-										value: get_value,
-										nodeNumber: nodeNumber,
-										dataType: params[:dataType],
-										state: params[:state],
-										selectOptions: (params[:selectOptions].map{|k,v| v } rescue nil ),
-										isWidgetOwner: is_widget_owner,
-										placeholder: $wizards["placeholders"][params[:widgetName]][nodeNumber],
-										placeholderClass: params[:placeholderClass],			
-										textClass: params[:textClass],
-										buttonClass: params[:buttonClass],
-									}.delete_if { |k, v| !v.present? }
-		}
+		{
+			wizard: true,
+			widgetName: params[:widgetName],
+			elementName: params[:elementName],
+			objectName: @object.class.name, 
+			objectId: @object.id,
+			key: params[:key],
+			value: get_value,
+			nodeNumber: nodeNumber,
+			dataType: params[:dataType],
+			state: params[:state],
+			selectOptions: (params[:selectOptions].map{|k,v| v } rescue nil ),
+			isWidgetOwner: is_widget_owner,
+			placeholder: $wizards["placeholders"][params[:widgetName]][nodeNumber],
+			saveButtonText: $wizards["save_button_text"][params[:widgetName]][nodeNumber],
+			placeholderClass: params[:placeholderClass],			
+			textClass: params[:textClass],
+			buttonClass: params[:buttonClass],
+		}.delete_if { |k, v| !v.present? }
 	end
 	
 	def nodeNumber

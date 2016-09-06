@@ -1,1 +1,4 @@
-$("<%= escape_javascript( widget_replace_selector( @widget_data ) )%>").replaceWith("<%= escape_javascript( render 'widgets/widget', locals: @widget_data ) %>");
+<%unless @widget_data[:saveOnly] == "true" %>
+	<% render_path =  @widget_data[:wizard] == true ?  "widgets/wizard/wizard" : "widgets/widget" %>
+	$("<%= escape_javascript( widget_replace_selector( @widget_data ) )%>").replaceWith("<%= escape_javascript( render render_path, locals: @widget_data ) %>");
+<%end%>

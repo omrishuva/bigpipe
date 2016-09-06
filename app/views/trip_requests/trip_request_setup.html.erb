@@ -2,9 +2,9 @@
 document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloudinary.com/kommunal/image/upload/v1472681768/lavender-flowers-1595487_1920_ezoljt.jpg" })
 </script>
 
-<%= render 'widgets/widget', 
+<%= render 'widgets/wizard/wizard', 
 	locals: {  
-						wizardConf:{
+							wizard: true,
 							widgetName: "trip_request_setup",
 							elementName: "tripRequestSetup",
 							nodeNumber: 1,
@@ -12,7 +12,7 @@ document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloud
 							objectId: @trip_request.id,
 							key: "trip_request_setup",
 							isWidgetOwner: true,
-							placeholder: "build_your_perfect_trip"
+							placeholder: "build_your_perfect_trip",
+							saveButtonText: "build_my_trip"
 						}
-					}
 %>

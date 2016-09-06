@@ -1,4 +1,12 @@
 <%id = generate_button_id %>
+<%if locals[:wizardMode].present? %>
+	<%locals[:class] = "#{locals[:class]} hidden " %>
+	<%if locals[:state] == "save"%>
+		<script>
+			 document.publishEvent('bindToWizardButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );
+		</script>	
+	<%end%>
+<%end%>
 <a 
 	href="javascript:void(0)"
 	onclick='return false;'
@@ -11,4 +19,6 @@
 </span>
 </a>
 
-<script> document.publishEvent('loadButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );</script>
+<script> 
+		document.publishEvent('activateButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );
+</script>

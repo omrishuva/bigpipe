@@ -1,14 +1,81 @@
-<%= render 'widgets/widget', 
-	  locals: {  
-	            widgetName: "location",
-	            elementName: "location",
-	            objectName: "Activity",
-	            objectId: @object.id,
-	            key: "place_id",
-	            value: @object.place_id,
-	            state: "edit",
-	            isWidgetOwner: true,
-	            placeholder: "enter_location",
-	            wizardMode: locals[:wizardConf].merge( mandatory: true )            
-	          }
-%>
+<div class="relativeCenter">
+	<div class="col-lg-3">
+		<h2>
+		Arrival
+		<i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i>
+		</h2>
+		<%= render 'widgets/widget', 
+			  locals: {  
+			            widgetName: "location",
+			            elementName: "location",
+			            objectName: "TripRequest",
+			            objectId: @object.id,
+			            key: "starting_point",
+			            state: "edit",
+			            value: @object.starting_point,
+			            isWidgetOwner: true,
+			            placeholder: "city_search",
+			            saveButtonText: "next",
+			            hideMap: true,
+			            mapId: "starting_point",
+			            wizardMode: true,
+			            saveOnly: true
+			          }
+		%>
+		<%= render 'widgets/widget', 
+			locals: {  
+								widgetName: "datetime_box",
+								elementName: "datetimeBox",
+								objectName: "TripRequest", 
+								objectId: @object.id,
+								key: "start_date",
+								value: @object.start_date,
+								state: "edit",
+								isWidgetOwner: true,
+								wizardMode: true,
+								saveOnly: true
+							}
+		%>
+	</div>
+	<div class="col-lg-3">
+		<h2>
+			Departure
+			<i class="fa fa-plane " aria-hidden="true"></i>
+		</h2>
+		<%= render 'widgets/widget', 
+			  locals: {  
+			            widgetName: "location",
+			            elementName: "location",
+			            objectName: "TripRequest",
+			            objectId: @object.id,
+			            key: "finish_point",
+			            state: "edit",
+			            value: @object.starting_point,
+			            isWidgetOwner: true,
+			            placeholder: "city_search",
+			            saveButtonText: "next",
+			            hideMap: true,
+			            mapId: "finish_point",
+			            wizardMode: true,
+			            loadSearchBoxOnly: true,
+			            loadScriptAfterServerResponse: "false",
+			            saveOnly: true
+			          }
+		%>
+
+		<%= render 'widgets/widget', 
+			locals: {  
+								widgetName: "datetime_box",
+								elementName: "datetimeBox",
+								objectName: "TripRequest", 
+								objectId: @object.id,
+								key: "end_date",
+								value: @object.end_date,
+								state: "edit",
+								isWidgetOwner: true,
+								wizardMode: true,
+								saveOnly: true
+							}
+		%>
+	</div>
+</div>

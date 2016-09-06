@@ -1,15 +1,7 @@
-<%if locals[:wizardConf].present? %>
-	<%elementName = locals[:wizardConf][:elementName] %>
-	<div class="<%="#{elementName}"%>" id=<%=widget_id(locals)%>  >
-		<%=render "widgets/wizard/wizard", locals: locals%>
-	</div>
+<div class="<%="#{locals[:elementName]}"%>" id=<%=widget_id(locals)%>  >
+	<%=render "widgets/multiple_state/#{locals[:widgetName]}/#{widget_state(locals)}", locals: locals%>
+</div>
 
-<%else%>
-	<div class="<%="#{locals[:elementName]}"%>" id=<%=widget_id(locals)%>  >
-		<%=render "widgets/multiple_state/#{locals[:widgetName]}/#{widget_state(locals)}", locals: locals%>
-	</div>
-
-<%end%>
 
 
 

@@ -1,11 +1,18 @@
 document.addEventListener 'initMap',(e) ->
-  initMap( e.detail );
+  if e.detail.loadSearchBoxOnly == "true"
+    setAutocompleteListener( null, null, e.detail.mapInputId )
+  else
+    initInputId( e.detail.mapInputId )
+    initMap( e.detail )
 
-initMap = ( placeId ) ->
-  @map = new (google.maps.Map)( document.getElementById( 'map' ), maxZoom: 20, scaleControl: false, scrollwheel: false )
+initInputId = (inputId) ->
+  @inputId = inputId
+
+initMap = ( data ) ->
+  @map = new (google.maps.Map)( document.getElementById( "map" ), maxZoom: 20, scaleControl: false, scrollwheel: false )
   @placesService = new (google.maps.places.PlacesService)( @map )
-  if placeId
-    findPlaceById( placeId.place_id )
+  if data.placeId
+    @currentPlace = findPlaceById( data )
   else
     setCurrentUserLocation();
    
@@ -20,27 +27,33 @@ setCurrentUserLocation = ->
 radarSearch = ( coords ) ->
   @placesService.nearbySearch( { location: coords, radius: 1 }, placeServiceCallback )
 
-findPlaceById = ( placeId ) ->
-  request = placeId: placeId
+findPlaceById = ( data ) ->
+  request = placeId: data.placeId
   @placesService.getDetails request, placeServiceCallback
 
 placeServiceCallback = (place, status) ->
   if status == google.maps.places.PlacesServiceStatus.OK
     place = place[0] if place instanceof Array
+    @currentPlace = place
     setMapBounds( place );
     setMarker( place );
 
-setAutocompleteListener = ( marker, infowindow ) ->
-  input = document.getElementById('pac-input')
+setAutocompleteListener = ( marker, infowindow, inputId ) ->
+  inputId = window.inputId unless inputId
+  input = document.getElementById(inputId)
   if input
     autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': ['(cities)'] })
     autocomplete.bindTo 'bounds', @map
     autocomplete.addListener 'place_changed', =>
-      infowindow.close()
-      marker.setVisible false
       @currentPlace = autocomplete.getPlace()
       setMapBounds( @currentPlace );
-      setMarker( @currentPlace );
+      if marker
+        marker.setVisible false
+        setMarker( @currentPlace );
+      if infowindow
+        infowindow.close() if infowindow
+
+      
       
 setMapBounds = ( place ) ->
   if !place.geometry

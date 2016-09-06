@@ -52,7 +52,7 @@ module ApplicationHelper
       :owner_before_commit
     elsif locals[:state] != "edit" && locals[:value].present? && locals[:isWidgetOwner]
       :owner_after_commit
-    elsif locals[:state] != "edit" && locals[:value].present? && !locals[:isWidgetOwner]
+    elsif locals[:state] != "edit" && !locals[:isWidgetOwner]
       :user_after_commit
     elsif locals[:state] == 'edit' && locals[:isWidgetOwner]
       :edit
@@ -112,9 +112,9 @@ module ApplicationHelper
 
   def placeholder_patterns( value )
     {
-      "activities_max_guest_limit" => "#{I18n.t :set_guest_limit}: #{value || I18n.t(:unlimited) } ",
-      "activities_duration" => "#{I18n.t :activity_duration}: #{value || '-' } #{I18n.t :hours} ",
-      "activities_price" => "#{I18n.t :price}: #{ activity_price(value) || 'free' } ",
+      "Activity_max_guest_limit" => "#{I18n.t :set_guest_limit}: #{value || I18n.t(:unlimited) } ",
+      "Activity_duration" => "#{I18n.t :activity_duration}: #{value || '-' } #{I18n.t :hours} ",
+      "Activity_price" => "#{I18n.t :price}: #{ activity_price(value) || 'free' } ",
     }
   end
 

@@ -20,3 +20,11 @@ indexes:
   - name: role_ids
   - name: service_ids
     direction: desc
+
+- kind: Place
+  ancestor: no
+  properties:
+  - name: owner_object_type
+  - name: owner_object_id
+  - name: key
+  direction: desc

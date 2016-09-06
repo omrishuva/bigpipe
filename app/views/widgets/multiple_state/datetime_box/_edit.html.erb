@@ -1,0 +1,22 @@
+<div class="editScheduling">
+	<%=render 'widgets/core_inputs/date_time_picker', locals: { id: "specificDate", type: 'dateTime' } %>
+	</br>
+	
+	<%=render "widgets/button", 
+						locals: locals.merge( 
+																	class: "btn btn-success smallBtn", 
+																	state: "save", 
+																	schedulingType: "specificDates",
+																	button_text: "add" )
+	%>
+
+		<%=render "widgets/button", 
+						locals: locals.merge( 
+																	class: "btn btn-danger smallBtn", 
+																	state: "cancel", 
+																	schedulingType: "specificDates",
+																	button_text: "cancel" )
+	%>
+	
+
+</div>

@@ -9,4 +9,4 @@
 	<span id="<%="#{id}updateCoverImageText"%>" ><%=I18n.t :update_image%><span>
 </div>
 
-<script> document.publishEvent('loadButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );</script>
+<script> document.publishEvent('activateButton', { 'widgetData': <%=raw(locals.merge(id: id).to_json)%> } );</script>

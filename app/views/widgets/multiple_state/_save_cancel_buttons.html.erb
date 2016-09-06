@@ -1,12 +1,16 @@
+<%if locals[:imageOverlay] == "true"%>
+	<%locals[:imageOverlaySave] = "#{current_direction}imageOveralySave" %>
+	<%locals[:imageOverlayCancel] = "#{current_direction}imageOveralyCancel" %>
+<%end%>
 <%=render "widgets/button", 
 						locals: locals.merge( 
-																	class: "btn btn-success smallBtn", 
+																	class: "btn btn-success smallBtn #{locals[:buttonClass]} #{locals[:imageOverlaySave]} ", 
 																	state: "save",
 																	button_text: "save" )
 	%>
 	<%=render "widgets/button", 
 						locals: locals.merge( 
-																	class: "btn btn-danger smallBtn", 
+																	class: "btn btn-danger smallBtn #{locals[:buttonClass]} #{locals[:imageOverlayCancel]}", 
 																	state: "cancel", 
 																	button_text: "cancel" )
 	%>

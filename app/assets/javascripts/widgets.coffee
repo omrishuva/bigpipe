@@ -1,12 +1,28 @@
-document.addEventListener 'loadButton',(e) ->
+document.addEventListener 'activateButton',(e) ->
 	widgetData = e.detail.widgetData;
-	addDataAttributesToButton( widgetData );
+	addDataAttributesToButton( widgetData, 'activateButton' );
 
-addDataAttributesToButton = ( widgetData ) ->
+document.addEventListener 'bindToWizardButton',(e) ->
+	widgetData = e.detail.widgetData;
+	addDataAttributesToButton( widgetData, 'bindToWizardButton' );
+
+document.addEventListener 'registerWizardOnPage',(e) ->
+	widgetData = e.detail.widgetData;
+	@registeredWizardOnPage = { }
+	@registeredWizardOnPage = widgetId( widgetData )
+
+addDataAttributesToButton = ( widgetData, activationType ) ->
 	$("##{widgetData.id}").data( widgetData: widgetData );
-	loadWidget( widgetData )
+	if activationType == "activateButton"
+		activateButton( widgetData )
+	if activationType == "bindToWizardButton"
+		bindToWizardButton( widgetData );
 
-loadWidget = ( widgetData ) ->
+bindToWizardButton = ( widgetData ) ->
+	@bindedWidgets = [] unless @bindedWidgets
+	@bindedWidgets.push( widgetData.id )
+
+activateButton = ( widgetData ) ->
  	if widgetData.wizardConf
  		widgetName = widgetData.wizardConf.widgetName
  	else
@@ -25,18 +41,18 @@ loadWidget = ( widgetData ) ->
 	 		baseWidgetControl( id );
 	 	when "checkbox_box"
 	 		baseWidgetControl( id );
-	 	when "account_setup"
-	 		baseWidgetControl( id );
-	 	when "activity_setup"
-	 		baseWidgetControl( id );
-	 	when "trip_request_setup"
-	 		baseWidgetControl( id );
  		when "image_box"
 	 		imageWidgetControl( id );
 	 	when "location"
 	 		locationWidgetControl( id );
 	 	when "scheduling_box"
 	 		schedulingWidgetControl( id );
+	 	when "account_setup"
+	 		wizardControl( id );
+	 	when "activity_setup"
+	 		wizardControl( id );
+	 	when "trip_request_setup"
+	 		wizardControl( id );
 
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
@@ -46,11 +62,44 @@ widgetId = ( widget ) ->
 
 inputId = ( widget ) ->				
 	"input_#{widgetId(widget)}"
-											
-baseWidgetControl =( id ) ->
+
+wizardControl =( id ) ->
 	$( "##{id}" ).click (e) ->
+	  $(this).data("widgetData").objectId
+	  widgetIdSelector = widgetId( $(this).data("widgetData") )
+	  $("##{widgetIdSelector}").hide();
+	  $(this).attr('disabled', 'disabled' )
 	  widget = {}
 	 	widget = getDataset( e.target )
+	  requestMethod = 'GET'
+	  triggerClickEventInBindedWidgets();
+	  switch widget.state
+	  	when 'cancel'
+	  		baseWidgetControlCancel( widget )
+	  		widget.value = ""
+	  	when 'edit'
+	  		widget.value = ""
+	  	when 'save'
+		  	requestMethod = 'POST'
+		  	widget = baseWidgetControlSave( widget )
+	  $.ajax
+	    type: requestMethod
+	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+	    data: widget
+
+triggerClickEventInBindedWidgets = ->
+	if @bindedWidgets
+		for bindedWidget in @bindedWidgets
+	  	do (bindedWidget) ->
+			  $( "##{bindedWidget}" ).trigger('click');
+
+baseWidgetControl =( id ) ->
+	$( "##{id}" ).click (e) ->
+	  $(this).attr('disabled', 'disabled' )
+	  widget = {}
+	 	widget = getDataset( e.target )
+	 	if @bindedWidget
+		 	widget.saveOnly = true if id in @bindedWidget
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
@@ -94,6 +143,7 @@ getCheckboxSelectedValue = ->
 
 imageWidgetControl = ( id ) ->
   $( "##{id}" ).change (e) ->
+    $(this).attr('disabled', 'disabled' )
     formData = new FormData;
     file = e.target.files[0];
     widget = getDataset( e.target);
@@ -114,15 +164,17 @@ initUploadImageLoader = ( widget ) ->
 
 locationWidgetControl = ( id ) ->
 	$( "##{id}" ).click (e) ->
+		$(this).attr('disabled', 'disabled' )
 		widget = getDataset( e.target )
 		widget['loadScriptAfterServerResponse'] = true
+		if @bindedWidgets
+			widget.saveOnly = true if id in @bindedWidgets
 		shouldSendRequest = true
 		switch widget.state
 	  	when 'edit'
 	  		widget['loadScriptAfterServerResponse'] = false
 	  	when 'cancel'
 	  		widget['loadScriptAfterServerResponse'] = false
-	  		# locationWidgetControl( widget ) 
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget['data'] = getPlaceid(); 	
@@ -141,6 +193,7 @@ getPlaceid = ->
 
 schedulingWidgetControl = ( id ) ->
 	$( "##{id}" ).click (e) ->
+		$(this).attr('disabled', 'disabled' )
 		widget = getDataset( e.target )
 		widget = schedulingWidgetSave( widget ) if widget.state == "save"
 		$.ajax
@@ -151,20 +204,20 @@ schedulingWidgetControl = ( id ) ->
 schedulingWidgetSave = ( data ) ->
 	switch data.schedulingType
     when "recurringEvent"
-      data = saverecurringEvent( data );
+      data = saveRecurringEvent( data );
     when "specificDates"
       data = saveSpecificDate( data );
   data['activityLeader'] = getActivityLeader( data );
   data
 
-saverecurringEvent = (data) ->
+saveRecurringEvent = (data) ->
   data['selectedTime'] = $('.dateTimePicker').data('date');
   data['selectedDayOfWeek'] = $('#dayOfWeek').val();
   data
 
 saveSpecificDate = (data) ->
   data['selectedDate'] =  new Date( $('.dateTimePicker').data('date') )
-  data  
+  data
 
 getActivityLeader = (data) ->
   activityLeaders = $('#activityLeader').val();

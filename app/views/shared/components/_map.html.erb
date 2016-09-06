@@ -1,29 +1,16 @@
  <div class=googleMapContainer>
   <%if locals[:renderSearchBox] == true %>
-		<%=render "widgets/core_inputs/location_search_box", locals: locals%>
+  	<% mapInputId = generate_button_id%>
+		<%=render "widgets/core_inputs/location_search_box", locals: locals.merge(mapInputId: mapInputId )%>
   <%end%>
   <%if locals[:hideMap] ==true %>
-    <div id="map" class="hidden" ></div>
+    <div id="map" class="hiddenMap" ></div>
+  <%elsif locals[:loadSearchBoxOnly] == "true"%>
   <%else%>
-    <div id="map"></div>
+  	<div id="map" class="map"></div>
   <%end%>
 </div>
 
 <script>
-	<%if locals[:value].present?%>
-  	function initMap() { document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )  };
-  <%else%>
-  	function initMap() { document.publishEvent('initMap' )  }
-  <%end%>
+ document.publishEvent('initMap', { 'placeId': "<%=locals[:value]%>", 'mapInputId': "<%=mapInputId%>", hideMap:  "<%=locals[:hideMap]%>", 'loadSearchBoxOnly': "<%=locals[:loadSearchBoxOnly]%>" } );                                                   
 </script>
-
-<%unless params[:loadScriptAfterServerResponse] == "false" %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaxhT2SJvK6MwGjYHB7pZB0Al0IYTknw&libraries=places&callback=initMap"
-      async defer>
-  </script>
-<%else%>
-  <script>initMap()</script>
-<%end%>
-
-
-
