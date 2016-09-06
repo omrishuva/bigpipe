@@ -1,0 +1,12 @@
+<%if locals[:renderSearchBox] == true %>
+  <%= render "widgets/core_inputs/location_search_box", locals: locals %>
+<%end%>
+
+<%if locals[:renderOnlyMap] == true %>
+  <%= render 'shared/components/google_maps/places_on_map', locals: locals%>
+<%end%>
+
+<%unless locals[:renderMap] == false %>
+  <%= render 'shared/components/google_maps/map', locals: locals%>
+<%end%>
+

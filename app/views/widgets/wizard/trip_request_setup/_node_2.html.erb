@@ -12,12 +12,13 @@
 			            objectId: @object.id,
 			            key: "starting_point",
 			            state: "edit",
-			            value: @object.starting_point,
+			            value: @object.starting_point || "ChIJRcbZaklDXz4RYlEphFBu5r0",
 			            isWidgetOwner: true,
 			            placeholder: "city_search",
 			            saveButtonText: "next",
 			            hideMap: true,
-			            mapId: "starting_point",
+			            renderSearchBox: true,
+			            renderMap: false,
 			            wizardMode: true,
 			            saveOnly: true
 			          }
@@ -50,15 +51,14 @@
 			            objectId: @object.id,
 			            key: "finish_point",
 			            state: "edit",
-			            value: @object.starting_point,
+			            value: @object.finish_point || "ChIJw0rXGxGKJRMRAIE4sppPCQM",
 			            isWidgetOwner: true,
 			            placeholder: "city_search",
 			            saveButtonText: "next",
 			            hideMap: true,
-			            mapId: "finish_point",
 			            wizardMode: true,
-			            loadSearchBoxOnly: true,
-			            loadScriptAfterServerResponse: "false",
+			            renderSearchBox: true,
+			            renderMap: false,
 			            saveOnly: true
 			          }
 		%>
@@ -79,3 +79,4 @@
 		%>
 	</div>
 </div>
+<%=render 'shared/components/google_maps/map', locals: locals%>

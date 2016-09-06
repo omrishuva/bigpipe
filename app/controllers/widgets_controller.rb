@@ -138,6 +138,8 @@ class WidgetsController < ApplicationController
 			loadScriptAfterServerResponse: params[:loadScriptAfterServerResponse],
 			saveOnly: params[:saveOnly],
 			mapId: params[:mapId],
+			loadMapAndSearchBox: params[:loadMapAndSearchBox],
+			widgetMode: params[:widgetMode],
 			placeholder: params[:placeholder]
 		}.delete_if { |k, v| !v.present? }
 	end

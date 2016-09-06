@@ -1,61 +1,69 @@
 document.addEventListener 'initMap',(e) ->
-  if e.detail.loadSearchBoxOnly == "true"
-    setAutocompleteListener( null, null, e.detail.mapInputId )
-  else
-    initInputId( e.detail.mapInputId )
-    initMap( e.detail )
-
-initInputId = (inputId) ->
-  @inputId = inputId
+  initMap( e.detail )
 
 initMap = ( data ) ->
   @map = new (google.maps.Map)( document.getElementById( "map" ), maxZoom: 20, scaleControl: false, scrollwheel: false )
+  @markers = {}
+  @places = {}
+  initPlacesService();
+  setPlacesOnMap( );
+
+initPlacesService = ->
   @placesService = new (google.maps.places.PlacesService)( @map )
-  if data.placeId
-    @currentPlace = findPlaceById( data )
-  else
-    setCurrentUserLocation();
-   
+
+setPlacesOnMap = () ->
+  inputs = getMapInputs()
+  if inputs
+    for input in inputs
+      setPlaceFromPlaceIdSearch( input.dataset.placeId )
+  
+setPlaceFromPlaceIdSearch = ( placeId ) ->
+  request = placeId: placeId
+  @placesService.getDetails request, placeServiceCallback
+
+placeServiceCallback = (place, status) ->
+  if status == google.maps.places.PlacesServiceStatus.OK
+    place = place[0] if place instanceof Array
+    setMarker( place );
+
 setCurrentUserLocation = ->
   @currentPlace = null
   if navigator.geolocation && not(window.location.protocol == "http:") 
     navigator.geolocation.getCurrentPosition (position) ->
       radarSearch( { lat: position.coords.latitude, lng: position.coords.longitude } )
   else
-    radarSearch( { lat: 32.0864361, lng: 34.7863192 } )
+    radarSearch( defaultCoordinates(); )
+
+setAutocompleteListener = ( marker, infowindow, input ) ->
+  autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': ['(cities)'] })
+  autocomplete.bindTo 'bounds', @map
+  autocomplete.addListener 'place_changed', =>
+    place = autocomplete.getPlace()
+    @places[input.id] = place
+    input.dataset.placeId = place.place_id
+    if marker
+      markers[input.id].setVisible false
+      setMarker( place );
+    if infowindow
+      infowindow.close() if infowindow
+
+getMapInputs = -> 
+  $(".pac-input")
 
 radarSearch = ( coords ) ->
   @placesService.nearbySearch( { location: coords, radius: 1 }, placeServiceCallback )
 
-findPlaceById = ( data ) ->
-  request = placeId: data.placeId
-  @placesService.getDetails request, placeServiceCallback
+setMapBounds = ->
+  bounds = new google.maps.LatLngBounds();
+  for inputId, place of @places
+    lat = place.geometry.location.lat()
+    lng = place.geometry.location.lng()
+    myLatLng = new google.maps.LatLng(lat, lng);
+    bounds.extend(myLatLng);
+    @map.fitBounds(bounds);
 
-placeServiceCallback = (place, status) ->
-  if status == google.maps.places.PlacesServiceStatus.OK
-    place = place[0] if place instanceof Array
-    @currentPlace = place
-    setMapBounds( place );
-    setMarker( place );
 
-setAutocompleteListener = ( marker, infowindow, inputId ) ->
-  inputId = window.inputId unless inputId
-  input = document.getElementById(inputId)
-  if input
-    autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': ['(cities)'] })
-    autocomplete.bindTo 'bounds', @map
-    autocomplete.addListener 'place_changed', =>
-      @currentPlace = autocomplete.getPlace()
-      setMapBounds( @currentPlace );
-      if marker
-        marker.setVisible false
-        setMarker( @currentPlace );
-      if infowindow
-        infowindow.close() if infowindow
-
-      
-      
-setMapBounds = ( place ) ->
+focusOnPlace = ( place ) ->
   if !place.geometry
     window.alert 'Autocomplete\'s returned place contains no geometry'
     return
@@ -88,10 +96,17 @@ setMarker =  ( place ) ->
   marker.setPosition place.geometry.location
   marker.setVisible true
   infowindow = setInfoWindowContent( place, marker );
-  setAutocompleteListener( marker, infowindow )
-  
+  matchingInput = findMatchingInputToMarker( place.place_id )
+  setAutocompleteListener( marker, infowindow, matchingInput )
+  @markers["#{matchingInput.id}"] = marker
+  @places["#{matchingInput.id}"] = place
+  setMapBounds()
   marker.addListener 'click', ->
     infowindow.open @map, marker
+  
+
+findMatchingInputToMarker = (placeId) ->
+  $(".pac-input[data-place-id=#{placeId}]")[0]
 
 buildAddressName = ( place ) ->
   address = '' 
@@ -101,3 +116,5 @@ buildAddressName = ( place ) ->
         place.address_components[1] and place.address_components[1].short_name or ''
         place.address_components[2] and place.address_components[2].short_name or ''
       ].join(' ')
+defaultCoordinates = ->
+  { lat: 32.0864361, lng: 34.7863192 }

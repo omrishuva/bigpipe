@@ -1,13 +1,1 @@
-<div class=googleMapContainer>
-  <div id="map"></div>
-</div>
-
-<script>
-  function initMap() {
-    document.publishEvent('initMap', { 'place_id': "<%=locals[:value]%>" }  )
-  }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNaxhT2SJvK6MwGjYHB7pZB0Al0IYTknw&libraries=places&callback=initMap"
-    async defer>
-</script>
+<%=render 'shared/components/google_maps/map_and_searchbox', locals: locals.merge( renderSearchBox: true )%>

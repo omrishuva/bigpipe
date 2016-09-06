@@ -1,5 +1,12 @@
-<div class="searchBox">
-  <input id="<%=locals[:mapInputId]%>" class="controls pac-input" type="text"
-  placeholder="<%="#{I18n.t locals[:placeholder]}"%>" >
+<% mapInputId = generate_button_id%>
+<input 
+	id="<%=mapInputId%>" 
+	class="controls pac-input" 
+	data-location-input-id="<%="#{locals[:objectName]}_#{locals[:key]}"%>"
+	data-place-id="<%=locals[:value]%>"
+	type="text"
+	placeholder="<%="#{I18n.t locals[:placeholder]}"%>" >
+
+<%if locals[:widgetMode] == true %>
 	<%= render 'widgets/edit_button_set', locals: locals %>
-</div>
+<%end%>
