@@ -31,6 +31,6 @@
 //= require bootstrap-datetimepicker
 //= require daterangepicker
 //= require bootstrap-table
-//= require bootstrap-table-he-IL
+
 //= require bootstrap-slider
 //= require_tree .
