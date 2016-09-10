@@ -50,6 +50,8 @@ GEM
     bootstrap (4.0.0.alpha3)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
+    bootstrap-daterangepicker-rails (0.1.5)
+      railties (>= 4.0, < 5.1)
     bootstrap-slider-rails (9.1.3)
       railties (>= 3.2, < 6.0)
     bootstrap-table-rails (1.11.0)
@@ -107,6 +109,8 @@ GEM
       retriable (~> 1.4)
       signet (~> 0.6)
     google-protobuf (3.0.0.alpha.5.0.5.1)
+    google_places (0.32.0)
+      httparty (~> 0.13.1)
     googleauth (0.5.1)
       faraday (~> 0.9)
       jwt (~> 1.4)
@@ -265,6 +269,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   bootstrap (~> 4.0.0.alpha3)
+  bootstrap-daterangepicker-rails
   bootstrap-slider-rails
   bootstrap-table-rails
   bootstrap3-datetimepicker-rails (~> 4.17.37)
@@ -274,6 +279,7 @@ DEPENDENCIES
   foreman
   gcloud
   google-api-client
+  google_places
   jquery-rails
   momentjs-rails (>= 2.9.0)
   pipedrive-api-client

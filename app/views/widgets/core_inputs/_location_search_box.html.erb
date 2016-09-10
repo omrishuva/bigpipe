@@ -1,12 +1,13 @@
-<% mapInputId = generate_button_id%>
+<% inputId = generate_id%>
 <input 
-	id="<%=mapInputId%>" 
+	id="<%=inputId%>" 
 	class="controls pac-input" 
 	data-location-input-id="<%="#{locals[:objectName]}_#{locals[:key]}"%>"
+	data-place-type="<%=locals[:placeType]%>"
+	data-submit-on-chnage="<%=locals[:submitOnChange]%>"
 	data-place-id="<%=locals[:value]%>"
-	type="text"
+	data-key="<%=locals[:key]%>"
+  type="text"
 	placeholder="<%="#{I18n.t locals[:placeholder]}"%>" >
 
-<%if locals[:widgetMode] == true %>
-	<%= render 'widgets/edit_button_set', locals: locals %>
-<%end%>
+<%= render 'widgets/multiple_state/save_cancel_buttons', locals: locals.merge(inputId: inputId) %>

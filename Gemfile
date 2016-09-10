@@ -34,10 +34,12 @@ gem 'cloudinary'
 gem "select2-rails"
 gem "bootstrap-table-rails"
 gem 'bootstrap-slider-rails'
-
-# gem "bootstrap-switch-rails"
+gem 'google_places'
+#gem "bootstrap-switch-rails"
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+gem 'bootstrap-daterangepicker-rails'
+
 
 # gem 'gmaps_geocoding'
 # gem 'gmaps4rails'

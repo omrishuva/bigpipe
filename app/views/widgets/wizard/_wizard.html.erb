@@ -7,7 +7,9 @@
 		<div class="col-lg-12 wizardBody" >
 			<%= render "widgets/wizard/#{locals[:widgetName]}/node_#{locals[:nodeNumber]}", locals: locals %>
 		</div>
-		<%= render "widgets/wizard/wizard_button_set", locals: locals 	%>
+		<%unless locals[:renderWizardButton] == false%>
+			<%= render "widgets/wizard/wizard_button_set", locals: locals 	%>
+		<%end%>
 		</br>
 	</div>
 </div>

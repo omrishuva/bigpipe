@@ -115,8 +115,9 @@ a{ color: #056cf9; }
   background-color: #F9F9F9;
 
 }
+.col-centered{ float: none !important;  margin: 0 auto !important; }
 .activityContainer{ @extend .textShadowContainer;  }
-
+.TripDatesSection{ margin-bottom: 2em; }
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
 
@@ -201,14 +202,17 @@ a{ color: #056cf9; }
 .btnBrand{  padding: 2px 4px; border-radius: 3px; font-weight: bold;  }
 .fullWidth{ width: 100%; }
 .halfWidth{ width: 50%; }
-.btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  }
+.btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.3); }
 .btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #056cf9; ;  }
+.btnBrand1InverseBgColor{ background-color: #FFB941 !important; }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }
 .largeBtn{ @extend .largeText;  }
 .btnBrandHover{ text-decoration: none; }
 .btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #056cf9 ; }
 .btnBrand1Inverse:hover{ @extend .btnBrandHover; background-color: #056cf9; color: #FFB941; }
-
+.btnImage{ color: #056cf9; background-color: #fff; border-style: solid; border-width: 1px; border-color: #056cf9;  }
+.imgInButton{ margin-right: 5px; }
+.btnImage:hover{ color: #056cf9; background-color: #FFB941; border-style: solid; border-width: 1px; border-color: #FFB941; }
 .btnBrand1:active{  background-color: #056cf9; color: #FFB941; text-decoration: none;}
 .btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #fff; width: 3.5em; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #000; color: #fff ;    }
@@ -257,14 +261,15 @@ a{ color: #056cf9; }
 .aboutOragnizerImage{ float: left; }
 .aboutOrganizerText{ display: inline-block; }
 // .fixedGridItem{ @extend .gridItem;  position: fixed; }
-.textAreaBox { min-width: 20%;  min-height: 15em; }
+.textAreaBox { min-width: 20%;  }
+.textAreaBoxMinHeight{ min-height: 15em;  }
 .thinBorder{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px;  }
 .thinUnderline{ border-radius: 5px;  border-bottom-style: solid; border-bottom-color: #e5e5e5; border-bottom-width: 1px;  }
 
 .widgetControl{ margin: 5px; text-decoration: none !important;  font-weight: bold;}
 .textAreaBoxTextLocation{  margin-left: 20px; margin-top: 10px;  }
 .textAreaBoxTextBeforeEdit{ @extend .textAreaBoxTextLocation; opacity: 0.3; }
-
+// .dateSelection{ margin-top: 2em;  min-height: 20em; }
 
 .textAreaBoxEditButton{ position: relative;  }
 .ltrTextAreaBoxEditButton{ @extend .textAreaBoxEditButton; float: left }
@@ -336,7 +341,7 @@ a{ color: #056cf9; }
     top: 0px;
     left: 0px;
 }
-.select2{ width: 16em; }
+.select2{ width: 100% !important; }
 .schedulingAndBooking{ border-radius: 5px; ;
   text-align: center; }
 .previewPublish{ width: 100%; height: 3em; background-color: rgba(224,224,224, 0.5);  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.3); border-radius: 5px; }  

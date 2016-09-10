@@ -1,6 +1,9 @@
 document.addEventListener 'initDateTimePicker',(e) ->
   initDateTimePicker(e.detail.type);
 
+document.addEventListener 'initDateRangePicker',(e) ->
+  initDateRangePicker(e.detail.type);
+
 document.addEventListener 'initMultipleSelectBox', (e) ->
 	initMultipleSelectBox( e.detail )
 
@@ -11,7 +14,10 @@ document.addEventListener 'initCheckbox', (e) ->
 	initCheckbox();
 
 document.addEventListener 'initCKeditor', (e) ->
-	initCKeditor( e.detail )
+	initCKeditor( e.detail );
+
+document.addEventListener 'initPlusMinus', (e) ->
+	initPlusMinus(e.detail);
 
 initCKeditor = ( data ) ->
 	data.options.extraPlugins = 'confighelper'
@@ -33,6 +39,42 @@ initSlider = ( data ) ->
 initMultipleSelectBox = (data) ->
 	$("##{data.id}.select2").select2({ theme: "bootstrap",  'maximumSelectionLength': parseInt( data.maxSelections )  });
 
+initPlusMinus = (data) ->
+	$("##{data.buttonId}").click (e) ->
+		if e.target.tagName == "I"
+			data = e.target.parentElement.dataset
+		else	
+			data = e.target.dataset
+		input = $("##{data.inputId}")
+		val = parseInt(input.val()) || 0
+		if data.behavior == "plus"
+			input.val( val + 1 )
+		if data.behavior == "minus"
+			input.val( val - 1 ) unless val == 0
+		
+
+initDateRangePicker = () ->
+	options = {	'autoApply': true, 'minDate': new Date() 	};
+	$('.dateRange').daterangepicker( options );
+	
+	$('.dateRange').on 'apply.daterangepicker', (ev, picker) ->
+	  startDate = dateFormat(picker.startDate.toArray())
+	  endDate = dateFormat(picker.endDate.toArray())
+	  $('#start-date').val(startDate)
+	  $('#end-date').val(endDate)
+	  $('#date-range').val("#{startDate} - #{endDate} ")
+	
+dateFormat = (dateArray) ->
+	day = addZeroIfNeeded( dateArray[2] )
+	month =   addZeroIfNeeded( (dateArray[1] + 1) )
+	year = dateArray[0]
+	"#{year}-#{month}-#{day}"
+
+addZeroIfNeeded = ( number ) ->
+	if number < 10
+		"0#{number}"
+	else
+		"#{number}"
 
 initDateTimePicker = ( type ) ->
 	options = { 

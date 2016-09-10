@@ -1,6 +1,7 @@
 document.addEventListener 'activateButton',(e) ->
 	widgetData = e.detail.widgetData;
 	addDataAttributesToButton( widgetData, 'activateButton' );
+	# enableSearchByInput( widgetData );
 
 document.addEventListener 'bindToWizardButton',(e) ->
 	widgetData = e.detail.widgetData;
@@ -11,6 +12,12 @@ document.addEventListener 'registerWizardOnPage',(e) ->
 	@registeredWizardOnPage = { }
 	@registeredWizardOnPage = widgetId( widgetData )
 
+document.addEventListener 'triggerClickEventInBindedWidgets',(e) ->
+	triggerClickEventInBindedWidgets(widget);
+
+document.addEventListener 'submitInputOnChange',(e) ->
+	submitInputOnChange( e.detail.input )
+
 addDataAttributesToButton = ( widgetData, activationType ) ->
 	$("##{widgetData.id}").data( widgetData: widgetData );
 	if activationType == "activateButton"
@@ -19,8 +26,9 @@ addDataAttributesToButton = ( widgetData, activationType ) ->
 		bindToWizardButton( widgetData );
 
 bindToWizardButton = ( widgetData ) ->
-	@bindedWidgets = [] unless @bindedWidgets
-	@bindedWidgets.push( widgetData.id )
+	@bindedWidgets = { } unless @bindedWidgets
+	@bindedWidgets[widgetData.nodeNumber] = [] unless @bindedWidgets[widgetData.nodeNumber] 
+	@bindedWidgets[widgetData.nodeNumber].push( widgetData.id )
 
 activateButton = ( widgetData ) ->
  	if widgetData.wizardConf
@@ -37,9 +45,15 @@ activateButton = ( widgetData ) ->
  			baseWidgetControl( id );
  		when "slider_box"
 	 		baseWidgetControl( id );
+	 	when "plus_minus_box"
+	 		baseWidgetControl( id );
  		when 'wizard_buttons'
 	 		baseWidgetControl( id );
 	 	when "checkbox_box"
+	 		baseWidgetControl( id );
+	 	when "datetime_box"
+	 		baseWidgetControl( id );
+	 	when "date_range_box"
 	 		baseWidgetControl( id );
  		when "image_box"
 	 		imageWidgetControl( id );
@@ -54,6 +68,10 @@ activateButton = ( widgetData ) ->
 	 	when "trip_request_setup"
 	 		wizardControl( id );
 
+submitInputOnChange = (input) -> 
+	button = $("[data-input-id='#{input.id}'][data-state='save'][data-submit-on-change=true]")
+	button.trigger('click') if button
+	
 buildWidgetSelectorKey = ( widgetData) ->
 	"##{widgetData.objectId}.widgetControl[data-element-name='#{widgetData.elementName}'][data-key='#{widgetData.key}']"
 
@@ -65,14 +83,20 @@ inputId = ( widget ) ->
 
 wizardControl =( id ) ->
 	$( "##{id}" ).click (e) ->
-	  $(this).data("widgetData").objectId
+	  # $(this).data("widgetData").objectId
 	  widgetIdSelector = widgetId( $(this).data("widgetData") )
-	  $("##{widgetIdSelector}").hide();
-	  $(this).attr('disabled', 'disabled' )
+	  
 	  widget = {}
 	 	widget = getDataset( e.target )
+	 	$("##{widgetIdSelector}").hide() unless widget.replaceDivId
+	 	 
+	 	if widget.replaceDivId
+	 		$('.btnBrand1InverseBgColor').removeClass('btnBrand1InverseBgColor')
+	 		$(this).addClass("btnBrand1InverseBgColor");
+	 		
+	 	$(this).attr('disabled', 'disabled' )
 	  requestMethod = 'GET'
-	  triggerClickEventInBindedWidgets();
+	  triggerClickEventInBindedWidgets(widget);
 	  switch widget.state
 	  	when 'cancel'
 	  		baseWidgetControlCancel( widget )
@@ -82,14 +106,12 @@ wizardControl =( id ) ->
 	  	when 'save'
 		  	requestMethod = 'POST'
 		  	widget = baseWidgetControlSave( widget )
-	  $.ajax
-	    type: requestMethod
-	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
-	    data: widget
+	  url = "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+  	ajaxRequest( requestMethod, url, widget );
 
-triggerClickEventInBindedWidgets = ->
-	if @bindedWidgets
-		for bindedWidget in @bindedWidgets
+triggerClickEventInBindedWidgets = (widget)->
+	if @bindedWidgets && @bindedWidgets[widget.nodeNumber]
+		for bindedWidget in @bindedWidgets[widget.nodeNumber]
 	  	do (bindedWidget) ->
 			  $( "##{bindedWidget}" ).trigger('click');
 
@@ -98,22 +120,19 @@ baseWidgetControl =( id ) ->
 	  $(this).attr('disabled', 'disabled' )
 	  widget = {}
 	 	widget = getDataset( e.target )
-	 	if @bindedWidget
-		 	widget.saveOnly = true if id in @bindedWidget
+	 	widget = shouldSaveOnly(widget, id)
 	  requestMethod = 'GET'
 	  switch widget.state
 	  	when 'cancel'
-	  		baseWidgetControlCancel( widget )
-	  		widget.value = ""
+	  		baseWidgetControlCancel( widget );
+	  		widget.value = "";
 	  	when 'edit'
-	  		widget.value = ""
+	  		widget.value = "";
 	  	when 'save'
-		  	requestMethod = 'POST'
-		  	widget = baseWidgetControlSave( widget )
-	  $.ajax
-	    type: requestMethod
-	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
-	    data: widget
+		  	requestMethod = 'POST';
+		  	widget = baseWidgetControlSave( widget );
+			url = "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+			ajaxRequest( requestMethod, url, widget );
    		
 baseWidgetControlSave = ( widget ) ->
 	switch widget.widgetName
@@ -125,10 +144,16 @@ baseWidgetControlSave = ( widget ) ->
 			widget['data'] = $("##{inputId(widget)}").val()
 		when 'slider_box'
 			widget['data'] = $("##{inputId(widget)}").val()
+		when 'plus_minus_box'
+			 widget['data'] =  $("##{inputId(widget)}").val()
 		when "checkbox_box"
 			widget['data'] = getCheckboxSelectedValue();
 		when 'wizard_buttons'
 			widget['data'] = widget.value
+		when 'date_range_box'
+			widget['data'] = {}
+			widget['data']['startDate'] = $("#start-date").val()
+			widget['data']['endDate'] = $("#end-date").val()
 	widget
 
 baseWidgetControlCancel = ( widget ) ->
@@ -166,20 +191,12 @@ locationWidgetControl = ( id ) ->
 	$( "##{id}" ).click (e) ->
 		$(this).attr('disabled', 'disabled' )
 		widget = getDataset( e.target )
-		widget['loadScriptAfterServerResponse'] = true
-		if @bindedWidgets
-			widget.saveOnly = true if id in @bindedWidgets
+		widget = shouldSaveOnly(widget)
 		shouldSendRequest = true
-		switch widget.state
-	  	when 'edit'
-	  		widget['loadScriptAfterServerResponse'] = false
-	  	when 'cancel'
-	  		widget['loadScriptAfterServerResponse'] = false
-	  	when 'save'
+		if widget.state == "save"
 		  	requestMethod = 'POST'
-		  	widget['data'] = getPlaceid(); 	
-		  	widget['loadScriptAfterServerResponse'] = false
-		  	if !getPlaceid()
+		  	widget['data'] = getPlaceid(widget.inputId); 	
+		  	if !getPlaceid(widget.inputId)
 				  window.alert( "Please choose a location for your activity before saving" );
 				  shouldSendRequest = false		
 		if shouldSendRequest
@@ -188,14 +205,16 @@ locationWidgetControl = ( id ) ->
 		    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
 		    data: widget
 
-getPlaceid = ->
-	currentPlace.place_id if currentPlace
+getPlaceid = (inputId) ->
+	@places[inputId].place_id
 
 schedulingWidgetControl = ( id ) ->
 	$( "##{id}" ).click (e) ->
 		$(this).attr('disabled', 'disabled' )
 		widget = getDataset( e.target )
-		widget = schedulingWidgetSave( widget ) if widget.state == "save"
+		if widget.state == "save"
+			widget = schedulingWidgetSave( widget ) 
+			widget = shouldSaveOnly(widget)
 		$.ajax
 	    type: "POST"
 	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
@@ -223,8 +242,19 @@ getActivityLeader = (data) ->
   activityLeaders = $('#activityLeader').val();
 
 #Utilities###############################################################################################
+ajaxRequest = ( requestMethod, url, widget ) ->
+	$.ajax
+	  type: requestMethod
+	  url: url
+	  data: widget
+
+shouldSaveOnly = ( widget, controlId ) ->
+	if @bindedWidgets && @bindedWidgets[widget.nodeNumber] && (controlId in @bindedWidgets[widget.nodeNumber])
+		widget.saveOnly = true
+	widget
+
 getDataset = ( el ) ->
-	if el.className == "buttonText"
+	if ( el.className in ["buttonText", "buttonImage"] )
 	 id = el.parentElement.id
 	else
 	 id = el.id

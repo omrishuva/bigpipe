@@ -27,4 +27,4 @@ indexes:
   - name: owner_object_type
   - name: owner_object_id
   - name: key
-  direction: desc
+    direction: desc

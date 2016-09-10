@@ -1,0 +1,51 @@
+<div class="col-lg-3 col-lg-offset-3">
+  <%= render 'widgets/widget', 
+  locals: {  
+            widgetName: "plus_minus_box",
+            elementName: "plusMinusBox",
+            objectName: "TripRequest",
+            objectId: @object.id,
+            key: "adults",
+            state: "edit",
+            isWidgetOwner: true,
+            placeholder: "number_adults",
+            wizardMode: true,
+            nodeNumber: 3,
+            saveOnly: true
+          }
+  %>
+</div>
+
+<div class="col-lg-3">
+  <%= render 'widgets/widget', 
+  locals: {  
+            widgetName: "plus_minus_box",
+            elementName: "plusMinusBox",
+            objectName: "TripRequest",
+            objectId: @object.id,
+            key: "children",
+            state: "edit",
+            isWidgetOwner: true,
+            placeholder: "number_children",
+            wizardMode: true,
+            nodeNumber: 3,
+            saveOnly: true
+          }
+%>
+</div>
+<div class="col-lg-6 col-lg-offset-3">
+<%= render 'widgets/widget', 
+  locals: {  
+            widgetName: "text_area_box",
+            elementName: "textAreaBox",
+            objectName: "TripRequest",
+            objectId: @object.id,
+            key: "travel_group_notes",
+            state: "owner_before_commit",
+            isWidgetOwner: true,
+            placeholder: "notes_about_the_group",
+            removePlugins: "toolbar"
+          
+          }
+%>
+</div>

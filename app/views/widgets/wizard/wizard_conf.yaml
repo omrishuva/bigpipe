@@ -1,11 +1,16 @@
 placeholders:
   trip_request_setup:
     1: "build_your_perfect_trip"
-    2: "where_are_you_traveling_to"
-    3: "trip_hobies"
-    # 3: "where_do_you_finish_your_trip"
+    2: "how_will_you_be_traveling"
+    3: "who_is_joining_you"
+    4: "when_will_you_be_traveling"
+    5: "where_will_you_be_traveling"
+    6: "trip_hobbies"
 save_button_text:
   trip_request_setup:
     1: "build_my_trip"
     2: "next"
     3: "next"
+    4: "next"
+    5: "next"
+    6: "done"

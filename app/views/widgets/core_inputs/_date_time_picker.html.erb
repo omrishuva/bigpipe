@@ -6,7 +6,7 @@
 			<i class="fa fa-clock-o" aria-hidden="true"></i>
 		<%end%>
 	</span>
-	<input type='text' class="form-control" />
+	<input type='text' placeholder="<%=I18n.t(locals[:placeholder])%>" class="form-control" />
 </div>
 
 <script>document.publishEvent('initDateTimePicker', { 'type': "<%=locals[:type]%>" })</script>

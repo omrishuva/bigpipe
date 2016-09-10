@@ -1,4 +1,8 @@
-<%unless @widget_data[:saveOnly] == "true" %>
-	<% render_path =  @widget_data[:wizard] == true ?  "widgets/wizard/wizard" : "widgets/widget" %>
-	$("<%= escape_javascript( widget_replace_selector( @widget_data ) )%>").replaceWith("<%= escape_javascript( render render_path, locals: @widget_data ) %>");
+<%if @widget_data[:replaceDivId] %>
+	$("<%= escape_javascript( '#' +  @widget_data[:replaceDivId] )%>").replaceWith("<%= escape_javascript( render @widget_data[:replacePartial], locals: @widget_data ) %>");
+<%else%>
+	<%unless @widget_data[:saveOnly] == "true" %>
+		<% render_path =  @widget_data[:wizard] == true ?  "widgets/wizard/wizard" : "widgets/widget" %>
+		$("<%= escape_javascript( widget_replace_selector( @widget_data ) )%>").replaceWith("<%= escape_javascript( render render_path, locals: @widget_data ) %>");
+	<%end%>
 <%end%>

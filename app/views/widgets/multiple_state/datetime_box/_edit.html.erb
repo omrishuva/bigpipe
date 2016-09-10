@@ -1,5 +1,5 @@
 <div class="editScheduling">
-	<%=render 'widgets/core_inputs/date_time_picker', locals: { id: "specificDate", type: 'dateTime' } %>
+	<%=render 'widgets/core_inputs/date_time_picker', locals: locals.merge({ id: "specificDate", type: 'dateTime' }) %>
 	</br>
 	
 	<%=render "widgets/button", 

@@ -1,4 +1,4 @@
-<%id = generate_button_id %>
+<%id = generate_id %>
 <%if locals[:wizardMode].present? %>
 	<%locals[:class] = "#{locals[:class]} hidden " %>
 	<%if locals[:state] == "save"%>
@@ -12,11 +12,20 @@
 	onclick='return false;'
 	class="widgetControl <%= locals[:class] %>"
 	id="<%=id%>"
+	data-input-id="<%=locals[:inputId]%>"
+	data-state="<%=locals[:state]%>"
+	data-submit-on-change="<%=locals[:submitOnChange]%>"
 	aria-hidden="true"
 >
+
+<%if locals[:image]%>	
+	<%=cl_image_tag(locals[:image], class: "imgInButton img-fluid", width: 30, height: 20)%>
+<%end%>
+
 <span class="buttonText" style="font-family:'Raleway', sans-serif">
-	<%=I18n.t locals[:button_text]%>	
+	<%=I18n.t locals[:button_text]%>
 </span>
+
 </a>
 
 <script> 

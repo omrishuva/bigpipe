@@ -48,6 +48,7 @@ module ApplicationHelper
   end
 
   def widget_state( locals )
+    return :owner_before_commit if locals[:state] == "owner_before_commit"
     if locals[:state] != "edit" && not( locals[:value].present? ) && locals[:isWidgetOwner]
       :owner_before_commit
     elsif locals[:state] != "edit" && locals[:value].present? && locals[:isWidgetOwner]
@@ -75,12 +76,11 @@ module ApplicationHelper
     locals[:user].id == current_user_id
   end
   
-  def generate_button_id
+  def generate_id
     (0..32).to_a.map{|a| rand(16).to_s(16)}.join
   end
   
   def widget_replace_selector( widget_data )
-    widget_data = widget_data[:wizardConf] if widget_data[:wizardConf].present?
     "##{widget_data[:objectId]}_#{widget_data[:key]}.#{widget_data[:elementName]}"
   end
   
@@ -115,6 +115,7 @@ module ApplicationHelper
       "Activity_max_guest_limit" => "#{I18n.t :set_guest_limit}: #{value || I18n.t(:unlimited) } ",
       "Activity_duration" => "#{I18n.t :activity_duration}: #{value || '-' } #{I18n.t :hours} ",
       "Activity_price" => "#{I18n.t :price}: #{ activity_price(value) || 'free' } ",
+      "TripRequest_number_adults" => "#{I18n.t :number_adults}: #{value} "
     }
   end
 

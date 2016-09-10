@@ -35,17 +35,18 @@ setCurrentUserLocation = ->
     radarSearch( defaultCoordinates(); )
 
 setAutocompleteListener = ( marker, infowindow, input ) ->
-  autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': ['(cities)'] })
+  autocomplete = new (google.maps.places.Autocomplete)(input, { 'types': [input.dataset.type] })
   autocomplete.bindTo 'bounds', @map
   autocomplete.addListener 'place_changed', =>
     place = autocomplete.getPlace()
     @places[input.id] = place
     input.dataset.placeId = place.place_id
+    if input.dataset.submitOnChnage == "true"
+      document.publishEvent("submitInputOnChange", { 'input': input } )
     if marker
       markers[input.id].setVisible false
       setMarker( place );
-    if infowindow
-      infowindow.close() if infowindow
+    infowindow.close() if infowindow
 
 getMapInputs = -> 
   $(".pac-input")
@@ -73,11 +74,11 @@ focusOnPlace = ( place ) ->
     @map.setCenter place.geometry.location
     @map.setZoom 17
 
-setInfoWindowContent = ( place, marker ) ->
+setInfoWindowContent = ( place, marker, input ) ->
   infowindow = new (google.maps.InfoWindow)
   address = buildAddressName( place );
   if address
-    infowindow.setContent '<div><strong>' + place.name + '</strong><br>' + address
+    infowindow.setContent "</br><div><strong>#{input.dataset.key}</strong></br>#{place.name}<br>#{address}"
   else
     infowindow.setContent '<div><strong>' + place.name
   infowindow.open @map, marker
@@ -95,8 +96,8 @@ setMarker =  ( place ) ->
       scaledSize: new (google.maps.Size)(35, 35)
   marker.setPosition place.geometry.location
   marker.setVisible true
-  infowindow = setInfoWindowContent( place, marker );
   matchingInput = findMatchingInputToMarker( place.place_id )
+  infowindow = setInfoWindowContent( place, marker, matchingInput );
   setAutocompleteListener( marker, infowindow, matchingInput )
   @markers["#{matchingInput.id}"] = marker
   @places["#{matchingInput.id}"] = place

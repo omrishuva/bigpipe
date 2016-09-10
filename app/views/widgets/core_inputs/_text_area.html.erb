@@ -1,7 +1,5 @@
 <textarea placeholder="<%=I18n.t locals[:placeholder]%>" name=<%="editor" + input_id(locals)%> ><%=locals[:value]%></textarea>
-
 <script>
-
 	document.publishEvent( 'initCKeditor', {
 																				 'id': "<%='editor' + input_id(locals)%>",
 																				  options: {
