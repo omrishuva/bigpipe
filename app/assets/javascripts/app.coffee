@@ -117,6 +117,7 @@ RequestCreateTrip = ->
       $.ajax
         type: 'POST'
         url: url[e.target.id]
+        data: "new_trip"
 
 ajaxRequest = ( requestMethod, url ) ->
   $.ajax
