@@ -1,0 +1,17 @@
+<div id="<%=locals[:replaceDivId]%>">
+    <%= render 'widgets/widget', 
+      locals: {  
+                widgetName: "date_range_box",
+                elementName: "DateRangeBox",
+                objectName: "TripRequest",
+                objectId: @object.id,
+                key: "date_range",
+                state: "edit",
+                isWidgetOwner: true,
+                placeholder: "select_travel_dates",
+                wizardMode: true,
+                nodeNumber: locals[:nodeNumber],
+                saveOnly: true
+              }
+    %>
+</div>

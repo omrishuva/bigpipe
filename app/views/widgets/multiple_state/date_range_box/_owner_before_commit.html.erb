@@ -1,0 +1,8 @@
+	<div class="col-lg-3 col-lg-offset-3">
+		<%=render "widgets/button", 
+						locals: locals.merge( 
+																		class: "fa fa-plus #{current_direction.to_s}", 
+																		state: "edit", 
+																		button_text: "I_know_my_dates" )
+			%>
+	</div>

@@ -1,0 +1,20 @@
+</br>
+<p>Select approximate duration of travel</p>
+<%= render 'widgets/widget', 
+		locals: {  
+							widgetName: "multiple_select_box",
+							elementName: "multipleSelectBox",
+							objectName: "TripRequest", 
+							objectId: @object.id,
+							key: "approximate_duration",
+							selectOptions: ["1 Week", "2 Weeks", "3 Weeks", "4 Weeks", "More than 4 weeks"].map{|i| [i,i] },
+							value: @object.approximate_duration,
+							state: "edit",
+							isWidgetOwner: true,
+							maxSelections: 1,
+							nodeNumber: locals[:nodeNumber],
+							wizardMode: true,
+							saveOnly: true,
+							placeholder: "select_approximate_duration"
+						}
+%>

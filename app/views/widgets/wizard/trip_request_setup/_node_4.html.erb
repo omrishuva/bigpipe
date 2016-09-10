@@ -1,0 +1,53 @@
+<%locals.merge!({ saveKey: "dates_type"  })%>
+<%replaceDivId = generate_id%>
+<div class="col-sm-4 col-sm-offset-4">
+        <%=render "widgets/button", 
+                                    locals: locals.merge( 
+                                                                                class: "btn btnImage fullWidth wizardButton ",
+                                                                                state: "save",
+                                                                                # image: "Calendar_30-100_rov6tt.png",
+                                                                                data: "i_have_exact_dates",
+                                                                                replaceDivId: replaceDivId,
+                                                                                replacePartial: "widgets/wizard/trip_request_setup/exact_dates",
+                                                                                promoteNode: false,
+                                                                                button_text: "i_have_exact_dates"
+                                                                                
+                                                                            )
+        %>
+</div>
+
+<div class="col-sm-4 col-sm-offset-4">
+        <%=render "widgets/button", 
+                                    locals: locals.merge( 
+                                                                                class: "btn btnImage fullWidth wizardButton relativeCenter", 
+                                                                                state: "save",
+                                                                                # image: "Calendar-100_1_fq79k6.png",
+                                                                                data: "i_have_approximate_dates",
+                                                                                replaceDivId: replaceDivId,
+                                                                                replacePartial: "widgets/wizard/trip_request_setup/approximate_dates",
+                                                                                promoteNode: false,
+                                                                                button_text: "i_have_approximate_dates"
+                                                                            )
+        %>
+</div>
+
+<div class="col-sm-4 col-sm-offset-4">
+        <%=render "widgets/button", 
+                                    locals: locals.merge( 
+                                                                                class: "btn btnImage fullWidth wizardButton relativeCenter", 
+                                                                                state: "save",
+                                                                                data: "i_dont_have_my_dates_yes",
+                                                                                # image: "Date_Span-100_amnjpd.png",
+                                                                                replaceDivId: replaceDivId,
+                                                                                replacePartial: "widgets/wizard/trip_request_setup/dates_unknown",
+                                                                                promoteNode: false,
+                                                                                button_text: "i_dont_have_my_dates_yet" 
+                                                                            )
+        %>
+</div>
+</br>
+<div class="row dateSelection">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div id="<%="#{replaceDivId}"%>">
+  </div>
+</div>

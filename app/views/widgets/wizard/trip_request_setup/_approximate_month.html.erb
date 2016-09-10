@@ -1,0 +1,20 @@
+</br>
+<p>Select approximate month of travel</p>
+<%= render 'widgets/widget', 
+		locals: {  
+							widgetName: "multiple_select_box",
+							elementName: "multipleSelectBox",
+							objectName: "TripRequest", 
+							objectId: @object.id,
+							key: "approximate_month",
+							selectOptions: (0..12).to_a.map{|n| n.month.from_now.strftime("%b %Y") }.map{|m| [m,m] },
+							value: @object.approximate_month,
+							state: "edit",
+							isWidgetOwner: true,
+							maxSelections: 1,
+							nodeNumber: locals[:nodeNumber],
+							wizardMode: true,
+							saveOnly: true,
+							placeholder: "select_a_month"
+						}
+%>

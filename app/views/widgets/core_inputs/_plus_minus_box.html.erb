@@ -1,0 +1,24 @@
+<%inputId = input_id(locals)%>
+<div class="form-group">
+  <label for="adults"><%=I18n.t locals[:placeholder]%></label>
+  <div class="input-group">
+        <span class="input-group-btn">
+          <%minusId = generate_id%>
+          <button id="<%=minusId%>" class="btn btn-secondary" type="button" data-behavior="minus" data-input-id="<%=inputId%>">
+            <i class="fa fa-minus"></i>
+          </button>
+        </span>
+    <input id="<%="#{input_id(locals)}"%>" class="form-control" placeholder="0" style="text-align:center" type="number">
+    <span class="input-group-btn">
+      <%plusId = generate_id%>
+      <button id="<%=plusId%>" class="btn btn-secondary" type="button" data-behavior="plus" data-input-id="<%=inputId%>" >
+        <i class="fa fa-plus"></i>
+      </button>
+    </span>
+  </div>
+</div>
+
+<script>
+  document.publishEvent( 'initPlusMinus', { 'inputId': "<%=inputId%>", 'buttonId': "<%=minusId%>" } );
+  document.publishEvent( 'initPlusMinus', { 'inputId': "<%=inputId%>", 'buttonId': "<%=plusId%>" } );
+</script>

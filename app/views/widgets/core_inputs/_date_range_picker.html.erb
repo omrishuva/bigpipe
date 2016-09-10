@@ -1,0 +1,12 @@
+</br>
+<p class="relativeCenter" >Select Travel Dates</p>
+	<div class='input-group dateRange' id="<%=locals[:id]%>">
+		<span class="input-group-addon">
+			<i class="fa fa-calendar" aria-hidden="true"></i>
+		</span>
+		<input type="text" id="date-range" class="form-control" name="date_range" placeholder="dd/mm/yyyy - dd/mm/yyyy" />
+	</div>
+	<input id="start-date" type="hidden" name="start_date">
+	<input id="end-date" type="hidden" name="end_date">
+
+<script>document.publishEvent('initDateRangePicker', { 'type': "<%=locals[:type]%>" })</script>
