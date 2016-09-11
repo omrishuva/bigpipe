@@ -15,6 +15,7 @@ loadListeners = ( exclude ) ->
   facebookSignIn();
   resendPhoneNumber();
   onFileUpload();
+  hideNavsOnScroll();
   # createNewActivty();
   logOut();
 
@@ -23,6 +24,10 @@ document.addEventListener 'ajaxRequest',(e) ->
 
 document.addEventListener 'setBodyBackgroundImage',(e) ->
   setBodyBackgroundImage( e.detail.imageUrl );
+
+document.addEventListener 'setHomePageBackgroundImage',(e) ->
+  setHomePageBackgroundImage( e.detail.imageUrl );
+
 document.addEventListener 'RequestCreateTrip',(e) ->
   RequestCreateTrip();
 
@@ -34,6 +39,14 @@ hideLoader = ->
 
 setBodyBackgroundImage = ( imageUrl ) ->
   $("body").css("background", "url(#{imageUrl})" );
+
+setHomePageBackgroundImage = (imageUrl) ->
+  $("#imageBackground").css( "background", "url(#{imageUrl})" )
+
+hideNavsOnScroll = -> 
+  $(window).scroll ->
+  if $(this).scrollTop() > 25
+    $('.userSideBar').css 'display': 'none'
 
 facebookSignIn = ->
   $('#fbSignIn, #fbTrainerSignIn').on 'click', ->

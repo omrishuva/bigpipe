@@ -1,0 +1,18 @@
+<div class="relativeCenter">
+	<%= render 'widgets/widget', 
+			locals: {  
+								widgetName: "multiple_select_box",
+								elementName: "multipleSelectBox",
+								objectName: "TripRequest", 
+								objectId: @object.id,
+								key: "persoal_taste",
+								selectOptions: TripRequest.metadata["personal_taste"],
+								value: @object.persoal_taste,
+								state: "edit",
+								isWidgetOwner: true,
+								maxSelections: 10,
+								wizardMode: true,
+								placeholder: "select_10_trip_elements"
+							}
+	%>
+</div>

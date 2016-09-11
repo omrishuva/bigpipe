@@ -1,17 +1,18 @@
 <div class="relativeCenter">
   <%=render "widgets/button", 
                       locals: locals.merge( 
-                                            class: "btn btn-success halfWidth wizardButton relativeCenter", 
+                                            class: "btn btn-success wizardButton relativeCenter", 
                                             state: "save",
-                                            button_text: locals[:saveButtonText] 
+                                            button_text: $wizards["save_button_text"][locals[:widgetName]][locals[:nodeNumber]]
                                           )
         %>
-  <%if locals[:showCancelButton].to_s == "true" %>
+
+  <%if $wizards["skipPhase"][locals[:widgetName]][locals[:nodeNumber]] == true %>
     <%=render "widgets/button", 
                         locals: locals.merge( 
                                               class: "btn btn-danger wizardButton relativeCenter", 
                                               state: "cancel",
-                                              button_text: locals[:cancelButtonText]  
+                                              button_text: $wizards["cancel_button_text"][locals[:widgetName]][locals[:nodeNumber]]
                                             )
           %>
   <%end%>

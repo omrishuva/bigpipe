@@ -1,5 +1,7 @@
 en:
  welcome_message: "Welcome to Activity Market"
+ give_a_title_to_your_trip: "Give a title to your trip"
+ joe_and_and_jane: "Joe and Jane honeymoon trip to Vietnam"
  where_are_you_from: "Where are you from ?"
  where_are_you_traveling_to: "Where do you start and finish your trip ? "
  where_will_you_be_traveling: "Where will you be traveling ?"
@@ -38,6 +40,7 @@ en:
  done: "Done"
  build_my_trip: "Build My Trip"
  do_it_later: "I'll do it later"
+ nevermind: "Nevermind"
  signin_with_email: "or connect via email"
  email_input_placeholder: "Enter your email adress"
  name_input_placeholder: "Enter your Full Name"

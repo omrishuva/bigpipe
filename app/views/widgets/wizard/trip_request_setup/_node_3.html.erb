@@ -1,51 +1,48 @@
-<div class="col-lg-3 col-lg-offset-3">
-  <%= render 'widgets/widget', 
-  locals: {  
-            widgetName: "plus_minus_box",
-            elementName: "plusMinusBox",
-            objectName: "TripRequest",
-            objectId: @object.id,
-            key: "adults",
-            state: "edit",
-            isWidgetOwner: true,
-            placeholder: "number_adults",
-            wizardMode: true,
-            nodeNumber: 3,
-            saveOnly: true
-          }
-  %>
-</div>
+<%locals.merge!({ saveKey: "travel_group_type", renderWizardButton: false })%>
 
-<div class="col-lg-3">
-  <%= render 'widgets/widget', 
-  locals: {  
-            widgetName: "plus_minus_box",
-            elementName: "plusMinusBox",
-            objectName: "TripRequest",
-            objectId: @object.id,
-            key: "children",
-            state: "edit",
-            isWidgetOwner: true,
-            placeholder: "number_children",
-            wizardMode: true,
-            nodeNumber: 3,
-            saveOnly: true
-          }
-%>
-</div>
-<div class="col-lg-6 col-lg-offset-3">
-<%= render 'widgets/widget', 
-  locals: {  
-            widgetName: "text_area_box",
-            elementName: "textAreaBox",
-            objectName: "TripRequest",
-            objectId: @object.id,
-            key: "travel_group_notes",
-            state: "owner_before_commit",
-            isWidgetOwner: true,
-            placeholder: "notes_about_the_group",
-            removePlugins: "toolbar"
-          
-          }
-%>
-</div>
+  <div class="col-lg-3">
+    <%=render "widgets/button", 
+                  locals: locals.merge( 
+                                        class: "btn btnImage wizardButton relativeCenter", 
+                                        state: "save",
+                                        image: "Trekking-104_e03lwe.png",
+                                        skipNextNode: true,
+                                        data: "solo",
+                                        button_text: "solo"
+                                      )
+    %>
+  </div>
+  <div class="col-lg-3">
+    <%=render "widgets/button", 
+                  locals: locals.merge( 
+                                        class: "btn btnImage wizardButton relativeCenter", 
+                                        state: "save",
+                                        image: "Date_Man_Woman_Filled-100_ryyd3q.png",
+                                        skipNextNode: true,
+                                        data: "couple",
+                                        button_text: "couple"
+                                      )
+    %>
+  </div>
+  <div class="col-lg-3">
+    <%=render "widgets/button", 
+                  locals: locals.merge( 
+                                        class: "btn btnImage wizardButton relativeCenter", 
+                                        state: "save",
+                                        data: "family",
+                                        image: "Family_Man_Woman_Filled-100_jayeh8.png",
+                                        button_text: "family" 
+                                      )
+    %>
+  </div>
+  <div class="col-lg-3">
+    <%=render "widgets/button", 
+                  locals: locals.merge( 
+                                        class: "btn btnImage wizardButton relativeCenter", 
+                                        state: "save",
+                                        image: "User_Groups_Filled-100_ik6czj.png",
+                                        data: "group",
+                                        button_text: "group" 
+                                      )
+    %>
+  </div>

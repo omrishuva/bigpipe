@@ -1,4 +1,5 @@
-<div class="activityContainer">
+</br></br></br></br>
+<div class="container activityContainer">
 	<%= render 'activity_preview_and_publish'%>
 
 	<div class="gridItem activityHeader">
@@ -33,7 +34,6 @@
 	</div>
 	<%=render 'activity_delete'%>
 </div>
-
 <%if @activity.state == "published"%>
 	<%= render 'meta_tags'%>
 	<%=render "shared/scripts/add_this_share_widget" %>

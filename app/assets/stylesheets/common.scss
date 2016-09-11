@@ -5,90 +5,90 @@ body
   overflow-x: hidden;
 }
 
-a{ color: #056cf9; }
-@media (min-width: 320px) { .mainContainer { z-index: -1; font-size: 65%;  margin-top: 20%;}
+a{ color: #4187ff; }
+@media (min-width: 320px) { .siteContent { z-index: -1; font-size: 65%; }
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  }   
-                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
+                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; }
                           }
 
-@media (min-width: 360px)  { .mainContainer { z-index: -1; font-size: 75%;  margin-top: 20%;}
+@media (min-width: 360px)  { .siteContent { z-index: -1; font-size: 75%; }
                              .ltrUserSidebar{  right: 0;  }
                              .rtlUserSidebars{  left: 0;  }  
-                             .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                             // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
                             }
 
 @media (min-width: 375px) { 
-                            .mainContainer { z-index: -1; font-size: 80%;  margin-top: 18%;}
+                            .siteContent { z-index: -1; font-size: 80%; }
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  }  
-                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
                           }
 
 @media (min-width: 411px) { 
-                            .mainContainer { z-index: -1; font-size: 90%;  margin-top: 18%;} 
+                            .siteContent { z-index: -1; font-size: 90%; } 
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  } 
-                            .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
                           }
 
 @media (min-width: 414px)  { 
-                              .mainContainer { z-index: -1; font-size: 90%;  margin-top:  18%;}
+                              .siteContent { z-index: -1; font-size: 90%;  }
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  } 
-                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                              // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
                             }
 
 @media (min-width: 435px)   { 
-                              .mainContainer { z-index: -1; font-size: 95%;  margin-top: 16%;     } 
+                              .siteContent { z-index: -1; font-size: 95%; } 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
-                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; } 
+                              // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
                             }
 
 @media (min-width: 768px)   { 
-                              .mainContainer { z-index: -1; font-size: 120%; margin-top: 10%;} 
+                              .siteContent { z-index: -1; font-size: 120%; } 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
-                              .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                              .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              // .NavBarLogo{ position: absolute; width: 2em; height: 1.5em; top: 5px; }
+                              .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 800px)   { 
-                              .mainContainer { z-index: -1; font-size: 120%; margin-top: 12.5%;} 
+                              .siteContent { z-index: -1; font-size: 120%;} 
                               .ltrUserSidebar{  right: 5%;  }
                               .rtlUserSidebar{  left: 5%;  }
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                              .NavBarLogo{ position: absolute; width: 4em; height: 2.5em; top: 10px; }
-                              .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                              .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                              // .NavBarLogo{ position: absolute; width: 2em; height: 1.5em; top: 3px; }
+                              .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                              .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 @media (min-width: 1000px) { 
-                            .mainContainer { z-index: -1; font-size: 120%; margin-top: 7.5%;}
+                            .siteContent { z-index: -1; font-size: 120%; }
                             .ltrUserSidebar{  right: 5%;  }
                             .rtlUserSideBar{  left: 5%;  }
-                            .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
+                            // .NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                            .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                            .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
 
                            }
 
 @media (min-width: 1500px) { 
-                            .mainContainer { z-index: -1; font-size: 120%; margin-top: 5%;} 
+                            .siteContent { z-index: -1; font-size: 120%; } 
                             .ltrUserSidebar{  right: 15%;  }
                             .rtlUserSidebar{  left: 15%;  }
-                            .NavBarLogo{ position: absolute; width: 10em; height: 4em; top: 5px; } 
+                            // .NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; } 
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                            .ltrRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
-                            .rtlRequestCreateTripPlan{  top: 20px; left: 40%; position: absolute; font-size: 15px; }
+                            .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                            .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                             }
 
 .hidden{ visibility: hidden; }
@@ -99,58 +99,50 @@ a{ color: #056cf9; }
   -webkit-box-pack:center;
   display:-webkit-box;
 }
-
+.wizardContainer{ @extend  .textShadowContainer; @extend .container;  }
 .textShadowContainer{ 
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.3);
-  background-color: #F9F9F9;
+  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+  background-color: rgba(249, 249, 249, 0.95);
 
 }
 .col-centered{ float: none !important;  margin: 0 auto !important; }
 .activityContainer{ @extend .textShadowContainer;  }
 .TripDatesSection{ margin-bottom: 2em; }
+.NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; }
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
-.ltrUserLogin{ top: 20px; right: 10%;  position: absolute; }
+.ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
 
 .rtlNavBarLogo { @extend .NavBarLogo;  right: 0.5em; }
-.rtlUserLogin{ top: 20px; left: 10%; position: absolute; }
+.rtlUserLogin{ top: 5px; left: 10%; position: absolute; }
 
 .userDropdown:active{ color: #FFB941; }
 
-.userSideBarShadow{  
-                   border-style: solid;
-                   border-width: 0px;
-                   border-radius: 25px;
-                   border-color: #fff;
-                   min-width: 13em;
-                   min-height: 85px;
-                   background-color: #FFB941;
-                   display: none;
-                   z-index: -2000;
-                   position: absolute;
-                   text-align: center;
-                   opacity: 0.85;
-                   top: 0px;
-                   left: -71px;
-                  }
-
 .userSideBarStyle { 
                     width: 13em; 
-                    top: 5em; 
-                    border-style: solid; 
-                    border-width: 1px; 
+                    top: 2.5em; 
                     border-bottom-left-radius: 25px;
                     border-bottom-right-radius: 25px;
-                    border-color: #fff; 
-                    background-color: #FFB941; 
+                    background-color: rgba(255,213,141, 0.95);
                     display: none; 
                     z-index: 2000; 
                     position: fixed; 
                     text-align: center; 
-                    opacity:0.95;
                 }
+
+.navigationBar{  
+  background: rgba(255,213,141, 0.9);
+  top: 0px;
+  width: 100%;
+  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+  height: 2.5em;
+  overflow:hidden;
+  position: fixed;
+  z-index: 2000;
+  
+}
 
 .signinLoader{  display: none; }
 
@@ -163,7 +155,7 @@ a{ color: #056cf9; }
                     height: 30px;
                   }
 
-.dropdown-item{ color: #056cf9; }
+.dropdown-item{ color: #4187ff; }
 .userMenuSection{ display: inline; }
 .modal{ top: 5em; }
 .formModalTitle{ font-weight: bold; }
@@ -171,37 +163,23 @@ a{ color: #056cf9; }
 .smallText{ font-size: 60%; }
 .mediumText{ font-size: 80%; }
 .largeText{ font-size: 120% }
-
-.navigationBar{  
-  background: #F7F7F7;
-  top: 0px;
-	width: 100%;
-	border-bottom: 1px solid #ff7f66;
-	box-shadow: 4px 4px 10px #ff7f66;
-	border-radius: 5px;
-	height: 5em;
-	overflow:hidden;
-  position: fixed;
-  z-index: 2000;
-  background-color: #F9F9F9;
-}
 .proColor{ color: #ff7f66; }
 .block{ display: inline-block; }
 .btnBrand{  padding: 2px 4px; border-radius: 3px; font-weight: bold;  }
 .fullWidth{ width: 100%; }
 .halfWidth{ width: 50%; }
-.btnBrand1{ @extend .btnBrand; background-color: #056cf9; color: #FFB941;  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.3); }
-.btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #056cf9; ;  }
+.btnBrand1{ @extend .btnBrand; background-color: #4187ff; color: #FFB941; }
+.btnBrand1Inverse{ @extend .btnBrand; background-color: #FFB941;  color: #4187ff; ;  }
 .btnBrand1InverseBgColor{ background-color: #FFB941 !important; }
 .smallBtn{ @extend .smallText; @extend .btn-sm; }
 .largeBtn{ @extend .largeText;  }
 .btnBrandHover{ text-decoration: none; }
-.btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #056cf9 ; }
-.btnBrand1Inverse:hover{ @extend .btnBrandHover; background-color: #056cf9; color: #FFB941; }
-.btnImage{ color: #056cf9; background-color: #fff; border-style: solid; border-width: 1px; border-color: #056cf9;  }
+.btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #4187ff ; }
+.btnBrand1Inverse:hover{ @extend .btnBrandHover; background-color: #4187ff; color: #FFB941; }
+.btnImage{ color: #4187ff; background-color: #fff; border-style: solid; border-width: 1px; border-color: #4187ff;  }
 .imgInButton{ margin-right: 5px; }
-.btnImage:hover{ color: #056cf9; background-color: #FFB941; border-style: solid; border-width: 1px; border-color: #FFB941; }
-.btnBrand1:active{  background-color: #056cf9; color: #FFB941; text-decoration: none;}
+.btnImage:hover{ color: #4187ff; background-color: #FFB941; border-style: solid; border-width: 1px; border-color: #FFB941; }
+.btnBrand1:active{  background-color: #4187ff; color: #FFB941; text-decoration: none;}
 .btnBrandCancel{ @extend .btnBrand; background-color: #AF3245; color: #fff; width: 3.5em; }
 .btnBrandCancel:hover{ @extend .btnBrandHover; background-color: #000; color: #fff ;    }
 .bthModalForm{ width: 100%; }
@@ -282,9 +260,9 @@ a{ color: #056cf9; }
 .activityLeader{ width: 13em !important; }
 .dayOfWeek{ width: 13em !important; }
 .slider{ width: 13em !important; }
-.slider-selection{ background: #056cf9; }
+.slider-selection{ background: #4187ff; }
 
-.imageOverlayTextWithLink{ @extend .imageOverlayText; color: #056cf9;  }
+.imageOverlayTextWithLink{ @extend .imageOverlayText; color: #4187ff;  }
 
 .imageOveralyButton{ position: absolute; top: 4.5em; box-shadow: 0px 0px 7px 8px #fff; @extend .smallBtn; }
 .ltrimageOveralySave{  @extend .imageOveralyButton; left: 5%; }
@@ -294,7 +272,7 @@ a{ color: #056cf9; }
 
 .widgetTextInput{ opacity: 1 !important; }
 .activityTitle{ font-size: 130%; }
-.activitySubtitle{ color: #056cf9; font-weight: bold; margin-top: 2px; text-decoration: underline; }
+.activitySubtitle{ color: #4187ff; font-weight: bold; margin-top: 2px; text-decoration: underline; }
 .ltrimageOverlayText{ @extend .imageOverlayText;  } 
 .rtlimageOverlayText{ @extend .imageOverlayText;  }
 

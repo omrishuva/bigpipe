@@ -1,4 +1,4 @@
-<div id="userProfileContent">
+<div class="container" id="userProfileContent">
 	<%if locals[:nav].present?%>
 		<%= render "users/#{locals[:nav]}", locals: { user: @user } %>
 	<%else%>
