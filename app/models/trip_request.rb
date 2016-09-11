@@ -1,7 +1,7 @@
 class TripRequest < Entity
 	DEPRECATED_FIELDS = []
 	attr_accessor :id,:user_id ,:start_date, :end_date, :rent_car, :personal_taste_tags, :food_preferences, 
-	:special_request, :travel_group_type, :travel_group_notes, :date_type, :approximate_month, :approximate_duration,
+	:special_request, :travel_group_type, :travel_group_notes, :time_duration_type, :approximate_month, :approximate_duration,
 	 :adults, :children, :seniors ,:created_at, :updated_at
 
 	def starting_point
