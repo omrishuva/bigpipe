@@ -122,15 +122,15 @@ createNewActivty = ->
 RequestCreateTrip = ->
   $('#createTripPlan, #requestTripPlan').click (e) ->
     userId = e.target.dataset.userId
-    if userId == undefined || userId == ""
-      openSignupModal();
-    else
-      url = { "createTripPlan": '/new_trip', 'requestTripPlan': '/new_trip_request'  }
-      showLoader();
-      $.ajax
-        type: 'POST'
-        url: url[e.target.id]
-        data: "new_trip"
+    # if userId == undefined || userId == ""
+    #   openSignupModal();
+    # else
+    url = { "createTripPlan": '/new_trip', 'requestTripPlan': '/new_trip_request'  }
+    showLoader();
+    $.ajax
+      type: 'POST'
+      url: url[e.target.id]
+      data: "new_trip"
 
 ajaxRequest = ( requestMethod, url ) ->
   $.ajax

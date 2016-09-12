@@ -6,6 +6,9 @@ body
 }
 
 a{ color: #4187ff; }
+a, a:hover, a:active, a:visited {
+    text-decoration:none;
+}
 @media (min-width: 320px) { .siteContent { z-index: -1; font-size: 65%; }
                             
                             .ltrUserSidebar{  right: 0;  }
@@ -337,11 +340,11 @@ a{ color: #4187ff; }
   background: #FFB941;
   border-radius: 10px;
   box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+  text-decoration: none;
 }
 .imageOverlaybottomCenter:hover{ text-decoration: none;  -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none; }
-    
 .imageOverlayTopButton:hover{ text-decoration: none;  -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;}

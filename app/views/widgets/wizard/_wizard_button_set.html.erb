@@ -7,7 +7,7 @@
                                           )
         %>
 
-  <%if $wizards["skipPhase"][locals[:widgetName]][locals[:nodeNumber]] == true %>
+  <%if $wizards["skipPhase"][locals[:widgetName]] && $wizards["skipPhase"][locals[:widgetName]][locals[:nodeNumber]] == true %>
     <%=render "widgets/button", 
                         locals: locals.merge( 
                                               class: "btn btn-danger wizardButton relativeCenter", 

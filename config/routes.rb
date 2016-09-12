@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 	get  '/profile/:user_id'            							 										 	 => 'users#profile'
 	get  '/profile/navigation/:navtab'               	 										 	 => 'users#profile_navigation'
 	post '/upload_image'								 							 										 	 => 'users#upload_image'
+	get  '/join_as_expert' 																									 => 'users#join_as_expert'
 	
 	#invite users
 	get  '/account_user/new'         				 																	=> 'users#invite_account_user'

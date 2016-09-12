@@ -6,7 +6,7 @@ class SiteText < Entity
 	end
 	
 	def generate_key
-		"#{I18n.locale}_trip_request"
+		"#{I18n.locale}_#{name}"
 	end
 
 	def namespace

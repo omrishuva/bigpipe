@@ -10,11 +10,14 @@
     %>
 
     <%topButtonClass = current_direction == :ltr ? "imageOverlaytopLeftButton" : "imageOverlaytopRightButton" %>
-     <a class="<%="#{topButtonClass} imageOverlayTopButton" %>" href="">
-     	<%=I18n.t locals[:topButtonText]%>
+     <a class="<%="#{topButtonClass} imageOverlayTopButton" %>" href="/join_as_expert">
+     		<%=I18n.t locals[:topButtonText]%>
      </a>
      <%bottomCenterButtonClass = current_direction == :ltr ? "ltrImageOverlayBottomCenter" : "rtlImageOverlayBottomCenter" %>
-      <a class="<%="#{bottomCenterButtonClass} imageOverlaybottomCenter"%>" href="">
+      <a id="<%=locals[:bottomCenterButtonId]%>" class="<%="#{bottomCenterButtonClass} imageOverlaybottomCenter"%>" href="javascript:void(0)">
 	     	<%= I18n.t locals[:bottomCenterButtonText] %>
      </a>
 </div>
+<%if locals[:jsEvent].present?  %>
+	<script> document.publishEvent("<%=locals[:jsEvent]%>"); </script>
+<%end%>

@@ -18,6 +18,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def join_as_expert
+   
+  end
+
   def authenticate_phone
     if params[:user][:phone].present?
         current_user.save_phone( params[:user][:phone] )

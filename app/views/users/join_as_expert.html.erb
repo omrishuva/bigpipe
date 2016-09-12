@@ -1,0 +1,15 @@
+<script> 
+document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "http://res.cloudinary.com/kommunal/image/upload/v1472681768/lavender-flowers-1595487_1920_ezoljt.jpg" })
+</script>
+
+<%= render 'widgets/wizard/wizard', 
+	locals: {  
+							wizard: true,
+							widgetName: "join_as_expert",
+							elementName: "joinAsExpert",
+							nodeNumber: 1,
+							objectName: "User",
+							isWidgetOwner: true,
+							placeholder: $wizards["placeholders"]["join_as_expert"][1]
+						}
+%>

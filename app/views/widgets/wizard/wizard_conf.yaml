@@ -7,6 +7,9 @@ placeholders:
     5: "when_will_you_be_traveling"
     6: "where_will_you_be_traveling"
     7: "trip_hobbies"
+  join_as_expert:
+    1: "happy_to_see_you"
+
 save_button_text:
   trip_request_setup:
     1: "build_my_trip"
@@ -15,7 +18,8 @@ save_button_text:
     4: "next"
     5: "next"
     6: "done"
-
+  join_as_expert:
+    1: "join_us_to_find_out_more"
 skipPhase:
  trip_request_setup: 
     2: true
