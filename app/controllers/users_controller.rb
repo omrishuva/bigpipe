@@ -11,10 +11,25 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new( params[:user] )
-    session[:user_id] = @user.id if @user.save
-    respond_to do |format|
-      format.js { }
-      format.json { render json: @user }
+    @embedded_form = params[:embedded]
+    
+    if @user.save
+      session[:user_id] = @user.id 
+      if params[:seller].to_s == "true"
+        render js: "window.location = '/account/setup/#{@user.id}' "
+      else
+        respond_to do |format|
+          format.js { }
+          format.json { render json: @user }
+        end
+      end
+    else
+    
+      respond_to do |format|
+        format.js { }
+        format.json { render json: @user }
+      end
+    
     end
   end
   

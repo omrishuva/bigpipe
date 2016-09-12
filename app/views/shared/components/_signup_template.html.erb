@@ -1,13 +1,16 @@
 <%locals ||= {} %>  
-<%if locals && locals[:embedded] == true %>
+<%if locals && locals[:embedded].to_s == "true" %>
   <%klass = "embeddedSignUp"%>
+  <%formId = "embeddedSignupForm"%>
+  <%templateId = "embeddedSignupTemplate"%>
 <%else%>
-  
+  <%formId = "signUpForm"%>
   <%klass = "modal-content"%>
+  <%templateId = "signupTemplate"%>
 <%end%>
 
-  <div id="signUpTemplate" class="<%="#{klass}"%>">
-  <% if not( locals && locals[:embedded] == true ) %>
+<div id="<%=templateId%>" class="<%="#{klass}"%>">
+  <% if not( locals && locals[:embedded].to_s == "true" ) %>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -21,18 +24,25 @@
       </p>
     </div>
   <%end%>
-    
-  <div class="modal-body">
   
+  <div class="modal-body">
+
   	<a class="btn btn-block btn-social btn-facebook centeredText" id="fbSignIn" >
       <span class="fa fa-facebook"></span>
       <%= I18n.t :signup_with_fb%> 
     </a>
     <div class="dropdown-divider"></div>
      <p class="centeredText" > <%= I18n.t :or_signup_with_email%> </p>
-    <form id="signUpForm" data-remote="true" action="/signup" accept-charset="UTF-8" method="post">	
+    
+    <form id="<%=formId%>" data-remote="true" action="/signup" accept-charset="UTF-8" method="post">	
 			<input name="utf8" type="hidden" value="&#x2713;" />
 			<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%if locals && locals[:embedded].to_s == "true" %>
+        <%= hidden_field_tag :embedded, "true" %>
+      <%end%>
+      <%if locals && locals[:seller].to_s == "true" %>
+        <%= hidden_field_tag :seller, "true" %>
+      <%end%>
 			<%= hidden_field_tag "user[auth_provider]", "email" %>
 			<%= render "shared/form_helpers/input_field", locals: {input_type: "text", field_name: :name, user: locals[:user] } %>
 			<%= render "shared/form_helpers/input_field", locals: {input_type:"email",field_name: :email, user: locals[:user] } %>
@@ -40,5 +50,8 @@
 			<button type="submit" class="btn btnBrand1 bthModalForm"><%= I18n.t :signup_button%></button>
       <%= render "shared/form_helpers/flash_messages" %>
 		</form>
-	</div>
+  
+  </div>
 </div>
+
+<script> document.publishEvent('enableSignUpForm') </script>

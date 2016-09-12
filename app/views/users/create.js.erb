@@ -1,5 +1,9 @@
 <%if @user.errors.present?%>
-	$('#signUpTemplate').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user }) %>");
+	<%if @embedded_form == 'true'%>
+		$('#embeddedSignupTemplate').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user, embedded: @embedded_form }) %>");
+	<%else%>
+		$('#signupTemplate').replaceWith("<%= escape_javascript( render 'shared/components/signup_template', :locals => { user: @user }) %>");
+	<%end%>
 <%else %>
 	$('#signupModal').modal('hide')
 	$('#flashMessages').replaceWith("<%= escape_javascript( render 'shared/form_helpers/flash_messages') %>");

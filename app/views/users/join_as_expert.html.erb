@@ -12,6 +12,7 @@ document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "http://res.cloudi
 							objectName: "User",
 							isWidgetOwner: true,
 							noObject: true,
+							skipNextNode: current_user.present?,
 							placeholder: $wizards["placeholders"]["join_as_expert"][1]
 						}
 %>

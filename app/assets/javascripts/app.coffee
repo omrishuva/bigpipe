@@ -1,4 +1,9 @@
 "use strict";
+
+
+document.addEventListener 'enableSignUpForm',(e) ->
+  submitSignUpForm();
+
 $(document).ready ->
   loadListeners();
 
@@ -7,7 +12,6 @@ loadListeners = ( exclude ) ->
   loadLoginForm();
   loadPasswordRecoveryEmailForm();
   submitLoginForm();
-  submitSignUpForm();
   submitPhoneForm();
   submitPhoneVerificationForm();
   submitPasswordRecoveryEmailForm();
@@ -82,7 +86,7 @@ facebookSignIn = ->
     ), scope: 'email,public_profile'
 
 submitSignUpForm = ->
-  $('#signUpForm').submit (e) ->
+  $('#signUpForm, #embeddedSignupForm').submit (e) ->
     disableSubmitButton();
     showLoader();
     e.preventDefault()
@@ -90,7 +94,7 @@ submitSignUpForm = ->
     $.ajax
       type: 'POST'
       url: url
-      data: $('#signUpForm').serialize()
+      data: $(this).serialize()
       success: (data) ->
         postSignUp();
 

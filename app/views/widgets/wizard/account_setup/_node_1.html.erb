@@ -1,8 +1,9 @@
+<%locals.merge!({ saveKey: "account_type", renderWizardButton: false })%>
 
-<div class="row">
+<div class="col-sm-6 col-sm-offset-5">
 	<%=render "widgets/button", 
-								locals: locals[:wizardConf].merge( 
-																			class: "btn btnBrand1 halfWidth wizardButton fa fa-user", 
+								locals: locals.merge( 
+																			class: "btn btnImage fa fa-user", 
 																			state: "save",
 																			data: "freelancer",
 																			button_text: "freelancer"
@@ -10,8 +11,8 @@
 	%>
 	</br>
 	<%=render "widgets/button", 
-								locals: locals[:wizardConf].merge( 
-																			class: "btn btnBrand1 halfWidth wizardButton fa fa-users", 
+								locals: locals.merge( 
+																			class: "btn btnImage fa fa-users", 
 																			state: "save",
 																			data: "business",
 																			button_text: "business" 

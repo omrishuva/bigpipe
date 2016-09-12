@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 	get  '/account/existing_user/onboarding/:account_id/:user_id'							=> 'users#existing_user_onboarding'
 	#accounts
 	post '/accounts/upgrade_business/:account_id'													    => 'accounts#upgrade_to_business_account'
-	get '/account/setup/:accountId'																					 	=> 'accounts#account_setup'
+	get '/account/setup/:user_id'																					   	=> 'accounts#account_setup'
 
 	#activities	
 	post '/new_activity'											 										 	   				 => 'activities#new_activity'

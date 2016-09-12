@@ -10,7 +10,11 @@ class AccountsController < ApplicationController
 	end
 
 	def account_setup
-		@account = current_user.current_account
+		if current_user.current_account
+			@account = current_user.current_account
+		else
+			@account = Account.create_freelancer_account( current_user )
+		end
 	end
 
 end
