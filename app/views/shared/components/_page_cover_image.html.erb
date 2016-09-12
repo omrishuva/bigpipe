@@ -11,12 +11,10 @@
 
     <%topButtonClass = current_direction == :ltr ? "imageOverlaytopLeftButton" : "imageOverlaytopRightButton" %>
      <a class="<%="#{topButtonClass} imageOverlayTopButton" %>" href="">
-     	Join as an expert
+     	<%=I18n.t locals[:topButtonText]%>
      </a>
      <%bottomCenterButtonClass = current_direction == :ltr ? "ltrImageOverlayBottomCenter" : "rtlImageOverlayBottomCenter" %>
       <a class="<%="#{bottomCenterButtonClass} imageOverlaybottomCenter"%>" href="">
-	     	Get Started
+	     	<%= I18n.t locals[:bottomCenterButtonText] %>
      </a>
 </div>
-
-	

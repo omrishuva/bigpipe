@@ -338,7 +338,10 @@ a{ color: #4187ff; }
   border-radius: 10px;
   box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
 }
-
+.imageOverlaybottomCenter:hover{ text-decoration: none;  -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+    
 .imageOverlayTopButton:hover{ text-decoration: none;  -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;}
