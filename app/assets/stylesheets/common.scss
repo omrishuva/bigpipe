@@ -7,88 +7,153 @@ body
 
 a{ color: #4187ff; }
 @media (min-width: 320px) { .siteContent { z-index: -1; font-size: 65%; }
+                            
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  }   
-                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; }
+
+                            .imageOverlaytopRightButton{  top: 5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton {  top: 5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 12em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 12em; left: 35%; }
                           }
 
 @media (min-width: 360px)  { .siteContent { z-index: -1; font-size: 75%; }
                              .ltrUserSidebar{  right: 0;  }
                              .rtlUserSidebars{  left: 0;  }  
-                             // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
+
+                            .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 10em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 10em; left: 35%; }
                             }
 
 @media (min-width: 375px) { 
                             .siteContent { z-index: -1; font-size: 80%; }
                             .ltrUserSidebar{  right: 0;  }
-                            .rtlUserSidebar{  left: 0;  }  
-                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
+                            .rtlUserSidebar{  left: 0;  }
+                            
+                            .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 10em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 10em; left: 35%; }
                           }
 
 @media (min-width: 411px) { 
                             .siteContent { z-index: -1; font-size: 90%; } 
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  } 
-                            // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
+
+                            .imageOverlaytopRightButton{ top: 3.5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton { top: 3.5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 8em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 9em; left: 35%; }
                           }
 
 @media (min-width: 414px)  { 
                               .siteContent { z-index: -1; font-size: 90%;  }
+  
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  } 
-                              // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
+                              
+                              .imageOverlaytopRightButton{  top: 3.5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                              .imageOverlaytopLeftButton {  top: 3.5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                              .ltrImageOverlayBottomCenter{ top: 8em; left: 35%; }
+                              .rtlImageOverlayBottomCenter{ top: 8em; left: 35%; }
                             }
 
 @media (min-width: 435px)   { 
                               .siteContent { z-index: -1; font-size: 95%; } 
+  
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
-                              // .NavBarLogo{ position: absolute; width: 4em; height: 2em; top: 4px; } 
+  
+                              .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                              .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                              .ltrImageOverlayBottomCenter{ top: 10em; left: 35%; }
+                              .rtlImageOverlayBottomCenter{ top: 10em; left: 35%; }
                             }
 
 @media (min-width: 768px)   { 
                               .siteContent { z-index: -1; font-size: 120%; } 
+  
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
+  
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                              // .NavBarLogo{ position: absolute; width: 2em; height: 1.5em; top: 5px; }
+  
                               .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                               .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+
+                             .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                             .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                              .ltrImageOverlayBottomCenter{ top: 7em; left: 36%; }
+                              .rtlImageOverlayBottomCenter{ top: 7em; left: 36%; }
                             }
 
 @media (min-width: 800px)   { 
                               .siteContent { z-index: -1; font-size: 120%;} 
+                              
                               .ltrUserSidebar{  right: 5%;  }
                               .rtlUserSidebar{  left: 5%;  }
+                              
                               .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                               .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
-                              // .NavBarLogo{ position: absolute; width: 2em; height: 1.5em; top: 3px; }
+                              
                               .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                               .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                              
+                              .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                              .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                              .ltrImageOverlayBottomCenter{ top: 7em; left: 38%; }
+                              .rtlImageOverlayBottomCenter{ top: 7em; left: 38%; }
                             }
 
 @media (min-width: 1000px) { 
                             .siteContent { z-index: -1; font-size: 120%; }
+                            
                             .ltrUserSidebar{  right: 5%;  }
                             .rtlUserSideBar{  left: 5%;  }
-                            // .NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; } 
+                            
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
+                            
                             .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                             .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                            
+                            .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 12em; left: 42%; }
+                            .rtlImageOverlayBottomCenter{ top: 12em; left: 42%; }
 
                            }
 
 @media (min-width: 1500px) { 
                             .siteContent { z-index: -1; font-size: 120%; } 
+                            
                             .ltrUserSidebar{  right: 15%;  }
                             .rtlUserSidebar{  left: 15%;  }
-                            // .NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; } 
+                            
                             .ltrInfo{ top: 20px; left: 20%; position: absolute; font-size: 15px; }
                             .rtlInfo{ top: 20px; right: 20%; position: absolute; font-size: 15px;}
+                            
                             .ltrRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
                             .rtlRequestCreateTripPlan{  top: 10px; left: 40%; position: absolute; font-size: 15px; }
+                            
+                            .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
+                            .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
+
+                            .ltrImageOverlayBottomCenter{ top: 12em; left: 40%; }
+                            .rtlImageOverlayBottomCenter{ top: 12em; left: 40%; }
                             }
 
 .hidden{ visibility: hidden; }
@@ -99,6 +164,7 @@ a{ color: #4187ff; }
   -webkit-box-pack:center;
   display:-webkit-box;
 }
+.fixedNavItem{ left: 5em; top: 3px; position: absolute; color: #FF2B5E !important; }
 .wizardContainer{ @extend  .textShadowContainer; @extend .container;  }
 .textShadowContainer{ 
   display: flex;
@@ -111,7 +177,7 @@ a{ color: #4187ff; }
 .col-centered{ float: none !important;  margin: 0 auto !important; }
 .activityContainer{ @extend .textShadowContainer;  }
 .TripDatesSection{ margin-bottom: 2em; }
-.NavBarLogo{ position: absolute; width: 5em; height: 2em; top: 3px; }
+.NavBarLogo{  width: 5em; height: 2em; position: absolute; top: 0.2em; }
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
 
@@ -123,9 +189,7 @@ a{ color: #4187ff; }
 .userSideBarStyle { 
                     width: 13em; 
                     top: 2.5em; 
-                    border-bottom-left-radius: 25px;
-                    border-bottom-right-radius: 25px;
-                    background-color: rgba(255,213,141, 0.95);
+                    background-color: rgba(249,249,249, 0.95);
                     display: none; 
                     z-index: 2000; 
                     position: fixed; 
@@ -133,7 +197,7 @@ a{ color: #4187ff; }
                 }
 
 .navigationBar{  
-  background: rgba(255,213,141, 0.9);
+  background: rgba(249,249,249, 0.9);
   top: 0px;
   width: 100%;
   box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
@@ -226,7 +290,6 @@ a{ color: #4187ff; }
 .aboutOrganizerBox{ font-size: 80%; background-color: rgba(224, 224, 224, 0.5); padding:1%;  height:auto; }
 .aboutOragnizerImage{ float: left; }
 .aboutOrganizerText{ display: inline-block; }
-// .fixedGridItem{ @extend .gridItem;  position: fixed; }
 .textAreaBox { min-width: 20%;  }
 .textAreaBoxMinHeight{ min-height: 15em;  }
 .thinBorder{ border-radius: 5px;  border-style: solid; border-color: #e5e5e5; border-width: 1px;  }
@@ -254,7 +317,31 @@ a{ color: #4187ff; }
                     font-weight: bold; 
                     text-align: center; 
                     top: 0px;
+                    font-weight: bold;
                 }
+.pageCover{ min-height: 330px !important; }
+
+.imageOverlayTopButton { 
+    position: absolute;
+    text-align: center;
+    top: 4em;
+    width: 9em;
+    background: #F9F9F9;
+    box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+}  
+
+.imageOverlaybottomCenter{ 
+  position: absolute;
+  text-align: center;
+  width: 9em;
+  background: #FFB941;
+  border-radius: 10px;
+  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+}
+
+.imageOverlayTopButton:hover{ text-decoration: none;  -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;}
 
 .dateTimePicker{ width: 13em; }
 .activityLeader{ width: 13em !important; }

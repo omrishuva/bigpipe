@@ -6,8 +6,9 @@
 <%else%>
 	<div class="rtlUserLogin">
 		<%=render 'shared/components/navigation/user_dropdown'%>
-		<a class="btn btnBrandSize btnBrand1" data-toggle="modal" data-target="#signupModal">
+		<a href="javascript:void(0)" data-toggle="modal" data-target="#signupModal">
 			<%=I18n.t :sign_in_button%>
 		</a>
 	</div>
 <%end%>
+

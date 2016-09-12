@@ -1,22 +1,15 @@
 <% if current_direction == :ltr%>
 	
 	<div class="navigationBar" id="navbarContainer" >
-		<div class="navItems">
-		  <%=render "shared/components/navigation/ltr_logo"%>
-		  <%=render "shared/components/navigation/ltr_user_login" unless params["action"] == "service_provider_onboarding"%>
-		  <%= render "shared/buttons/request_or_create_trip_plan"%>		
-		</div>
+		<%=render "shared/components/navigation/ltr_logo"%>
+		<%=render "shared/components/navigation/ltr_user_login"%>
 	</div>
 
 <%else%>
 
 	<div class="navigationBar" id="navbarContainer" >
-		<div class="navItems"> 
-			<%= render "shared/buttons/request_or_create_trip_plan"%>	
-		  <%=render "shared/components/navigation/rtl_user_login" unless params["action"] == "service_provider_onboarding"%>
-
+		  <%=render "shared/components/navigation/rtl_user_login"%>
 		  <%=render "shared/components/navigation/rtl_logo"%>
-		</div>
 	</div>
 
 <%end%>

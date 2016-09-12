@@ -1,0 +1,22 @@
+ <div id="imageBackground">
+      <%=cl_image_tag(locals[:imgId], class:"img-fluid pageCover",
+                      transformation: [
+                                        { height: locals[:height], 
+                                        	width: locals[:width], 
+                                        	crop: locals[:crop], 
+                                        	quality: locals[:quality]},
+                                        { overlay: locals[:overlayText] , gravity: locals[:gravity], y: locals[:y], color: locals[:color] }
+                                      ])
+    %>
+
+    <%topButtonClass = current_direction == :ltr ? "imageOverlaytopLeftButton" : "imageOverlaytopRightButton" %>
+     <a class="<%="#{topButtonClass} imageOverlayTopButton" %>" href="">
+     	Join as an expert
+     </a>
+     <%bottomCenterButtonClass = current_direction == :ltr ? "ltrImageOverlayBottomCenter" : "rtlImageOverlayBottomCenter" %>
+      <a class="<%="#{bottomCenterButtonClass} imageOverlaybottomCenter"%>" href="">
+	     	Get Started
+     </a>
+</div>
+
+	
