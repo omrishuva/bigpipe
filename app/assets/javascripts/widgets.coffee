@@ -1,7 +1,6 @@
 document.addEventListener 'activateButton',(e) ->
 	widgetData = e.detail.widgetData;
 	addDataAttributesToButton( widgetData, 'activateButton' );
-	# enableSearchByInput( widgetData );
 
 document.addEventListener 'bindToWizardButton',(e) ->
 	widgetData = e.detail.widgetData;
@@ -66,6 +65,8 @@ activateButton = ( widgetData ) ->
 	 	when "activity_setup"
 	 		wizardControl( id );
 	 	when "trip_request_setup"
+	 		wizardControl( id );
+	 	when "join_as_expert"
 	 		wizardControl( id );
 
 submitInputOnChange = (input) -> 

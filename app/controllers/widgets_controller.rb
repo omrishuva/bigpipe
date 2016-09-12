@@ -20,6 +20,7 @@ class WidgetsController < ApplicationController
 				when "scheduling_box" then scheduling_widget
 				when "account_setup" then wizard_widget
 				when "trip_request_setup" then wizard_widget
+				when "join_as_expert" then wizard_widget
 			end
 		end
 		respond_to do |format|
@@ -185,7 +186,7 @@ class WidgetsController < ApplicationController
 	#Wizard########################################################
 	
 	def wizard_widget
-		@object = get_object( params[:objectName], params[:objectId] )
+		@object = get_object( params[:objectName], params[:objectId] )  unless params[:noObject] == "true"
 		save_value if params[:state] == "save"
 		@widget_data = prepare_wizard_data
 	end
@@ -196,7 +197,7 @@ class WidgetsController < ApplicationController
 			widgetName: params[:widgetName],
 			elementName: params[:elementName],
 			objectName: @object.class.name, 
-			objectId: @object.id,
+			objectId: @object.try(:id),
 			key: params[:key],
 			value: get_value,
 			nodeNumber: nodeNumber,
@@ -211,6 +212,7 @@ class WidgetsController < ApplicationController
 			replaceDivId: params[:replaceDivId],
 			replacePartial: params[:replacePartial],
 			buttonClass: params[:buttonClass],
+			noObject: params[:noObject]
 		}.delete_if { |k, v| !v.present? }
 	end
 	
