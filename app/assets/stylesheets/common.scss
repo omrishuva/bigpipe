@@ -9,6 +9,14 @@ a{ color: #4187ff; }
 a, a:hover, a:active, a:visited {
     text-decoration:none;
 }
+#footer{ 
+        background: rgba(249, 249, 249, 0.95);
+        // color: #fff;
+        font-size: 13px;
+        line-height: 17px;
+        // display: table-row;
+         height: 12em;
+      }
 @media (min-width: 320px) { .siteContent { z-index: -1; font-size: 65%; }
                             
                             .ltrUserSidebar{  right: 0;  }
@@ -244,7 +252,7 @@ a, a:hover, a:active, a:visited {
 .btnBrandHover{ text-decoration: none; }
 .btnBrand1:hover{ @extend .btnBrandHover; background-color: #FFB941; color: #4187ff ; }
 .btnBrand1Inverse:hover{ @extend .btnBrandHover; background-color: #4187ff; color: #FFB941; }
-.btnImage{ color: #4187ff; background-color: #fff; border-style: solid; border-width: 1px; border-color: #4187ff;  }
+.btnImage{ color: #4187ff; background-color: #fff; border-style: solid; border-width: 1px; border-color: #4187ff; min-width: 10em; }
 .imgInButton{ margin-right: 5px; }
 .btnImage:hover{ color: #4187ff; background-color: #FFB941; border-style: solid; border-width: 1px; border-color: #FFB941; }
 .btnBrand1:active{  background-color: #4187ff; color: #FFB941; text-decoration: none;}
@@ -337,11 +345,15 @@ a, a:hover, a:active, a:visited {
 .imageOverlaybottomCenter{ 
   position: absolute;
   text-align: center;
-  width: 9em;
+  width: 10em;
   background: #FFB941;
   border-radius: 10px;
-  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+  // box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 0 rgba(255,255,255, 0.3), inset 0 1px 0 rgba(255,255,255, 0.3);
   text-decoration: none;
+  padding: 5px;
+  font-weight: bolder;
+
 }
 .imageOverlaybottomCenter:hover{ text-decoration: none;  -moz-box-shadow: none;
     -webkit-box-shadow: none;

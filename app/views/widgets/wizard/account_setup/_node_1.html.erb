@@ -1,6 +1,6 @@
 <%locals.merge!({ saveKey: "account_type", renderWizardButton: false })%>
 
-<div class="col-sm-6 col-sm-offset-5">
+<div class="col-lg-4 col-xs-offset-3">
 	<%=render "widgets/button", 
 								locals: locals.merge( 
 																			class: "btn btnImage fa fa-user", 
@@ -9,7 +9,8 @@
 																			button_text: "freelancer"
 																		)
 	%>
-	</br>
+</div>
+	<div class="col-lg-4 col-xs-offset-3">
 	<%=render "widgets/button", 
 								locals: locals.merge( 
 																			class: "btn btnImage fa fa-users", 
@@ -18,5 +19,4 @@
 																			button_text: "business" 
 																		)
 	%>
-	</br></br></br>
 </div>

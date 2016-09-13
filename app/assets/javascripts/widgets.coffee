@@ -255,7 +255,7 @@ shouldSaveOnly = ( widget, controlId ) ->
 	widget
 
 getDataset = ( el ) ->
-	if ( el.className in ["buttonText", "buttonImage"] )
+	if ( "buttonText" in  el.classList ) || ( "buttonImage" in el.classList ) || ( "imgInButton" in el.classList )
 	 id = el.parentElement.id
 	else
 	 id = el.id
