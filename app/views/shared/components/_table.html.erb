@@ -10,7 +10,11 @@
 		<%locals[:values].each do |values_group|%>
 			<tr>
 				<%values_group.each do |value|%>
-					<td><%=value%></td>
+					<%if value.class.name == "Hash" && value[:link].present?  %>
+						<td><a href="<%=value[:link]%>">Edit</a> </td>
+					<%else%>
+						<td><%=value%></td>
+					<%end%>
 				<%end%>
 			</tr>
 		<%end%>

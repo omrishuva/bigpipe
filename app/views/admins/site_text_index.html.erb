@@ -3,8 +3,11 @@
 	</br></br>
 	<div class="accountMemebers">
 		<%= render 'shared/components/table', locals: { 
-																										keys: [:id, :key, :text], 
-																										values: @site_texts.map{|t| [t.id, t.name, t.text] }, 
+																										keys: [:edit, :key, :text], 
+																										values: @site_texts.map{ |t| [ { link: "/admins/site_text/edit/#{t.id}" }, 																t.name, 
+																																										t.text
+																																								] 
+																																						}, 
 																										id: "siteTexts" 
 																									 } 
 		%>
