@@ -3,22 +3,40 @@ body
   width: 100%;
   font-family: 'Raleway', sans-serif !important;
   overflow-x: hidden;
+  padding-bottom: 100px;
+}
+
+html,body{
+  height: 100%
 }
 
 a{ color: #4187ff; }
 a, a:hover, a:active, a:visited {
     text-decoration:none;
 }
-#footer{ 
-        background: rgba(249, 249, 249, 0.95);
-        // color: #fff;
-        font-size: 13px;
-        line-height: 17px;
-        // display: table-row;
-         height: 12em;
-      }
-@media (min-width: 320px) { .siteContent { z-index: -1; font-size: 65%; }
-                            
+footer{
+    height: 100px; 
+    width:100%;
+    position: static;
+    left: 0;
+    bottom: 0; 
+    background-color: rgba(249,249,249, 0.95);
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-top-color: #FFB941;
+    @extend .dddBoxShadow;
+
+}
+.siteContent{ min-height: 800px; margin-bottom: 20px; }
+#imageBackground{ @extend .dddBoxShadow; }
+.howItWorks{ 
+              border-top-style: solid; 
+              border-top-width: 5px; 
+              border-top-color: #FFB941; 
+            }
+@media (min-width: 320px) { 
+                            .siteContent { z-index: -1; font-size: 65%; }
+                            .wizardTitle{ font-size: 25px;  }
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  }   
 
@@ -29,7 +47,9 @@ a, a:hover, a:active, a:visited {
                             .rtlImageOverlayBottomCenter{ top: 12em; left: 35%; }
                           }
 
-@media (min-width: 360px)  { .siteContent { z-index: -1; font-size: 75%; }
+@media (min-width: 360px)  { 
+                             .siteContent { z-index: -1; font-size: 75%; }
+                             .wizardTitle{ font-size: 25px;  }
                              .ltrUserSidebar{  right: 0;  }
                              .rtlUserSidebars{  left: 0;  }  
 
@@ -42,6 +62,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 375px) { 
                             .siteContent { z-index: -1; font-size: 80%; }
+                            .wizardTitle{ font-size: 25px;  }
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  }
                             
@@ -54,6 +75,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 411px) { 
                             .siteContent { z-index: -1; font-size: 90%; } 
+                            .wizardTitle{ font-size: 25px;  }
                             .ltrUserSidebar{  right: 0;  }
                             .rtlUserSidebar{  left: 0;  } 
 
@@ -66,7 +88,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 414px)  { 
                               .siteContent { z-index: -1; font-size: 90%;  }
-  
+                              .wizardTitle{ font-size: 25px;  } 
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  } 
                               
@@ -78,8 +100,9 @@ a, a:hover, a:active, a:visited {
                             }
 
 @media (min-width: 435px)   { 
+
                               .siteContent { z-index: -1; font-size: 95%; } 
-  
+                              .wizardTitle{ font-size: 25px;  }
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
   
@@ -91,8 +114,9 @@ a, a:hover, a:active, a:visited {
                             }
 
 @media (min-width: 768px)   { 
+                              
                               .siteContent { z-index: -1; font-size: 120%; } 
-  
+                              .wizardTitle{ font-size: 35px;  }
                               .ltrUserSidebar{  right: 0;  }
                               .rtlUserSidebar{  left: 0;  }
   
@@ -111,7 +135,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 800px)   { 
                               .siteContent { z-index: -1; font-size: 120%;} 
-                              
+                              .wizardTitle{ font-size: 35px;  }
                               .ltrUserSidebar{  right: 5%;  }
                               .rtlUserSidebar{  left: 5%;  }
                               
@@ -130,7 +154,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 1000px) { 
                             .siteContent { z-index: -1; font-size: 120%; }
-                            
+                            .wizardTitle{ font-size: 35px;  }
                             .ltrUserSidebar{  right: 5%;  }
                             .rtlUserSideBar{  left: 5%;  }
                             
@@ -150,7 +174,7 @@ a, a:hover, a:active, a:visited {
 
 @media (min-width: 1500px) { 
                             .siteContent { z-index: -1; font-size: 120%; } 
-                            
+                            .wizardTitle{ font-size: 35px;  }
                             .ltrUserSidebar{  right: 15%;  }
                             .rtlUserSidebar{  left: 15%;  }
                             
@@ -177,18 +201,19 @@ a, a:hover, a:active, a:visited {
 }
 .fixedNavItem{ left: 5em; top: 3px; position: absolute; color: #FF2B5E !important; }
 .wizardContainer{ @extend  .textShadowContainer; @extend .container;  }
+
 .textShadowContainer{ 
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
   background-color: rgba(249, 249, 249, 0.95);
-
 }
+
 .col-centered{ float: none !important;  margin: 0 auto !important; }
 .activityContainer{ @extend .textShadowContainer;  }
 .TripDatesSection{ margin-bottom: 2em; }
-.NavBarLogo{  width: 5em; height: 2em; position: absolute; top: 0.2em; }
+.NavBarLogo{  width: 10em; height: 3em; position: absolute; top: 0.2em; }
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
 .ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
 
@@ -208,17 +233,17 @@ a, a:hover, a:active, a:visited {
                 }
 
 .navigationBar{  
-  background: rgba(249,249,249, 0.9);
+  background: rgba(249,249,249, 0.98);
   top: 0px;
   width: 100%;
-  box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6);
-  height: 2.5em;
+  @extend .dddBoxShadow;
+  height: 3.5em;
   overflow:hidden;
   position: fixed;
   z-index: 2000;
   
 }
-
+.dddBoxShadow{ box-shadow: 1px 3px 30px 5px rgba(0, 0, 0, 0.6); }
 .signinLoader{  display: none; }
 
 .navBarProfilePic {  
