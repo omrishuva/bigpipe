@@ -36,7 +36,7 @@ automatic_scaling:
 handlers:
 - url: /.*
   script: IGNORED
-  secure: always
+  # secure: always
 
 env_variables:
   FORMATION: web=1
