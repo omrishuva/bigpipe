@@ -30,6 +30,7 @@ footer{
 .siteContent{ min-height: 800px; margin-bottom: 20px; }
 #imageBackground{ @extend .dddBoxShadow; }
 .howItWorks{ 
+              text-align: center;
               border-top-style: solid; 
               border-top-width: 5px; 
               border-top-color: #FFB941; 

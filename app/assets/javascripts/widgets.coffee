@@ -6,11 +6,6 @@ document.addEventListener 'bindToWizardButton',(e) ->
 	widgetData = e.detail.widgetData;
 	addDataAttributesToButton( widgetData, 'bindToWizardButton' );
 
-document.addEventListener 'registerWizardOnPage',(e) ->
-	widgetData = e.detail.widgetData;
-	@registeredWizardOnPage = { }
-	@registeredWizardOnPage = widgetId( widgetData )
-
 document.addEventListener 'triggerClickEventInBindedWidgets',(e) ->
 	triggerClickEventInBindedWidgets(widget);
 
@@ -84,9 +79,7 @@ inputId = ( widget ) ->
 
 wizardControl =( id ) ->
 	$( "##{id}" ).click (e) ->
-	  # $(this).data("widgetData").objectId
 	  widgetIdSelector = widgetId( $(this).data("widgetData") )
-	  
 	  widget = {}
 	 	widget = getDataset( e.target )
 	 	$("##{widgetIdSelector}").hide() unless widget.replaceDivId
