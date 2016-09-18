@@ -21,6 +21,7 @@ addDataAttributesToButton = ( widgetData, activationType ) ->
 
 bindToWizardButton = ( widgetData ) ->
 	@bindedWidgets = { } unless @bindedWidgets
+	debugger
 	@bindedWidgets[widgetData.nodeNumber] = [] unless @bindedWidgets[widgetData.nodeNumber] 
 	@bindedWidgets[widgetData.nodeNumber].push( widgetData.id )
 
@@ -107,6 +108,7 @@ triggerClickEventInBindedWidgets = (widget)->
 	if @bindedWidgets && @bindedWidgets[widget.nodeNumber]
 		for bindedWidget in @bindedWidgets[widget.nodeNumber]
 	  	do (bindedWidget) ->
+			  debugger
 			  $( "##{bindedWidget}" ).trigger('click');
 
 baseWidgetControl =( id ) ->

@@ -2,7 +2,7 @@
 <html>
 
   <head>
-    <title>Activity.Market</title>
+    <title>Perfect Voyage</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />  
     <meta name='B-verify' content='895a952d419d64d08ca175180cec0a5e7c4c0795' />
@@ -48,7 +48,17 @@
     </div>    
   </body>
   <footer>
-     <p class="muted pull-right"> Created by Z the Man of The master Plan</p>
-     <p class="muted pull-left"> Created by Z the Man of The master Plan</p>
+    <div class="col-sm-4 whoWeAre">
+      <p>Who we are</p>
+      <%= $site_text["#{I18n.locale}_who_we_are"].html_safe %>
+    </div>
+    <div class="col-sm-4 whoWeAre">
+    </div>
+    <div class="col-sm-4 footerLinks">
+      <p>Links</p>
+      <p><a href="#">Partners</a></p>
+      <p><a href="#">Investors</a></p>
+      <p><a href="#">Term & Conditions</a></p>
+    </div>
   </footer>
 </html>

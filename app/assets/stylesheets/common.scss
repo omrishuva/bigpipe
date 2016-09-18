@@ -1,3 +1,4 @@
+html{ line-height: 24px; }
 body
 {
   width: 100%;
@@ -15,7 +16,7 @@ a, a:hover, a:active, a:visited {
     text-decoration:none;
 }
 footer{
-    height: 100px; 
+    height: 250px; 
     width:100%;
     position: static;
     left: 0;
@@ -25,9 +26,10 @@ footer{
     border-top-width: 5px;
     border-top-color: #FFB941;
     @extend .dddBoxShadow;
+        line-height: 24px;
 
 }
-.siteContent{ min-height: 800px; margin-bottom: 20px; }
+.siteContent{ min-height: 1200px; margin-bottom: 20px; }
 #imageBackground{ @extend .dddBoxShadow; }
 .howItWorks{ 
               text-align: center;
@@ -35,6 +37,9 @@ footer{
               border-top-width: 5px; 
               border-top-color: #FFB941; 
             }
+.whoWeAre{ line-height: 12px; margin-top: 10px; }
+.footerLinks{ @extend .centeredText; margin-top: 10px; line-height: 12px; }
+
 @media (min-width: 320px) { 
                             .siteContent { z-index: -1; font-size: 65%; }
                             .wizardTitle{ font-size: 25px;  }
@@ -216,12 +221,12 @@ footer{
 .TripDatesSection{ margin-bottom: 2em; }
 .NavBarLogo{  width: 10em; height: 3em; position: absolute; top: 0.2em; }
 .ltrNavBarLogo { @extend .NavBarLogo;  left: 0.5em; }
-.ltrUserLogin{ top: 5px; right: 10%;  position: absolute; }
+.ltrUserLogin{ top: 10px; right: 10%;  position: absolute; }
 
 .rtlNavBarLogo { @extend .NavBarLogo;  right: 0.5em; }
 .rtlUserLogin{ top: 5px; left: 10%; position: absolute; }
 
-.userDropdown:active{ color: #FFB941; }
+.userDropdown:active{ color: #FF2B5E; }
 
 .userSideBarStyle { 
                     width: 13em; 
