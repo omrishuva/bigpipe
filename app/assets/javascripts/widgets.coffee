@@ -108,7 +108,6 @@ triggerClickEventInBindedWidgets = (widget)->
 	if @bindedWidgets && @bindedWidgets[widget.nodeNumber]
 		for bindedWidget in @bindedWidgets[widget.nodeNumber]
 	  	do (bindedWidget) ->
-			  debugger
 			  $( "##{bindedWidget}" ).trigger('click');
 
 baseWidgetControl =( id ) ->
