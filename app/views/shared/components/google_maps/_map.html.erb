@@ -1,4 +1,3 @@
-<div class=" textShadowContainer googleMapContainer">
-	<div id="map" class="map"></div>
-	<script>document.publishEvent('initMap');</script>
-</div>
+<%mapClass = locals[:hiddenMap] == true ? "map hiddenMap" : "map"   %>
+<div id="map" class="<%=mapClass%>"></div>
+<script>document.publishEvent('initMap');</script>

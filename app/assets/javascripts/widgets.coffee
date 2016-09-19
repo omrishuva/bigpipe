@@ -21,7 +21,6 @@ addDataAttributesToButton = ( widgetData, activationType ) ->
 
 bindToWizardButton = ( widgetData ) ->
 	@bindedWidgets = { } unless @bindedWidgets
-	debugger
 	@bindedWidgets[widgetData.nodeNumber] = [] unless @bindedWidgets[widgetData.nodeNumber] 
 	@bindedWidgets[widgetData.nodeNumber].push( widgetData.id )
 
@@ -176,8 +175,7 @@ imageWidgetControl = ( id ) ->
         data: formData
         processData: false
         contentType: false
-        
-        	
+                	
 initUploadImageLoader = ( widget ) ->
 	$('.fa-camera').addClass('fa-spin');
 	$("##{widget.id}updateCoverImageText").text("Updating Image")
@@ -203,39 +201,6 @@ locationWidgetControl = ( id ) ->
 getPlaceid = (inputId) ->
 	@places[inputId].place_id
 
-schedulingWidgetControl = ( id ) ->
-	$( "##{id}" ).click (e) ->
-		$(this).attr('disabled', 'disabled' )
-		widget = getDataset( e.target )
-		if widget.state == "save"
-			widget = schedulingWidgetSave( widget ) 
-			widget = shouldSaveOnly(widget)
-		$.ajax
-	    type: "POST"
-	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
-	    data: widget
-
-schedulingWidgetSave = ( data ) ->
-	switch data.schedulingType
-    when "recurringEvent"
-      data = saveRecurringEvent( data );
-    when "specificDates"
-      data = saveSpecificDate( data );
-  data['activityLeader'] = getActivityLeader( data );
-  data
-
-saveRecurringEvent = (data) ->
-  data['selectedTime'] = $('.dateTimePicker').data('date');
-  data['selectedDayOfWeek'] = $('#dayOfWeek').val();
-  data
-
-saveSpecificDate = (data) ->
-  data['selectedDate'] =  new Date( $('.dateTimePicker').data('date') )
-  data
-
-getActivityLeader = (data) ->
-  activityLeaders = $('#activityLeader').val();
-
 #Utilities###############################################################################################
 ajaxRequest = ( requestMethod, url, widget ) ->
 	$.ajax
@@ -254,5 +219,45 @@ getDataset = ( el ) ->
 	else
 	 id = el.id
 	$("##{id}").data('widgetData')
+
+
+
+
+
+
+
+
+# schedulingWidgetControl = ( id ) ->
+# 	$( "##{id}" ).click (e) ->
+# 		$(this).attr('disabled', 'disabled' )
+# 		widget = getDataset( e.target )
+# 		if widget.state == "save"
+# 			widget = schedulingWidgetSave( widget ) 
+# 			widget = shouldSaveOnly(widget)
+# 		$.ajax
+# 	    type: "POST"
+# 	    url: "/widgets/widget_control/#{widget.widgetName}/#{widget.objectName}/#{widget.key}"
+# 	    data: widget
+
+# schedulingWidgetSave = ( data ) ->
+# 	switch data.schedulingType
+#     when "recurringEvent"
+#       data = saveRecurringEvent( data );
+#     when "specificDates"
+#       data = saveSpecificDate( data );
+#   data['activityLeader'] = getActivityLeader( data );
+#   data
+
+# saveRecurringEvent = (data) ->
+#   data['selectedTime'] = $('.dateTimePicker').data('date');
+#   data['selectedDayOfWeek'] = $('#dayOfWeek').val();
+#   data
+
+# saveSpecificDate = (data) ->
+#   data['selectedDate'] =  new Date( $('.dateTimePicker').data('date') )
+#   data
+
+# getActivityLeader = (data) ->
+#   activityLeaders = $('#activityLeader').val();
 
 

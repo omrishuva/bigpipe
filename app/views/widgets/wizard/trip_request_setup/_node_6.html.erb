@@ -57,6 +57,4 @@
 	</div>
 </div>
 
-<div class="col-lg-12">
-	<%=render 'shared/components/google_maps/map', locals: locals%>
-</div>
+<%=render 'shared/components/google_maps/map', locals: locals.merge( hiddenMap: true )%>

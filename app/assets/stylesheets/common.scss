@@ -16,7 +16,6 @@ a, a:hover, a:active, a:visited {
     text-decoration:none;
 }
 footer{
-    height: 250px; 
     width:100%;
     position: static;
     left: 0;
@@ -37,17 +36,21 @@ footer{
               border-top-width: 5px; 
               border-top-color: #FFB941; 
             }
-.whoWeAre{ line-height: 12px; margin-top: 10px; }
+.step{ margin-top: 10px; }
+
+.whoWeAre{ line-height: 20px; margin-top: 10px; }
 .footerLinks{ @extend .centeredText; margin-top: 10px; line-height: 12px; }
 
 .siteContent{ margin-bottom: 20px; margin-top: 20px;}
-@media (min-height: 550px) { .siteContent { min-height: 550px } }
-@media (min-height: 600px) { .siteContent { min-height: 600px } }
-@media (min-height: 700px) { .siteContent { min-height: 700px } }
-@media (min-height: 800px) { .siteContent { min-height: 800px } }
-@media (min-height: 900px) { .siteContent { min-height: 900px } }
-@media (min-height: 1000px) { .siteContent { min-height: 1000px } }
-@media (min-height: 1200px) { .siteContent { min-height: 1050px } }
+@media (min-height: 550px) { .siteContent { min-height: 550px }   footer{  min-height: 300px;  }  }
+@media (min-height: 600px) { .siteContent { min-height: 600px }   footer{  min-height: 300px;  }  }
+@media (min-height: 700px) { .siteContent { min-height: 700px }   footer{  min-height: 330px;  }  }
+@media (min-height: 800px) { .siteContent { min-height: 800px }   footer{  min-height: 330px;  }  }
+@media (min-height: 900px) { .siteContent { min-height: 900px }   footer{  min-height: 330px;  }  }
+@media (min-height: 1000px) { .siteContent { min-height: 1000px } footer{  min-height: 230px;  }  }
+@media (min-height: 1200px) { .siteContent { min-height: 1050px } footer{  min-height: 230px;  }  }
+@media (min-height: 1300px) { .siteContent { min-height: 1150px } footer{  min-height: 230px;  }  }
+
 
 @media (min-width: 320px) { 
                             .siteContent { z-index: -1; font-size: 65%; }
@@ -58,8 +61,8 @@ footer{
                             .imageOverlaytopRightButton{  top: 6.5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton {  top: 6.5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 13em; left: 35%; }
-                            .rtlImageOverlayBottomCenter{ top: 13em; left: 35%; }
+                            .ltrImageOverlayBottomCenter{ top: 14.5em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 14.5em; left: 35%; }
                           }
 
 @media (min-width: 360px)  { 
@@ -71,8 +74,8 @@ footer{
                             .imageOverlaytopRightButton{  top: 6em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton {  top: 6em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 11em; left: 35%; }
-                            .rtlImageOverlayBottomCenter{ top: 11em; left: 35%; }
+                            .ltrImageOverlayBottomCenter{ top: 12em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 12em; left: 35%; }
                             }
 
 @media (min-width: 375px) { 
@@ -84,8 +87,8 @@ footer{
                             .imageOverlaytopRightButton{  top: 6em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton {  top: 6em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 11em; left: 35%; }
-                            .rtlImageOverlayBottomCenter{ top: 11em; left: 35%; }
+                            .ltrImageOverlayBottomCenter{ top: 12em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 12em; left: 35%; }
                           }
 
 @media (min-width: 411px) { 
@@ -97,8 +100,8 @@ footer{
                             .imageOverlaytopRightButton{ top: 4.5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton { top: 4.5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 9em; left: 35%; }
-                            .rtlImageOverlayBottomCenter{ top: 9em; left: 35%; }
+                            .ltrImageOverlayBottomCenter{ top: 10em; left: 35%; }
+                            .rtlImageOverlayBottomCenter{ top: 10em; left: 35%; }
                           }
 
 @media (min-width: 414px)  { 
@@ -124,8 +127,8 @@ footer{
                               .imageOverlaytopRightButton{  top: 4.5em !important; right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                               .imageOverlaytopLeftButton {  top: 4.5em !important; left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                              .ltrImageOverlayBottomCenter{ top: 11em; left: 35%; }
-                              .rtlImageOverlayBottomCenter{ top: 11em; left: 35%; }
+                              .ltrImageOverlayBottomCenter{ top: 12em; left: 35%; }
+                              .rtlImageOverlayBottomCenter{ top: 12em; left: 35%; }
                             }
 
 @media (min-width: 768px)   { 
@@ -144,8 +147,8 @@ footer{
                              .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                              .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                              .ltrImageOverlayBottomCenter{ top: 8em; left: 36%; }
-                              .rtlImageOverlayBottomCenter{ top: 8em; left: 36%; }
+                              .ltrImageOverlayBottomCenter{ top: 9em; left: 36%; }
+                              .rtlImageOverlayBottomCenter{ top: 9em; left: 36%; }
                             }
 
 @media (min-width: 800px)   { 
@@ -163,8 +166,8 @@ footer{
                               .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                               .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                              .ltrImageOverlayBottomCenter{ top: 7em; left: 38%; }
-                              .rtlImageOverlayBottomCenter{ top: 7em; left: 38%; }
+                              .ltrImageOverlayBottomCenter{ top: 8em; left: 38%; }
+                              .rtlImageOverlayBottomCenter{ top: 8em; left: 38%; }
                             }
 
 @media (min-width: 1000px) { 
@@ -182,8 +185,8 @@ footer{
                             .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 13em; left: 42%; }
-                            .rtlImageOverlayBottomCenter{ top: 13em; left: 42%; }
+                            .ltrImageOverlayBottomCenter{ top: 14em; left: 42%; }
+                            .rtlImageOverlayBottomCenter{ top: 14em; left: 42%; }
 
                            }
 
@@ -202,11 +205,12 @@ footer{
                             .imageOverlaytopRightButton{  right: 0px; border-bottom-left-radius: 10px; border-top-left-radius: 10px;}
                             .imageOverlaytopLeftButton {  left: 0px;  border-bottom-right-radius: 10px; border-top-right-radius: 10px;}
 
-                            .ltrImageOverlayBottomCenter{ top: 13em; left: 40%; }
-                            .rtlImageOverlayBottomCenter{ top: 13em; left: 40%; }
+                            .ltrImageOverlayBottomCenter{ top: 14em; left: 40%; }
+                            .rtlImageOverlayBottomCenter{ top: 14em; left: 40%; }
                             }
 
 .hidden{ visibility: hidden; }
+.hiddenMap{ max-height: 1px; @extend .hidden }
 .inlineBlock{  display:inline-block; margin-right: 5px; }
 .clearfix { overflow: auto;}
 .relativeCenter{
