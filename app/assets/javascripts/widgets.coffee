@@ -37,6 +37,8 @@ activateButton = ( widgetData ) ->
  			baseWidgetControl( id );
  		when	"multiple_select_box"
  			baseWidgetControl( id );
+ 		when "tag_selector_box"
+ 			baseWidgetControl( id );
  		when "slider_box"
 	 		baseWidgetControl( id );
 	 	when "plus_minus_box"
@@ -136,6 +138,8 @@ baseWidgetControlSave = ( widget ) ->
 			widget['data'] = $("##{inputId(widget)}").val()
 		when "multiple_select_box"
 			widget['data'] = $("##{inputId(widget)}").val()
+		when "tag_selector_box"
+			debugger
 		when 'slider_box'
 			widget['data'] = $("##{inputId(widget)}").val()
 		when 'plus_minus_box'

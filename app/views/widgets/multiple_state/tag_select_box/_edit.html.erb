@@ -1,0 +1,11 @@
+<% inputId = generate_id %> 
+<%locals[:selectOptions].in_groups_of(10,false) do |tag_group|%>		
+	<div class="col-sm-12">
+		<%tag_group.each do |select_option|%>
+			<a href="javascript:void(0)"  data-input-id="<%=inputId%>" class="tagSelector"> <%=I18n.t select_option %> </a>
+		<%end%>
+		</br></br>
+	</div>
+<%end%>
+
+<script>document.publishEvent('initTagSelector', { 'inputId': "<%=inputId%>" } )</script>

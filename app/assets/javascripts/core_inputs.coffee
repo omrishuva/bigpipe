@@ -19,6 +19,10 @@ document.addEventListener 'initCKeditor', (e) ->
 document.addEventListener 'initPlusMinus', (e) ->
 	initPlusMinus(e.detail);
 
+document.addEventListener 'initTagSelector', (e) ->
+	debugger
+	initTagSelector(e.detail.inputId);
+
 initCKeditor = ( data ) ->
 	data.options.extraPlugins = 'confighelper'
 	CKEDITOR.replace( data.id, data.options );
@@ -52,6 +56,15 @@ initPlusMinus = (data) ->
 		if data.behavior == "minus"
 			input.val( val - 1 ) unless val == 0
 		
+initTagSelector = (inputId) -> 
+	$("[data-input-id='#{inputId}']").click (e) ->
+		debugger
+		if e.target.dataset.selected == "true"
+			e.target.dataset.selected = false
+			$(this).removeClass("selectedTag")
+		else
+			e.target.dataset.selected = true
+			$(this).addClass("selectedTag")
 
 initDateRangePicker = () ->
 	options = {	'autoApply': true, 'minDate': new Date() 	};
