@@ -24,10 +24,13 @@
     <%else%>
       <%= stylesheet_link_tag 'application_rtl', media: "all" %>
     <%end%>
-     <%=render "shared/scripts/browser_type"%>
-     <%=render "shared/scripts/load_script"%>
-      <%=render "shared/scripts/google_maps"%>
-     <%=render "shared/scripts/polyfills/publish_event"%>
+    <%=render "shared/scripts/browser_type"%>
+    <%=render "shared/scripts/load_script"%>
+    <%=render "shared/scripts/google_maps"%>
+    <%if Rails.env == "production"%>
+      <%=render "shared/scripts/google_analytics"%>
+    <%end%>
+    <%=render "shared/scripts/polyfills/publish_event"%>
 
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>

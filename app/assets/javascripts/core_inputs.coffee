@@ -58,7 +58,6 @@ initPlusMinus = (data) ->
 		
 initTagSelector = (inputId) -> 
 	$("[data-input-id='#{inputId}']").click (e) ->
-		debugger
 		if e.target.dataset.selected == "true"
 			e.target.dataset.selected = false
 			$(this).removeClass("selectedTag")

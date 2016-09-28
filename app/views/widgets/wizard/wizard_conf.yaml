@@ -6,7 +6,7 @@ placeholders:
     4: "who_is_joining_you"
     5: "when_will_you_be_traveling"
     6: "where_will_you_be_traveling"
-    7: "trip_hobbies"
+    7: "choose_your_style"
   join_as_expert:
     1: "happy_to_see_you"
     2: "signup_modal_title"

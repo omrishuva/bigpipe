@@ -1,16 +1,20 @@
 select 
-  probability, stage, sum(revenue) revenue
+  probability,owner,customer_name,stage, sum(revenue) revenue
 from 
 (
   select 
     opportunity_id,
     case
-    when probability in (90, 100) then "High"
-    when probability in (50, 60, 70,75) then "Medium"
-    else "low" end probability
+    when probability = 100 then "1 Very High"
+    when probability = 90 then "2 High"
+    when probability in (60, 70,75) then "3 Medium"
+    when probability = 50 then "4 Low"
+    else "5 Very Low" end probability,
+    owner,
+    left(opportunity_name, (INSTR(opportunity_name, "-") -1) ) customer_name, 
   from sf_raw_data
   where closed = "0"
-  group by 1,2 
+  group by 1,2,3,4
 ) probability
 join
 (
@@ -27,26 +31,28 @@ join
   ) last_event
   join 
   (
-    select opportunity_id, edit_date,
-    case
-    when to_stage = "Needs Analysis" then 
-    when to_stage = "Prospecting" then
-    when to_stage = "Qualification" then
-    when to_stage = "Perception Analysis" then     
-    when to_stage = "Id. Decision Makers" then 
-    when to_stage = "Value Proposition" then
-    when to_stage = "Proposal/Quote" then 
-    when to_stage = "Proposal/Price Quote" then
-    when to_stage = "Negotiation" then 
-    when to_stage = "Negotiation/Review" then
-    else "" end stage
-    to_stage stage ,amount revenue
+    select 
+      opportunity_id, 
+      edit_date,
+      case
+      when to_stage = "Needs Analysis" then "1 Early Stage"
+      when to_stage = "Prospecting" then "1 Early Stage"
+      when to_stage = "Qualification" then "1 Early Stage"
+      when to_stage = "Perception Analysis" then "1 Early Stage"    
+      when to_stage = "Id. Decision Makers" then "2 Mid Stage"
+      when to_stage = "Value Proposition" then "2 Mid Stage"
+      when to_stage = "Proposal/Quote" then "2 Mid Stage"
+      when to_stage = "Proposal/Price Quote" then "2 Mid Stage"
+      when to_stage = "Negotiation" then "3 Advanced Stage"
+      when to_stage = "Negotiation/Review" then "3 Advanced Stage"
+      else "" end stage,
+      amount revenue
     from sf_raw_data
     where closed = "0"
-    and stage !="Closed Won" and stage != "Closed Lost"
+    and to_stage !="Closed Won" and to_stage != "Closed Lost"
   ) rev
   on rev.edit_date = last_event.edit_date
 ) revenue
 on probability.opportunity_id = revenue.opportunity_id
-group by 1,2
+group by 1,2,3,4
 order by 1 asc
