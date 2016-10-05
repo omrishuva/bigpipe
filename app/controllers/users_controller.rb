@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
   
   def join_as_expert
-   
+    
   end
 
   def authenticate_phone

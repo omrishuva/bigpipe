@@ -1,12 +1,16 @@
 placeholders:
   trip_request_setup:
     1: "build_your_perfect_trip"
-    2: "give_a_title_to_your_trip"
+    2: "where_will_you_be_traveling"
     3: "how_will_you_be_traveling"
     4: "who_is_joining_you"
     5: "when_will_you_be_traveling"
-    6: "where_will_you_be_traveling"
+    6: "give_a_title_to_your_trip" 
     7: "choose_your_style"
+    8: "choose_your_style"
+    9: "choose_your_style"
+    10: "choose_your_style"
+
   join_as_expert:
     1: "happy_to_see_you"
     2: "signup_modal_title"
@@ -17,12 +21,15 @@ placeholders:
 save_button_text:
   trip_request_setup:
     1: "build_my_trip"
-    2: "done"
+    2: "next"
     3: "next"
     4: "next"
     5: "next"
     6: "next"
-    7: "done"
+    7: "next"
+    8: "next"
+    9: "next"
+    10: "done"
   join_as_expert:
     1: "join_us_to_find_out_more"
     2: "continue"
@@ -31,8 +38,8 @@ save_button_text:
     2: "next"
 skipPhase:
  trip_request_setup: 
-    2: true
+    6: true
 
 cancel_button_text:
   trip_request_setup:
-    2: "nevermind"
+    6: "nevermind"

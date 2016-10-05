@@ -1,4 +1,4 @@
-<p class="thinUnderline"><%="Activities"%></p>
+<p class="thinUnderline"><%="Culture"%></p>
 	
 	<%= render 'widgets/widget', 
 			locals: {  
@@ -7,7 +7,7 @@
 								objectName: "TripRequest", 
 								objectId: @object.id,
 								key: "personal_taste",
-								selectOptions: TripRequest.metadata["personal_taste"]["activities"],
+								selectOptions: TripRequest.metadata["personal_taste"]["culture"],
 								value: @object.personal_taste,
 								state: "edit",
 								isWidgetOwner: true,

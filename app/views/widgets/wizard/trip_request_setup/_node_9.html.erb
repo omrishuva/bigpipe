@@ -1,5 +1,5 @@
-<p class="thinUnderline"><%="Activities"%></p>
-	
+<p class="thinUnderline"><%="nightlife"%></p>
+
 	<%= render 'widgets/widget', 
 			locals: {  
 								widgetName: "tag_select_box",
@@ -7,7 +7,7 @@
 								objectName: "TripRequest", 
 								objectId: @object.id,
 								key: "personal_taste",
-								selectOptions: TripRequest.metadata["personal_taste"]["activities"],
+								selectOptions: TripRequest.metadata["personal_taste"]["nightlife"],
 								value: @object.personal_taste,
 								state: "edit",
 								isWidgetOwner: true,

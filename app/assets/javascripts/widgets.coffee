@@ -84,8 +84,7 @@ wizardControl =( id ) ->
 	  widgetIdSelector = widgetId( $(this).data("widgetData") )
 	  widget = {}
 	 	widget = getDataset( e.target )
-	 	$("##{widgetIdSelector}").hide() unless widget.replaceDivId
-	 	 
+	 	$("##{widgetIdSelector}").hide() unless widget.replaceDivId 
 	 	if widget.replaceDivId
 	 		$('.btnBrand1InverseBgColor').removeClass('btnBrand1InverseBgColor')
 	 		$(this).addClass("btnBrand1InverseBgColor");
@@ -222,13 +221,18 @@ getDataset = ( el ) ->
 	 id = el.parentElement.id
 	else
 	 id = el.id
-	$("##{id}").data('widgetData')
+	data = $("##{id}").data('widgetData')
+	data.queryParams =  window.location.search
+	data["queryParams"] = parseQueryParams() unless window.location.search == ""
+	data
 
-
-
-
-
-
+parseQueryParams = () ->
+	queryParams = { }
+	for param in window.location.search.split("?")[1].split("&")
+		do (param) ->
+			splittedParam = param.split("=")
+			queryParams["#{splittedParam[0]}"] = splittedParam[1]
+	queryParams
 
 
 # schedulingWidgetControl = ( id ) ->

@@ -9,7 +9,7 @@ class TripRequestsController < ApplicationController
 	end
 	
 	def trip_request_setup
-		@trip_request = TripRequest.find( params[:tripRequestId].to_i )
+		@object = TripRequest.find( params[:tripRequestId].to_i )
 	end
 
 end

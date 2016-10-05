@@ -4,8 +4,9 @@ document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloud
 
 <%= render 'widgets/wizard/wizard', 
 	locals: {  
+						wizard: true,
+						init: true,
 						widgetName: "account_setup",
-						nodeNumber: 1,
 						elementName: "accountSetup",
 						objectName: "Account",
 						objectId: @account.id,

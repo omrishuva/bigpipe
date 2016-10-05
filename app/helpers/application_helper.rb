@@ -126,5 +126,17 @@ module ApplicationHelper
   def prepare_wizard_data( wizard_type )
     $wizards[wizard_type]
   end
+  
+  def defaultNodeNumber
+    if params[:promoteTo] 
+      params[:promoteTo].to_i 
+    else
+      1
+    end
+  end
+  
+  def wizard_title(locals)
+    $wizards["placeholders"][locals[:widgetName]][locals[:nodeNumber]]
+  end
 
 end

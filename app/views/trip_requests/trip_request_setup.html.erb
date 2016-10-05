@@ -1,15 +1,14 @@
 <script> 
 document.publishEvent('setBodyBackgroundImage', { 'imageUrl': "https://res.cloudinary.com/kommunal/image/upload/v1472689304/leaves-1363766_1920_o88kyu.jpg" })
 </script>
-
 <%= render 'widgets/wizard/wizard', 
 	locals: {  
 							wizard: true,
+							init: true,
 							widgetName: "trip_request_setup",
 							elementName: "tripRequestSetup",
-							nodeNumber: 1,
 							objectName: "TripRequest",
-							objectId: @trip_request.id,
+							objectId: @object.id,
 							key: "trip_request_setup",
 							isWidgetOwner: true,
 							placeholder: "build_your_perfect_trip",

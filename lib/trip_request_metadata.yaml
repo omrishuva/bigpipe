@@ -16,7 +16,8 @@ personal_taste:
    - "amusement_parks" 
    - "national_parks"
    - "wildlife"
-   - "guided_tours" 
+   - "guided_tours"
+   - "rafting"
   culture:
    - "food_&_wine" 
    - "nightlife"
@@ -29,8 +30,13 @@ personal_taste:
    - "caffes" 
    - "coffee_shops_&_reagge_bars"
    - "nightclubs"
-  accomodation:
-   - "fancy_hotels"
+  accommodation:
+   - "luxury_hotels"
+   - "all_inclusive"
+   - "boutique_hotels"
+   - "exotic_hotels"
+   - "hostels"
    - "beach_huts"
+   - "tree_houses"
    - "home_stays"
    - "rent_a_house"

@@ -1,61 +1,16 @@
-<div class="col-lg-12">
-	<div class="col-sm-3 col-sm-offset-3">
-		<h2>
-		Arrival
-		<i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i>
-		</h2>
-			<%= render 'widgets/widget', 
-				  locals: {  
-				            widgetName: "location",
-				            elementName: "location",
-				            objectName: "TripRequest",
-				            objectId: @object.id,
-				            key: "starting_point",
-				            state: "edit",
-				            value: @object.starting_point.try(:place_id) || "ChIJE9on3F3HwoAR9AhGJW_fL-I",
-				            isWidgetOwner: true,
-				            placeType: "country",
-				            placeholder: "city_search",
-				            saveButtonText: "next",
-				            hideMap: true,
-				            renderSearchBox: true,
-				            renderMap: false,
-				            wizardMode: true,
-				            nodeNumber: 2,
-				            submitOnChange: true,
-				            saveOnly: true
-				          }
-			%>
-	</div>
-	<div class="col-sm-3">
-		<h2>
-			Departure
-			<i class="fa fa-plane " aria-hidden="true"></i>
-		</h2>
-		<%= render 'widgets/widget', 
-			  locals: {  
-			            widgetName: "location",
-			            elementName: "location",
-			            objectName: "TripRequest",
-			            objectId: @object.id,
-			            key: "finish_point",
-			            state: "edit",
-			            value: @object.finish_point.try(:place_id) || "ChIJOwg_06VPwokRYv534QaPC8g",
-			            isWidgetOwner: true,
-			            placeholder: "city_search",
-			            placeType: "country",
-			            saveButtonText: "next",
-			            hideMap: true,
-			            wizardMode: true,
-			            renderSearchBox: true,
-			            renderMap: false,
-			            nodeNumber: 2,
-			            submitOnChange: true,
-			            saveOnly: true
-			          }
-		%>
-	</div>
-</div>
-
-<%=render 'shared/components/google_maps/map', locals: locals%>
-<!-- .merge( hiddenMap: true ) -->
+	<%= render 'widgets/widget', 
+    		locals: {  
+    							widgetName: "text_input_box",
+    							elementName: "textInputBox",
+    							objectName: "TripRequest", 
+    							objectId: @object.id,
+    							key: "title",
+    							value: @object.title,
+    							state: "edit",
+    							isWidgetOwner: true,
+    							placeholder: "joe_and_and_jane",
+                  textClass: "fullWidth",
+                  wizardMode: true,
+                  saveOnly: true
+    						}
+    %>

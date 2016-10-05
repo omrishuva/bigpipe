@@ -24,6 +24,7 @@ footer{
     border-top-style: solid;
     border-top-width: 5px;
     border-top-color: #FFB941;
+    min-height: 180px;
     @extend .dddBoxShadow;
 }
 
@@ -41,15 +42,18 @@ footer{
 .whoWeAre{ line-height: 20px; margin-top: 10px; }
 .footerLinks{ @extend .centeredText; margin-top: 10px; line-height: 12px; }
 
-.siteContent{ margin-bottom: 20px; margin-top: 20px;}
-@media (min-height: 550px) { .siteContent { min-height: 550px }   footer{  min-height: 300px;  }  }
+.siteContent{ margin-bottom: 100px; margin-top: 20px;}
+@media (min-height: 500px) { .siteContent { min-height: 500px }   footer{  min-height: 300px;  }  }
 @media (min-height: 600px) { .siteContent { min-height: 600px }   footer{  min-height: 300px;  }  }
 @media (min-height: 700px) { .siteContent { min-height: 700px }   footer{  min-height: 330px;  }  }
 @media (min-height: 800px) { .siteContent { min-height: 800px }   footer{  min-height: 330px;  }  }
 @media (min-height: 900px) { .siteContent { min-height: 900px }   footer{  min-height: 330px;  }  }
 @media (min-height: 1000px) { .siteContent { min-height: 1000px } footer{  min-height: 230px;  }  }
-@media (min-height: 1200px) { .siteContent { min-height: 1050px } footer{  min-height: 230px;  }  }
-@media (min-height: 1300px) { .siteContent { min-height: 1150px } footer{  min-height: 230px;  }  }
+@media (min-height: 1100px) { .siteContent { min-height: 1100px } footer{  min-height: 230px;  }  }
+@media (min-height: 1200px) { .siteContent { min-height: 1200px } footer{  min-height: 230px;  }  }
+@media (min-height: 1300px) { .siteContent { min-height: 1300px } footer{  min-height: 180px;  }  }
+@media (min-height: 1400px) { .siteContent { min-height: 1400px } footer{  min-height: 180px;  }  }
+@media (min-height: 1500px) { .siteContent { min-height: 1500px } footer{  min-height: 180px;  }  }
 
 
 @media (min-width: 320px) { 
